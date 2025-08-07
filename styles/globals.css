@@ -1,3 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* GI global utilities and helpers */
+.gi-blueprint{position:relative;background-color:#fff;isolation:isolate;}
+.gi-blueprint::before{content:"";position:absolute;inset:-1px;z-index:-1;background:
+  linear-gradient(to right, rgba(6,30,75,.12) 1px, transparent 1px) 0 0/24px 24px,
+  linear-gradient(to bottom, rgba(6,30,75,.12) 1px, transparent 1px) 0 0/24px 24px,
+  linear-gradient(to right, rgba(6,30,75,.2) 1px, transparent 1px) 0 0/96px 96px,
+  linear-gradient(to bottom, rgba(6,30,75,.2) 1px, transparent 1px) 0 0/96px 96px;opacity:.6;}
+@media (prefers-reduced-motion:no-preference){.gi-blueprint::before{animation:drift 12s ease-in-out infinite;}}
+
+.btn-primary{@apply inline-flex items-center justify-center rounded-xl px-5 py-3 bg-gi-green text-gi-black font-semibold hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-gi-green focus:ring-offset-1;}
+.btn-secondary{@apply inline-flex items-center justify-center rounded-xl px-5 py-3 border border-gi-fog text-gi-text hover:bg-gi-subtle focus:outline-none focus:ring-2 focus:ring-gi-navy focus:ring-offset-1;}
+
+.kpi-chip{@apply inline-flex items-center gap-2 rounded-xl px-3 py-2 bg-black/5;}
+.kpi-chip .kpi-bar{@apply h-3 w-1.5 rounded bg-gi-pink;}
+.kpi-chip .kpi-val{@apply font-mono font-bold text-gi-black;}
+
+.on-dark h1,
+.on-dark .heading,
+.on-dark .title { @apply text-white; }
+
+.on-dark p,
+.on-dark .subhead,
+.on-dark .body { @apply text-white/80; }
+
+.on-dark .btn-secondary { @apply border-white/30 text-white hover:bg-white/10; }
+.on-dark .kpi-val { @apply text-white; }
+
+.on-light h1,.on-light .heading,.on-light .title { @apply text-gi-text; }
+.on-light p,.on-light .subhead,.on-light .body { @apply text-gi-gray; }
+
+@layer components {
+  .link-underline { position: relative; }
+  .link-underline::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px;
+    background-image: linear-gradient(to right, #5AAD5A, #C40084, #5AAD5A);
+    transform: scaleX(0); transform-origin: left; transition: transform .18s ease-out;
+  }
+  .link-underline:hover::after { transform: scaleX(1); }
+}
+
 html,
 body {
   padding: 0;
