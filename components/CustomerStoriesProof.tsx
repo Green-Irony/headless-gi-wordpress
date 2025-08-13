@@ -3,43 +3,38 @@ import { useState } from 'react';
 import { motion as m, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 
-type VideoItem = {
+export type StoryItem = {
   brand: string;
   title: string;
   blurb: string;
   kpis: string[];
-  poster: string;
+  posterUrl: string;
   videoId: string;
 };
+export type CustomerStoriesProps = {
+  id?: string;
+  className?: string;
+  heading?: string;
+  items?: StoryItem[];
+  cta?: { label: string; href: string };
+};
 
-const ITEMS: VideoItem[] = [
-  {
-    brand: 'Spirit Airlines',
-    title: 'Event-driven integration powering operational agentic workflows',
-    blurb: 'How event-driven MuleSoft work enabled real-time ops and agent actions.',
-    kpis: ['⚡ Delivery cycle time ↓ 50%', '⬇️ Deflection rate up', '🧠 Capacity freed'],
-    poster: '/logos/spirit.svg',
-    videoId: 'SPIRIT_VIDEO_ID',
-  },
-  {
-    brand: 'UNC Charlotte',
-    title: '24/7 deflection and capacity reallocated to strategic advising',
-    blurb: 'Persistent agents improve student engagement and reduce live load.',
-    kpis: ['⬇️ Deflection rate up', '⚡ Faster time-to-value', '🧠 Capacity freed'],
-    poster: '/logos/unc-charlotte.svg',
-    videoId: 'UNC_VIDEO_ID',
-  },
+const DEFAULT_HEADING = 'Proof that scales';
+const DEFAULT_ITEMS: StoryItem[] = [
+  { brand: 'Spirit Airlines', title: 'Event-driven integration powering operational agentic workflows', blurb: 'How event-driven MuleSoft work enabled real-time ops and agent actions.', kpis: ['⚡ Delivery cycle time ↓ 50%', '⬇️ Deflection rate up', '🧠 Capacity freed'], posterUrl: '/logos/spirit.svg', videoId: 'SPIRIT_VIDEO_ID' },
+  { brand: 'UNC Charlotte', title: '24/7 deflection and capacity reallocated to strategic advising', blurb: 'Persistent agents improve student engagement and reduce live load.', kpis: ['⬇️ Deflection rate up', '⚡ Faster time-to-value', '🧠 Capacity freed'], posterUrl: '/logos/unc-charlotte.svg', videoId: 'UNC_VIDEO_ID' },
 ];
+const DEFAULT_CTA = { label: 'Start Your Success Plan', href: '#contact' };
 
-export default function CustomerStoriesProof() {
+export default function CustomerStoriesProof({ id, className, heading = DEFAULT_HEADING, items = DEFAULT_ITEMS, cta = DEFAULT_CTA }: CustomerStoriesProps) {
   const prefersReduced = useReducedMotion();
   const enterY = prefersReduced ? 0 : 8;
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
     <m.section
-      id="stories"
-      className="relative isolate bg-white"
+      id={id}
+      className={`relative isolate bg-white ${className ?? ''}`}
       initial={{ opacity: 0, y: enterY }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -54,11 +49,7 @@ export default function CustomerStoriesProof() {
         <div className="mx-auto mb-8 h-px w-16 bg-gi-line" />
 
         <h2 className="text-center text-3xl md:text-4xl font-semibold text-gi-text tracking-tight text-balance">
-          Proof that{' '}
-          <span className="relative inline-block">
-            scales
-            <UnderlineGreen />
-          </span>
+          {heading}
         </h2>
 
         <p className="mx-auto mt-4 max-w-3xl text-center text-gi-gray text-balance">
@@ -72,7 +63,7 @@ export default function CustomerStoriesProof() {
           viewport={{ once: true, amount: 0.2 }}
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.06 } } }}
         >
-          {ITEMS.map((it) => (
+          {items.map((it) => (
             <m.li
               key={it.brand}
               className="relative overflow-visible"
@@ -89,8 +80,9 @@ export default function CustomerStoriesProof() {
                     aria-label={`Play video: ${it.brand}`}
                   >
                     <Image
-                      width={192} height={112}
-                      src={it.poster}
+                      width={192}
+                      height={112}
+                      src={it.posterUrl}
                       alt={`${it.brand} video poster`}
                       className="aspect-video w-full object-contain bg-white"
                       loading="lazy"
@@ -108,7 +100,10 @@ export default function CustomerStoriesProof() {
                     </div>
                     <div className="absolute inset-0 flex items-center justify-center">
                       <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-white/90 ring-1 ring-gi-fog backdrop-blur transition group-hover:scale-[1.04]">
-                        <PlayIcon className="ml-0.5 h-5 w-5 text-gi-text" />
+                        <svg viewBox="0 0 24 24" aria-hidden="true" className="ml-0.5 h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="12" cy="12" r="9" />
+                          <path d="M10 8l6 4-6 4z" fill="currentColor" stroke="none" />
+                        </svg>
                       </span>
                     </div>
                   </button>
@@ -117,13 +112,7 @@ export default function CustomerStoriesProof() {
                     <div className="text-base font-semibold text-gi-text">{it.title}</div>
                     <p className="mt-1 text-sm text-gi-gray">{it.blurb}</p>
                     <div className="mt-4">
-                      <button
-                        onClick={() => setOpenId(it.videoId)}
-                        className="btn-secondary"
-                        aria-label={`Watch ${it.brand} video`}
-                      >
-                        Watch the video
-                      </button>
+                      <a className="btn-secondary" href={cta.href}>{cta.label}</a>
                     </div>
                   </div>
                 </div>
@@ -140,7 +129,7 @@ export default function CustomerStoriesProof() {
         </m.ul>
 
         <div className="mt-10 flex justify-center">
-          <a className="btn-primary" href="#contact">Start Your Success Plan</a>
+          <a className="btn-primary" href={cta.href}>{cta.label}</a>
         </div>
       </div>
 
@@ -185,42 +174,5 @@ function VideoLightbox({ videoId, onClose }: { videoId: string; onClose: () => v
         </div>
       </div>
     </div>
-  );
-}
-
-function PlayIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="9" />
-      <path d="M10 8l6 4-6 4z" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
-function UnderlineGreen() {
-  return (
-    <svg
-      aria-hidden
-      className="pointer-events-none absolute -bottom-1 left-0 right-0 h-[8px] w-full"
-      viewBox="0 0 100 8"
-      preserveAspectRatio="none"
-    >
-      <defs>
-        <filter id="proofBlur" x="-5%" y="-150%" width="110%" height="400%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="0.4" />
-        </filter>
-        <linearGradient id="proofGreen" x1="0" x2="1">
-          <stop offset="0" stopColor="#5AAD5A" stopOpacity="0.9" />
-          <stop offset="1" stopColor="#5AAD5A" stopOpacity="0.9" />
-        </linearGradient>
-      </defs>
-      <path
-        d="M0 5 C 10 1, 20 7, 30 5 S 50 1, 60 5 80 7, 100 5"
-        stroke="url(#proofGreen)"
-        strokeWidth="1.8"
-        fill="none"
-        filter="url(#proofBlur)"
-      />
-    </svg>
   );
 } 

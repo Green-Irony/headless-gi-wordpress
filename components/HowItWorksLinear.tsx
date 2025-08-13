@@ -1,27 +1,32 @@
 'use client';
 import { motion as m, useReducedMotion } from 'framer-motion';
 
-type Step = {
-  k: string;
-  title: string;
-  body: string;
-  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+export type HowStep = { k: string; title: string; body: string };
+export type HowItWorksProps = {
+  id?: string;
+  className?: string;
+  heading?: string;
+  steps?: HowStep[];
+  cta?: { label: string; href: string };
 };
 
-const STEPS: Step[] = [
-  { k: '01', title: 'Align', body: 'Pick the high-impact workflow and define KPIs—deflection, cycle time, and capacity freed.', Icon: IconAlign },
-  { k: '02', title: 'Launch', body: 'AI-infused MuleSoft delivery and agent build; first working agent in ~8 weeks.', Icon: IconLaunch },
-  { k: '03', title: 'Measure', body: 'Scorecard tracks deflection lift, cycle time reduction, and capacity freed across teams.', Icon: IconMeasure },
-  { k: '04', title: 'Scale', body: 'Expand to new workflows, add safe actions, and deepen automation with confidence.', Icon: IconScale },
+const DEFAULT_HEADING = 'A lean path to your first AI outcome';
+const DEFAULT_STEPS: HowStep[] = [
+  { k: '01', title: 'Align', body: 'Pick the high-impact workflow and define KPIs—deflection, cycle time, and capacity freed.' },
+  { k: '02', title: 'Launch', body: 'AI-infused MuleSoft delivery and agent build; first working agent in ~8 weeks.' },
+  { k: '03', title: 'Measure', body: 'Scorecard tracks deflection lift, cycle time reduction, and capacity freed across teams.' },
+  { k: '04', title: 'Scale', body: 'Expand to new workflows, add safe actions, and deepen automation with confidence.' },
 ];
+const DEFAULT_CTA = { label: 'Get the 8-Week Agent Launch Plan', href: '#plan' };
 
-export default function HowItWorksLinear() {
+export default function HowItWorksLinear({ id, className, heading = DEFAULT_HEADING, steps = DEFAULT_STEPS, cta = DEFAULT_CTA }: HowItWorksProps) {
   const prefersReduced = useReducedMotion();
   const enterY = prefersReduced ? 0 : 10;
 
   return (
     <m.section
-      className="relative isolate bg-white"
+      id={id}
+      className={`relative isolate bg-white ${className ?? ''}`}
       initial={{ opacity: 0, y: enterY }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -35,11 +40,7 @@ export default function HowItWorksLinear() {
         <div className="mx-auto mb-8 h-px w-16 bg-gi-line" />
 
         <h2 className="text-center text-3xl md:text-4xl font-semibold text-gi-text tracking-tight text-balance">
-          A lean path to your{' '}
-          <span className="relative inline-block">
-            first AI outcome
-            <UnderlineGreen />
-          </span>
+          {heading}
         </h2>
 
         <p className="mx-auto mt-4 max-w-3xl text-center text-gi-gray text-balance">
@@ -57,7 +58,7 @@ export default function HowItWorksLinear() {
           </div>
 
           <div className="grid grid-cols-4 gap-6">
-            {STEPS.map((s, idx) => (
+            {steps.map((s, idx) => (
               <m.div
                 key={s.k}
                 className="relative flex flex-col items-center text-center"
@@ -68,7 +69,7 @@ export default function HowItWorksLinear() {
               >
                 <div className="relative z-10">
                   <div className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full bg-white ring-1 ring-gi-fog shadow-gi">
-                    <s.Icon className="h-5 w-5 text-gi-text" />
+                    <span className="h-5 w-5" />
                   </div>
                   <div className="mt-2 text-xs font-medium text-gi-gray">{s.k}</div>
                 </div>
@@ -96,11 +97,11 @@ export default function HowItWorksLinear() {
               aria-hidden
               className="absolute left-[26px] top-5 bottom-5 w-px bg-gradient-to-b from-gi-green/60 via-gi-pink/40 to-gi-green/60 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]"
             />
-            {STEPS.map((s) => (
+            {steps.map((s) => (
               <li key={s.k} className="relative pl-16">
                 <div className="absolute left-0 top-1">
                   <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white ring-1 ring-gi-fog shadow-gi">
-                    <s.Icon className="h-5 w-5 text-gi-text" />
+                    <span className="h-5 w-5" />
                   </div>
                 </div>
                 <div className="rounded-2xl bg-gradient-to-r from-gi-green/35 via-gi-pink/20 to-gi-green/35 p-[1px]">
@@ -120,8 +121,8 @@ export default function HowItWorksLinear() {
         </div>
 
         <div className="mt-10 flex justify-center">
-          <a className="btn-primary" href="#plan">
-            Get the 8-Week Agent Launch Plan
+          <a className="btn-primary" href={cta.href}>
+            {cta.label}
           </a>
         </div>
       </div>

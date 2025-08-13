@@ -1,13 +1,38 @@
 'use client';
 import { motion as m, useReducedMotion } from 'framer-motion';
 
-export default function HeroCenterPro() {
+export type HeroCta = { label: string; href: string };
+export type HeroCenterProProps = {
+  id?: string;
+  className?: string;
+  title?: string;
+  body?: string;
+  primaryCta?: HeroCta;
+  secondaryCta?: HeroCta;
+};
+
+const DEFAULT_TITLE = `Do more with the team you have.`;
+const DEFAULT_BODY = `Launch AI agents that cut busywork, deflect routine demand, and free capacity—delivering measurable impact in eight weeks. Our AI-infused MuleSoft delivery halves cycle time while expanding what your people can actually get done.`;
+const DEFAULT_PRIMARY: HeroCta = { label: 'Talk to an Expert', href: '#contact' };
+const DEFAULT_SECONDARY: HeroCta = { label: 'Get the 8-Week Agent Launch Plan', href: '#plan' };
+
+export default function HeroCenterPro(props: HeroCenterProProps) {
+  const {
+    id,
+    className,
+    title = DEFAULT_TITLE,
+    body = DEFAULT_BODY,
+    primaryCta = DEFAULT_PRIMARY,
+    secondaryCta = DEFAULT_SECONDARY,
+  } = props;
+
   const prefersReduced = useReducedMotion();
   const enterY = prefersReduced ? 0 : 8;
 
   return (
     <m.section
-      className="relative isolate overflow-visible bg-white"
+      id={id}
+      className={`relative isolate overflow-visible bg-white ${className ?? ''}`}
       initial={{ opacity: 0, y: enterY }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -22,31 +47,16 @@ export default function HeroCenterPro() {
 
       <div className="relative z-20 mx-auto max-w-7xl px-6 py-28 text-center">
         <h1 className="text-5xl md:text-7xl font-bold leading-[1.05] text-gi-text tracking-tight text-balance">
-          Do{' '}
-          <span className="relative inline-block">
-            more
-            <SquiggleUnderlinePink />
-          </span>{' '}
-          with the team you{' '}
-          <span className="relative inline-block">
-            have
-            <SquiggleUnderlinePink />
-          </span>
-          .
+          {title}
         </h1>
 
         <p className="mx-auto mt-6 max-w-3xl text-lg text-gi-gray text-balance">
-          Launch AI agents that cut busywork, deflect routine demand, and free capacity—delivering measurable impact in eight weeks.
-          Our AI-infused MuleSoft delivery halves cycle time while expanding what your people can actually get done.
-        </p>
-
-        <p className="mx-auto mt-4 max-w-xl text-sm text-gi-gray">
-          Powered by integration that spans all workflows and makes agents actionable.
+          {body}
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <a className="btn-primary" href="#contact">Talk to an Expert</a>
-          <a className="btn-secondary" href="#plan">Get the 8-Week Agent Launch Plan</a>
+          <a className="btn-primary" href={primaryCta.href}>{primaryCta.label}</a>
+          <a className="btn-secondary" href={secondaryCta.href}>{secondaryCta.label}</a>
         </div>
 
         <div className="mt-6 flex flex-wrap justify-center gap-3">
