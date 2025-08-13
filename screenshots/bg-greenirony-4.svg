@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+    <defs>
+      <!-- Softer, wider green glow at top -->
+      <radialGradient id="giGreenP" gradientUnits="userSpaceOnUse" cx="540" cy="-100" r="1200">
+        <stop offset="0"   stop-color="#5AAD5A" stop-opacity="0.18"/>
+        <stop offset="0.35" stop-color="#5AAD5A" stop-opacity="0.10"/>
+        <stop offset="0.70" stop-color="#5AAD5A" stop-opacity="0.04"/>
+        <stop offset="1"   stop-color="#5AAD5A" stop-opacity="0"/>
+      </radialGradient>
+      <!-- Softer, wider pink glow at bottom -->
+      <radialGradient id="giPinkP" gradientUnits="userSpaceOnUse" cx="540" cy="2020" r="1200">
+        <stop offset="0"   stop-color="#C40084" stop-opacity="0.16"/>
+        <stop offset="0.35" stop-color="#C40084" stop-opacity="0.09"/>
+        <stop offset="0.70" stop-color="#C40084" stop-opacity="0.04"/>
+        <stop offset="1"   stop-color="#C40084" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+  
+    <!-- White base -->
+    <rect width="1080" height="1920" fill="#FFFFFF"/>
+    <!-- Overlaid glows -->
+    <rect width="1080" height="1920" fill="url(#giGreenP)"/>
+    <rect width="1080" height="1920" fill="url(#giPinkP)"/>
+  </svg>
