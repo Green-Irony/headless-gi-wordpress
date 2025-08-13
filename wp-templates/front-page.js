@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { SITE_DATA_QUERY } from "../queries/SiteSettingsQuery";
@@ -14,6 +13,10 @@ import HowItWorksLinear from "../components/HowItWorksLinear";
 import CustomerStoriesProof from "../components/CustomerStoriesProof";
 import LeadMagnetCTA from "../components/LeadMagnetCTA";
 import PreFooterCTA from "../components/PreFooterCTA";
+import { FRONT_PAGE_SECTIONS_QUERY, FRONT_PAGE_MIN_QUERY } from "../queries/SectionsQueries";
+import { renderSections } from "../lib/sectionRegistry";
+
+const ENABLE_SECTIONS = process.env.NEXT_PUBLIC_ENABLE_WP_SECTIONS === "1";
 
 export default function FrontPage(props) {
   if (props.loading) {
@@ -29,6 +32,12 @@ export default function FrontPage(props) {
   };
   const { title: siteTitle, description: siteDescription } = siteData;
 
+  const sectionsQuery = useQuery(ENABLE_SECTIONS ? FRONT_PAGE_SECTIONS_QUERY : FRONT_PAGE_MIN_QUERY, {
+    variables: { uri: "/" },
+  });
+  const sections = sectionsQuery?.data?.page?.sections || [];
+  const hasSections = ENABLE_SECTIONS && Array.isArray(sections) && sections.length > 0;
+
   return (
     <>
       <Head>
@@ -42,14 +51,20 @@ export default function FrontPage(props) {
       />
 
       <main>
-        <HeroCenterPro />
-        <TrustStrip />
-        <ValuePillars />
-        <FeaturedOffers />
-        <HowItWorksLinear />
-        <CustomerStoriesProof />
-        <LeadMagnetCTA />
-        <PreFooterCTA />
+        {hasSections ? (
+          renderSections(sections)
+        ) : (
+          <>
+            <HeroCenterPro />
+            <TrustStrip />
+            <ValuePillars />
+            <FeaturedOffers />
+            <HowItWorksLinear />
+            <CustomerStoriesProof />
+            <LeadMagnetCTA />
+            <PreFooterCTA />
+          </>
+        )}
       </main>
 
       <Footer />
