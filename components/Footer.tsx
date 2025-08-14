@@ -7,7 +7,7 @@ const linkUnderline =
 
 export default function Footer() {
   return (
-    <footer className="relative isolate bg-white">
+    <footer className="relative bg-white overflow-hidden">
       {/* Top wave accent */}
       <svg
         aria-hidden

@@ -31,7 +31,9 @@ export default function MyApp({ Component, pageProps }) {
         )}
       </Head>
       <FaustProvider pageProps={pageProps}>
-        <Component {...pageProps} key={router.asPath} />
+        <div style={{ paddingTop: 64 }}>
+          <Component {...pageProps} key={router.asPath} />
+        </div>
       </FaustProvider>
     </>
   );

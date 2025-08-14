@@ -190,9 +190,11 @@ export default function Header({
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+
   return (
-    <header className="sticky top-0 z-50">
-      <div className={`supports-[backdrop-filter]:backdrop-blur bg-white/85 transition-shadow ${scrolled ? 'shadow-gi' : ''}`}>
+    <>
+             <header className="fixed inset-x-0 top-0 z-50">
+                 <div className={`supports-[backdrop-filter]:backdrop-blur bg-white/85 transition-shadow ${scrolled ? 'shadow-gi' : ''}`}>
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex h-16 items-center justify-between">
             {/* Brand */}
@@ -299,51 +301,8 @@ export default function Header({
         </div>
         <div className={`h-px w-full ${scrolled ? 'bg-gi-fog' : 'bg-gi-line'}`} />
       </div>
-
-      {/* Mobile panel */}
-      <div className={`md:hidden overflow-hidden bg-white transition-all ${openMobile ? 'opacity-100' : 'opacity-0'} ${openMobile ? 'max-h-[560px]' : 'max-h-0'}`} aria-hidden={!openMobile}>
-        <div className="mx-auto max-w-7xl px-6 pb-4 pt-2">
-          <nav className="mt-2 flex flex-col gap-1" aria-label="Mobile">
-            {(hasWpMenu ? tree : FALLBACK_NAV.map((n, i) => ({ id: String(i), uri: n.href, label: n.label })) as any[]).map((rawItem: any) => {
-              const item: MenuItem = rawItem as MenuItem;
-              const isServices = (item.label || '').toLowerCase().includes('services') || (item.uri ?? '').startsWith('/services');
-              const isSolutions = (item.label || '').toLowerCase().includes('solutions') || (item.uri ?? '').startsWith('/solutions');
-              const children = (item.childItems && item.childItems.nodes) ? item.childItems.nodes : [];
-              const mappedChildren = isServices ? children.map(c => ({ ...c, uri: toServicesAnchor(c.uri) })) : children;
-              const effectiveChildren = mappedChildren.length > 0 ? mappedChildren.map(c => ({ href: c.uri, title: c.label })) : (isServices ? DEFAULT_SERVICES_CHILDREN : (isSolutions ? DEFAULT_SOLUTIONS_CHILDREN : []));
-
-              return (
-                <div key={item.id || item.label} className="rounded-md">
-                  <Link href={item.uri} className="block rounded-md px-2 py-2 text-sm font-medium text-gi-text hover:bg-gi-fog/60" onClick={() => setOpenMobile(false)}>
-                    {item.label}
-                  </Link>
-                  {effectiveChildren.length > 0 && (
-                    <ul className="ml-2 border-l border-gi-fog pl-2">
-                      {effectiveChildren.map((c) => (
-                        <li key={c.title}>
-                          <Link href={c.href} className="block rounded-md px-2 py-2 text-sm text-gi-gray hover:bg-gi-fog/60" onClick={() => setOpenMobile(false)}>
-                            {c.title}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              );
-            })}
-            <div className="mt-2 flex gap-2">
-              <Link href="#plan" className="btn-secondary flex-1" onClick={() => setOpenMobile(false)}>
-                Get the 8-Week Plan
-              </Link>
-              <Link href="/contact" className="btn-primary flex-1" onClick={() => setOpenMobile(false)}>
-                Talk to an Expert
-              </Link>
-            </div>
-          </nav>
-        </div>
-        <div className="h-px w-full bg-gi-line" />
-      </div>
-    </header>
+      </header>
+    </>
   );
 }
 

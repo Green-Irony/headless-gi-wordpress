@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HeroCenterPro from '../components/HeroCenterPro';
 import CaseStudyTile from '../components/CaseStudyTile';
+import LogoTicker from '../components/LogoTicker';
 import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../queries/SiteSettingsQuery';
@@ -42,6 +43,22 @@ const Page: any = function CustomerStoriesPage(props: any) {
             { label: '🤖 First agent in 8 weeks' },
           ]}
           showMedia={false}
+        />
+
+        <LogoTicker
+          items={[
+            { src: '/logos/spirit.svg', alt: 'Spirit Airlines' },
+            { src: '/logos/unc-charlotte.svg', alt: 'UNC Charlotte' },
+            { src: '/logos/air-culinaire.png', alt: 'Air Culinaire' },
+            { src: '/logos/ccu_h.png', alt: 'CCU' },
+            { src: '/logos/college-hunks.png', alt: 'College Hunks' },
+            { src: '/logos/HIVC.png', alt: 'HIVC' },
+            { src: '/logos/Hotwire.svg', alt: 'Hotwire' },
+            { src: '/logos/logo-upc-insurance-story-e1729029847866.webp', alt: 'UPC' },
+            { src: '/logos/PODS-Logo.png', alt: 'PODS' },
+            { src: '/logos/rochelec.png', alt: 'Rochelec' },
+          ]}
+          speedSeconds={45}
         />
 
         <section className="mx-auto max-w-7xl px-6 py-12">
