@@ -1,55 +1,37 @@
 'use client';
+import Link from 'next/link';
 import { motion as m, useReducedMotion } from 'framer-motion';
 
-type Item = {
+export type OfferItem = {
   title: string;
   body: string;
-  cta: string;
-  href: string;
-  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  cta?: { label: string; href: string };
   flag?: string;
+  icon?: string;
+};
+export type FeaturedOffersProps = {
+  id?: string;
+  className?: string;
+  heading?: string;
+  items?: OfferItem[];
 };
 
-const ITEMS: Item[] = [
-  {
-    title: 'AI & Digital Labor (Agentforce)',
-    body: 'Launch agents with jobs, safe actions, and measurable KPIs.',
-    cta: 'Scope My First Agent',
-    href: '#contact',
-    Icon: IconAgent,
-  },
-  {
-    title: 'MuleSoft Integration (AI-led)',
-    body: 'Design the pipelines and events that let AI agents see, decide, and do.',
-    cta: 'Review My Integration Gaps',
-    href: '#contact',
-    Icon: IconIntegration,
-    flag: 'Flagship',
-  },
-  {
-    title: 'Salesforce Optimization',
-    body: 'Make Salesforce the control room for both humans and agents.',
-    cta: 'Optimize My Org',
-    href: '#contact',
-    Icon: IconSalesforce,
-  },
-  {
-    title: 'Data & Migrations',
-    body: 'Build the trusted knowledge and real-time context your agents need.',
-    cta: 'Map My Data for AI',
-    href: '#contact',
-    Icon: IconData,
-  },
+const DEFAULT_HEADING = 'Your first win starts here';
+const DEFAULT_ITEMS: OfferItem[] = [
+  { title: 'AI & Digital Labor (Agentforce)', body: 'Launch agents with jobs, safe actions, and measurable KPIs.', cta: { label: 'Scope My First Agent', href: '#contact' } },
+  { title: 'MuleSoft Integration (AI-led)', body: 'Design the pipelines and events that let AI agents see, decide, and do.', cta: { label: 'Review My Integration Gaps', href: '#contact' }, flag: 'Flagship' },
+  { title: 'Salesforce Optimization', body: 'Make Salesforce the control room for both humans and agents.', cta: { label: 'Optimize My Org', href: '#contact' } },
+  { title: 'Data & Migrations', body: 'Build the trusted knowledge and real-time context your agents need.', cta: { label: 'Map My Data for AI', href: '#contact' } },
 ];
 
-export default function FeaturedOffers() {
+export default function FeaturedOffers({ id, className, heading = DEFAULT_HEADING, items = DEFAULT_ITEMS }: FeaturedOffersProps) {
   const prefersReduced = useReducedMotion();
   const enterY = prefersReduced ? 0 : 8;
 
   return (
     <m.section
-      id="offers"
-      className="relative isolate bg-white"
+      id={id}
+      className={`relative isolate bg-white ${className ?? ''}`}
       initial={{ opacity: 0, y: enterY }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -64,12 +46,7 @@ export default function FeaturedOffers() {
         <div className="mx-auto mb-8 h-px w-16 bg-gi-line" />
 
         <h2 className="text-center text-3xl md:text-4xl font-semibold text-gi-text tracking-tight text-balance">
-          Your{' '}
-          <span className="relative inline-block">
-            first win
-            <SquiggleUnderlinePink />
-          </span>{' '}
-          starts here
+          {heading}
         </h2>
 
         <m.ul
@@ -79,52 +56,48 @@ export default function FeaturedOffers() {
           viewport={{ once: true, amount: 0.2 }}
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.06 } } }}
         >
-          {ITEMS.map((it) => (
-            <m.li
-              key={it.title}
-              className="relative overflow-visible"
-              variants={{
-                hidden: { opacity: 0, y: enterY },
-                show: { opacity: 1, y: 0, transition: { duration: 0.2, ease: 'easeOut' } },
-              }}
-            >
-              <div className="group rounded-2xl bg-gradient-to-r from-gi-pink/35 via-gi-green/20 to-gi-pink/35 p-[1px]">
-                <div className="rounded-[16px] bg-white p-6 shadow-gi transition-transform duration-200 will-change-transform group-hover:-translate-y-0.5">
-                  <div className="flex items-start gap-3">
-                    <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gi-green/15 ring-1 ring-gi-fog">
-                      <it.Icon className="h-5 w-5" />
+          {items.map((it) => {
+            const CardInner = (
+              <div className="rounded-[16px] bg-white p-6 shadow-gi transition-transform duration-200 will-change-transform group-hover:-translate-y-0.5">
+                <div className="flex items-start gap-3">
+                  <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gi-green/15 ring-1 ring-gi-fog">
+                    <span className="h-5 w-5"/>
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-base font-semibold text-gi-text">{it.title}</h3>
+                      {it.flag && (
+                        <span className="rounded-full bg-gi-pink/10 px-2 py-0.5 text-xs font-medium text-gi-text ring-1 ring-gi-fog">
+                          {it.flag}
+                        </span>
+                      )}
                     </div>
-
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2">
-                        <h3 className="text-base font-semibold text-gi-text">{it.title}</h3>
-                        {it.flag && (
-                          <span className="rounded-full bg-gi-pink/10 px-2 py-0.5 text-xs font-medium text-gi-text ring-1 ring-gi-fog">
-                            {it.flag}
-                          </span>
-                        )}
-                      </div>
-
-                      <p className="mt-2 text-sm text-gi-gray">{it.body}</p>
-
+                    <p className="mt-2 text-sm text-gi-gray">{it.body}</p>
+                    {it.cta && (
                       <div className="mt-6">
-                        <a className="btn-secondary" href={it.href}>
-                          {it.cta}
-                        </a>
+                        <Link className="btn-secondary" href={it.cta.href}>
+                          {it.cta.label}
+                        </Link>
                       </div>
-                    </div>
+                    )}
                   </div>
                 </div>
               </div>
+            );
 
-              <div
-                aria-hidden
-                className="pointer-events-none absolute left-3 right-3 -bottom-3 h-6 rounded-b-[18px]
-                           bg-gradient-to-r from-gi-pink/30 via-gi-green/20 to-gi-pink/30 blur-[10px] opacity-80 md:opacity-90
-                           [mask-image:linear-gradient(to_bottom,transparent,black_40%)]"
-              />
-            </m.li>
-          ))}
+            return (
+              <m.li
+                key={it.title}
+                className="relative overflow-visible"
+                variants={{ hidden: { opacity: 0, y: enterY }, show: { opacity: 1, y: 0, transition: { duration: 0.2, ease: 'easeOut' } } }}
+              >
+                <div className="group rounded-2xl bg-gradient-to-r from-gi-pink/35 via-gi-green/20 to-gi-pink/35 p-[1px]">
+                  {CardInner}
+                </div>
+                <div aria-hidden className="pointer-events-none absolute left-3 right-3 -bottom-3 h-6 rounded-b-[18px] bg-gradient-to-r from-gi-pink/30 via-gi-green/20 to-gi-pink/30 blur-[10px] opacity-80 md:opacity-90 [mask-image:linear-gradient(to_bottom,transparent,black_40%)]" />
+              </m.li>
+            );
+          })}
         </m.ul>
       </div>
     </m.section>
@@ -194,4 +167,4 @@ function IconData(props: React.SVGProps<SVGSVGElement>) {
       <path d="M6 12c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5" />
     </svg>
   );
-} 
+}

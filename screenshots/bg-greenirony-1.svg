@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <!-- Soft radial glows -->
+    <radialGradient id="giGreen" cx="0.18" cy="0.20" r="0.45">
+      <stop offset="0" stop-color="#5AAD5A" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#5AAD5A" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="giPink" cx="0.82" cy="0.80" r="0.42">
+      <stop offset="0" stop-color="#C40084" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#C40084" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- White base -->
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+
+  <!-- Glows (positions roughly match the app) -->
+  <rect width="1920" height="1080" fill="url(#giGreen)"/>
+  <rect width="1920" height="1080" fill="url(#giPink)"/>
+</svg>

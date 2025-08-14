@@ -1,34 +1,61 @@
 'use client';
 import { motion as m, useReducedMotion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
 
-export default function ValuePillars() {
+export type PillarItem = { title: string; body: string; icon?: string; accentStrength?: number };
+export type ValuePillarsProps = {
+  id?: string;
+  className?: string;
+  heading?: string;
+  subhead?: string;
+  items?: PillarItem[];
+};
+
+const DEFAULT_HEADING = 'From promise to predictable impact';
+const DEFAULT_SUBHEAD = 'Most AI pilots stall because agents can’t see context, act safely, or scale. We combine integration-first architecture, AI-native agent design, and senior delivery to give you outcomes you can plan around.';
+const DEFAULT_ITEMS: PillarItem[] = [
+  { title: 'Deflection that scales', body: 'Automate routine requests with agents that surface answers and take safe actions—reducing load on your live teams.' },
+  { title: 'Speed to value', body: 'AI-infused MuleSoft delivery cuts cycle time in half; your first working agent in eight weeks.' },
+  { title: 'Capacity unlocked', body: 'Free your experts for strategic work while agents handle structured, repeatable demand.' },
+];
+
+export default function ValuePillars({ id, className, heading = DEFAULT_HEADING, subhead = DEFAULT_SUBHEAD, items = DEFAULT_ITEMS }: ValuePillarsProps) {
   const prefersReduced = useReducedMotion();
   const enterY = prefersReduced ? 0 : 8;
+  const listRef = useRef<HTMLUListElement | null>(null);
+  const [cardMinHeight, setCardMinHeight] = useState<number | undefined>(undefined);
 
-  const items = [
-    {
-      title: 'Deflection that scales',
-      body:
-        'Automate routine requests with agents that surface answers and take safe actions—reducing load on your live teams.',
-      Icon: IconDeflect,
-    },
-    {
-      title: 'Speed to value',
-      body:
-        'AI-infused MuleSoft delivery cuts cycle time in half; your first working agent in eight weeks.',
-      Icon: IconSpeed,
-    },
-    {
-      title: 'Capacity unlocked',
-      body:
-        'Free your experts for strategic work while agents handle structured, repeatable demand.',
-      Icon: IconCapacity,
-    },
-  ];
+  useEffect(() => {
+    const container = listRef.current;
+    if (!container) return;
+
+    const measure = () => {
+      const cards = Array.from(container.querySelectorAll<HTMLElement>('.vp-card'));
+      if (cards.length === 0) return;
+      // Reset any previous minHeight to measure natural content heights
+      cards.forEach((c) => (c.style.minHeight = ''));
+      const max = Math.max(...cards.map((c) => c.getBoundingClientRect().height));
+      setCardMinHeight(Math.ceil(max));
+    };
+
+    measure();
+
+    const ro = new ResizeObserver(() => measure());
+    ro.observe(container);
+    // also observe each card content for changes
+    container.querySelectorAll('.vp-card').forEach((el) => ro.observe(el));
+
+    window.addEventListener('resize', measure);
+    return () => {
+      window.removeEventListener('resize', measure);
+      ro.disconnect();
+    };
+  }, [items]);
 
   return (
     <m.section
-      className="relative isolate"
+      id={id}
+      className={`relative isolate ${className ?? ''}`}
       initial={{ opacity: 0, y: enterY }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -43,43 +70,41 @@ export default function ValuePillars() {
         <div className="mx-auto mb-8 h-px w-16 bg-gi-line" />
 
         <h2 className="text-center text-3xl md:text-4xl font-semibold text-gi-text tracking-tight text-balance">
-          From promise to{' '}
-          <span className="relative inline-block">
-            predictable impact
-            <SquiggleUnderlineGreen />
-          </span>
+          {heading}
         </h2>
 
         <p className="mx-auto mt-4 max-w-3xl text-center text-gi-gray text-balance">
-          Most AI pilots stall because agents can’t see context, act safely, or scale. We combine integration-first architecture,
-          AI-native agent design, and senior delivery to give you outcomes you can plan around.
+          {subhead}
         </p>
 
         <m.ul
-          className="mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-5 md:grid-cols-3"
+          ref={listRef}
+          className="mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-5 md:grid-cols-3 items-stretch"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.06 } } }}
         >
-          {items.map(({ title, body, Icon }) => (
+          {items.map(({ title, body }) => (
             <m.li
               key={title}
-              className="relative overflow-visible"
+              className="relative overflow-visible h-full"
               variants={{
                 hidden: { opacity: 0, y: enterY },
                 show: { opacity: 1, y: 0, transition: { duration: 0.2, ease: 'easeOut' } },
               }}
             >
-              <div className="rounded-2xl bg-gradient-to-r from-gi-green/35 via-gi-pink/20 to-gi-green/35 p-[1px]">
-                <div className="rounded-[16px] bg-white p-6 shadow-gi transition-transform duration-200 will-change-transform group-hover:-translate-y-0.5">
+              <div className="h-full rounded-2xl bg-gradient-to-r from-gi-green/35 via-gi-pink/20 to-gi-green/35 p-[1px]">
+                <div className="vp-card flex h-full flex-col rounded-[16px] bg-white p-6 shadow-gi transition-transform duration-200 will-change-transform group-hover:-translate-y-0.5" style={cardMinHeight ? { minHeight: cardMinHeight } : undefined}>
                   <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-gi-green/15 ring-1 ring-gi-fog">
-                    <Icon />
+                    <span className="h-5 w-5" />
                   </div>
                   <h3 className="text-base font-semibold text-gi-text">{title}</h3>
                   <p className="mt-2 text-sm text-gi-gray">{body}</p>
+                  <div className="mt-auto" />
                 </div>
               </div>
+
               <div
                 aria-hidden
                 className="pointer-events-none absolute left-3 right-3 -bottom-3 h-6 rounded-b-[18px]
@@ -148,4 +173,4 @@ function IconCapacity() {
       <path d="M12 21c1.5-3 4-5 7-5" />
     </svg>
   );
-} 
+}

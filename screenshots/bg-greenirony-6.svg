@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+    <defs>
+      <!-- Centered soft green glow → transparent (white base shows through) -->
+      <radialGradient id="giCenter" gradientUnits="userSpaceOnUse" cx="960" cy="540" r="1150">
+        <stop offset="0"    stop-color="#5AAD5A" stop-opacity="0.18"/>
+        <stop offset="0.35" stop-color="#5AAD5A" stop-opacity="0.10"/>
+        <stop offset="0.70" stop-color="#5AAD5A" stop-opacity="0.04"/>
+        <stop offset="1"    stop-color="#5AAD5A" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+  
+    <!-- White base -->
+    <rect width="1920" height="1080" fill="#FFFFFF"/>
+    <!-- Center glow -->
+    <rect width="1920" height="1080" fill="url(#giCenter)"/>
+  </svg>
