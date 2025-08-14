@@ -24,9 +24,9 @@ const DEFAULT_BODY = `Launch AI agents that cut busywork, deflect routine demand
 const DEFAULT_PRIMARY: HeroCta = { label: 'Talk to an Expert', href: '#contact' };
 const DEFAULT_SECONDARY: HeroCta = { label: 'Get the 8-Week Agent Launch Plan', href: '#plan' };
 const DEFAULT_KPIS: HeroKpi[] = [
-  { label: '⬇️ Deflection rate up' },
-  { label: '⚡ Delivery cycle time ↓ 50%' },
-  { label: '🧠 Capacity freed' },
+  { label: '🤖 AI-assisted throughput up' },
+  { label: '⚡ Delivery efficiency ↑ 50%' },
+  { label: '🕒 More time for high-value work' },
 ];
 
 export default function HeroCenterPro(props: HeroCenterProProps) {
