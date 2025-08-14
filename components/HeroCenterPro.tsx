@@ -1,7 +1,10 @@
 'use client';
 import { motion as m, useReducedMotion } from 'framer-motion';
+import Image from 'next/image';
 
 export type HeroCta = { label: string; href: string };
+export type HeroKpi = { label: string };
+export type HeroMediaImage = { src: string; alt: string; width?: number; height?: number };
 export type HeroCenterProProps = {
   id?: string;
   className?: string;
@@ -9,12 +12,22 @@ export type HeroCenterProProps = {
   body?: string;
   primaryCta?: HeroCta;
   secondaryCta?: HeroCta;
+  kpis?: HeroKpi[]; // Optional; if undefined use defaults, if [] hide
+  showMedia?: boolean; // Optional; default true
+  mediaImage?: HeroMediaImage; // Optional; overrides default diagram when provided
+  showPrimaryCta?: boolean; // Optional; default true
+  showSecondaryCta?: boolean; // Optional; default true
 };
 
 const DEFAULT_TITLE = `Do more with the team you have.`;
 const DEFAULT_BODY = `Launch AI agents that cut busywork, deflect routine demand, and free capacity—delivering measurable impact in eight weeks. Our AI-infused MuleSoft delivery halves cycle time while expanding what your people can actually get done.`;
 const DEFAULT_PRIMARY: HeroCta = { label: 'Talk to an Expert', href: '#contact' };
 const DEFAULT_SECONDARY: HeroCta = { label: 'Get the 8-Week Agent Launch Plan', href: '#plan' };
+const DEFAULT_KPIS: HeroKpi[] = [
+  { label: '⬇️ Deflection rate up' },
+  { label: '⚡ Delivery cycle time ↓ 50%' },
+  { label: '🧠 Capacity freed' },
+];
 
 export default function HeroCenterPro(props: HeroCenterProProps) {
   const {
@@ -24,10 +37,21 @@ export default function HeroCenterPro(props: HeroCenterProProps) {
     body = DEFAULT_BODY,
     primaryCta = DEFAULT_PRIMARY,
     secondaryCta = DEFAULT_SECONDARY,
+    kpis,
+    showMedia = true,
+    mediaImage,
+    showPrimaryCta = true,
+    showSecondaryCta = true,
   } = props;
 
   const prefersReduced = useReducedMotion();
   const enterY = prefersReduced ? 0 : 8;
+
+  // If kpis is undefined, use defaults. If it's an empty array, render none.
+  const kpisToRender: HeroKpi[] = kpis === undefined ? DEFAULT_KPIS : kpis;
+  const shouldShowKpis = Array.isArray(kpisToRender) && kpisToRender.length > 0;
+
+  const shouldShowAnyCta = (showPrimaryCta && primaryCta) || (showSecondaryCta && secondaryCta);
 
   return (
     <m.section
@@ -54,22 +78,42 @@ export default function HeroCenterPro(props: HeroCenterProProps) {
           {body}
         </p>
 
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <a className="btn-primary" href={primaryCta.href}>{primaryCta.label}</a>
-          <a className="btn-secondary" href={secondaryCta.href}>{secondaryCta.label}</a>
-        </div>
-
-        <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <div className="kpi-chip"><span className="kpi-bar" /><span className="kpi-val">⬇️ Deflection rate up</span></div>
-          <div className="kpi-chip"><span className="kpi-bar" /><span className="kpi-val">⚡ Delivery cycle time ↓ 50%</span></div>
-          <div className="kpi-chip"><span className="kpi-bar" /><span className="kpi-val">🧠 Capacity freed</span></div>
-        </div>
-
-        <div className="mt-12 flex justify-center">
-          <div className="relative w-full max-w-[640px] rounded-2xl border border-gi-fog bg-white p-6 shadow-gi">
-            <HeroDiagram />
+        {shouldShowAnyCta && (
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            {showPrimaryCta && primaryCta && (
+              <a className="btn-primary" href={primaryCta.href}>{primaryCta.label}</a>
+            )}
+            {showSecondaryCta && secondaryCta && (
+              <a className="btn-secondary" href={secondaryCta.href}>{secondaryCta.label}</a>
+            )}
           </div>
-        </div>
+        )}
+
+        {shouldShowKpis && (
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            {kpisToRender.map((kpi, idx) => (
+              <div className="kpi-chip" key={`${kpi.label}-${idx}`}><span className="kpi-bar" /><span className="kpi-val">{kpi.label}</span></div>
+            ))}
+          </div>
+        )}
+
+        {showMedia && (
+          <div className="mt-12 flex justify-center">
+            <div className="relative w-full max-w-[640px] rounded-2xl border border-gi-fog bg-white p-6 shadow-gi">
+              {mediaImage ? (
+                <Image
+                  src={mediaImage.src}
+                  alt={mediaImage.alt}
+                  width={mediaImage.width ?? 960}
+                  height={mediaImage.height ?? 540}
+                  className="h-auto w-full rounded-md"
+                />
+              ) : (
+                <HeroDiagram />
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </m.section>
   );
@@ -154,4 +198,4 @@ function HeroDiagram() {
       <path d="M108 262 C 220 240, 292 220, 396 232" stroke="url(#giSweep)" strokeWidth="8"/>
     </svg>
   );
-} 
+}

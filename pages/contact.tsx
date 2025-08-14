@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import PlaceholderPage from '../components/PlaceholderPage';
+import HeroSimple from '../components/HeroSimple';
 import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../queries/SiteSettingsQuery';
@@ -22,7 +22,13 @@ const Page: any = function ContactPage(props: any) {
       <Head><title>{siteTitle ? `${siteTitle} — Contact` : 'Contact'}</title></Head>
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
       <main>
-        <PlaceholderPage title="Contact" subtitle="Tell us about your goals and challenges. We’ll get back quickly." />
+        <HeroSimple
+          title="Talk to an Expert"
+          subhead="Let’s map your first agentic outcome and plan an 8-week launch."
+        />
+        <section className="mx-auto max-w-7xl px-6 py-12">
+          <p className="max-w-3xl text-gi-gray">Contact form coming soon.</p>
+        </section>
       </main>
       <Footer />
     </>
@@ -35,7 +41,7 @@ export async function getStaticProps(context: any) {
   return getNextStaticProps(context, { Page, revalidate: 60 });
 }
 
-Page.queries = [
+(Page as any).queries = [
   { query: SITE_DATA_QUERY },
   { query: HEADER_MENU_QUERY },
-]; 
+] as any; 

@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+    <defs>
+      <filter id="glowGreen" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+      <filter id="glowPink" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+      <filter id="streak" x="-20%" y="-40%" width="140%" height="180%">
+        <feGaussianBlur stdDeviation="1.6" />
+      </filter>
+      <style><![CDATA[
+        .link { stroke: #ffffff; stroke-opacity: .22; stroke-width: 2; fill: none; }
+        .link.fast { stroke-opacity: .12; filter: url(#streak); }
+        .node { stroke: white; stroke-width: 1; }
+        .connector { stroke: #0B0C0F; stroke-opacity: .35; stroke-width: 1.1; fill: none; stroke-linecap: round; }
+      ]]></style>
+    </defs>
+
+    <!-- Base network (same as hero1.svg) -->
+    <g>
+      <polyline class="link" points="140 680 360 560 600 620 820 520 1040 640 1240 560 1460 620 1700 520"/>
+      <polyline class="link" points="120 420 340 500 560 380 780 460 1000 360 1220 440 1440 380 1660 460"/>
+      <polyline class="link" points="220 820 460 740 700 860 940 760 1180 880 1420 800 1660 900"/>
+      <polyline class="link" points="220 300 460 360 700 280 940 340 1180 300 1420 360 1660 320"/>
+      <polyline class="link" points="100 560 320 640 540 540 760 660 980 560 1200 640 1420 540 1640 620"/>
+      <polyline class="link fast" points="300 700 640 560 980 660 1320 560 1660 640"/>
+      <polyline class="link fast" points="240 460 580 380 920 460 1260 380 1600 460"/>
+    </g>
+
+    <!-- Nodes -->
+    <g>
+      <circle cx="140" cy="680" r="7" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+      <circle cx="120" cy="420" r="6" fill="#C40084" class="node" filter="url(#glowPink)"/>
+      <circle cx="100" cy="560" r="6" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+      <circle cx="220" cy="300" r="5.5" fill="#C40084" class="node" filter="url(#glowPink)"/>
+      <circle cx="220" cy="820" r="6.5" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+
+      <circle cx="340" cy="500" r="7" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+      <circle cx="360" cy="560" r="7.5" fill="#C40084" class="node" filter="url(#glowPink)"/>
+      <circle cx="320" cy="640" r="6" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+      <circle cx="460" cy="740" r="6.5" fill="#C40084" class="node" filter="url(#glowPink)"/>
+      <circle cx="460" cy="360" r="6" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+
+      <circle cx="540" cy="540" r="6" fill="#C40084" class="node" filter="url(#glowPink)"/>
+      <circle cx="560" cy="380" r="6.5" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+      <circle cx="600" cy="620" r="7" fill="#C40084" class="node" filter="url(#glowPink)"/>
+      <circle cx="700" cy="280" r="5.5" fill="#C40084" class="node" filter="url(#glowPink)"/>
+      <circle cx="700" cy="860" r="7" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+      <circle cx="760" cy="660" r="6" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+      <circle cx="780" cy="460" r="6.5" fill="#C40084" class="node" filter="url(#glowPink)"/>
+      <circle cx="820" cy="520" r="7" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+
+      <circle cx="920" cy="460" r="6" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+      <circle cx="940" cy="760" r="7" fill="#C40084" class="node" filter="url(#glowPink)"/>
+      <circle cx="980" cy="560" r="6.5" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+      <circle cx="1000" cy="360" r="6" fill="#C40084" class="node" filter="url(#glowPink)"/>
+      <circle cx="1040" cy="640" r="7" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+
+      <circle cx="1180" cy="880" r="7.5" fill="#C40084" class="node" filter="url(#glowPink)"/>
+      <circle cx="1180" cy="300" r="6" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+      <circle cx="1200" cy="640" r="6.5" fill="#C40084" class="node" filter="url(#glowPink)"/>
+      <circle cx="1220" cy="440" r="6" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+      <circle cx="1240" cy="560" r="7" fill="#C40084" class="node" filter="url(#glowPink)"/>
+      <circle cx="1420" cy="800" r="6.5" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+      <circle cx="1420" cy="360" r="6" fill="#C40084" class="node" filter="url(#glowPink)"/>
+      <circle cx="1440" cy="380" r="6" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+      <circle cx="1460" cy="620" r="7" fill="#C40084" class="node" filter="url(#glowPink)"/>
+      <circle cx="1640" cy="620" r="6" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+      <circle cx="1660" cy="900" r="7.5" fill="#C40084" class="node" filter="url(#glowPink)"/>
+      <circle cx="1660" cy="320" r="6" fill="#5AAD5A" class="node" filter="url(#glowGreen)"/>
+      <circle cx="1700" cy="520" r="8" fill="#C40084" class="node" filter="url(#glowPink)"/>
+    </g>
+
+    <!-- Thin black connectors between select nodes -->
+    <g class="connectors">
+      <!-- Left cluster connections -->
+      <path class="connector" d="M100 560 L140 680"/>
+      <path class="connector" d="M120 420 L100 560"/>
+      <path class="connector" d="M120 420 L220 300"/>
+      <path class="connector" d="M140 680 L220 820"/>
+
+      <!-- Mid-left mesh -->
+      <path class="connector" d="M320 640 L340 500"/>
+      <path class="connector" d="M320 640 L360 560"/>
+      <path class="connector" d="M360 560 L540 540"/>
+      <path class="connector" d="M360 560 L460 740"/>
+      <path class="connector" d="M460 360 L560 380"/>
+
+      <!-- Center connections -->
+      <path class="connector" d="M540 540 L560 380"/>
+      <path class="connector" d="M540 540 L600 620"/>
+      <path class="connector" d="M560 380 L700 280"/>
+      <path class="connector" d="M600 620 L760 660"/>
+      <path class="connector" d="M760 660 L820 520"/>
+      <path class="connector" d="M780 460 L820 520"/>
+      <path class="connector" d="M780 460 L920 460"/>
+      <path class="connector" d="M820 520 L920 460"/>
+
+      <!-- Mid-right connections -->
+      <path class="connector" d="M920 460 L980 560"/>
+      <path class="connector" d="M980 560 L1040 640"/>
+      <path class="connector" d="M1000 360 L920 460"/>
+      <path class="connector" d="M1000 360 L1180 300"/>
+      <path class="connector" d="M1040 640 L1200 640"/>
+      <path class="connector" d="M1180 880 L1040 640"/>
+
+      <!-- Right cluster and top connections -->
+      <path class="connector" d="M1200 640 L1240 560"/>
+      <path class="connector" d="M1220 440 L1240 560"/>
+      <path class="connector" d="M1220 440 L1420 360"/>
+      <path class="connector" d="M1180 880 L1420 800"/>
+      <path class="connector" d="M1420 800 L1460 620"/>
+      <path class="connector" d="M1460 620 L1640 620"/>
+      <path class="connector" d="M1440 380 L1420 360"/>
+      <path class="connector" d="M1460 620 L1440 380"/>
+      <path class="connector" d="M1660 900 L1420 800"/>
+      <path class="connector" d="M1660 320 L1180 300"/>
+      <path class="connector" d="M1700 520 L1460 620"/>
+      <path class="connector" d="M1700 520 L1660 320"/>
+    </g>
+  </svg> 

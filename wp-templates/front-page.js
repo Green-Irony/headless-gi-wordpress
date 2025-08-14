@@ -58,7 +58,32 @@ export default function FrontPage(props) {
             <HeroCenterPro />
             <TrustStrip />
             <ValuePillars />
-            <FeaturedOffers />
+            <FeaturedOffers
+              heading="Our services"
+              items={[
+                {
+                  title: 'MuleSoft Integration (AI-led)',
+                  body: 'Pipelines & events so agents can see, decide, and do.',
+                  cta: { label: 'Review My Integration Gaps', href: '/services#mulesoft' },
+                  flag: 'Flagship',
+                },
+                {
+                  title: 'AI & Digital Labor (Agentforce)',
+                  body: 'Launch agents with jobs, safe actions, and KPIs.',
+                  cta: { label: 'Scope My First Agent', href: '/services#agentforce' },
+                },
+                {
+                  title: 'Salesforce Optimization',
+                  body: 'Make Salesforce the control room for humans + agents.',
+                  cta: { label: 'Optimize My Org', href: '/services#salesforce' },
+                },
+                {
+                  title: 'Data & Migrations',
+                  body: 'Trusted knowledge and real-time context for agents.',
+                  cta: { label: 'Map My Data for AI', href: '/services#data' },
+                },
+              ]}
+            />
             <HowItWorksLinear />
             <CustomerStoriesProof />
             <LeadMagnetCTA />

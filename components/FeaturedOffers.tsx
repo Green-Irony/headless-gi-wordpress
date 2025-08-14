@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { motion as m, useReducedMotion } from 'framer-motion';
 
 export type OfferItem = {
@@ -55,55 +56,48 @@ export default function FeaturedOffers({ id, className, heading = DEFAULT_HEADIN
           viewport={{ once: true, amount: 0.2 }}
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.06 } } }}
         >
-          {items.map((it) => (
-            <m.li
-              key={it.title}
-              className="relative overflow-visible"
-              variants={{
-                hidden: { opacity: 0, y: enterY },
-                show: { opacity: 1, y: 0, transition: { duration: 0.2, ease: 'easeOut' } },
-              }}
-            >
-              <div className="group rounded-2xl bg-gradient-to-r from-gi-pink/35 via-gi-green/20 to-gi-pink/35 p-[1px]">
-                <div className="rounded-[16px] bg-white p-6 shadow-gi transition-transform duration-200 will-change-transform group-hover:-translate-y-0.5">
-                  <div className="flex items-start gap-3">
-                    <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gi-green/15 ring-1 ring-gi-fog">
-                      {/* icon slot */}
-                      <span className="h-5 w-5"/>
-                    </div>
-
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2">
-                        <h3 className="text-base font-semibold text-gi-text">{it.title}</h3>
-                        {it.flag && (
-                          <span className="rounded-full bg-gi-pink/10 px-2 py-0.5 text-xs font-medium text-gi-text ring-1 ring-gi-fog">
-                            {it.flag}
-                          </span>
-                        )}
-                      </div>
-
-                      <p className="mt-2 text-sm text-gi-gray">{it.body}</p>
-
-                      {it.cta && (
-                        <div className="mt-6">
-                          <a className="btn-secondary" href={it.cta.href}>
-                            {it.cta.label}
-                          </a>
-                        </div>
+          {items.map((it) => {
+            const CardInner = (
+              <div className="rounded-[16px] bg-white p-6 shadow-gi transition-transform duration-200 will-change-transform group-hover:-translate-y-0.5">
+                <div className="flex items-start gap-3">
+                  <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gi-green/15 ring-1 ring-gi-fog">
+                    <span className="h-5 w-5"/>
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-base font-semibold text-gi-text">{it.title}</h3>
+                      {it.flag && (
+                        <span className="rounded-full bg-gi-pink/10 px-2 py-0.5 text-xs font-medium text-gi-text ring-1 ring-gi-fog">
+                          {it.flag}
+                        </span>
                       )}
                     </div>
+                    <p className="mt-2 text-sm text-gi-gray">{it.body}</p>
+                    {it.cta && (
+                      <div className="mt-6">
+                        <Link className="btn-secondary" href={it.cta.href}>
+                          {it.cta.label}
+                        </Link>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
+            );
 
-              <div
-                aria-hidden
-                className="pointer-events-none absolute left-3 right-3 -bottom-3 h-6 rounded-b-[18px]
-                           bg-gradient-to-r from-gi-pink/30 via-gi-green/20 to-gi-pink/30 blur-[10px] opacity-80 md:opacity-90
-                           [mask-image:linear-gradient(to_bottom,transparent,black_40%)]"
-              />
-            </m.li>
-          ))}
+            return (
+              <m.li
+                key={it.title}
+                className="relative overflow-visible"
+                variants={{ hidden: { opacity: 0, y: enterY }, show: { opacity: 1, y: 0, transition: { duration: 0.2, ease: 'easeOut' } } }}
+              >
+                <div className="group rounded-2xl bg-gradient-to-r from-gi-pink/35 via-gi-green/20 to-gi-pink/35 p-[1px]">
+                  {CardInner}
+                </div>
+                <div aria-hidden className="pointer-events-none absolute left-3 right-3 -bottom-3 h-6 rounded-b-[18px] bg-gradient-to-r from-gi-pink/30 via-gi-green/20 to-gi-pink/30 blur-[10px] opacity-80 md:opacity-90 [mask-image:linear-gradient(to_bottom,transparent,black_40%)]" />
+              </m.li>
+            );
+          })}
         </m.ul>
       </div>
     </m.section>
@@ -173,4 +167,4 @@ function IconData(props: React.SVGProps<SVGSVGElement>) {
       <path d="M6 12c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5" />
     </svg>
   );
-} 
+}

@@ -6,6 +6,7 @@ export type HowItWorksProps = {
   id?: string;
   className?: string;
   heading?: string;
+  subhead?: string;
   steps?: HowStep[];
   cta?: { label: string; href: string };
 };
@@ -19,9 +20,12 @@ const DEFAULT_STEPS: HowStep[] = [
 ];
 const DEFAULT_CTA = { label: 'Get the 8-Week Agent Launch Plan', href: '#plan' };
 
-export default function HowItWorksLinear({ id, className, heading = DEFAULT_HEADING, steps = DEFAULT_STEPS, cta = DEFAULT_CTA }: HowItWorksProps) {
+export default function HowItWorksLinear({ id, className, heading = DEFAULT_HEADING, subhead, steps = DEFAULT_STEPS, cta = DEFAULT_CTA }: HowItWorksProps) {
   const prefersReduced = useReducedMotion();
   const enterY = prefersReduced ? 0 : 10;
+
+  const count = Math.max(1, Math.min(4, steps.length));
+  const gridCols = count === 1 ? 'grid-cols-1' : count === 2 ? 'grid-cols-2' : count === 3 ? 'grid-cols-3' : 'grid-cols-4';
 
   return (
     <m.section
@@ -43,22 +47,25 @@ export default function HowItWorksLinear({ id, className, heading = DEFAULT_HEAD
           {heading}
         </h2>
 
-        <p className="mx-auto mt-4 max-w-3xl text-center text-gi-gray text-balance">
-          Align on the right use case, launch with integration-first delivery, measure results, and
-          scale with confidence.
-        </p>
+        {subhead && (
+          <p className="mx-auto mt-4 max-w-3xl text-center text-gi-gray text-balance">
+            {subhead}
+          </p>
+        )}
 
         <div className="relative mt-12 hidden md:block">
           <div aria-hidden className="absolute left-0 right-0 top-[50px] h-[2px] bg-gradient-to-r from-gi-green/70 via-gi-pink/50 to-gi-green/70" />
           <div aria-hidden className="absolute inset-x-0 top-[42px] h-16">
-            <div className="absolute left-[12.5%] h-16 w-16 -translate-x-1/2 rounded-full bg-gi-green/15 blur-[18px]" />
-            <div className="absolute left-[37.5%] h-16 w-16 -translate-x-1/2 rounded-full bg-gi-green/15 blur-[18px]" />
-            <div className="absolute left-[62.5%] h-16 w-16 -translate-x-1/2 rounded-full bg-gi-green/15 blur-[18px]" />
-            <div className="absolute left-[87.5%] h-16 w-16 -translate-x-1/2 rounded-full bg-gi-green/15 blur-[18px]" />
+            {steps.slice(0, count).map((_, idx) => {
+              const left = ((idx + 0.5) * 100) / count;
+              return (
+                <div key={idx} className="absolute h-16 w-16 -translate-x-1/2 rounded-full bg-gi-green/15 blur-[18px]" style={{ left: `${left}%` }} />
+              );
+            })}
           </div>
 
-          <div className="grid grid-cols-4 gap-6">
-            {steps.map((s, idx) => (
+          <div className={`grid ${gridCols} gap-6`}>
+            {steps.slice(0, count).map((s, idx) => (
               <m.div
                 key={s.k}
                 className="relative flex flex-col items-center text-center"
@@ -97,7 +104,7 @@ export default function HowItWorksLinear({ id, className, heading = DEFAULT_HEAD
               aria-hidden
               className="absolute left-[26px] top-5 bottom-5 w-px bg-gradient-to-b from-gi-green/60 via-gi-pink/40 to-gi-green/60 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]"
             />
-            {steps.map((s) => (
+            {steps.slice(0, count).map((s) => (
               <li key={s.k} className="relative pl-16">
                 <div className="absolute left-0 top-1">
                   <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white ring-1 ring-gi-fog shadow-gi">
