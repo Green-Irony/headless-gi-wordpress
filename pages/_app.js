@@ -31,7 +31,8 @@ export default function MyApp({ Component, pageProps }) {
         )}
       </Head>
       <FaustProvider pageProps={pageProps}>
-        <div style={{ paddingTop: 64 }}>
+        <div style={{ paddingTop: 'var(--gi-header-offset,64px)' }}>
+          <style jsx global>{`:root{--gi-header-offset:64px}`}</style>
           <Component {...pageProps} key={router.asPath} />
         </div>
       </FaustProvider>

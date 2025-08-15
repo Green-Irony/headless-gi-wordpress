@@ -27,14 +27,17 @@ export default function ServicesTabbedContent({
 
   const [activeId, setActiveId] = useState<string>(initialId);
   const listRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [isFixed, setIsFixed] = useState(false);
+  const [fixedStyle, setFixedStyle] = useState<React.CSSProperties>({});
+  const [spacerH, setSpacerH] = useState(0);
 
   useEffect(() => {
     const onHash = () => {
       const h = window.location.hash?.replace('#', '');
       if (h && tabIds.includes(h)) {
         setActiveId(h);
-        const el = document.getElementById(h);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        pushHashAndScroll(h);
       }
     };
     window.addEventListener('hashchange', onHash);
@@ -42,11 +45,9 @@ export default function ServicesTabbedContent({
   }, [tabIds]);
 
   useEffect(() => {
-    // If user lands with a hash, ensure we scroll to the tab list (no hash is added if absent)
     const h = window.location.hash?.replace('#', '');
     if (h && tabIds.includes(h)) {
-      const el = document.getElementById(h);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      pushHashAndScroll(h);
     }
   }, [tabIds]);
 
@@ -60,8 +61,18 @@ export default function ServicesTabbedContent({
 
   const pushHashAndScroll = (id: string) => {
     history.pushState(null, '', `#${id}`);
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const headerOffset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gi-header-offset')) || 64;
+    const container = containerRef.current;
+    if (container) {
+      const top = container.getBoundingClientRect().top + window.scrollY - headerOffset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    } else {
+      const el = document.getElementById(id);
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.scrollY - headerOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }
   };
 
   const onKeyDown = (e: React.KeyboardEvent) => {
@@ -92,15 +103,64 @@ export default function ServicesTabbedContent({
     }
   };
 
+  useEffect(() => {
+    const headerOffset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gi-header-offset')) || 64;
+    const handle = () => {
+      const list = listRef.current;
+      const container = containerRef.current;
+      if (!list || !container) return;
+      const containerRect = container.getBoundingClientRect();
+      const containerTop = containerRect.top + window.scrollY;
+      const scrollTop = window.scrollY;
+      const shouldFix = scrollTop + headerOffset >= containerTop;
+      if (shouldFix) {
+        const cStyle = getComputedStyle(container);
+        const padL = cStyle.paddingLeft;
+        const padR = cStyle.paddingRight;
+        setIsFixed(true);
+        setSpacerH(list.offsetHeight);
+        setFixedStyle({
+          position: 'fixed',
+          top: `var(--gi-header-offset, ${headerOffset}px)`,
+          left: `${containerRect.left + window.scrollX}px`,
+          width: `${containerRect.width}px`,
+          //height: '64px',
+          zIndex: 30,
+          //background: 'rgba(255,255,255,0.9)',
+          backdropFilter: 'saturate(180%) blur(6px)',
+          boxSizing: 'border-box',
+          paddingLeft: padL,
+          paddingRight: padR,
+          //paddingTop: '16px',
+          //paddingBottom: '16px',
+        });
+      } else if (isFixed) {
+        setIsFixed(false);
+        setSpacerH(0);
+        setFixedStyle({});
+      }
+    };
+    handle();
+    window.addEventListener('scroll', handle, { passive: true });
+    window.addEventListener('resize', handle);
+    return () => {
+      window.removeEventListener('scroll', handle);
+      window.removeEventListener('resize', handle);
+    };
+  }, [isFixed]);
+
   return (
     <section id={id} className={className ?? ''}>
-      <div className="mx-auto max-w-7xl px-6">
+      <div ref={containerRef} className="mx-auto max-w-7xl px-6">
+        {/* Spacer to avoid layout jump when fixed */}
+        {spacerH > 0 && <div style={{ height: spacerH }} />}
         <div
           ref={listRef}
           role="tablist"
           aria-label="Services"
-          className="flex flex-wrap items-center gap-2 border-b border-gi-line pb-4"
+          className="flex flex-wrap items-center gap-2 border-b border-gi-line pb-4 pt-4"
           onKeyDown={onKeyDown}
+          style={fixedStyle}
         >
           {tabs.map((t) => (
             <a
