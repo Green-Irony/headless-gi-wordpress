@@ -209,7 +209,7 @@ export default function Header({
 
             {/* Right-side: desktop nav + CTAs + mobile trigger */}
             <div className="ml-auto flex items-center gap-4">
-              <nav className="relative hidden md:flex md:items-center md:gap-8" aria-label="Primary">
+              <nav className="relative hidden xl:flex xl:items-center xl:gap-8" aria-label="Primary">
                 {(hasWpMenu ? tree : FALLBACK_NAV.map((n, i) => ({ id: String(i), uri: n.href, label: n.label })) as any[]).map((rawItem: any, idx) => {
                   const item: MenuItem = rawItem as MenuItem;
                   const isServices = (item.label || '').toLowerCase().includes('services') || (item.uri ?? '').startsWith('/services');
@@ -280,12 +280,14 @@ export default function Header({
                 })}
               </nav>
 
-              <div className="flex items-center gap-3">
-                <Link href="#plan" className="btn-secondary hidden lg:inline-flex">Get the 8-Week Plan</Link>
-                <Link href="#contact" className="btn-primary hidden md:inline-flex">Talk to an Expert</Link>
+              <div className="hidden xl:flex items-center gap-3">
+                <Link href="#plan" className="btn-secondary">Get the 8-Week Plan</Link>
+                <Link href="#contact" className="btn-primary">Talk to an Expert</Link>
+              </div>
+              <div className="flex xl:hidden items-center">
                 <button
                   type="button"
-                  className="md:hidden inline-flex items-center justify-center rounded-md px-2 py-2 text-gi-text ring-1 ring-gi-fog hover:bg-gi-fog/60"
+                  className="inline-flex items-center justify-center rounded-md px-2 py-2 text-gi-text ring-1 ring-gi-fog hover:bg-gi-fog/60"
                   aria-label={openMobile ? 'Close menu' : 'Open menu'}
                   onClick={() => setOpenMobile((v) => !v)}
                 >
@@ -300,6 +302,51 @@ export default function Header({
           </div>
         </div>
         <div className={`h-px w-full ${scrolled ? 'bg-gi-fog' : 'bg-gi-line'}`} />
+      </div>
+      {/* Mobile overlay panel */}
+      <div
+        className={`xl:hidden fixed inset-x-0 top-16 z-40 bg-white ring-1 ring-gi-fog shadow-gi transition-[opacity,transform] duration-200 ${openMobile ? 'opacity-100 translate-y-0' : 'pointer-events-none opacity-0 -translate-y-2'}`}
+        aria-hidden={!openMobile}
+      >
+        <div className="mx-auto max-w-7xl px-6 pb-4 pt-2">
+          <nav className="mt-2 flex flex-col gap-1" aria-label="Mobile">
+            {(hasWpMenu ? tree : FALLBACK_NAV.map((n, i) => ({ id: String(i), uri: n.href, label: n.label })) as any[]).map((rawItem: any) => {
+              const item: MenuItem = rawItem as MenuItem;
+              const isServices = (item.label || '').toLowerCase().includes('services') || (item.uri ?? '').startsWith('/services');
+              const isSolutions = (item.label || '').toLowerCase().includes('solutions') || (item.uri ?? '').startsWith('/solutions');
+              const children = (item.childItems && item.childItems.nodes) ? item.childItems.nodes : [];
+              const mappedChildren = isServices ? children.map(c => ({ ...c, uri: toServicesAnchor(c.uri) })) : children;
+              const effectiveChildren = mappedChildren.length > 0 ? mappedChildren.map(c => ({ href: c.uri, title: c.label })) : (isServices ? DEFAULT_SERVICES_CHILDREN : (isSolutions ? DEFAULT_SOLUTIONS_CHILDREN : []));
+
+              return (
+                <div key={item.id || item.label} className="rounded-md">
+                  <Link href={item.uri} className="block rounded-md px-2 py-2 text-sm font-medium text-gi-text hover:bg-gi-fog/60" onClick={() => setOpenMobile(false)}>
+                    {item.label}
+                  </Link>
+                  {effectiveChildren.length > 0 && (
+                    <ul className="ml-2 border-l border-gi-fog pl-2">
+                      {effectiveChildren.map((c) => (
+                        <li key={c.title}>
+                          <Link href={c.href} className="block rounded-md px-2 py-2 text-sm text-gi-gray hover:bg-gi-fog/60" onClick={() => setOpenMobile(false)}>
+                            {c.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              );
+            })}
+            <div className="mt-2 flex gap-2">
+              <Link href="#plan" className="btn-secondary flex-1" onClick={() => setOpenMobile(false)}>
+                Get the 8-Week Plan
+              </Link>
+              <Link href="/contact" className="btn-primary flex-1" onClick={() => setOpenMobile(false)}>
+                Talk to an Expert
+              </Link>
+            </div>
+          </nav>
+        </div>
       </div>
       </header>
     </>
