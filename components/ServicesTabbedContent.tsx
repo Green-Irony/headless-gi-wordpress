@@ -124,15 +124,12 @@ export default function ServicesTabbedContent({
           top: `var(--gi-header-offset, ${headerOffset}px)`,
           left: `${containerRect.left + window.scrollX}px`,
           width: `${containerRect.width}px`,
-          //height: '64px',
           zIndex: 30,
           //background: 'rgba(255,255,255,0.9)',
           backdropFilter: 'saturate(180%) blur(6px)',
           boxSizing: 'border-box',
           paddingLeft: padL,
-          paddingRight: padR,
-          //paddingTop: '16px',
-          //paddingBottom: '16px',
+          paddingRight: padR
         });
       } else if (isFixed) {
         setIsFixed(false);

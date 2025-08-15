@@ -200,7 +200,7 @@ export default function Header({
             {/* Brand */}
             <div className="flex items-center gap-3">
               <Link href="/" aria-label={(siteTitle ?? 'Green Irony') + ' — Home'} className="flex items-center gap-2">
-                <Image src="/img/gi-logo-green.svg" alt={siteTitle ?? 'Green Irony'} width={140} height={28} priority className="h-7 w-auto" />
+                <Image src="/logos/green-irony/green-logo-long.png" alt={siteTitle ?? 'Green Irony'} width={212} height={45} priority className="h-7 w-auto" />
                 <span id="gi-fallback" className="hidden items-center rounded-md px-2 py-1 text-sm font-semibold text-gi-text ring-1 ring-gi-fog">
                   <span className="mr-1 inline-block h-2 w-2 rounded-full bg-gi-green" /> {siteTitle ?? 'Green Irony'}
                 </span>

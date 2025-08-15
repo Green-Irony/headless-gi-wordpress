@@ -27,7 +27,7 @@ export default function MyApp({ Component, pageProps }) {
         {faviconHref ? (
           <link rel="icon" href={faviconHref} />
         ) : (
-          <link rel="icon" href="/img/gi-logo.svg" type="image/svg+xml" />
+          <link rel="icon" href="/logos/green-irony/banksy-solo-transparent.png" type="image/png" />
         )}
       </Head>
       <FaustProvider pageProps={pageProps}>
