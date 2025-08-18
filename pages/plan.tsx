@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import HomepageHero from '../components/HomepageHero';
 import ValuePillars from '../components/ValuePillars';
 import HowItWorksLinear from '../components/HowItWorksLinear';
-import PillarsDynamic from '../components/PillarsDynamic';
+import AccordionWithMedia from '../components/AccordionWithMedia';
 import LeadMagnetCTA from '../components/LeadMagnetCTA';
 import PreFooterCTA from '../components/PreFooterCTA';
 import { useQuery } from '@apollo/client';
@@ -64,16 +64,19 @@ const Page: any = function PlanPage(props: any) {
         />
 
         {/* What you get */}
-        <PillarsDynamic
+        <AccordionWithMedia
           heading="What you get in 8 weeks"
-          mode="grid"
+          imageSrc="/images/accordion-sample.svg"
+          imageAlt="Eight‑week plan visual"
+          imageRight={true}
+          initialOpenIndex={0}
           items={[
-            { title: 'Use‑case selection & KPI scorecard', body: 'A crisp problem statement with measurable outcomes and owners.', accentStrength: 20 },
-            { title: 'Minimal integration blueprint', body: 'API‑led/event‑driven map so agents can see, decide, and do. No wasted build.', accentStrength: 15 },
-            { title: 'Agent job & action design', body: 'Clear responsibilities, safe actions, approvals, guardrails, and fallbacks.', accentStrength: 20 },
-            { title: 'Working pilot', body: 'End‑to‑end agent executing a scoped workflow with trustworthy data.', accentStrength: 15 },
-            { title: 'Operational telemetry', body: 'Observability, error handling, and performance instrumentation built in.', accentStrength: 20 },
-            { title: 'Adoption & scale plan', body: 'Playbook to expand coverage, add actions, and deepen automation with confidence.', accentStrength: 20 },
+            { title: 'Use‑case selection & KPI scorecard', body: 'A crisp problem statement with measurable outcomes and owners.' },
+            { title: 'Minimal integration blueprint', body: 'API‑led/event‑driven map so agents can see, decide, and do. No wasted build.' },
+            { title: 'Agent job & action design', body: 'Clear responsibilities, safe actions, approvals, guardrails, and fallbacks.' },
+            { title: 'Working pilot', body: 'End‑to‑end agent executing a scoped workflow with trustworthy data.' },
+            { title: 'Operational telemetry', body: 'Observability, error handling, and performance instrumentation built in.' },
+            { title: 'Adoption & scale plan', body: 'Playbook to expand coverage, add actions, and deepen automation with confidence.' },
           ]}
         />
 

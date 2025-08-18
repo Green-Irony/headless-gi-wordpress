@@ -67,7 +67,7 @@ export default function FrontPage(props) {
               ]}
               body="Launch your first AI-powered MuleSoft or Salesforce outcome in 8 weeks. Our AI-accelerated delivery cuts timelines in half—without sacrificing quality or price—so your team achieves more, faster."
               primaryCta={{ label: 'Talk to an Expert', href: '/contact' }}
-              secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '#plan' }}
+              secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '/plan' }}
               showMedia={false}
               mediaImage={{ src: '/logos/green-irony/Green-Irony-Logo.svg', alt: 'Green Irony services overview' }}
             />

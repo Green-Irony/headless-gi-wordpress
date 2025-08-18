@@ -115,7 +115,7 @@ const Page: any = function SolutionsPage(props: any) {
                   title="See the Higher-Ed Blueprint"
                   body="Deflect routine questions and scale student experience with integrated, agent-backed support."
                   primaryCta={{ label: 'Open the Blueprint', href: '/solutions/higher-education' }}
-                  secondaryCta={{ label: 'Get the 8-Week Plan', href: '/#plan' }}
+                  secondaryCta={{ label: 'Get the 8-Week Plan', href: '/plan' }}
                 />
               </div>
             ),
@@ -128,7 +128,7 @@ const Page: any = function SolutionsPage(props: any) {
                   showMedia={true}
                   mediaImage={{ src: '/images/hero-sol-smb.svg', alt: 'SMB hero' }}
                   primaryCta={{ label: 'Start My First Win', href: '/solutions/smb' }}
-                  secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '/#plan' }}
+                  secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '/plan' }}
                 />
                 <CustomerStoryHighlight
                   customer="Common App"

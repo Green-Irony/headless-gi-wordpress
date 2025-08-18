@@ -95,7 +95,7 @@ const Page: any = function ServicesPage(props: any) {
                   title="Plan your first agent win"
                   body="Bring a workflow, we’ll shape the job, safe actions, and KPIs to launch in ~8 weeks."
                   primaryCta={{ label: 'Scope My First Agent', href: '/contact' }}
-                  secondaryCta={{ label: 'Get the 8-Week Plan', href: '/#plan' }}
+                  secondaryCta={{ label: 'Get the 8-Week Plan', href: '/plan' }}
                 />
               </div>
             ),
@@ -131,7 +131,7 @@ const Page: any = function ServicesPage(props: any) {
                   title="Review your integration gaps"
                   body="We’ll map the minimal event and pipeline set your first agent needs to act."
                   primaryCta={{ label: 'Book an assessment', href: '/contact' }}
-                  secondaryCta={{ label: 'See our accelerators', href: '/#plan' }}
+                  secondaryCta={{ label: 'See our accelerators', href: '/plan' }}
                 />
               </div>
             ),
@@ -166,7 +166,7 @@ const Page: any = function ServicesPage(props: any) {
                   title="Optimize your org for digital labor"
                   body="We’ll remove friction and ready Salesforce for reliable agent action."
                   primaryCta={{ label: 'Talk to Salesforce experts', href: '/contact' }}
-                  secondaryCta={{ label: 'See optimization checklist', href: '/#plan' }}
+                  secondaryCta={{ label: 'See optimization checklist', href: '/plan' }}
                 />
               </div>
             ),
@@ -201,7 +201,7 @@ const Page: any = function ServicesPage(props: any) {
                   title="Map your data for AI"
                   body="We’ll define trusted sources, freshness guarantees, and event patterns to power safe agent action."
                   primaryCta={{ label: 'Start a data blueprint', href: '/contact' }}
-                  secondaryCta={{ label: 'See migration playbook', href: '/#plan' }}
+                  secondaryCta={{ label: 'See migration playbook', href: '/plan' }}
                 />
               </div>
             ),

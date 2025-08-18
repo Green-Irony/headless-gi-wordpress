@@ -19,7 +19,7 @@ const DEFAULT_BULLETS = [
   'Integration checklist (events, pipelines, data)',
   'Expansion plays to add actions and deepen automation',
 ];
-const DEFAULT_PRIMARY = { label: 'Download the Plan', href: '#plan' };
+const DEFAULT_PRIMARY = { label: 'Download the Plan', href: '/plan' };
 const DEFAULT_SECONDARY = { label: 'Talk to an Expert', href: '/contact' };
 
 export default function LeadMagnetCTA({ id, className, title = DEFAULT_TITLE, body = DEFAULT_BODY, bullets = DEFAULT_BULLETS, primaryCta = DEFAULT_PRIMARY, secondaryCta = DEFAULT_SECONDARY }: LeadMagnetProps) {

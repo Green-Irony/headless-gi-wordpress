@@ -80,7 +80,7 @@ export default function Footer() {
             <div>
               <div className="text-sm font-semibold text-gi-text">Resources</div>
               <ul className="mt-3 space-y-2 text-sm">
-                <li><Link href="/#plan" className={linkUnderline}>8-Week Agent Launch Plan</Link></li>
+                <li><Link href="/plan" className={linkUnderline}>8-Week Agent Launch Plan</Link></li>
                 <li><Link href="/privacy" className={linkUnderline}>Privacy</Link></li>
                 <li><Link href="/terms" className={linkUnderline}>Terms</Link></li>
               </ul>

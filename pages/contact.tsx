@@ -35,7 +35,7 @@ const Page: any = function ContactPage(props: any) {
           title="Let’s launch your first win"
           body="Our senior team will respond within one business day—often the same day."
           primaryCta={{ label: 'Start the Conversation', href: '#contact-form' }}
-          secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '#plan' }}
+          secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '/plan' }}
           kpis={[{ label: '⚡ Faster delivery' }, { label: '⬇️ Deflection up' }, { label: '🧠 Capacity unlocked' }]}
           showMedia={false}
         />

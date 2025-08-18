@@ -36,7 +36,7 @@ const Page: any = function CustomerStoriesPage(props: any) {
           title="Prove value, then scale"
           body="Case studies built around business outcomes—speed, deflection, and capacity—powered by integrated systems and AI-native agents. See how we turned complex problems into predictable wins."
           primaryCta={{ label: 'Start Your Success Plan', href: '#contact' }}
-          secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '#plan' }}
+          secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '/plan' }}
           kpis={[
             { label: '⚡ ½ delivery time' },
             { label: '🛎️ 24/7 support' },
@@ -97,7 +97,7 @@ const Page: any = function CustomerStoriesPage(props: any) {
               ]}
               proofTag="Public-facing AI agents powered by integrated data."
               quote="The agent feels like a teammate—always on, always informed, and it freed our advisors to focus where humans matter most."
-              primaryCta={{ label: 'See the Higher-Ed Blueprint', href: '#plan' }}
+              primaryCta={{ label: 'See the Higher-Ed Blueprint', href: '/plan' }}
               secondaryCta={{ label: 'Scope my first agent', href: '#contact' }}
             />
 
@@ -116,7 +116,7 @@ const Page: any = function CustomerStoriesPage(props: any) {
               proofTag="Partner-level attention with AI-level leverage."
               quote="We didn’t have the resources for a big program. Green Irony made our first AI win feel immediate and expandable."
               primaryCta={{ label: 'Start My First-Win', href: '#contact' }}
-              secondaryCta={{ label: 'Get the 8-Week Plan', href: '#plan' }}
+              secondaryCta={{ label: 'Get the 8-Week Plan', href: '/plan' }}
             />
           </div>
         </section>
