@@ -21,8 +21,8 @@ export default function InsightsHeroSearch({
   return (
     <section className="bg-gradient-to-b from-gi-subtle to-white py-10 sm:py-14">
       <div className="mx-auto max-w-3xl px-6">
-        <h1 className="text-center text-3xl font-extrabold tracking-tight text-gi-text sm:text-4xl">Insights</h1>
-        <p className="mt-2 text-center text-gi-gray">Search titles, content, categories, and tags</p>
+        <h1 className="text-center text-3xl font-extrabold tracking-tight text-gi-text sm:text-4xl">Clarity in the age of AI</h1>
+        <p className="mt-2 text-center text-gi-gray">Practical plays for integrating AI into your business—from MuleSoft‑powered foundations to agent deployment and scale.</p>
         <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row">
           <div className="relative w-full flex-1">
             <input

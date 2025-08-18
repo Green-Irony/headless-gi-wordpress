@@ -24,21 +24,11 @@ export default function TrustStrip() {
         <div className="mx-auto mb-8 h-px w-16 bg-gi-line" />
 
         <h2 className="text-center text-3xl font-semibold tracking-tight text-gi-text md:text-4xl text-balance">
-          <span className="relative inline-block pr-1 align-baseline">
-            Trusted
-            <SquiggleUnderlineGreen />
-          </span>{' '}
-          by enterprise teams to launch{' '}
-          <span className="relative inline-block pr-1 align-baseline">
-            Real
-            <SquiggleUnderlineGreen />
-          </span>{' '}
-          AI outcomes
+          Trusted by organizations that run on real-time outcomes
         </h2>
 
         <p className="mx-auto mt-6 max-w-3xl text-center text-gi-gray text-balance">
-          We took what worked at scale—event-driven ops and MuleSoft excellence (Spirit Airlines)—and bottled it into an
-          AI-native delivery engine. The result: reliable deflection, faster delivery, and capacity unlocked without adding headcount.
+          From Spirit Airlines’ event‑driven operations to higher ed’s 24/7 support and SMB growth wins, AI‑native integration delivers at scale.
         </p>
 
         <div className="relative mt-14 overflow-visible">

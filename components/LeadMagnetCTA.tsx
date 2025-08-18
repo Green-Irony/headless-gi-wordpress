@@ -12,8 +12,8 @@ export type LeadMagnetProps = {
   secondaryCta?: { label: string; href: string };
 };
 
-const DEFAULT_TITLE = 'Your 8-Week Agent Launch Plan';
-const DEFAULT_BODY = 'A concise, practical playbook: pick the right use case, design the minimal integrations, launch a working agent, and measure outcomes—fast.';
+const DEFAULT_TITLE = 'Your 8‑Week Agent Launch Plan';
+const DEFAULT_BODY = 'Pick the right use case, design the minimal integrations, launch a working agent, and measure outcomes—fast.';
 const DEFAULT_BULLETS = [
   'KPI scorecard (deflection, cycle time, capacity)',
   'Integration checklist (events, pipelines, data)',

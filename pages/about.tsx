@@ -35,8 +35,8 @@ const Page: any = function AboutPage(props: any) {
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
       <main>
         <HeroCenterPro
-          title="AI amplifies expertise—yours and ours"
-          body="We rebuilt consulting to deliver real business outcomes fast. By embedding agents into delivery and powering them with integrated systems, we give you predictable speed, capacity, and confidence without the usual overhead."
+          title="We’ve always moved fast. Now we move twice as fast."
+          body="Trusted since 2018 for enterprise‑grade Salesforce and MuleSoft delivery. Today, AI‑native—cutting timelines in half while keeping US‑based quality and predictability."
           primaryCta={{ label: 'Meet the Team', href: '#team' }}
           secondaryCta={{ label: 'Start Your First Win', href: '#contact' }}
           kpis={[{ label: '⚡ Faster delivery' }, { label: '⬇️ Deflection up' }, { label: '🧠 Capacity unlocked' }]}

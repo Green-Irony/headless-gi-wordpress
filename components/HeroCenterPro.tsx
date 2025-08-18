@@ -19,8 +19,8 @@ export type HeroCenterProProps = {
   showSecondaryCta?: boolean; // Optional; default true
 };
 
-const DEFAULT_TITLE = `Do more with the team you have.`;
-const DEFAULT_BODY = `Launch AI agents that cut busywork, deflect routine demand, and free capacity—delivering measurable impact in eight weeks. Our AI-infused MuleSoft delivery halves cycle time while expanding what your people can actually get done.`;
+const DEFAULT_TITLE = `2× Faster Delivery. Offshore Economics. Onshore Expertise.`;
+const DEFAULT_BODY = `Launch your first AI-powered MuleSoft or Salesforce outcome in 8 weeks. Our AI-accelerated delivery cuts timelines in half—without sacrificing quality or price—so your team achieves more, faster.`;
 const DEFAULT_PRIMARY: HeroCta = { label: 'Talk to an Expert', href: '/contact' };
 const DEFAULT_SECONDARY: HeroCta = { label: 'Get the 8-Week Agent Launch Plan', href: '#plan' };
 const DEFAULT_KPIS: HeroKpi[] = [

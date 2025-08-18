@@ -73,7 +73,7 @@ const Page: any = function InsightsPage(props: any) {
 
   return (
     <>
-      <Head><title>{siteTitle ? `${siteTitle} — Insights` : 'Insights'}</title></Head>
+      <Head><title>{siteTitle ? `${siteTitle} — Clarity in the age of AI` : 'Clarity in the age of AI'}</title></Head>
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
       <main>
         <InsightsHeroSearch

@@ -36,8 +36,8 @@ const Page: any = function ServicesPage(props: any) {
 
       <main>
         <HeroCenterPro
-          title="What we deliver"
-          body="Investment → impact. Integration-led agentic outcomes across MuleSoft integration, Agentforce digital labor, Salesforce optimization, and trusted data."
+          title="From investment to impact — fast"
+          body="You already own powerful platforms. We combine AI‑accelerated MuleSoft delivery, digital labor (Agentforce), Salesforce optimization, and trusted data to cut delivery timelines in half and deliver measurable outcomes in 8 weeks."
           primaryCta={{ label: 'Plan my first win', href: '/contact' }}
           secondaryCta={{ label: 'Explore services', href: '#agentforce' }}
           kpis={[]}
@@ -47,12 +47,11 @@ const Page: any = function ServicesPage(props: any) {
         />
 
         <ValuePillars
-          heading="Our Approach"
-          subhead="We combine integration-first execution, AI-native delivery, and outcome orientation to deliver impactful solutions."
+          heading="Our approach"
           items={[
-            { title: 'Integration-first execution', body: 'The only way agents deliver is by seeing accurate state and triggering reliable actions.' },
-            { title: 'AI-native delivery', body: 'Agents aren’t add-ons—they’re embedded in how we scope, build, and accelerate your outcomes.' },
-            { title: 'Outcome orientation', body: 'We begin with the business result (speed, deflection, capacity) and reverse-engineer the technical path to get you there in eight weeks.' },
+            { title: 'Integration‑first execution', body: 'Agents deliver when they can see accurate state and trigger reliable actions.' },
+            { title: 'AI‑native delivery', body: 'AI accelerates discovery, design, and delivery without sacrificing quality.' },
+            { title: 'Outcome orientation', body: 'Start with speed, deflection, capacity—and deliver it in weeks, not months.' },
           ]}
         />
         <ServicesTabbedContent
@@ -68,7 +67,7 @@ const Page: any = function ServicesPage(props: any) {
               <div>
                 <HeroSimple
                   title="Launch your first AI agent the right way"
-                  subhead="We give agents clear jobs, connect them to the data they need, and enable safe actions—delivering a measurable business outcome in eight weeks."
+                  subhead="Scope, build, and deploy AI agents with clear jobs, safe actions, and measurable KPIs—delivered by US‑based senior experts using AI‑accelerated methods to move twice as fast as traditional teams."
                 />
                 <PillarsDynamic
                   heading="What we deliver"
@@ -95,7 +94,7 @@ const Page: any = function ServicesPage(props: any) {
                 <PreFooterCTA
                   title="Plan your first agent win"
                   body="Bring a workflow, we’ll shape the job, safe actions, and KPIs to launch in ~8 weeks."
-                  primaryCta={{ label: 'Scope my agent', href: '/contact' }}
+                  primaryCta={{ label: 'Scope My First Agent', href: '/contact' }}
                   secondaryCta={{ label: 'Get the 8-Week Plan', href: '/#plan' }}
                 />
               </div>
@@ -103,8 +102,8 @@ const Page: any = function ServicesPage(props: any) {
             mulesoft: (
               <div>
                 <HeroSimple
-                  title="Integration that powers agent actionability"
-                  subhead="Agents can only act when they see the right signals. We design API-led, event-driven MuleSoft architectures so your AI agents can see, decide, and do—reliably, quickly, and at scale."
+                  title="Integration that makes AI agents act"
+                  subhead="AI‑accelerated, senior‑led MuleSoft delivery cuts integration timelines in half—giving agents the context they need from day one."
                 />
                 <PillarsDynamic
                   heading="What we deliver"
@@ -140,7 +139,7 @@ const Page: any = function ServicesPage(props: any) {
               <div>
                 <HeroSimple
                   title="Make Salesforce the control room for digital labor"
-                  subhead="Remove friction, simplify processes, and prepare your org so humans and AI agents operate in flow."
+                  subhead="We streamline workflows, remove friction, and prepare your Salesforce org so humans and AI agents operate in flow—doubling throughput without doubling headcount."
                 />
                 <PillarsDynamic
                   heading="What we deliver"
@@ -175,7 +174,7 @@ const Page: any = function ServicesPage(props: any) {
               <div>
                 <HeroSimple
                   title="The data your agents can trust"
-                  subhead="Reliable pipelines and knowledge architecture unlock precise answers and safe actions—so you can scale automation without guesswork."
+                  subhead="Reliable pipelines and knowledge architecture give AI agents precise context to act with confidence—so automation scales without guesswork."
                 />
                 <PillarsDynamic
                   heading="What we deliver"

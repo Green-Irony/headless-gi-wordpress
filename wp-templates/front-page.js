@@ -61,29 +61,29 @@ export default function FrontPage(props) {
           <>
             <HeroCenterPro />
             <OfferTiles
-              title="Our services"
+              title="What we deliver"
               items={[
                 {
-                  title: 'AI & Digital Labor (Agentforce)',
-                  description: 'Launch a working agent in ~8 weeks with clear jobs, safe actions, and KPIs.',
-                  href: '/services#agentforce',
-                  icon: <AiIcon className="h-24 w-24 text-gi-green" />
-                },
-                {
-                  title: 'MuleSoft Integration (AI-led)',
-                  description: 'API-led and event-driven pipelines so agents can see, decide, and do.',
+                  title: 'MuleSoft Integration (AI‑led)',
+                  description: 'Pipelines & events so agents can see, decide, and do.',
                   href: '/services#mulesoft',
                   icon: <MuleIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
-                  title: 'Salesforce Optimization',
-                  description: 'Remove friction and make Salesforce the control room for digital labor.',
+                  title: 'AI & Digital Labor (Agentforce)',
+                  description: 'Launch agents with jobs, safe actions, and KPIs.',
+                  href: '/services#agentforce',
+                  icon: <AiIcon className="h-24 w-24 text-gi-green" />
+                },
+                {
+                  title: 'Salesforce',
+                  description: 'Make Salesforce the control room for humans + agents.',
                   href: '/services#salesforce',
                   icon: <SalesforceIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
                   title: 'Data & Migrations',
-                  description: 'Trusted sources, freshness guarantees, and knowledge for reliable AI.',
+                  description: 'Trusted knowledge and real‑time context for agents.',
                   href: '/services#data',
                   icon: <DataIcon className="h-24 w-24 text-gi-green" />
                 }
@@ -91,7 +91,15 @@ export default function FrontPage(props) {
             />
             <TrustStrip />
             <ValuePillars />
-            {/* <HowItWorksLinear /> */}
+            {/* <HowItWorksLinear
+              heading="A lean path to your first AI outcome"
+              steps={[
+                { k: '01', title: 'Align', body: 'Pick the high‑impact workflow and define KPIs—deflection, cycle time, capacity.' },
+                { k: '02', title: 'Launch', body: 'AI‑accelerated integration + agent build; first working agent in ~8 weeks.' },
+                { k: '03', title: 'Measure', body: 'Track deflection lift, cycle‑time reduction, and capacity freed.' },
+                { k: '04', title: 'Scale', body: 'Expand to new workflows, add safe actions, and deepen automation.' },
+              ]}
+            /> */}
             <CustomerStoriesProof />
             <LeadMagnetCTA />
             <PreFooterCTA />

@@ -52,7 +52,7 @@ const Page: any = function SolutionsPage(props: any) {
                 {/* Hero */}
                 <HeroCenterPro
                   title="Real-time operations without the friction"
-                  body="Event-driven integration and AI agents that coordinate across ops, customer experience, and fulfillment—so you cut cycle time in half, deflect routine demand, and unlock capacity. What worked at Spirit Airlines is now bottled into an AI-native delivery engine for travel and transportation teams."
+                  body="Event‑driven integration and AI agents coordinate across ops, CX, and fulfillment—cutting cycle time in half, deflecting routine demand, and unlocking capacity."
                   kpis={[]}
                   showMedia={true}
                   mediaImage={{ src: '/images/hero-sol-travel.svg', alt: 'Travel & transportation hero' }}
@@ -63,7 +63,7 @@ const Page: any = function SolutionsPage(props: any) {
                   customer="Spirit Airlines"
                   logoSrc="/logos/spirit.svg"
                   headline="Proof"
-                  body="Real-time disruption workflows and event-driven coordination patterns proven at Spirit Airlines underpin our approach for travel and transportation."
+                  body="Patterns proven at Spirit Airlines, adapted to your environment."
                   cta={{ label: 'Explore the Travel Playbook', href: '/solutions/travel' }}
                 />
                 <ValuePillars
@@ -87,7 +87,7 @@ const Page: any = function SolutionsPage(props: any) {
               <div>
                 <HeroCenterPro
                   title="Scale student support without scaling headcount"
-                  body="AI agents that deflect routine questions, coordinate across SIS/LMS/ITSM, and surface insights—so institutions free human experts for strategic advising while improving student experience."
+                  body="AI agents deflect routine questions, coordinate across systems, and surface insights—freeing staff for high‑value advising and improving the student experience."
                   kpis={[]}
                   showMedia={true}
                   mediaImage={{ src: '/images/hero-sol-highered.svg', alt: 'Higher education hero' }}
@@ -122,12 +122,12 @@ const Page: any = function SolutionsPage(props: any) {
             smb: (
               <div>
                 <HeroCenterPro
-                  title="Big outcomes, without enterprise overhead"
-                  body="You don’t have unlimited headcount or months to wait. We combine AI-native delivery, MuleSoft-powered integration, and scoped agents to fix disconnected systems, eliminate swivel-chair work, and surface business intelligence—so you move faster with the team you have."
+                  title="Big outcomes without enterprise overhead"
+                  body="Combine AI‑native delivery, MuleSoft‑powered integration, and scoped agents to automate high‑impact workflows in weeks—not months."
                   kpis={[]}
                   showMedia={true}
                   mediaImage={{ src: '/images/hero-sol-smb.svg', alt: 'SMB hero' }}
-                  primaryCta={{ label: 'Start My First-Win', href: '/solutions/smb' }}
+                  primaryCta={{ label: 'Start My First Win', href: '/solutions/smb' }}
                   secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '/#plan' }}
                 />
                 <CustomerStoryHighlight
@@ -147,9 +147,9 @@ const Page: any = function SolutionsPage(props: any) {
                   ]}
                 />
                 <PreFooterCTA
-                  title="Start your first-win"
-                  body="We’ll connect what matters, eliminate swivel-chair work, and launch an agent that proves value in 8 weeks."
-                  primaryCta={{ label: 'Start My First-Win', href: '/solutions/smb' }}
+                  title="Start your first win"
+                  body="We’ll connect what matters, eliminate swivel‑chair work, and launch an agent that proves value in 8 weeks."
+                  primaryCta={{ label: 'Start My First Win', href: '/solutions/smb' }}
                   secondaryCta={{ label: 'Review Integration Gaps', href: '/contact' }}
                 />
               </div>

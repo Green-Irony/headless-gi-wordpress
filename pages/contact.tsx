@@ -32,9 +32,9 @@ const Page: any = function ContactPage(props: any) {
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
       <main>
         <HeroCenterPro
-          title="Let’s map your first 8-week win"
-          body="Fast, focused, outcome-oriented. Tell us your biggest bottleneck, and we’ll show you the path to a working AI agent that delivers real business value."
-          primaryCta={{ label: 'Book a Discovery', href: '#contact-form' }}
+          title="Let’s launch your first win"
+          body="Our senior team will respond within one business day—often the same day."
+          primaryCta={{ label: 'Start the Conversation', href: '#contact-form' }}
           secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '#plan' }}
           kpis={[{ label: '⚡ Faster delivery' }, { label: '⬇️ Deflection up' }, { label: '🧠 Capacity unlocked' }]}
           showMedia={false}
