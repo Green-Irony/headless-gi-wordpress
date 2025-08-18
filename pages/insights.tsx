@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HeroSimple from '../components/HeroSimple';
+import InsightsHeroSearch from '../components/InsightsHeroSearch';
 import { gql, useQuery } from '@apollo/client';
 import PostTile from '../components/PostTile';
 import { POST_LIST_FRAGMENT } from '../fragments/PostListFragment';
@@ -13,8 +14,8 @@ import React from 'react';
 // Simple latest posts query (9 most recent)
 export const LATEST_POSTS_QUERY = gql`
   ${POST_LIST_FRAGMENT}
-  query LatestPosts($first: Int!, $categoryIn: [ID]) {
-    posts(first: $first, where: { orderby: { field: DATE, order: DESC }, status: PUBLISH, categoryIn: $categoryIn }) {
+  query LatestPosts($first: Int!, $categoryIn: [ID], $search: String) {
+    posts(first: $first, where: { orderby: { field: DATE, order: DESC }, status: PUBLISH, categoryIn: $categoryIn, search: $search }) {
       pageInfo { hasNextPage endCursor }
       nodes { ...PostListFragment databaseId }
     }
@@ -29,6 +30,15 @@ export const CATEGORIES_QUERY = gql`
   }
 `;
 
+function useDebouncedValue<T>(value: T, delayMs = 300): T {
+  const [debounced, setDebounced] = React.useState(value);
+  React.useEffect(() => {
+    const t = setTimeout(() => setDebounced(value), delayMs);
+    return () => clearTimeout(t);
+  }, [value, delayMs]);
+  return debounced;
+}
+
 const Page: any = function InsightsPage(props: any) {
   if (props.loading) return <>Loading...</>;
 
@@ -40,9 +50,11 @@ const Page: any = function InsightsPage(props: any) {
   const { title: siteTitle, description: siteDescription } = siteData;
 
   const [selectedCategoryIds, setSelectedCategoryIds] = React.useState<number[]>([]);
+  const [q, setQ] = React.useState<string>('');
+  const debouncedQ = useDebouncedValue(q, 300);
 
   const { data: postsData, error: postsError } = useQuery(LATEST_POSTS_QUERY, {
-    variables: { first: 9, categoryIn: selectedCategoryIds.length ? selectedCategoryIds : undefined },
+    variables: { first: 9, categoryIn: selectedCategoryIds.length ? selectedCategoryIds : undefined, search: debouncedQ || undefined },
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'no-cache',
     nextFetchPolicy: 'cache-first',
@@ -64,9 +76,10 @@ const Page: any = function InsightsPage(props: any) {
       <Head><title>{siteTitle ? `${siteTitle} — Insights` : 'Insights'}</title></Head>
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
       <main>
-        <HeroSimple
-          title="Insights"
-          subhead="Notes for operators on making AI outcomes predictable."
+        <InsightsHeroSearch
+          value={q}
+          onChange={setQ}
+          onClear={() => setQ('')}
         />
         <section className="mx-auto max-w-7xl px-6 py-12">
           {categories.length > 0 ? (
