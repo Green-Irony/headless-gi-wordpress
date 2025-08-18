@@ -9,6 +9,8 @@ import HeroCenterPro from "../components/HeroCenterPro";
 import TrustStrip from "../components/TrustStrip";
 import ValuePillars from "../components/ValuePillars";
 import FeaturedOffers from "../components/FeaturedOffers";
+import OfferTiles from "../components/OfferTiles";
+import { AiIcon, MuleIcon, SalesforceIcon, DataIcon } from "../components/Header";
 import HowItWorksLinear from "../components/HowItWorksLinear";
 import CustomerStoriesProof from "../components/CustomerStoriesProof";
 import LeadMagnetCTA from "../components/LeadMagnetCTA";
@@ -56,34 +58,37 @@ export default function FrontPage(props) {
         ) : (
           <>
             <HeroCenterPro />
-            <TrustStrip />
-            <ValuePillars />
-            <FeaturedOffers
-              heading="Our services"
+            <OfferTiles
+              title="Our services"
               items={[
                 {
-                  title: 'MuleSoft Integration (AI-led)',
-                  body: 'Pipelines & events so agents can see, decide, and do.',
-                  cta: { label: 'Review My Integration Gaps', href: '/services#mulesoft' },
-                  flag: 'Flagship',
+                  title: 'AI & Digital Labor (Agentforce)',
+                  description: 'Launch a working agent in ~8 weeks with clear jobs, safe actions, and KPIs.',
+                  href: '/services#agentforce',
+                  icon: <AiIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
-                  title: 'AI & Digital Labor (Agentforce)',
-                  body: 'Launch agents with jobs, safe actions, and KPIs.',
-                  cta: { label: 'Scope My First Agent', href: '/services#agentforce' },
+                  title: 'MuleSoft Integration (AI-led)',
+                  description: 'API-led and event-driven pipelines so agents can see, decide, and do.',
+                  href: '/services#mulesoft',
+                  icon: <MuleIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
                   title: 'Salesforce Optimization',
-                  body: 'Make Salesforce the control room for humans + agents.',
-                  cta: { label: 'Optimize My Org', href: '/services#salesforce' },
+                  description: 'Remove friction and make Salesforce the control room for digital labor.',
+                  href: '/services#salesforce',
+                  icon: <SalesforceIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
                   title: 'Data & Migrations',
-                  body: 'Trusted knowledge and real-time context for agents.',
-                  cta: { label: 'Map My Data for AI', href: '/services#data' },
-                },
+                  description: 'Trusted sources, freshness guarantees, and knowledge for reliable AI.',
+                  href: '/services#data',
+                  icon: <DataIcon className="h-24 w-24 text-gi-green" />
+                }
               ]}
             />
+            <TrustStrip />
+            <ValuePillars />
             <HowItWorksLinear />
             <CustomerStoriesProof />
             <LeadMagnetCTA />

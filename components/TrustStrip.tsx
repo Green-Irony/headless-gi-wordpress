@@ -20,7 +20,7 @@ export default function TrustStrip() {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.24, ease: 'easeOut' }}
     >
-      <div className="relative isolate mx-auto max-w-7xl overflow-visible px-6 py-24">
+      <div className="relative isolate mx-auto max-w-7xl overflow-visible px-6 py-16">
         <div className="mx-auto mb-8 h-px w-16 bg-gi-line" />
 
         <h2 className="text-center text-3xl font-semibold tracking-tight text-gi-text md:text-4xl text-balance">

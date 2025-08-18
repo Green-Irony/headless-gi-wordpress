@@ -20,7 +20,6 @@ const FALLBACK_NAV: Array<{ label: string; href: string }> = [
   { label: 'Customer Stories', href: '/customer-stories' },
   { label: 'Insights', href: '/insights' },
   { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
 ];
 
 const DEFAULT_SERVICES_CHILDREN = [
@@ -84,17 +83,17 @@ function renderSolutionIcon(label: string) {
 }
 
 // Small inline SVG icons for Services submenu
-function AiIcon() {
+export function AiIcon({ className = 'h-4 w-4 text-gi-green' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-4 w-4 text-gi-green">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className={className}>
       <path d="M12 3a4 4 0 0 1 4 4v1h1a3 3 0 0 1 0 6h-1v1a4 4 0 0 1-8 0v-1H7a3 3 0 0 1 0-6h1V7a4 4 0 0 1 4-4z" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M10 12h4M9 9h6" strokeLinecap="round" />
     </svg>
   );
 }
-function MuleIcon() {
+export function MuleIcon({ className = 'h-4 w-4 text-gi-green' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-4 w-4 text-gi-green">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className={className}>
       <circle cx="6" cy="12" r="2" />
       <circle cx="18" cy="6" r="2" />
       <circle cx="18" cy="18" r="2" />
@@ -102,22 +101,22 @@ function MuleIcon() {
     </svg>
   );
 }
-function SalesforceIcon() {
+export function SalesforceIcon({ className = 'h-4 w-4 text-gi-green' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-4 w-4 text-gi-green">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className={className}>
       <path d="M7 14a4 4 0 0 1 0-8 4.5 4.5 0 0 1 8.5-1.5A4 4 0 1 1 17 14H7z" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
-function DataIcon() {
+export function DataIcon({ className = 'h-4 w-4 text-gi-green' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-4 w-4 text-gi-green">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className={className}>
       <ellipse cx="12" cy="5" rx="7" ry="3" />
       <path d="M5 5v6c0 1.7 3.1 3 7 3s7-1.3 7-3V5M5 11v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
-function renderServiceIcon(label: string) {
+export function renderServiceIcon(label: string) {
   const l = (label || '').toLowerCase();
   if (l.includes('agent') || l.includes('digital')) return <AiIcon />;
   if (l.includes('mule')) return <MuleIcon />;
@@ -282,7 +281,7 @@ export default function Header({
 
               <div className="hidden xl:flex items-center gap-3">
                 <Link href="#plan" className="btn-secondary">Get the 8-Week Plan</Link>
-                <Link href="#contact" className="btn-primary">Talk to an Expert</Link>
+                <Link href="/contact" className="btn-primary">Talk to an Expert</Link>
               </div>
               <div className="flex xl:hidden items-center">
                 <button

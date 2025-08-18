@@ -21,7 +21,7 @@ export type HeroCenterProProps = {
 
 const DEFAULT_TITLE = `Do more with the team you have.`;
 const DEFAULT_BODY = `Launch AI agents that cut busywork, deflect routine demand, and free capacity—delivering measurable impact in eight weeks. Our AI-infused MuleSoft delivery halves cycle time while expanding what your people can actually get done.`;
-const DEFAULT_PRIMARY: HeroCta = { label: 'Talk to an Expert', href: '#contact' };
+const DEFAULT_PRIMARY: HeroCta = { label: 'Talk to an Expert', href: '/contact' };
 const DEFAULT_SECONDARY: HeroCta = { label: 'Get the 8-Week Agent Launch Plan', href: '#plan' };
 const DEFAULT_KPIS: HeroKpi[] = [
   { label: '🤖 AI-assisted throughput up' },
@@ -69,7 +69,7 @@ export default function HeroCenterPro(props: HeroCenterProProps) {
         <div className="absolute right-[-120px] bottom-[-160px] h-[520px] w-[520px] rounded-full bg-gi-green/20 blur-[140px]" />
       </div>
 
-      <div className="relative z-20 mx-auto max-w-7xl px-6 py-28 text-center">
+      <div className="relative z-20 mx-auto max-w-7xl px-6 py-16 text-center">
         <h1 className="text-5xl md:text-7xl font-bold leading-[1.05] text-gi-text tracking-tight text-balance">
           {title}
         </h1>

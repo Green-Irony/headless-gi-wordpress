@@ -42,6 +42,11 @@
   .link-underline:hover::after { transform: scaleX(1); }
 }
 
+/* 3D flip helpers used by OfferTiles */
+.rotate-y-180 { transform: rotateY(180deg); }
+[transform-style\:preserve-3d] { transform-style: preserve-3d; }
+[backface-visibility\:hidden] { backface-visibility: hidden; }
+
 html,
 body {
   padding: 0;

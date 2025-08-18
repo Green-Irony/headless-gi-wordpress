@@ -131,7 +131,7 @@ const Page: any = function CustomerStoriesPage(props: any) {
           <div className="mt-6 flex flex-wrap gap-3">
             <a className="btn-secondary" href="#quiz">Compare your challenge</a>
             <a className="btn-secondary" href="#scorecard">Download the First-Win Scorecard</a>
-            <a className="btn-primary" href="#contact">Talk to an Expert</a>
+            <a className="btn-primary" href="/contact">Talk to an Expert</a>
           </div>
         </section>
       </main>

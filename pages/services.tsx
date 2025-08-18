@@ -8,6 +8,7 @@ import PreFooterCTA from '../components/PreFooterCTA';
 import ServicesTabbedContent from '../components/ServicesTabbedContent';
 import PillarsDynamic from '../components/PillarsDynamic';
 import HeroSimple from '../components/HeroSimple';
+import OfferTiles from '../components/OfferTiles';
 import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../queries/SiteSettingsQuery';
@@ -54,7 +55,6 @@ const Page: any = function ServicesPage(props: any) {
             { title: 'Outcome orientation', body: 'We begin with the business result (speed, deflection, capacity) and reverse-engineer the technical path to get you there in eight weeks.' },
           ]}
         />
-
         <ServicesTabbedContent
           className="mt-8"
           tabs={[
