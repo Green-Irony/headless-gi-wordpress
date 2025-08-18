@@ -33,6 +33,7 @@ export default function FrontPage(props) {
     nodes: [],
   };
   const { title: siteTitle, description: siteDescription } = siteData;
+  const effectiveSiteDescription = siteDescription || 'Turning AI into Actual Intelligence';
 
   const sectionsQuery = useQuery(ENABLE_SECTIONS ? FRONT_PAGE_SECTIONS_QUERY : FRONT_PAGE_MIN_QUERY, {
     variables: { uri: "/" },
@@ -43,12 +44,13 @@ export default function FrontPage(props) {
   return (
     <>
       <Head>
-        <title>{siteTitle}</title>
+        <title>{`${siteTitle} | ${effectiveSiteDescription}`}</title>
+        <meta name="description" content={effectiveSiteDescription} />
       </Head>
 
       <Header
         siteTitle={siteTitle}
-        siteDescription={siteDescription}
+        siteDescription={effectiveSiteDescription}
         menuItems={menuItems}
       />
 

@@ -45,7 +45,7 @@ export default function CustomerStoriesProof({ id, className, heading = DEFAULT_
         <div className="absolute right-[12%] top-[24%] h-[260px] w-[260px] rounded-full bg-gi-pink/20 opacity-[0.12] blur-[120px]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 py-24">
+      <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="mx-auto mb-8 h-px w-16 bg-gi-line" />
 
         <h2 className="text-center text-3xl md:text-4xl font-semibold text-gi-text tracking-tight text-balance">

@@ -1,6 +1,6 @@
 'use client';
 import { motion as m, useReducedMotion } from 'framer-motion';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export type DynamicPillar = { title: string; body: string; accentStrength?: number };
 export type PillarsDynamicProps = {
@@ -17,6 +17,29 @@ const DEFAULT_HEADING = 'What we do';
 export default function PillarsDynamic({ id, className, heading = DEFAULT_HEADING, subhead, items, mode = 'grid' }: PillarsDynamicProps) {
 	const prefersReduced = useReducedMotion();
 	const enterY = prefersReduced ? 0 : 8;
+	const listRef = useRef<HTMLUListElement | null>(null);
+
+	// Equalize heights across rows so mixed row counts align visually
+	useEffect(() => {
+		const list = listRef.current;
+		if (!list) return;
+		const cards = Array.from(list.querySelectorAll<HTMLElement>('[data-eq-card]'));
+		if (cards.length === 0) return;
+		const update = () => {
+			cards.forEach((c) => (c.style.height = 'auto'));
+			const maxH = cards.reduce((m, c) => Math.max(m, c.offsetHeight), 0);
+			cards.forEach((c) => (c.style.height = `${maxH}px`));
+		};
+		const ro = new ResizeObserver(() => update());
+		cards.forEach((c) => ro.observe(c));
+		window.addEventListener('resize', update);
+		update();
+		return () => {
+			ro.disconnect();
+			window.removeEventListener('resize', update);
+			cards.forEach((c) => (c.style.height = ''));
+		};
+	}, [items]);
 
 	return (
 		<m.section
@@ -38,7 +61,8 @@ export default function PillarsDynamic({ id, className, heading = DEFAULT_HEADIN
 				{subhead && <p className="mx-auto mt-4 max-w-3xl text-center text-gi-gray text-balance">{subhead}</p>}
 
 				<m.ul
-					className="mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 items-stretch"
+					ref={listRef}
+					className="mx-auto mt-10 flex max-w-6xl flex-wrap items-stretch justify-center gap-5"
 					initial="hidden"
 					whileInView="show"
 					viewport={{ once: true, amount: 0.2 }}
@@ -47,10 +71,10 @@ export default function PillarsDynamic({ id, className, heading = DEFAULT_HEADIN
 					{items.map(({ title, body }) => (
 						<m.li
 							key={title}
-							className="relative overflow-visible h-full"
+							className="relative h-full w-full overflow-visible sm:w-1/2 lg:w-1/3"
 							variants={{ hidden: { opacity: 0, y: enterY }, show: { opacity: 1, y: 0, transition: { duration: 0.2, ease: 'easeOut' } } }}
 						>
-							<div className="h-full rounded-2xl bg-gradient-to-r from-gi-green/35 via-gi-pink/20 to-gi-green/35 p-[1px]">
+							<div className="h-full rounded-2xl bg-gradient-to-r from-gi-green/35 via-gi-pink/20 to-gi-green/35 p-[1px]" data-eq-card>
 								<div className="flex h-full flex-col rounded-[16px] bg-white p-6 shadow-gi">
 									<div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-gi-green/15 ring-1 ring-gi-fog">
 										<span className="h-5 w-5" />

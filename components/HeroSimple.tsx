@@ -16,7 +16,7 @@ export default function HeroSimple({ title, subhead, cta, id, className }: Simpl
 				<div className="absolute left-1/2 top-[36%] -translate-x-1/2 -translate-y-1/2 h-[460px] w-[460px] rounded-full bg-gi-green opacity-[0.10] blur-[140px]" />
 			</div>
 
-			<div className="mx-auto max-w-7xl px-6 py-20 md:py-16">
+			<div className="mx-auto max-w-7xl px-6 py-24 md:py-16">
 				<h1 className="mx-auto max-w-3xl text-center text-4xl md:text-5xl font-semibold leading-tight tracking-tight text-gi-text">
 					{title}
 				</h1>

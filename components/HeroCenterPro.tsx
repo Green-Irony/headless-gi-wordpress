@@ -69,7 +69,7 @@ export default function HeroCenterPro(props: HeroCenterProProps) {
         <div className="absolute right-[-120px] bottom-[-160px] h-[520px] w-[520px] rounded-full bg-gi-green/20 blur-[140px]" />
       </div>
 
-      <div className="relative z-20 mx-auto max-w-7xl px-6 py-16 text-center">
+      <div className="relative z-20 mx-auto max-w-7xl px-6 py-28 text-center">
         <h1 className="text-5xl md:text-7xl font-bold leading-[1.05] text-gi-text tracking-tight text-balance">
           {title}
         </h1>
