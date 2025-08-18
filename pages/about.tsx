@@ -38,7 +38,7 @@ const Page: any = function AboutPage(props: any) {
           title="We’ve always moved fast. Now we move twice as fast."
           body="Trusted since 2018 for enterprise‑grade Salesforce and MuleSoft delivery. Today, AI‑native—cutting timelines in half while keeping US‑based quality and predictability."
           primaryCta={{ label: 'Meet the Team', href: '#team' }}
-          secondaryCta={{ label: 'Start Your First Win', href: '#contact' }}
+          secondaryCta={{ label: 'Start Your First Win', href: '/contact' }}
           kpis={[{ label: '⚡ Faster delivery' }, { label: '⬇️ Deflection up' }, { label: '🧠 Capacity unlocked' }]}
           showMedia={false}
         />

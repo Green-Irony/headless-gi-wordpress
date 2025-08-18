@@ -35,7 +35,7 @@ const Page: any = function CustomerStoriesPage(props: any) {
         <HeroCenterPro
           title="Prove value, then scale"
           body="Case studies built around business outcomes—speed, deflection, and capacity—powered by integrated systems and AI-native agents. See how we turned complex problems into predictable wins."
-          primaryCta={{ label: 'Start Your Success Plan', href: '#contact' }}
+          primaryCta={{ label: 'Start Your Success Plan', href: '/contact' }}
           secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '/plan' }}
           kpis={[
             { label: '⚡ ½ delivery time' },
@@ -78,8 +78,8 @@ const Page: any = function CustomerStoriesPage(props: any) {
               ]}
               proofTag="Built from Spirit Airlines-scale delivery discipline."
               quote="Green Irony gave us the real-time operational insight and automation we thought only large incumbents could deliver—faster and with less overhead."
-              primaryCta={{ label: 'Start your Travel success plan', href: '#contact' }}
-              secondaryCta={{ label: 'Review integration gaps', href: '#contact' }}
+              primaryCta={{ label: 'Start your Travel success plan', href: '/contact' }}
+              secondaryCta={{ label: 'Review integration gaps', href: '/contact' }}
             />
 
             <CaseStudyTile
@@ -98,7 +98,7 @@ const Page: any = function CustomerStoriesPage(props: any) {
               proofTag="Public-facing AI agents powered by integrated data."
               quote="The agent feels like a teammate—always on, always informed, and it freed our advisors to focus where humans matter most."
               primaryCta={{ label: 'See the Higher-Ed Blueprint', href: '/plan' }}
-              secondaryCta={{ label: 'Scope my first agent', href: '#contact' }}
+              secondaryCta={{ label: 'Scope my first agent', href: '/contact' }}
             />
 
             <CaseStudyTile
@@ -115,7 +115,7 @@ const Page: any = function CustomerStoriesPage(props: any) {
               ]}
               proofTag="Partner-level attention with AI-level leverage."
               quote="We didn’t have the resources for a big program. Green Irony made our first AI win feel immediate and expandable."
-              primaryCta={{ label: 'Start My First-Win', href: '#contact' }}
+              primaryCta={{ label: 'Start My First-Win', href: '/contact' }}
               secondaryCta={{ label: 'Get the 8-Week Plan', href: '/plan' }}
             />
           </div>
