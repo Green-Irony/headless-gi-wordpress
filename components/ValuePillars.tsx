@@ -1,8 +1,18 @@
 'use client';
 import { motion as m, useReducedMotion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
-export type PillarItem = { title: string; body: string; icon?: string; accentStrength?: number };
+export type PillarItem = {
+  title: string;
+  body: string;
+  /** Optional: pass a React node (e.g., inline SVG) to render inside the green circle */
+  iconNode?: React.ReactNode;
+  /** Optional: path to an image (preferably a white SVG). Rendered centered in the green circle */
+  iconSrc?: string;
+  iconAlt?: string;
+  accentStrength?: number;
+};
 export type ValuePillarsProps = {
   id?: string;
   className?: string;
@@ -85,7 +95,7 @@ export default function ValuePillars({ id, className, heading = DEFAULT_HEADING,
           viewport={{ once: true, amount: 0.2 }}
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.06 } } }}
         >
-          {items.map(({ title, body }) => (
+          {items.map(({ title, body, iconNode, iconSrc, iconAlt }) => (
             <m.li
               key={title}
               className="relative overflow-visible h-full"
@@ -96,10 +106,20 @@ export default function ValuePillars({ id, className, heading = DEFAULT_HEADING,
             >
               <div className="h-full rounded-2xl bg-gradient-to-r from-gi-green/35 via-gi-pink/20 to-gi-green/35 p-[1px]">
                 <div className="vp-card flex h-full flex-col rounded-[16px] bg-white p-6 shadow-gi transition-transform duration-200 will-change-transform group-hover:-translate-y-0.5" style={cardMinHeight ? { minHeight: cardMinHeight } : undefined}>
-                  <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-gi-green/15 ring-1 ring-gi-fog">
-                    <span className="h-5 w-5" />
+                  <div className="mb-2 flex items-center gap-3">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gi-green/50 ring-1 ring-gi-fog">
+                      {iconSrc ? (
+                        <Image src={iconSrc} alt={iconAlt ?? ''} width={20} height={20} className="h-5 w-5 object-contain" />
+                      ) : iconNode && React.isValidElement(iconNode) ? (
+                        <span className="text-white">
+                          {React.cloneElement(iconNode as any, { className: 'h-5 w-5 text-white' })}
+                        </span>
+                      ) : (
+                        <span className="h-5 w-5" />
+                      )}
+                    </div>
+                    <h3 className="text-base font-semibold text-gi-text">{title}</h3>
                   </div>
-                  <h3 className="text-base font-semibold text-gi-text">{title}</h3>
                   <p className="mt-2 text-sm text-gi-gray">{body}</p>
                   <div className="mt-auto" />
                 </div>

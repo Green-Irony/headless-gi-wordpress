@@ -5,18 +5,17 @@ import { SITE_DATA_QUERY } from "../queries/SiteSettingsQuery";
 import { HEADER_MENU_QUERY } from "../queries/MenuQueries";
 import { useQuery } from "@apollo/client";
 import { getNextStaticProps } from "@faustwp/core";
-import HeroCenterPro from "../components/HeroCenterPro";
+import HomepageHero from '../components/HomepageHero';
 import TrustStrip from "../components/TrustStrip";
 import ValuePillars from "../components/ValuePillars";
-import FeaturedOffers from "../components/FeaturedOffers";
 import OfferTiles from "../components/OfferTiles";
 import { AiIcon, MuleIcon, SalesforceIcon, DataIcon } from "../components/Header";
-import HowItWorksLinear from "../components/HowItWorksLinear";
 import CustomerStoriesProof from "../components/CustomerStoriesProof";
 import LeadMagnetCTA from "../components/LeadMagnetCTA";
 import PreFooterCTA from "../components/PreFooterCTA";
 import { FRONT_PAGE_SECTIONS_QUERY, FRONT_PAGE_MIN_QUERY } from "../queries/SectionsQueries";
 import { renderSections } from "../lib/sectionRegistry";
+
 
 const ENABLE_SECTIONS = process.env.NEXT_PUBLIC_ENABLE_WP_SECTIONS === "1";
 
@@ -59,7 +58,17 @@ export default function FrontPage(props) {
           renderSections(sections)
         ) : (
           <>
-            <HeroCenterPro />
+            <HomepageHero
+              titleLines={[
+                '2× Faster Delivery.',
+                'Offshore Economics.',
+                'Onshore Expertise.',
+              ]}
+              body="Launch your first AI-powered MuleSoft or Salesforce outcome in 8 weeks. Our AI-accelerated delivery cuts timelines in half—without sacrificing quality or price—so your team achieves more, faster."
+              primaryCta={{ label: 'Talk to an Expert', href: '/contact' }}
+              secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '#plan' }}
+              mediaImage={{ src: '/logos/green-irony/Green-Irony-Logo.svg', alt: 'Green Irony services overview' }}
+            />
             <OfferTiles
               title="What we deliver"
               items={[
@@ -90,7 +99,33 @@ export default function FrontPage(props) {
               ]}
             />
             <TrustStrip />
-            <ValuePillars />
+            <ValuePillars
+              heading="From investment to impact — fast"
+              subhead="Most AI pilots stall because agents can’t see context, act safely, or scale. We combine integration-first architecture, AI-native agent design, and senior delivery to give you outcomes you can plan around."
+              items={[
+                { title: 'Deflection that scales', body: 'Agents surface answers and take safe actions to reduce live demand.', iconNode: (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                    <circle cx="12" cy="12" r="8" />
+                    <path d="M8 12h5l3-3" />
+                    <path d="M13 9v6" />
+                  </svg>
+                ) },
+                { title: 'Speed to value', body: 'AI‑accelerated MuleSoft delivery cuts cycle time in half; your first working agent in 8 weeks.', iconNode: (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                    <path d="M12 12l7-7" />
+                  </svg>
+                ) },
+                { title: 'Capacity unlocked', body: 'Free experts for strategic work while agents handle structured, repeatable demand.', iconNode: (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                    <circle cx="8" cy="8" r="3" />
+                    <path d="M2 22c1.8-3.6 4.8-6 8-6" />
+                    <circle cx="16" cy="12" r="3" />
+                    <path d="M10 22c1.8-3.6 4.8-6 8-6" />
+                  </svg>
+                ) },
+              ]}
+            />
             {/* <HowItWorksLinear
               heading="A lean path to your first AI outcome"
               steps={[

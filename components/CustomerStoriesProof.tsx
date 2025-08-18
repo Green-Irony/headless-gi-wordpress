@@ -24,7 +24,7 @@ const DEFAULT_ITEMS: StoryItem[] = [
   { brand: 'Spirit Airlines', title: 'Event-driven integration powering operational agentic workflows', blurb: 'How event-driven MuleSoft work enabled real-time ops and agent actions.', kpis: ['⚡ Delivery cycle time ↓ 50%', '⬇️ Deflection rate up', '🧠 Capacity freed'], posterUrl: '/logos/spirit.svg', videoId: 'SPIRIT_VIDEO_ID' },
   { brand: 'UNC Charlotte', title: '24/7 deflection and capacity reallocated to strategic advising', blurb: 'Persistent agents improve student engagement and reduce live load.', kpis: ['⬇️ Deflection rate up', '⚡ Faster time-to-value', '🧠 Capacity freed'], posterUrl: '/logos/unc-charlotte.svg', videoId: 'UNC_VIDEO_ID' },
 ];
-const DEFAULT_CTA = { label: 'Start Your Success Plan', href: '#contact' };
+const DEFAULT_CTA = { label: 'Start Your Success Plan', href: '/contact' };
 
 export default function CustomerStoriesProof({ id, className, heading = DEFAULT_HEADING, items = DEFAULT_ITEMS, cta = DEFAULT_CTA }: CustomerStoriesProps) {
   const prefersReduced = useReducedMotion();
