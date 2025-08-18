@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Article embeds */
+.gi-prose .wp-block-embed, .gi-prose .wp-block-video {
+  position: relative;
+}
+.gi-prose .wp-block-embed__wrapper iframe,
+.gi-prose .wp-block-video video {
+  width: 100%;
+  height: auto;
+}
+
 /* GI global utilities and helpers */
 .gi-blueprint{position:relative;background-color:#fff;isolation:isolate;}
 .gi-blueprint::before{content:"";position:absolute;inset:-1px;z-index:-1;background:

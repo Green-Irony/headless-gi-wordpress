@@ -91,7 +91,7 @@ export default function FrontPage(props) {
             />
             <TrustStrip />
             <ValuePillars />
-            <HowItWorksLinear />
+            {/* <HowItWorksLinear /> */}
             <CustomerStoriesProof />
             <LeadMagnetCTA />
             <PreFooterCTA />
