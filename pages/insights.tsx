@@ -14,8 +14,8 @@ import React from 'react';
 // Simple latest posts query (9 most recent)
 export const LATEST_POSTS_QUERY = gql`
   ${POST_LIST_FRAGMENT}
-  query LatestPosts($first: Int!, $categoryIn: [ID], $search: String) {
-    posts(first: $first, where: { orderby: { field: DATE, order: DESC }, status: PUBLISH, categoryIn: $categoryIn, search: $search }) {
+  query LatestPosts($first: Int!, $after: String, $categoryIn: [ID], $search: String) {
+    posts(first: $first, after: $after, where: { orderby: { field: DATE, order: DESC }, status: PUBLISH, categoryIn: $categoryIn, search: $search }) {
       pageInfo { hasNextPage endCursor }
       nodes { ...PostListFragment databaseId }
     }
@@ -62,13 +62,74 @@ const Page: any = function InsightsPage(props: any) {
   const [q, setQ] = React.useState<string>('');
   const debouncedQ = useDebouncedValue(q, 300);
 
-  const { data: postsData, error: postsError } = useQuery(LATEST_POSTS_QUERY, {
-    variables: { first: 9, categoryIn: selectedCategoryIds.length ? selectedCategoryIds : undefined, search: debouncedQ || undefined },
+  const { data: postsData, error: postsError, fetchMore, refetch } = useQuery(LATEST_POSTS_QUERY, {
+    variables: { first: 9, after: null, categoryIn: selectedCategoryIds.length ? selectedCategoryIds : undefined, search: debouncedQ || undefined },
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'no-cache',
     nextFetchPolicy: 'cache-first',
   });
-  const posts = postsData?.posts?.nodes || [];
+  const initialPosts = postsData?.posts?.nodes || [];
+  const initialPageInfo = postsData?.posts?.pageInfo;
+
+  const [accPosts, setAccPosts] = React.useState<any[]>([]);
+  const [pageInfo, setPageInfo] = React.useState<{ hasNextPage: boolean; endCursor: string | null } | undefined>(undefined);
+  const loadingMoreRef = React.useRef(false);
+  const sentinelRef = React.useRef<HTMLDivElement | null>(null);
+
+  React.useEffect(() => {
+    setAccPosts([]);
+    setPageInfo(undefined);
+    refetch({ first: 9, after: null, categoryIn: selectedCategoryIds.length ? selectedCategoryIds : undefined, search: debouncedQ || undefined });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategoryIds, debouncedQ]);
+
+  React.useEffect(() => {
+    if (initialPosts && initialPosts.length > 0) {
+      setAccPosts(initialPosts);
+      setPageInfo(initialPageInfo);
+    } else if (initialPosts && initialPosts.length === 0) {
+      setAccPosts([]);
+      setPageInfo(initialPageInfo);
+    }
+  }, [initialPosts, initialPageInfo]);
+
+  async function loadMore() {
+    if (loadingMoreRef.current || !pageInfo?.hasNextPage) return;
+    loadingMoreRef.current = true;
+    try {
+      const res = await fetchMore({
+        variables: {
+          first: 9,
+          after: pageInfo?.endCursor,
+          categoryIn: selectedCategoryIds.length ? selectedCategoryIds : undefined,
+          search: debouncedQ || undefined,
+        },
+      });
+      const newNodes = res?.data?.posts?.nodes || [];
+      const nextInfo = res?.data?.posts?.pageInfo;
+      if (newNodes.length > 0) {
+        setAccPosts((prev) => {
+          const existingIds = new Set(prev.map((p: any) => p.databaseId || p.id));
+          const deduped = newNodes.filter((p: any) => !existingIds.has(p.databaseId || p.id));
+          return [...prev, ...deduped];
+        });
+      }
+      setPageInfo(nextInfo);
+    } finally {
+      loadingMoreRef.current = false;
+    }
+  }
+
+  React.useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver((entries) => {
+      const [e] = entries;
+      if (e.isIntersecting) loadMore();
+    }, { rootMargin: '200px' });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [pageInfo?.endCursor]);
 
   const { data: featuredData } = useQuery(FEATURED_STICKY_POST_QUERY, { fetchPolicy: 'no-cache', nextFetchPolicy: 'cache-first' });
   const featuredPost = (featuredData?.posts?.nodes || []).find((p: any) => p?.isSticky);
@@ -81,6 +142,21 @@ const Page: any = function InsightsPage(props: any) {
   }
   function clearFilters() {
     setSelectedCategoryIds([]);
+  }
+
+  // Modernized Filters UI (modal)
+  const [filtersOpen, setFiltersOpen] = React.useState(false);
+  const [tempSelectedIds, setTempSelectedIds] = React.useState<number[]>([]);
+  function openFilters() {
+    setTempSelectedIds(selectedCategoryIds);
+    setFiltersOpen(true);
+  }
+  function applyFilters() {
+    setSelectedCategoryIds(tempSelectedIds);
+    setFiltersOpen(false);
+  }
+  function toggleTemp(id: number) {
+    setTempSelectedIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
   }
 
   return (
@@ -100,42 +176,71 @@ const Page: any = function InsightsPage(props: any) {
         />
 
         <section className="mx-auto max-w-7xl px-6 py-12">
-          {categories.length > 0 ? (
-            <div className="mb-6 flex flex-wrap items-center gap-2">
-              <span className="text-sm text-gi-gray">Filter by category:</span>
-              {categories.map((c) => {
-                const active = selectedCategoryIds.includes(c.databaseId);
-                return (
-                  <button
-                    key={c.slug}
-                    type="button"
-                    onClick={() => toggleCategory(c.databaseId)}
-                    className={`inline-flex items-center rounded-full px-3 py-1 text-sm ring-1 transition-colors ${active ? 'bg-gi-green/15 text-gi-text ring-gi-fog' : 'bg-white text-gi-text ring-gi-fog hover:bg-gi-fog/60'}`}
-                    aria-pressed={active}
-                  >
-                    {c.name}
-                  </button>
-                );
-              })}
-              {selectedCategoryIds.length > 0 ? (
-                <button type="button" onClick={clearFilters} className="ml-2 text-sm text-gi-gray underline">
-                  Clear
-                </button>
-              ) : null}
+          {/* Filters button (right-aligned) + selected chips */}
+          <div className="mb-6">
+            <div className="flex items-center justify-end">
+              <button type="button" onClick={openFilters} className="btn-secondary">Filters</button>
             </div>
-          ) : null}
+            {selectedCategoryIds.length > 0 ? (
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                {selectedCategoryIds.map((id) => {
+                  const c = categories.find((x) => x.databaseId === id);
+                  if (!c) return null;
+                  return (
+                    <span key={c.slug} className="inline-flex items-center rounded-full bg-gi-green/15 px-3 py-1 text-sm text-gi-text ring-1 ring-gi-fog">
+                      {c.name}
+                      <button onClick={() => toggleCategory(c.databaseId)} className="ml-2 text-xs text-gi-gray hover:underline">Remove</button>
+                    </span>
+                  );
+                })}
+                <button type="button" onClick={clearFilters} className="text-sm text-gi-gray underline">Clear</button>
+              </div>
+            ) : null}
+          </div>
           {postsError ? (
             <p className="max-w-3xl text-gi-gray">Error loading posts: {String(postsError.message)}</p>
-          ) : posts.length === 0 ? (
+          ) : accPosts.length === 0 ? (
             <p className="max-w-3xl text-gi-gray">No articles published yet.</p>
           ) : (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {posts.map((post: any) => (
+              {accPosts.map((post: any) => (
                 <PostTile key={post.id} post={post} />
               ))}
             </div>
           )}
+          <div ref={sentinelRef} className="h-8" />
         </section>
+
+        {filtersOpen ? (
+          <div role="dialog" aria-modal="true" className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 p-4" onClick={() => setFiltersOpen(false)}>
+            <div className="w-full max-w-2xl rounded-2xl bg-white p-6 shadow-gi ring-1 ring-gi-fog" onClick={(e) => e.stopPropagation()}>
+              <div className="mb-4 flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-gi-text">Filter by category</h3>
+                <button className="text-sm text-gi-gray underline" onClick={() => setFiltersOpen(false)}>Close</button>
+              </div>
+              {categories.length === 0 ? (
+                <p className="text-sm text-gi-gray">No categories available.</p>
+              ) : (
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                  {categories.map((c) => {
+                    const active = tempSelectedIds.includes(c.databaseId);
+                    return (
+                      <label key={c.slug} className={`flex cursor-pointer items-center gap-2 rounded-lg border p-3 text-sm transition-colors ${active ? 'border-gi-green bg-gi-green/10' : 'border-gi-fog hover:bg-gi-subtle'}`}>
+                        <input type="checkbox" checked={active} onChange={() => toggleTemp(c.databaseId)} />
+                        <span className="flex-1">{c.name}</span>
+                        <span className="text-gi-gray">{c.count}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              )}
+              <div className="mt-6 flex flex-wrap items-center justify-end gap-3">
+                <button type="button" className="btn-secondary" onClick={() => setTempSelectedIds([])}>Clear</button>
+                <button type="button" className="btn-primary" onClick={applyFilters}>Apply</button>
+              </div>
+            </div>
+          </div>
+        ) : null}
       </main>
       <Footer />
     </>
