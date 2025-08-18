@@ -9,6 +9,7 @@ export const POST_LIST_FRAGMENT = gql`
     uri
     excerpt
     date
+    isSticky
     featuredImage {
       node {
         sourceUrl

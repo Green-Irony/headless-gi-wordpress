@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import HeroSimple from '../components/HeroSimple';
 import InsightsHeroSearch from '../components/InsightsHeroSearch';
+import FeaturedPost from '../components/FeaturedPost';
 import { gql, useQuery } from '@apollo/client';
 import PostTile from '../components/PostTile';
 import { POST_LIST_FRAGMENT } from '../fragments/PostListFragment';
@@ -26,6 +26,15 @@ export const CATEGORIES_QUERY = gql`
   query InsightCategories {
     categories(where: { hideEmpty: true }, first: 100) {
       nodes { id databaseId name slug count }
+    }
+  }
+`;
+
+export const FEATURED_STICKY_POST_QUERY = gql`
+  ${POST_LIST_FRAGMENT}
+  query FeaturedStickyPost {
+    posts(first: 100, where: { orderby: { field: DATE, order: DESC }, status: PUBLISH }) {
+      nodes { ...PostListFragment databaseId }
     }
   }
 `;
@@ -61,6 +70,9 @@ const Page: any = function InsightsPage(props: any) {
   });
   const posts = postsData?.posts?.nodes || [];
 
+  const { data: featuredData } = useQuery(FEATURED_STICKY_POST_QUERY, { fetchPolicy: 'no-cache', nextFetchPolicy: 'cache-first' });
+  const featuredPost = (featuredData?.posts?.nodes || []).find((p: any) => p?.isSticky);
+
   const { data: catsData } = useQuery(CATEGORIES_QUERY);
   const categories: Array<{ name: string; databaseId: number; slug: string; count: number }> = catsData?.categories?.nodes || [];
 
@@ -76,11 +88,17 @@ const Page: any = function InsightsPage(props: any) {
       <Head><title>{siteTitle ? `${siteTitle} — Clarity in the age of AI` : 'Clarity in the age of AI'}</title></Head>
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
       <main>
+      {featuredPost ? (
+          <section className="mx-auto max-w-7xl px-6 py-6">
+            <FeaturedPost post={featuredPost} />
+          </section>
+        ) : null}
         <InsightsHeroSearch
           value={q}
           onChange={setQ}
           onClear={() => setQ('')}
         />
+
         <section className="mx-auto max-w-7xl px-6 py-12">
           {categories.length > 0 ? (
             <div className="mb-6 flex flex-wrap items-center gap-2">
