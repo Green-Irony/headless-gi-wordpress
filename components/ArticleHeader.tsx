@@ -7,12 +7,14 @@ export default function ArticleHeader({
   author,
   featuredImage,
   categories,
+  readingMinutes,
 }: {
   title: string;
   date?: string;
   author?: string;
   featuredImage?: { src?: string; alt?: string } | null;
   categories?: Array<{ name: string; slug: string }>;
+  readingMinutes?: number;
 }) {
   const dt = date ? new Date(date) : null;
 
@@ -33,9 +35,14 @@ export default function ArticleHeader({
       </div>
 
       <h1 className="text-3xl font-extrabold tracking-tight text-gi-text sm:text-4xl">{title}</h1>
-      <div className="mt-3 text-sm text-gi-gray">
+      <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-gi-gray">
         {author ? <span>{author}</span> : null}
-        {dt ? <span> • {dt.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}</span> : null}
+        {dt ? <span>• {dt.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}</span> : null}
+        {typeof readingMinutes === 'number' ? (
+          <span className="inline-flex items-center rounded-full bg-white px-2 py-0.5 text-xs text-gi-text ring-1 ring-gi-fog">
+            {readingMinutes} min read
+          </span>
+        ) : null}
       </div>
     </header>
   );

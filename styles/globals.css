@@ -2,14 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Article embeds */
-.gi-prose .wp-block-embed, .gi-prose .wp-block-video {
+/* Article embeds - force standard 16:9 ratio */
+.gi-prose .embed-responsive,
+.gi-prose .wp-block-embed.is-type-video .wp-block-embed__wrapper,
+.gi-prose .wp-block-embed.is-provider-youtube .wp-block-embed__wrapper,
+.gi-prose .wp-block-embed.is-provider-vimeo .wp-block-embed__wrapper,
+.gi-prose .wp-block-video {
   position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
 }
+
 .gi-prose .wp-block-embed__wrapper iframe,
 .gi-prose .wp-block-video video {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+}
+
+/* General iframe fallback */
+.gi-prose iframe { max-width: 100%; }
+
+/* Reserve space for fixed TOC on very wide screens without shifting article */
+@media (min-width: 1280px) {
+  .gi-prose-container { position: relative; }
 }
 
 /* GI global utilities and helpers */

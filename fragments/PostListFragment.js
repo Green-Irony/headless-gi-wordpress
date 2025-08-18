@@ -15,6 +15,12 @@ export const POST_LIST_FRAGMENT = gql`
         altText
       }
     }
+    categories {
+      nodes {
+        name
+        slug
+      }
+    }
     author {
       node {
         name

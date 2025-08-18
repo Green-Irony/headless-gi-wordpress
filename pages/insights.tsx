@@ -8,14 +8,23 @@ import { POST_LIST_FRAGMENT } from '../fragments/PostListFragment';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../queries/SiteSettingsQuery';
 import { HEADER_MENU_QUERY } from '../queries/MenuQueries';
+import React from 'react';
 
 // Simple latest posts query (9 most recent)
 export const LATEST_POSTS_QUERY = gql`
   ${POST_LIST_FRAGMENT}
-  query LatestPosts($first: Int!) {
-    posts(first: $first, where: { orderby: { field: DATE, order: DESC }, status: PUBLISH }) {
+  query LatestPosts($first: Int!, $categoryIn: [ID]) {
+    posts(first: $first, where: { orderby: { field: DATE, order: DESC }, status: PUBLISH, categoryIn: $categoryIn }) {
       pageInfo { hasNextPage endCursor }
       nodes { ...PostListFragment databaseId }
+    }
+  }
+`;
+
+export const CATEGORIES_QUERY = gql`
+  query InsightCategories {
+    categories(where: { hideEmpty: true }, first: 100) {
+      nodes { id databaseId name slug count }
     }
   }
 `;
@@ -30,13 +39,25 @@ const Page: any = function InsightsPage(props: any) {
   const menuItems = headerMenuDataQuery?.data?.primaryMenuItems?.nodes || { nodes: [] };
   const { title: siteTitle, description: siteDescription } = siteData;
 
+  const [selectedCategoryIds, setSelectedCategoryIds] = React.useState<number[]>([]);
+
   const { data: postsData, error: postsError } = useQuery(LATEST_POSTS_QUERY, {
-    variables: { first: 9 },
+    variables: { first: 9, categoryIn: selectedCategoryIds.length ? selectedCategoryIds : undefined },
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'no-cache',
     nextFetchPolicy: 'cache-first',
   });
   const posts = postsData?.posts?.nodes || [];
+
+  const { data: catsData } = useQuery(CATEGORIES_QUERY);
+  const categories: Array<{ name: string; databaseId: number; slug: string; count: number }> = catsData?.categories?.nodes || [];
+
+  function toggleCategory(id: number) {
+    setSelectedCategoryIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+  }
+  function clearFilters() {
+    setSelectedCategoryIds([]);
+  }
 
   return (
     <>
@@ -48,6 +69,30 @@ const Page: any = function InsightsPage(props: any) {
           subhead="Notes for operators on making AI outcomes predictable."
         />
         <section className="mx-auto max-w-7xl px-6 py-12">
+          {categories.length > 0 ? (
+            <div className="mb-6 flex flex-wrap items-center gap-2">
+              <span className="text-sm text-gi-gray">Filter by category:</span>
+              {categories.map((c) => {
+                const active = selectedCategoryIds.includes(c.databaseId);
+                return (
+                  <button
+                    key={c.slug}
+                    type="button"
+                    onClick={() => toggleCategory(c.databaseId)}
+                    className={`inline-flex items-center rounded-full px-3 py-1 text-sm ring-1 transition-colors ${active ? 'bg-gi-green/15 text-gi-text ring-gi-fog' : 'bg-white text-gi-text ring-gi-fog hover:bg-gi-fog/60'}`}
+                    aria-pressed={active}
+                  >
+                    {c.name}
+                  </button>
+                );
+              })}
+              {selectedCategoryIds.length > 0 ? (
+                <button type="button" onClick={clearFilters} className="ml-2 text-sm text-gi-gray underline">
+                  Clear
+                </button>
+              ) : null}
+            </div>
+          ) : null}
           {postsError ? (
             <p className="max-w-3xl text-gi-gray">Error loading posts: {String(postsError.message)}</p>
           ) : posts.length === 0 ? (
