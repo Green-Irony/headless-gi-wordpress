@@ -6,6 +6,7 @@ import { HEADER_MENU_QUERY } from "../queries/MenuQueries";
 import { useQuery } from "@apollo/client";
 import { getNextStaticProps } from "@faustwp/core";
 import HomepageHero from '../components/HomepageHero';
+import LogoTicker from '../components/LogoTicker';
 import TrustStrip from "../components/TrustStrip";
 import ValuePillars from "../components/ValuePillars";
 import OfferTiles from "../components/OfferTiles";
@@ -67,9 +68,26 @@ export default function FrontPage(props) {
               body="Launch your first AI-powered MuleSoft or Salesforce outcome in 8 weeks. Our AI-accelerated delivery cuts timelines in half—without sacrificing quality or price—so your team achieves more, faster."
               primaryCta={{ label: 'Talk to an Expert', href: '/contact' }}
               secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '#plan' }}
+              showMedia={false}
               mediaImage={{ src: '/logos/green-irony/Green-Irony-Logo.svg', alt: 'Green Irony services overview' }}
             />
+            <LogoTicker
+              items={[
+                { src: '/logos/spirit.svg', alt: 'Spirit Airlines' },
+                { src: '/logos/unc-charlotte.svg', alt: 'UNC Charlotte' },
+                { src: '/logos/air-culinaire.png', alt: 'Air Culinaire' },
+                { src: '/logos/ccu_h.png', alt: 'CCU' },
+                { src: '/logos/college-hunks.png', alt: 'College Hunks' },
+                { src: '/logos/HIVC.png', alt: 'HIVC' },
+                { src: '/logos/Hotwire.svg', alt: 'Hotwire' },
+                { src: '/logos/logo-upc-insurance-story-e1729029847866.webp', alt: 'UPC' },
+                { src: '/logos/PODS-Logo.png', alt: 'PODS' },
+                { src: '/logos/rochelec.png', alt: 'Rochelec' },
+              ]}
+              speedSeconds={45}
+            />
             <OfferTiles
+              className="mt-12 md:mt-16"
               title="What we deliver"
               items={[
                 {
