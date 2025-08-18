@@ -42,7 +42,7 @@ export default function OfferTiles({ items, title, className }: OfferTilesProps)
 		<section className={className ?? ''}>
 			<div className="mx-auto max-w-7xl px-6">
 				{title && (
-					<h2 className="mb-6 text-center text-3xl font-semibold tracking-tight text-gi-text">
+					<h2 className="mb-10 text-center text-4xl md:text-5xl font-bold tracking-tight text-gi-text">
 						{title}
 					</h2>
 				)}
