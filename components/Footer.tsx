@@ -50,10 +50,10 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-4">
             <Link href="/" aria-label="Green Irony — Home" className="inline-flex items-center gap-2">
-              <Image src="/img/gi-logo-green.svg" alt="Green Irony" width={140} height={28} className="h-7 w-auto" />
+              <Image src="/logos/green-irony/green-logo-long.png" alt="Green Irony" width={140} height={28} className="h-7 w-auto" />
             </Link>
             <p className="mt-4 max-w-sm text-sm text-gi-gray">
-              Offshore economics. Onshore expertise. At the speed of AI.
+              Offshore economics.<br/>Onshore expertise.<br/>At the speed of AI.
             </p>
           </div>
 
