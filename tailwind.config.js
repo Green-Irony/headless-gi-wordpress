@@ -10,13 +10,14 @@ module.exports = {
       colors: {
         'gi-green': '#5AAD5A',
         'gi-pink': '#C40084',
-        'gi-text': '#141415',
-        'gi-gray': '#6B6B6F',
+        'gi-text': '#061E4B',
+        'gi-gray': '#58595B',
         'gi-line': '#E9E9EF',
         'gi-fog': '#EEF1F6',
-        'gi-black': '#0B0C0F',
+        'gi-black': '#141415',
         'gi-subtle': '#F7F9FC',
-        'gi-navy': '#0C1022',
+        'gi-navy': '#061E4B',
+        'gi-white': '#FFFFFF',
       },
       boxShadow: {
         gi: '0 8px 30px rgba(20,20,21,0.08)',
