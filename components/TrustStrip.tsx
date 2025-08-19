@@ -14,7 +14,7 @@ export default function TrustStrip() {
 
   return (
     <m.section
-      className="bg-white"
+      className=""
       initial={{ opacity: 0, y: enterY }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
