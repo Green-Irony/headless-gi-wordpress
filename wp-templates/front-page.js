@@ -1,4 +1,5 @@
 import Head from "next/head";
+import dynamic from 'next/dynamic';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { SITE_DATA_QUERY } from "../queries/SiteSettingsQuery";
@@ -16,6 +17,7 @@ import LeadMagnetCTA from "../components/LeadMagnetCTA";
 import PreFooterCTA from "../components/PreFooterCTA";
 import { FRONT_PAGE_SECTIONS_QUERY, FRONT_PAGE_MIN_QUERY } from "../queries/SectionsQueries";
 import { renderSections } from "../lib/sectionRegistry";
+const BackgroundStarsCanvas = dynamic(() => import('../components/BackgroundStarsCanvas'), { ssr: false });
 
 
 const ENABLE_SECTIONS = process.env.NEXT_PUBLIC_ENABLE_WP_SECTIONS === "1";
@@ -55,6 +57,7 @@ export default function FrontPage(props) {
       />
 
       <main>
+        <BackgroundStarsCanvas density={1.2} maxStars={28} />
         {hasSections ? (
           renderSections(sections)
         ) : (

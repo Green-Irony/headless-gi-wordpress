@@ -34,7 +34,7 @@ export default function CustomerStoriesProof({ id, className, heading = DEFAULT_
   return (
     <m.section
       id={id}
-      className={`relative isolate bg-white ${className ?? ''}`}
+      className={`relative isolate ${className ?? ''}`}
       initial={{ opacity: 0, y: enterY }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
