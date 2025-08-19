@@ -36,6 +36,11 @@ const DEFAULT_SOLUTIONS_CHILDREN = [
   { href: '/solutions/smb', title: 'Small & Midsized Business' },
 ];
 
+// Default About submenu entries
+const DEFAULT_ABOUT_CHILDREN = [
+  { href: '/careers', title: 'Careers' },
+];
+
 function toServicesAnchor(href: string): string {
   try {
     if (!href) return href;
@@ -74,12 +79,27 @@ function SmbIcon() {
     </svg>
   );
 }
+// Small inline SVG for About submenu
+function CareerIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-4 w-4 text-gi-green">
+      <rect x="3" y="8" width="18" height="10" rx="2" />
+      <path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+      <path d="M3 13h18" />
+    </svg>
+  );
+}
 function renderSolutionIcon(label: string) {
   const l = (label || '').toLowerCase();
   if (l.includes('travel')) return <TravelIcon />;
   if (l.includes('higher')) return <HigherEdIcon />;
   if (l.includes('smb') || l.includes('small')) return <SmbIcon />;
   return <SmbIcon />;
+}
+function renderAboutIcon(label: string) {
+  const l = (label || '').toLowerCase();
+  if (l.includes('career')) return <CareerIcon />;
+  return <CareerIcon />;
 }
 
 // Small inline SVG icons for Services submenu
@@ -213,10 +233,11 @@ export default function Header({
                   const item: MenuItem = rawItem as MenuItem;
                   const isServices = (item.label || '').toLowerCase().includes('services') || (item.uri ?? '').startsWith('/services');
                   const isSolutions = (item.label || '').toLowerCase().includes('solutions') || (item.uri ?? '').startsWith('/solutions');
+                  const isAbout = (item.label || '').toLowerCase().includes('about') || (item.uri ?? '').startsWith('/about');
                   const children = (item.childItems && item.childItems.nodes) ? item.childItems.nodes : [];
                   const mappedChildren = isServices ? children.map(c => ({ ...c, uri: toServicesAnchor(c.uri) })) : children;
-                  const hasChildren = isServices ? (mappedChildren.length > 0 || DEFAULT_SERVICES_CHILDREN.length > 0) : (isSolutions ? (mappedChildren.length > 0 || DEFAULT_SOLUTIONS_CHILDREN.length > 0) : mappedChildren.length > 0);
-                  const effectiveChildren = mappedChildren.length > 0 ? mappedChildren.map(c => ({ href: c.uri, title: c.label })) : (isServices ? DEFAULT_SERVICES_CHILDREN : (isSolutions ? DEFAULT_SOLUTIONS_CHILDREN : []));
+                  const hasChildren = isServices ? (mappedChildren.length > 0 || DEFAULT_SERVICES_CHILDREN.length > 0) : (isSolutions ? (mappedChildren.length > 0 || DEFAULT_SOLUTIONS_CHILDREN.length > 0) : (isAbout ? (mappedChildren.length > 0 || DEFAULT_ABOUT_CHILDREN.length > 0) : mappedChildren.length > 0));
+                  const effectiveChildren = mappedChildren.length > 0 ? mappedChildren.map(c => ({ href: c.uri, title: c.label })) : (isServices ? DEFAULT_SERVICES_CHILDREN : (isSolutions ? DEFAULT_SOLUTIONS_CHILDREN : (isAbout ? DEFAULT_ABOUT_CHILDREN : [])));
 
                   return (
                     <div
@@ -241,14 +262,14 @@ export default function Header({
                           transition={{ duration: 0.18, ease: 'easeOut' }}
                           className="absolute left-0 top-8 z-40"
                         >
-                          {(isServices || isSolutions) ? (
+                          {(isServices || isSolutions || isAbout) ? (
                             <div className="w-[720px] rounded-2xl bg-white p-4 ring-1 ring-gi-fog shadow-gi">
                               <ul className="grid grid-cols-2 gap-3">
                                 {effectiveChildren.slice(0,4).map((c) => (
                                   <li key={c.title}>
                                     <Link href={c.href} className="group flex items-start gap-3 rounded-md p-3 hover:bg-gi-fog/60">
                                       <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gi-green/15 ring-1 ring-gi-fog">
-                                        {isSolutions ? renderSolutionIcon(c.title) : (isServices ? renderServiceIcon(c.title) : <span className="h-4 w-4" />)}
+                                        {isSolutions ? renderSolutionIcon(c.title) : (isServices ? renderServiceIcon(c.title) : renderAboutIcon(c.title))}
                                       </span>
                                       <span className="min-w-0">
                                         <span className="block text-sm font-semibold text-gi-text">{c.title}</span>
