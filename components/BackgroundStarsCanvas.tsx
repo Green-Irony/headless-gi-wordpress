@@ -12,6 +12,8 @@ type StarsProps = {
   trailHalfLifeSec?: number; // default 0.8
   /** Maximum tail length in pixels (peak). */
   tailMaxPx?: number; // default 110
+  /** Maximum total stars to spawn before permanently stopping. Default: Infinity (no limit). */
+  maxTotalSpawns?: number;
 };
 
 type Star = {
@@ -25,17 +27,21 @@ type Star = {
   active: boolean;
 };
 
-export default function BackgroundStarsCanvas({ density = 1.2, color = '#22c55e', maxStars = 28, trailHalfLifeSec = 0.4, tailMaxPx = 110 }: StarsProps) {
+export default function BackgroundStarsCanvas({ density = 1.2, color = '#22c55e', maxStars = 28, trailHalfLifeSec = 0.4, tailMaxPx = 110, maxTotalSpawns = Number.POSITIVE_INFINITY }: StarsProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rafRef = useRef<number | null>(null);
   const starsRef = useRef<Star[]>([]);
   const lastTsRef = useRef<number>(0);
   const spawnAccRef = useRef<number>(0);
   const visibleRef = useRef<boolean>(true);
+  const totalSpawnedRef = useRef<number>(0);
+  const stoppedRef = useRef<boolean>(false);
 
   useEffect(() => {
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext('2d', { alpha: true })!;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
 
     let dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -70,6 +76,10 @@ export default function BackgroundStarsCanvas({ density = 1.2, color = '#22c55e'
     io.observe(canvas);
 
     const spawnStar = () => {
+      if (stoppedRef.current || totalSpawnedRef.current >= maxTotalSpawns) {
+        stoppedRef.current = true;
+        return;
+      }
       const stars = starsRef.current;
       const s = stars.find((p) => !p.active);
       if (!s) return;
@@ -89,6 +99,7 @@ export default function BackgroundStarsCanvas({ density = 1.2, color = '#22c55e'
       const size = 2 + Math.random() * 2; // px head size
 
       Object.assign(s, { x: startX, y: startY, vx, vy, life: 0, maxLife, size, active: true });
+      totalSpawnedRef.current += 1;
     };
 
     const step = (ts: number) => {
@@ -110,8 +121,9 @@ export default function BackgroundStarsCanvas({ density = 1.2, color = '#22c55e'
       // Switch back to normal drawing for stars
       ctx.globalCompositeOperation = 'source-over';
 
-      // Spawn logic (pause when off-screen)
-      const spawnRate = visibleRef.current ? (isMobile ? 0.5 : 1) * density : 0; // approx per second
+      // Spawn logic (pause when off-screen or when stopped)
+      const canSpawn = visibleRef.current && !stoppedRef.current && totalSpawnedRef.current < maxTotalSpawns;
+      const spawnRate = canSpawn ? (isMobile ? 0.5 : 1) * density : 0; // approx per second
       spawnAccRef.current += dt * spawnRate;
       while (spawnAccRef.current >= 1) {
         spawnStar();
@@ -119,9 +131,11 @@ export default function BackgroundStarsCanvas({ density = 1.2, color = '#22c55e'
       }
 
       const stars = starsRef.current;
+      let activeCount = 0;
       for (let i = 0; i < stars.length; i++) {
         const s = stars[i];
         if (!s.active) continue;
+        activeCount++;
         s.life += dt;
         s.x += s.vx * dt;
         s.y += s.vy * dt;
@@ -138,7 +152,8 @@ export default function BackgroundStarsCanvas({ density = 1.2, color = '#22c55e'
         const ty = s.y - (s.vy / Math.hypot(s.vx, s.vy)) * tailLen;
         const grad = ctx.createLinearGradient(tx, ty, s.x, s.y);
         grad.addColorStop(0, 'rgba(34,197,94,0)');
-        grad.addColorStop(1, 'rgba(34,197,94,0.5)');
+        grad.addColorStop(0.65, 'rgba(34,197,94,0.55)');
+        grad.addColorStop(1, 'rgba(34,197,94,0)');
         ctx.strokeStyle = grad;
         ctx.lineWidth = 1.4;
         ctx.beginPath();
@@ -151,6 +166,13 @@ export default function BackgroundStarsCanvas({ density = 1.2, color = '#22c55e'
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
         ctx.fill();
+      }
+
+      // If we've reached the spawn limit and nothing is active anymore, stop the loop
+      if (stoppedRef.current && activeCount === 0) {
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+        return;
       }
 
       rafRef.current = requestAnimationFrame(step);
@@ -179,7 +201,7 @@ export default function BackgroundStarsCanvas({ density = 1.2, color = '#22c55e'
       ro.disconnect();
       io.disconnect();
     };
-  }, [density, color, maxStars, trailHalfLifeSec, tailMaxPx]);
+  }, [density, color, maxStars, trailHalfLifeSec, tailMaxPx, maxTotalSpawns]);
 
   return <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 -z-10" aria-hidden />;
 }
