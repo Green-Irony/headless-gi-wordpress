@@ -31,6 +31,7 @@ export default function BackgroundStarsCanvas({ density = 1.2, color = '#22c55e'
   const starsRef = useRef<Star[]>([]);
   const lastTsRef = useRef<number>(0);
   const spawnAccRef = useRef<number>(0);
+  const visibleRef = useRef<boolean>(true);
 
   useEffect(() => {
     const canvas = canvasRef.current!;
@@ -45,7 +46,10 @@ export default function BackgroundStarsCanvas({ density = 1.2, color = '#22c55e'
 
     const resize = () => {
       dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
-      const { innerWidth: w, innerHeight: h } = window;
+      const parent = canvas.parentElement as HTMLElement;
+      if (!parent) return;
+      const w = parent.clientWidth;
+      const h = parent.clientHeight;
       canvas.width = Math.floor(w * dpr);
       canvas.height = Math.floor(h * dpr);
       canvas.style.width = `${w}px`;
@@ -54,22 +58,34 @@ export default function BackgroundStarsCanvas({ density = 1.2, color = '#22c55e'
     };
     resize();
     window.addEventListener('resize', resize);
+    // Observe parent size changes
+    const parent = canvas.parentElement as HTMLElement;
+    const ro = new ResizeObserver(() => resize());
+    if (parent) ro.observe(parent);
+    // Observe visibility within viewport
+    const io = new IntersectionObserver((entries) => {
+      const e = entries[0];
+      visibleRef.current = !!e && e.isIntersecting && e.intersectionRatio > 0.01;
+    }, { threshold: [0, 0.01, 0.1, 1] });
+    io.observe(canvas);
 
     const spawnStar = () => {
       const stars = starsRef.current;
       const s = stars.find((p) => !p.active);
       if (!s) return;
-      const { innerWidth: w, innerHeight: h } = window;
+      const rect = canvas.getBoundingClientRect();
+      const w = rect.width;
+      const h = rect.height;
 
       // Spawn from a random edge (top or left) for a diagonal travel.
       const fromTop = Math.random() < 0.55;
       const startX = fromTop ? Math.random() * w : -20;
       const startY = fromTop ? -20 : Math.random() * h * 0.9;
       const angle = fromTop ? (15 + Math.random() * 25) * (Math.PI / 180) : (5 + Math.random() * 20) * (Math.PI / 180);
-      const speed = (isMobile ? 140 : 180) + Math.random() * 140; // px/s
+      const speed = (isMobile ? 80 : 120) + Math.random() * 60; // px/s within hero
       const vx = Math.cos(angle) * speed;
       const vy = Math.sin(angle) * speed;
-      const maxLife = (w + h) / speed * (0.6 + Math.random() * 0.4); // seconds
+      const maxLife = (w + h) / speed * (0.5 + Math.random() * 0.35); // seconds
       const size = 2 + Math.random() * 2; // px head size
 
       Object.assign(s, { x: startX, y: startY, vx, vy, life: 0, maxLife, size, active: true });
@@ -94,8 +110,8 @@ export default function BackgroundStarsCanvas({ density = 1.2, color = '#22c55e'
       // Switch back to normal drawing for stars
       ctx.globalCompositeOperation = 'source-over';
 
-      // Spawn logic
-      const spawnRate = (isMobile ? 0.5 : 1) * density; // approx per second
+      // Spawn logic (pause when off-screen)
+      const spawnRate = visibleRef.current ? (isMobile ? 0.5 : 1) * density : 0; // approx per second
       spawnAccRef.current += dt * spawnRate;
       while (spawnAccRef.current >= 1) {
         spawnStar();
@@ -160,10 +176,12 @@ export default function BackgroundStarsCanvas({ density = 1.2, color = '#22c55e'
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       window.removeEventListener('resize', resize);
       document.removeEventListener('visibilitychange', onVis);
+      ro.disconnect();
+      io.disconnect();
     };
-  }, [density, color, maxStars]);
+  }, [density, color, maxStars, trailHalfLifeSec, tailMaxPx]);
 
-  return <canvas ref={canvasRef} className="pointer-events-none fixed inset-0 -z-10" aria-hidden />;
+  return <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 -z-10" aria-hidden />;
 }
 
 

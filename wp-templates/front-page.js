@@ -57,7 +57,6 @@ export default function FrontPage(props) {
       />
 
       <main>
-        <BackgroundStarsCanvas density={.5} maxStars={8} />
         {hasSections ? (
           renderSections(sections)
         ) : (
