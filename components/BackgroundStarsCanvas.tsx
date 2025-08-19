@@ -25,7 +25,7 @@ type Star = {
   active: boolean;
 };
 
-export default function BackgroundStarsCanvas({ density = 1.2, color = '#22c55e', maxStars = 28, trailHalfLifeSec = 0.8, tailMaxPx = 110 }: StarsProps) {
+export default function BackgroundStarsCanvas({ density = 1.2, color = '#22c55e', maxStars = 28, trailHalfLifeSec = 0.4, tailMaxPx = 110 }: StarsProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rafRef = useRef<number | null>(null);
   const starsRef = useRef<Star[]>([]);
