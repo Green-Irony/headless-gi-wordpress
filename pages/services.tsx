@@ -48,10 +48,11 @@ const Page: any = function ServicesPage(props: any) {
 
         <ValuePillars
           heading="Our approach"
+          subhead="Most AI pilots stall because agents can’t see context, act safely, or scale. Our approach removes those barriers—combining integration‑first architecture, AI‑native delivery methods, and outcome‑driven focus—so you get results you can count on."
           items={[
-            { title: 'Integration‑first execution', body: 'Agents deliver when they can see accurate state and trigger reliable actions.' },
-            { title: 'AI‑native delivery', body: 'AI accelerates discovery, design, and delivery without sacrificing quality.' },
-            { title: 'Outcome orientation', body: 'Start with speed, deflection, capacity—and deliver it in weeks, not months.' },
+            { title: 'Integration‑first execution', body: 'Reliable agents require reliable context. We design event‑driven, API‑led integrations that give agents a clear view of state and the ability to trigger safe, consistent actions.' },
+            { title: 'AI‑native delivery', body: 'We rebuilt delivery with AI at the core. Discovery, design, and build all move 2× faster—without sacrificing senior‑level quality or predictability.' },
+            { title: 'Outcome orientation', body: 'Every project starts with measurable goals—speed, deflection, capacity—and ends with outcomes delivered in weeks, not months.' },
           ]}
         />
         <ServicesTabbedContent
