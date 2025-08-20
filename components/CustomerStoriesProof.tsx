@@ -1,5 +1,6 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion as m, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 
@@ -21,15 +22,29 @@ export type CustomerStoriesProps = {
 
 const DEFAULT_HEADING = 'Proof that scales';
 const DEFAULT_ITEMS: StoryItem[] = [
-  { brand: 'Spirit Airlines', title: 'Event-driven integration powering operational agentic workflows', blurb: 'How event-driven MuleSoft work enabled real-time ops and agent actions.', kpis: ['⚡ Delivery cycle time ↓ 50%', '⬇️ Deflection rate up', '🧠 Capacity freed'], posterUrl: '/logos/spirit.svg', videoId: 'SPIRIT_VIDEO_ID' },
-  { brand: 'UNC Charlotte', title: '24/7 deflection and capacity reallocated to strategic advising', blurb: 'Persistent agents improve student engagement and reduce live load.', kpis: ['⬇️ Deflection rate up', '⚡ Faster time-to-value', '🧠 Capacity freed'], posterUrl: '/logos/unc-charlotte.svg', videoId: 'UNC_VIDEO_ID' },
+  { brand: 'Spirit Airlines', title: 'Event-driven integration powering operational agentic workflows', blurb: 'How event-driven MuleSoft work enabled real-time ops and agent actions.', kpis: ['⚡ Delivery cycle time ↓ 50%', '⬇️ Deflection rate up', '🧠 Capacity freed'], posterUrl: '/logos/spirit.svg', videoId: 'XPktNadDalA' },
+  { brand: 'UNC Charlotte', title: '24/7 deflection and capacity reallocated to strategic advising', blurb: 'Persistent agents improve student engagement and reduce live load.', kpis: ['⬇️ Deflection rate up', '⚡ Faster time-to-value', '🧠 Capacity freed'], posterUrl: '/logos/unc-charlotte.svg', videoId: 'v8sVC1PIv-s' },
 ];
-const DEFAULT_CTA = { label: 'Start Your Success Plan', href: '/contact' };
+const DEFAULT_CTA = { label: 'More Customer Stories', href: '/customer-stories' };
 
 export default function CustomerStoriesProof({ id, className, heading = DEFAULT_HEADING, items = DEFAULT_ITEMS, cta = DEFAULT_CTA }: CustomerStoriesProps) {
   const prefersReduced = useReducedMotion();
   const enterY = prefersReduced ? 0 : 8;
   const [openId, setOpenId] = useState<string | null>(null);
+
+  // Lock page scroll when the lightbox is open
+  useEffect(() => {
+    if (openId) {
+      const prevHtmlOverflow = document.documentElement.style.overflow;
+      const prevBodyOverflow = document.body.style.overflow;
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.documentElement.style.overflow = prevHtmlOverflow;
+        document.body.style.overflow = prevBodyOverflow;
+      };
+    }
+  }, [openId]);
 
   return (
     <m.section
@@ -77,42 +92,30 @@ export default function CustomerStoriesProof({ id, className, heading = DEFAULT_
                   <button
                     onClick={() => setOpenId(it.videoId)}
                     className="relative block w-full overflow-hidden rounded-xl ring-1 ring-gi-fog focus:outline-none focus-visible:ring-2 focus-visible:ring-gi-green aspect-video flex items-center justify-center bg-white"
-                    aria-label={`Play video: ${it.brand}`}
+                    aria-label={`Open story: ${it.brand}`}
                   >
                     <Image
                       width={192}
                       height={112}
                       src={it.posterUrl}
                       alt={`${it.brand} video poster`}
-                      className="h-auto w-auto max-h-[60%] max-w-[70%] object-contain"
+                      className="h-auto w-auto max-h-[75%] max-w-[85%] object-contain"
                       loading="lazy"
                     />
                     <div className="pointer-events-none absolute left-0 right-0 top-0 h-24 bg-gradient-to-b from-black/20 to-transparent" />
                     <div className="absolute left-4 top-3 rounded-full bg-white/85 px-2.5 py-1 text-xs font-medium text-gi-text ring-1 ring-gi-fog backdrop-blur">
                       {it.brand}
                     </div>
-                    <div className="absolute left-4 bottom-3 flex flex-wrap gap-2">
-                      {it.kpis.slice(0, 2).map((k) => (
-                        <span key={k} className="rounded-full bg-white/85 px-2 py-0.5 text-xs font-medium text-gi-text ring-1 ring-gi-fog backdrop-blur">
-                          {k}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-white/90 ring-1 ring-gi-fog backdrop-blur transition group-hover:scale-[1.04]">
-                        <svg viewBox="0 0 24 24" aria-hidden="true" className="ml-0.5 h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                          <circle cx="12" cy="12" r="9" />
-                          <path d="M10 8l6 4-6 4z" fill="currentColor" stroke="none" />
-                        </svg>
-                      </span>
-                    </div>
+                    {/* KPI badges and play icon overlay removed for cleaner presentation */}
                   </button>
 
                   <div className="mt-4">
                     <div className="text-base font-semibold text-gi-text">{it.title}</div>
                     <p className="mt-1 text-sm text-gi-gray">{it.blurb}</p>
                     <div className="mt-4">
-                      <a className="btn-secondary" href={cta.href}>{cta.label}</a>
+                      <button type="button" className="btn-secondary" onClick={() => setOpenId(it.videoId)}>
+                        Watch Story
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -143,11 +146,16 @@ export default function CustomerStoriesProof({ id, className, heading = DEFAULT_
 function VideoLightbox({ videoId, onClose }: { videoId: string; onClose: () => void }) {
   const src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
 
-  return (
+  // Portal to body to escape any stacking contexts and ensure maximum z-index
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
@@ -173,6 +181,7 @@ function VideoLightbox({ videoId, onClose }: { videoId: string; onClose: () => v
           />
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 } 

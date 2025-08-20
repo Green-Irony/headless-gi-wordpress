@@ -98,11 +98,14 @@ export default function HomepageHero(props: HomepageHeroProps) {
         )}
 
         {shouldShowKpis && (
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-gi-gray">
             {kpisToRender.map((kpi, idx) => (
-              <div className="kpi-chip" key={`${kpi.label}-${idx}`}><span className="kpi-bar" /><span className="kpi-val">{kpi.label}</span></div>
+              <li key={`${kpi.label}-${idx}`} className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-gi-green" />
+                <span className="text-sm md:text-base">{kpi.label}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         )}
 
         {showMedia && (

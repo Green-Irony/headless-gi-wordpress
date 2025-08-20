@@ -8,6 +8,7 @@ import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../queries/SiteSettingsQuery';
 import { HEADER_MENU_QUERY } from '../queries/MenuQueries';
+import TrustStrip from '../components/TrustStrip';
 
 const Page: any = function CustomerStoriesPage(props: any) {
   if (props.loading) return <>Loading...</>;
@@ -60,6 +61,8 @@ const Page: any = function CustomerStoriesPage(props: any) {
           ]}
           speedSeconds={45}
         />
+
+      <TrustStrip />
 
         <section className="mx-auto max-w-7xl px-6 py-12">
           <div className="flex flex-col gap-8">

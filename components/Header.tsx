@@ -246,7 +246,7 @@ export default function Header({
                       onMouseEnter={() => { clearCloseTimer(); setOpenDesktopIdx(idx); }}
                       onMouseLeave={() => scheduleClose(180)}
                     >
-                      <Link href={item.uri} className="relative px-1 text-sm font-medium text-gi-gray hover:text-gi-text">
+                      <Link href={item.uri} className="relative px-1 text-sm font-medium text-gi-navy hover:text-gi-text">
                         {item.label}
                       </Link>
                       {hasChildren && (

@@ -10,6 +10,7 @@ import HomepageHero from '../components/HomepageHero';
 import LogoTicker from '../components/LogoTicker';
 import TrustStrip from "../components/TrustStrip";
 import ValuePillars from "../components/ValuePillars";
+import RibbonBanner from "../components/RibbonBanner";
 import OfferTiles from "../components/OfferTiles";
 import { AiIcon, MuleIcon, SalesforceIcon, DataIcon } from "../components/Header";
 import CustomerStoriesProof from "../components/CustomerStoriesProof";
@@ -123,7 +124,8 @@ export default function FrontPage(props) {
                 }
               ]}
             />
-            <TrustStrip />
+            <RibbonBanner title="Why partner with Green Irony?" />
+            
             <ValuePillars
               heading="From investment to impact — fast"
               subhead="Most AI pilots stall because agents can’t see context, act safely, or scale. We combine integration-first architecture, AI-native agent design, and senior delivery to give you outcomes you can plan around."

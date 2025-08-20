@@ -82,7 +82,7 @@ function Tile({ item }: { item: OfferTileItem }) {
 		>
 			{/* 3D flip container */}
 			<div
-				className="relative h-56 w-full transform-gpu [transform-style:preserve-3d] transition-transform duration-500 ease-out group-hover:[transform:rotateY(180deg)] group-focus-within:[transform:rotateY(180deg)]"
+				className="relative h-64 md:h-72 w-full transform-gpu [transform-style:preserve-3d] transition-transform duration-500 ease-out group-hover:[transform:rotateY(180deg)] group-focus-within:[transform:rotateY(180deg)]"
 			>
 				{/* Front */}
 				<div className="absolute inset-0 flex flex-col items-center justify-center gap-3 [backface-visibility:hidden]">
@@ -91,12 +91,19 @@ function Tile({ item }: { item: OfferTileItem }) {
 					) : item.iconSrc ? (
 						<Image src={item.iconSrc} alt={item.iconAlt ?? ''} width={72} height={72} />
 					) : null}
-					<h3 className="text-center text-lg font-semibold text-gi-text">{item.title}</h3>
+					<h3 className="text-center text-2xl md:text-3xl leading-tight font-semibold text-gi-text">{item.title}</h3>
 				</div>
 
 				{/* Back */}
-				<div className="absolute inset-0 flex rotate-y-180 flex-col items-center justify-center [backface-visibility:hidden]">
-					<p className="mx-auto max-w-xs text-center text-lg text-gi-text/80">{item.description ?? ''}</p>
+				<div className="absolute inset-0 flex rotate-y-180 flex-col items-center justify-center gap-4 px-4 [backface-visibility:hidden]">
+					<div className="mx-auto max-w-md text-center">
+						<h4 className="text-xl md:text-2xl font-semibold text-gi-text">{item.description ?? ''}</h4>
+					</div>
+					{item.href ? (
+						<span className="inline-flex items-center rounded-md bg-gi-green px-4 py-2 text-white text-sm font-medium shadow-gi transition-colors hover:bg-gi-green/90">
+							Learn more
+						</span>
+					) : null}
 				</div>
 			</div>
 		</div>
