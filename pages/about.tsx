@@ -40,7 +40,8 @@ const Page: any = function AboutPage(props: any) {
           body="Trusted since 2016 for enterprise‑grade Salesforce and MuleSoft delivery. Today, we’re AI‑native—cutting timelines in half while keeping US‑based quality and predictability."
           primaryCta={{ label: 'Start Your First Win', href: '/contact' }}
           secondaryCta={{ label: 'Explore Careers', href: '/careers' }}
-          kpis={[{ label: '⚡ Faster delivery' }, { label: '⬇️ Deflection up' }, { label: '🧠 Capacity unlocked' }]}
+          //kpis={[{ label: '⚡ Faster delivery' }, { label: '⬇️ Deflection up' }, { label: '🧠 Capacity unlocked' }]}
+          kpis={[]}
           showMedia={false}
         />
 

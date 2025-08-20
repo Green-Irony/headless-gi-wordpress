@@ -91,8 +91,7 @@ const Page: any = function TravelSolutionsPage(props: any) {
         {/* Proof / Origin */}
         <WhyUsBanner body="Built from the same event-driven delivery discipline and integration patterns that powered Spirit Airlines’ operational scale. That institutional knowledge is now a reusable, AI-native delivery engine—so you get the same reliability and speed with less friction." />
 
-        {/* Why Green Irony */}
-        <WhyUsBanner body="We don’t just automate; we operationalize intelligence. MuleSoft + real-time events + agent execution makes coordination proactive instead of reactive—delivering throughput only large-scale travel ops previously had." />
+        
 
         {/* Pre-footer CTA */}
         <PreFooterCTA

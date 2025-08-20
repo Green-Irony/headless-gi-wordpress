@@ -89,8 +89,7 @@ const Page: any = function SmbSolutionsPage(props: any) {
         {/* Proof / Narrative */}
         <WhyUsBanner body="Our AI-native model means you get a delivery engine that amplifies your small team—agents automate routine work, integration ties systems, and senior oversight keeps outcomes predictable. This isn’t a pilot that disappears; it’s a first win that expands." />
 
-        {/* Why Green Irony */}
-        <WhyUsBanner body="We were rebuilt to serve organizations that can’t afford months of ambiguous consulting. AI-native delivery gives you speed and leverage; integration-first thinking ensures every agent has the context and actionability needed to deliver real business value." />
+        
 
         {/* Pre-footer CTA */}
         <PreFooterCTA

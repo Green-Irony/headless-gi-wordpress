@@ -91,8 +91,7 @@ const Page: any = function HigherEducationSolutionsPage(props: any) {
         {/* Proof / Example */}
         <WhyUsBanner body="Public-facing Agentforce implementations (e.g., UNC Charlotte-style knowledge-backed bots) demonstrate how integrated data + scoped agents deliver persistent support while freeing human advisors." />
 
-        {/* Why Green Irony */}
-        <WhyUsBanner body="We combine academic empathy with delivery rigor. Your institution gets an AI-native support layer that behaves like a reliable teammate with measurable impact—far beyond thin chatbot experiments." />
+        
 
         {/* Pre-footer CTA */}
         <PreFooterCTA
