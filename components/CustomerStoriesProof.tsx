@@ -76,7 +76,7 @@ export default function CustomerStoriesProof({ id, className, heading = DEFAULT_
                 <div className="rounded-[16px] bg-white p-5 shadow-gi">
                   <button
                     onClick={() => setOpenId(it.videoId)}
-                    className="relative block w-full overflow-hidden rounded-xl ring-1 ring-gi-fog focus:outline-none focus-visible:ring-2 focus-visible:ring-gi-green"
+                    className="relative block w-full overflow-hidden rounded-xl ring-1 ring-gi-fog focus:outline-none focus-visible:ring-2 focus-visible:ring-gi-green aspect-video flex items-center justify-center bg-white"
                     aria-label={`Play video: ${it.brand}`}
                   >
                     <Image
@@ -84,7 +84,7 @@ export default function CustomerStoriesProof({ id, className, heading = DEFAULT_
                       height={112}
                       src={it.posterUrl}
                       alt={`${it.brand} video poster`}
-                      className="aspect-video w-full object-contain bg-white"
+                      className="h-auto w-auto max-h-[60%] max-w-[70%] object-contain"
                       loading="lazy"
                     />
                     <div className="pointer-events-none absolute left-0 right-0 top-0 h-24 bg-gradient-to-b from-black/20 to-transparent" />

@@ -25,7 +25,7 @@ const DEFAULT_HEADING = 'From investment to impact — fast';
 const DEFAULT_SUBHEAD = 'Most AI pilots stall because agents can’t see context, act safely, or scale. We combine integration-first architecture, AI-native agent design, and senior delivery to give you outcomes you can plan around.';
 const DEFAULT_ITEMS: PillarItem[] = [
   { title: 'Deflection that scales', body: 'Agents surface answers and take safe actions to reduce live demand.' },
-  { title: 'Speed to value', body: 'AI‑accelerated MuleSoft delivery cuts cycle time in half; your first working agent in 8 weeks.' },
+  { title: 'Speed to value', body: 'AI-accelerated delivery cuts cycle time in half; go live in 8 weeks.' },
   { title: 'Capacity unlocked', body: 'Free experts for strategic work while agents handle structured, repeatable demand.' },
 ];
 

@@ -70,7 +70,7 @@ export default function LeadMagnetCTA({ id, className, title = DEFAULT_TITLE, bo
               </a>
             </div>
 
-            <p className="mt-3 text-xs text-gi-gray">No spam—just the plan. We’ll also send the editable KPI scorecard.</p>
+            <p className="mt-3 text-xs text-gi-gray">No spam — just the plan. You'll also get an editable KPI scorecard.</p>
           </div>
 
           <div className="order-1 md:order-2 md:col-span-6">

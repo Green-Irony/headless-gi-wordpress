@@ -99,25 +99,25 @@ export default function FrontPage(props) {
               items={[
                 {
                   title: 'MuleSoft Integration (AI‑led)',
-                  description: 'Pipelines & events so agents can see, decide, and do.',
+                  description: 'API‑led, event‑driven integration so agents can see, decide, and do.',
                   href: '/services#mulesoft',
                   icon: <MuleIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
                   title: 'AI & Digital Labor (Agentforce)',
-                  description: 'Launch agents with jobs, safe actions, and KPIs.',
+                  description: 'Launch agents with clear jobs, safe actions, and measurable KPIs.',
                   href: '/services#agentforce',
                   icon: <AiIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
-                  title: 'Salesforce',
+                  title: 'Salesforce (AI‑led)',
                   description: 'Make Salesforce the control room for humans + agents.',
                   href: '/services#salesforce',
                   icon: <SalesforceIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
                   title: 'Data & Migrations',
-                  description: 'Trusted knowledge and real‑time context for agents.',
+                  description: 'Seamless platform migrations, trusted data, and real-time context for reliable agent and human decisions.',
                   href: '/services#data',
                   icon: <DataIcon className="h-24 w-24 text-gi-green" />
                 }
@@ -135,7 +135,7 @@ export default function FrontPage(props) {
                     <path d="M13 9v6" />
                   </svg>
                 ) },
-                { title: 'Speed to value', body: 'AI‑accelerated MuleSoft delivery cuts cycle time in half; your first working agent in 8 weeks.', iconNode: (
+                { title: 'Speed to value', body: 'AI‑accelerated delivery cuts cycle time in half; go live in 8 weeks.', iconNode: (
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
                     <path d="M21 12a9 9 0 1 1-6.219-8.56" />
                     <path d="M12 12l7-7" />
