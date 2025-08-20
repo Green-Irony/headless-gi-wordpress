@@ -4,7 +4,7 @@ import { motion as m, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import TextCascadeDiagonal from './TextCascadeDiagonal';
 import dynamic from 'next/dynamic';
-const BackgroundStarsCanvas = dynamic(() => import('../components/BackgroundStarsCanvas'), { ssr: false });
+const AiTwinkleStars = dynamic(() => import('../components/AiTwinkleStars'), { ssr: false });
 
 
 export type HomepageHeroCta = { label: string; href: string };
@@ -70,7 +70,8 @@ export default function HomepageHero(props: HomepageHeroProps) {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.24, ease: 'easeOut' }}
     >
-      {/*<BackgroundStarsCanvas density={.5} maxStars={8} maxTotalSpawns={20} />*/}
+      {/* Side twinkle stars (subtle, around text, not over it) */}
+      <AiTwinkleStars sides="both" countPerSide={14} className="-z-10" />
       {/* Glow layer */}
       <div className="pointer-events-none absolute inset-0 z-10">
         <div className="absolute left-[8%] top-[-120px] h-[600px] w-[600px] rounded-full bg-gi-green opacity-[0.22] blur-[140px]
