@@ -6,8 +6,9 @@ import ValuePillars from '../components/ValuePillars';
 import HowItWorksLinear from '../components/HowItWorksLinear';
 import PreFooterCTA from '../components/PreFooterCTA';
 import ServicesTabbedContent from '../components/ServicesTabbedContent';
-import PillarsDynamic from '../components/PillarsDynamic';
+import DeliverablesWheel from '../components/DeliverablesWheel';
 import HeroSimple from '../components/HeroSimple';
+import OfferTiles from '../components/OfferTiles';
 import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../queries/SiteSettingsQuery';
@@ -35,8 +36,8 @@ const Page: any = function ServicesPage(props: any) {
 
       <main>
         <HeroCenterPro
-          title="What we deliver"
-          body="Investment → impact. Integration-led agentic outcomes across MuleSoft integration, Agentforce digital labor, Salesforce optimization, and trusted data."
+          title="From investment to impact — fast"
+          body="You already own powerful platforms. We combine AI‑accelerated MuleSoft delivery, digital labor (Agentforce), Salesforce optimization, and trusted data to cut delivery timelines in half and deliver measurable outcomes in 8 weeks."
           primaryCta={{ label: 'Plan my first win', href: '/contact' }}
           secondaryCta={{ label: 'Explore services', href: '#agentforce' }}
           kpis={[]}
@@ -46,15 +47,13 @@ const Page: any = function ServicesPage(props: any) {
         />
 
         <ValuePillars
-          heading="Our Approach"
-          subhead="We combine integration-first execution, AI-native delivery, and outcome orientation to deliver impactful solutions."
+          heading="Our approach"
           items={[
-            { title: 'Integration-first execution', body: 'The only way agents deliver is by seeing accurate state and triggering reliable actions.' },
-            { title: 'AI-native delivery', body: 'Agents aren’t add-ons—they’re embedded in how we scope, build, and accelerate your outcomes.' },
-            { title: 'Outcome orientation', body: 'We begin with the business result (speed, deflection, capacity) and reverse-engineer the technical path to get you there in eight weeks.' },
+            { title: 'Integration‑first execution', body: 'Agents deliver when they can see accurate state and trigger reliable actions.' },
+            { title: 'AI‑native delivery', body: 'AI accelerates discovery, design, and delivery without sacrificing quality.' },
+            { title: 'Outcome orientation', body: 'Start with speed, deflection, capacity—and deliver it in weeks, not months.' },
           ]}
         />
-
         <ServicesTabbedContent
           className="mt-8"
           tabs={[
@@ -68,17 +67,16 @@ const Page: any = function ServicesPage(props: any) {
               <div>
                 <HeroSimple
                   title="Launch your first AI agent the right way"
-                  subhead="We give agents clear jobs, connect them to the data they need, and enable safe actions—delivering a measurable business outcome in eight weeks."
+                  subhead="Scope, build, and deploy AI agents with clear jobs, safe actions, and measurable KPIs—delivered by US‑based senior experts using AI‑accelerated methods to move twice as fast as traditional teams."
                 />
-                <PillarsDynamic
+                <DeliverablesWheel
                   heading="What we deliver"
-                  mode="carousel"
                   items={[
-                    { title: 'Use-case selection & KPI definition', body: 'Choose the workflow with the highest ROI and define metrics (deflection, cycle time reduction, capacity uplift).', accentStrength: 20 },
-                    { title: 'Knowledge & data architecture', body: 'Build the retrieval layer, truth sources, and freshness guarantees that agents rely on.', accentStrength: 15 },
-                    { title: 'Safe action design', body: 'Guardrails, approvals, fallback behaviors, and auditability so actions are trustworthy.', accentStrength: 20 },
-                    { title: 'Pilot build & launch', body: 'An end-to-end working agent with the minimal integrations required to prove value.', accentStrength: 15 },
-                    { title: 'Adoption & iteration plan', body: 'Stakeholder alignment, feedback loop, and expansion roadmap tied to measured outcomes.', accentStrength: 20 },
+                    { title: 'Use-case selection & KPI definition', body: 'Choose the workflow with the highest ROI and define metrics (deflection, cycle time reduction, capacity uplift).' },
+                    { title: 'Knowledge & data architecture', body: 'Build the retrieval layer, truth sources, and freshness guarantees that agents rely on.' },
+                    { title: 'Safe action design', body: 'Guardrails, approvals, fallback behaviors, and auditability so actions are trustworthy.' },
+                    { title: 'Pilot build & launch', body: 'An end-to-end working agent with the minimal integrations required to prove value.' },
+                    { title: 'Adoption & iteration plan', body: 'Stakeholder alignment, feedback loop, and expansion roadmap tied to measured outcomes.' },
                   ]}
                 />
                 <HowItWorksLinear
@@ -95,26 +93,25 @@ const Page: any = function ServicesPage(props: any) {
                 <PreFooterCTA
                   title="Plan your first agent win"
                   body="Bring a workflow, we’ll shape the job, safe actions, and KPIs to launch in ~8 weeks."
-                  primaryCta={{ label: 'Scope my agent', href: '/contact' }}
-                  secondaryCta={{ label: 'Get the 8-Week Plan', href: '/#plan' }}
+                  primaryCta={{ label: 'Scope My First Agent', href: '/contact' }}
+                  secondaryCta={{ label: 'Get the 8-Week Plan', href: '/plan' }}
                 />
               </div>
             ),
             mulesoft: (
               <div>
                 <HeroSimple
-                  title="Integration that powers agent actionability"
-                  subhead="Agents can only act when they see the right signals. We design API-led, event-driven MuleSoft architectures so your AI agents can see, decide, and do—reliably, quickly, and at scale."
+                  title="Integration that makes AI agents act"
+                  subhead="AI‑accelerated, senior‑led MuleSoft delivery cuts integration timelines in half—giving agents the context they need from day one."
                 />
-                <PillarsDynamic
+                <DeliverablesWheel
                   heading="What we deliver"
-                  mode="carousel"
                   items={[
-                    { title: 'Reference architecture & governance', body: 'API-led, event-driven design patterns with clear ownership, security, and scalability baked in.', accentStrength: 20 },
-                    { title: 'AI-assisted accelerated implementation', body: 'Senior architects augmented by AI tooling to cut planning and build time—delivering outcomes in weeks, not months.', accentStrength: 15 },
-                    { title: 'Observability & reliability', body: 'Telemetry, error handling, SLAs, and health telemetry so your agents don’t just run—they run with confidence.', accentStrength: 20 },
-                    { title: 'Integration gap assessment', body: 'Quick diagnostic to surface the minimal set of pipelines/events required for your first agentic win.', accentStrength: 15 },
-                    { title: 'Deployment & validation runbook', body: 'Production-ready support: test harnesses, rollback strategies, and performance tuning.', accentStrength: 20 },
+                    { title: 'Reference architecture & governance', body: 'API-led, event-driven design patterns with clear ownership, security, and scalability baked in.' },
+                    { title: 'AI-assisted accelerated implementation', body: 'Senior architects augmented by AI tooling to cut planning and build time—delivering outcomes in weeks, not months.' },
+                    { title: 'Observability & reliability', body: 'Telemetry, error handling, SLAs, and health telemetry so your agents don’t just run—they run with confidence.' },
+                    { title: 'Integration gap assessment', body: 'Quick diagnostic to surface the minimal set of pipelines/events required for your first agentic win.' },
+                    { title: 'Deployment & validation runbook', body: 'Production-ready support: test harnesses, rollback strategies, and performance tuning.' },
                   ]}
                 />
                 <HowItWorksLinear
@@ -132,7 +129,7 @@ const Page: any = function ServicesPage(props: any) {
                   title="Review your integration gaps"
                   body="We’ll map the minimal event and pipeline set your first agent needs to act."
                   primaryCta={{ label: 'Book an assessment', href: '/contact' }}
-                  secondaryCta={{ label: 'See our accelerators', href: '/#plan' }}
+                  secondaryCta={{ label: 'See our accelerators', href: '/plan' }}
                 />
               </div>
             ),
@@ -140,16 +137,15 @@ const Page: any = function ServicesPage(props: any) {
               <div>
                 <HeroSimple
                   title="Make Salesforce the control room for digital labor"
-                  subhead="Remove friction, simplify processes, and prepare your org so humans and AI agents operate in flow."
+                  subhead="We streamline workflows, remove friction, and prepare your Salesforce org so humans and AI agents operate in flow—doubling throughput without doubling headcount."
                 />
-                <PillarsDynamic
+                <DeliverablesWheel
                   heading="What we deliver"
-                  mode="carousel"
                   items={[
-                    { title: 'Org assessment & quick wins', body: 'Identify and fix the biggest sources of delay and confusion.', accentStrength: 20 },
-                    { title: 'Workflow simplification', body: 'Collapse manual steps, streamline approvals, and remove bottlenecks.', accentStrength: 15 },
-                    { title: 'Automation readiness', body: 'Prepare object model, permissions, and telemetry for safe agent interaction.', accentStrength: 20 },
-                    { title: 'Adoption design', body: 'Embed agent touchpoints into user workflows so humans and AI complement, not compete.', accentStrength: 15 },
+                    { title: 'Org assessment & quick wins', body: 'Identify and fix the biggest sources of delay and confusion.' },
+                    { title: 'Workflow simplification', body: 'Collapse manual steps, streamline approvals, and remove bottlenecks.' },
+                    { title: 'Automation readiness', body: 'Prepare object model, permissions, and telemetry for safe agent interaction.' },
+                    { title: 'Adoption design', body: 'Embed agent touchpoints into user workflows so humans and AI complement, not compete.' },
                   ]}
                 />
                 <HowItWorksLinear
@@ -167,7 +163,7 @@ const Page: any = function ServicesPage(props: any) {
                   title="Optimize your org for digital labor"
                   body="We’ll remove friction and ready Salesforce for reliable agent action."
                   primaryCta={{ label: 'Talk to Salesforce experts', href: '/contact' }}
-                  secondaryCta={{ label: 'See optimization checklist', href: '/#plan' }}
+                  secondaryCta={{ label: 'See optimization checklist', href: '/plan' }}
                 />
               </div>
             ),
@@ -175,16 +171,15 @@ const Page: any = function ServicesPage(props: any) {
               <div>
                 <HeroSimple
                   title="The data your agents can trust"
-                  subhead="Reliable pipelines and knowledge architecture unlock precise answers and safe actions—so you can scale automation without guesswork."
+                  subhead="Reliable pipelines and knowledge architecture give AI agents precise context to act with confidence—so automation scales without guesswork."
                 />
-                <PillarsDynamic
+                <DeliverablesWheel
                   heading="What we deliver"
-                  mode="carousel"
                   items={[
-                    { title: 'Source-of-truth mapping', body: 'Identify canonical data, ownership, and freshness rules.', accentStrength: 20 },
-                    { title: 'Event enrichment & real-time context', body: 'Ensure agents have live situational awareness via eventing patterns.', accentStrength: 15 },
-                    { title: 'Migration playbooks', body: 'Safe transitions with automated validation and drift detection.', accentStrength: 20 },
-                    { title: 'Governance framework', body: 'Schema, access controls, lineage tracking, and retention policy aligned to trust and auditability.', accentStrength: 15 },
+                    { title: 'Source-of-truth mapping', body: 'Identify canonical data, ownership, and freshness rules.' },
+                    { title: 'Event enrichment & real-time context', body: 'Ensure agents have live situational awareness via eventing patterns.' },
+                    { title: 'Migration playbooks', body: 'Safe transitions with automated validation and drift detection.' },
+                    { title: 'Governance framework', body: 'Schema, access controls, lineage tracking, and retention policy aligned to trust and auditability.' },
                   ]}
                 />
                 <HowItWorksLinear
@@ -202,7 +197,7 @@ const Page: any = function ServicesPage(props: any) {
                   title="Map your data for AI"
                   body="We’ll define trusted sources, freshness guarantees, and event patterns to power safe agent action."
                   primaryCta={{ label: 'Start a data blueprint', href: '/contact' }}
-                  secondaryCta={{ label: 'See migration playbook', href: '/#plan' }}
+                  secondaryCta={{ label: 'See migration playbook', href: '/plan' }}
                 />
               </div>
             ),

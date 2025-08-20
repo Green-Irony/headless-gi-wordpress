@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Article embeds - force standard 16:9 ratio */
+.gi-prose .embed-responsive,
+.gi-prose .wp-block-embed.is-type-video .wp-block-embed__wrapper,
+.gi-prose .wp-block-embed.is-provider-youtube .wp-block-embed__wrapper,
+.gi-prose .wp-block-embed.is-provider-vimeo .wp-block-embed__wrapper,
+.gi-prose .wp-block-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.gi-prose .wp-block-embed__wrapper iframe,
+.gi-prose .wp-block-video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* General iframe fallback */
+.gi-prose iframe { max-width: 100%; }
+
+/* Reserve space for fixed TOC on very wide screens without shifting article */
+@media (min-width: 1280px) {
+  .gi-prose-container { position: relative; }
+}
+
 /* GI global utilities and helpers */
 .gi-blueprint{position:relative;background-color:#fff;isolation:isolate;}
 .gi-blueprint::before{content:"";position:absolute;inset:-1px;z-index:-1;background:
@@ -11,8 +38,8 @@
   linear-gradient(to bottom, rgba(6,30,75,.2) 1px, transparent 1px) 0 0/96px 96px;opacity:.6;}
 @media (prefers-reduced-motion:no-preference){.gi-blueprint::before{animation:drift 12s ease-in-out infinite;}}
 
-.btn-primary{@apply inline-flex items-center justify-center rounded-xl px-5 py-3 bg-gi-green text-gi-black font-semibold hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-gi-green focus:ring-offset-1;}
-.btn-secondary{@apply inline-flex items-center justify-center rounded-xl px-5 py-3 border border-gi-fog text-gi-text hover:bg-gi-subtle focus:outline-none focus:ring-2 focus:ring-gi-navy focus:ring-offset-1;}
+.btn-primary{@apply inline-flex items-center justify-center rounded-xl px-5 py-3 bg-gi-green text-gi-white font-semibold hover:bg-gi-green/85 focus:outline-none focus:ring-2 focus:ring-gi-green focus:ring-offset-1;}
+.btn-secondary{@apply inline-flex items-center justify-center rounded-xl px-5 py-3 border border-gi-fog text-gi-text hover:bg-gi-pink/50 hover:text-gi-white focus:outline-none focus:ring-2 focus:ring-gi-navy focus:ring-offset-1;}
 
 .kpi-chip{@apply inline-flex items-center gap-2 rounded-xl px-3 py-2 bg-black/5;}
 .kpi-chip .kpi-bar{@apply h-3 w-1.5 rounded bg-gi-pink;}
@@ -41,6 +68,11 @@
   }
   .link-underline:hover::after { transform: scaleX(1); }
 }
+
+/* 3D flip helpers used by OfferTiles */
+.rotate-y-180 { transform: rotateY(180deg); }
+[transform-style\:preserve-3d] { transform-style: preserve-3d; }
+[backface-visibility\:hidden] { backface-visibility: hidden; }
 
 html,
 body {

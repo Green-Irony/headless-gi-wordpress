@@ -12,15 +12,15 @@ export type LeadMagnetProps = {
   secondaryCta?: { label: string; href: string };
 };
 
-const DEFAULT_TITLE = 'Your 8-Week Agent Launch Plan';
-const DEFAULT_BODY = 'A concise, practical playbook: pick the right use case, design the minimal integrations, launch a working agent, and measure outcomes—fast.';
+const DEFAULT_TITLE = 'Your 8‑Week Agent Launch Plan';
+const DEFAULT_BODY = 'Pick the right use case, design the minimal integrations, launch a working agent, and measure outcomes—fast.';
 const DEFAULT_BULLETS = [
   'KPI scorecard (deflection, cycle time, capacity)',
   'Integration checklist (events, pipelines, data)',
   'Expansion plays to add actions and deepen automation',
 ];
-const DEFAULT_PRIMARY = { label: 'Download the Plan', href: '#plan' };
-const DEFAULT_SECONDARY = { label: 'Talk to an Expert', href: '#contact' };
+const DEFAULT_PRIMARY = { label: 'Download the Plan', href: '/plan' };
+const DEFAULT_SECONDARY = { label: 'Talk to an Expert', href: '/contact' };
 
 export default function LeadMagnetCTA({ id, className, title = DEFAULT_TITLE, body = DEFAULT_BODY, bullets = DEFAULT_BULLETS, primaryCta = DEFAULT_PRIMARY, secondaryCta = DEFAULT_SECONDARY }: LeadMagnetProps) {
   const prefersReduced = useReducedMotion();
@@ -41,7 +41,7 @@ export default function LeadMagnetCTA({ id, className, title = DEFAULT_TITLE, bo
         <div className="absolute right-[12%] bottom-[10%] h-[300px] w-[300px] rounded-full bg-gi-green opacity-[0.14] blur-[130px]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 py-24">
+      <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="mx-auto mb-8 h-px w-16 bg-gi-line" />
 
         <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-12">

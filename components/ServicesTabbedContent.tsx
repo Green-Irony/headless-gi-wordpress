@@ -155,7 +155,7 @@ export default function ServicesTabbedContent({
           ref={listRef}
           role="tablist"
           aria-label="Services"
-          className="flex flex-wrap items-center gap-2 border-b border-gi-line pb-4 pt-4"
+          className="flex flex-wrap items-center gap-2 border-b border-gi-line py-4"
           onKeyDown={onKeyDown}
           style={fixedStyle}
         >

@@ -5,8 +5,25 @@ const { withFaust } = require("@faustwp/core");
  **/
 module.exports = withFaust({
   images: {
-    domains: ["faustexample.wpengine.com"],
     dangerouslyAllowSVG: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'bpheadlessgiwe.wpengine.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'bpheadlessgiwe.wpenginepowered.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.wpengine.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.wpenginepowered.com',
+      },
+    ],
   },
   trailingSlash: true,
 });

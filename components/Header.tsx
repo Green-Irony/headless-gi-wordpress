@@ -20,7 +20,6 @@ const FALLBACK_NAV: Array<{ label: string; href: string }> = [
   { label: 'Customer Stories', href: '/customer-stories' },
   { label: 'Insights', href: '/insights' },
   { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
 ];
 
 const DEFAULT_SERVICES_CHILDREN = [
@@ -35,6 +34,11 @@ const DEFAULT_SOLUTIONS_CHILDREN = [
   { href: '/solutions/travel', title: 'Travel & Transportation' },
   { href: '/solutions/higher-education', title: 'Higher Education' },
   { href: '/solutions/smb', title: 'Small & Midsized Business' },
+];
+
+// Default About submenu entries
+const DEFAULT_ABOUT_CHILDREN = [
+  { href: '/careers', title: 'Careers' },
 ];
 
 function toServicesAnchor(href: string): string {
@@ -75,6 +79,16 @@ function SmbIcon() {
     </svg>
   );
 }
+// Small inline SVG for About submenu
+function CareerIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-4 w-4 text-gi-green">
+      <rect x="3" y="8" width="18" height="10" rx="2" />
+      <path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+      <path d="M3 13h18" />
+    </svg>
+  );
+}
 function renderSolutionIcon(label: string) {
   const l = (label || '').toLowerCase();
   if (l.includes('travel')) return <TravelIcon />;
@@ -82,19 +96,24 @@ function renderSolutionIcon(label: string) {
   if (l.includes('smb') || l.includes('small')) return <SmbIcon />;
   return <SmbIcon />;
 }
+function renderAboutIcon(label: string) {
+  const l = (label || '').toLowerCase();
+  if (l.includes('career')) return <CareerIcon />;
+  return <CareerIcon />;
+}
 
 // Small inline SVG icons for Services submenu
-function AiIcon() {
+export function AiIcon({ className = 'h-4 w-4 text-gi-green' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-4 w-4 text-gi-green">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className={className}>
       <path d="M12 3a4 4 0 0 1 4 4v1h1a3 3 0 0 1 0 6h-1v1a4 4 0 0 1-8 0v-1H7a3 3 0 0 1 0-6h1V7a4 4 0 0 1 4-4z" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M10 12h4M9 9h6" strokeLinecap="round" />
     </svg>
   );
 }
-function MuleIcon() {
+export function MuleIcon({ className = 'h-4 w-4 text-gi-green' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-4 w-4 text-gi-green">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className={className}>
       <circle cx="6" cy="12" r="2" />
       <circle cx="18" cy="6" r="2" />
       <circle cx="18" cy="18" r="2" />
@@ -102,22 +121,22 @@ function MuleIcon() {
     </svg>
   );
 }
-function SalesforceIcon() {
+export function SalesforceIcon({ className = 'h-4 w-4 text-gi-green' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-4 w-4 text-gi-green">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className={className}>
       <path d="M7 14a4 4 0 0 1 0-8 4.5 4.5 0 0 1 8.5-1.5A4 4 0 1 1 17 14H7z" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
-function DataIcon() {
+export function DataIcon({ className = 'h-4 w-4 text-gi-green' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-4 w-4 text-gi-green">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className={className}>
       <ellipse cx="12" cy="5" rx="7" ry="3" />
       <path d="M5 5v6c0 1.7 3.1 3 7 3s7-1.3 7-3V5M5 11v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
-function renderServiceIcon(label: string) {
+export function renderServiceIcon(label: string) {
   const l = (label || '').toLowerCase();
   if (l.includes('agent') || l.includes('digital')) return <AiIcon />;
   if (l.includes('mule')) return <MuleIcon />;
@@ -214,10 +233,11 @@ export default function Header({
                   const item: MenuItem = rawItem as MenuItem;
                   const isServices = (item.label || '').toLowerCase().includes('services') || (item.uri ?? '').startsWith('/services');
                   const isSolutions = (item.label || '').toLowerCase().includes('solutions') || (item.uri ?? '').startsWith('/solutions');
+                  const isAbout = (item.label || '').toLowerCase().includes('about') || (item.uri ?? '').startsWith('/about');
                   const children = (item.childItems && item.childItems.nodes) ? item.childItems.nodes : [];
                   const mappedChildren = isServices ? children.map(c => ({ ...c, uri: toServicesAnchor(c.uri) })) : children;
-                  const hasChildren = isServices ? (mappedChildren.length > 0 || DEFAULT_SERVICES_CHILDREN.length > 0) : (isSolutions ? (mappedChildren.length > 0 || DEFAULT_SOLUTIONS_CHILDREN.length > 0) : mappedChildren.length > 0);
-                  const effectiveChildren = mappedChildren.length > 0 ? mappedChildren.map(c => ({ href: c.uri, title: c.label })) : (isServices ? DEFAULT_SERVICES_CHILDREN : (isSolutions ? DEFAULT_SOLUTIONS_CHILDREN : []));
+                  const hasChildren = isServices ? (mappedChildren.length > 0 || DEFAULT_SERVICES_CHILDREN.length > 0) : (isSolutions ? (mappedChildren.length > 0 || DEFAULT_SOLUTIONS_CHILDREN.length > 0) : (isAbout ? (mappedChildren.length > 0 || DEFAULT_ABOUT_CHILDREN.length > 0) : mappedChildren.length > 0));
+                  const effectiveChildren = mappedChildren.length > 0 ? mappedChildren.map(c => ({ href: c.uri, title: c.label })) : (isServices ? DEFAULT_SERVICES_CHILDREN : (isSolutions ? DEFAULT_SOLUTIONS_CHILDREN : (isAbout ? DEFAULT_ABOUT_CHILDREN : [])));
 
                   return (
                     <div
@@ -242,14 +262,14 @@ export default function Header({
                           transition={{ duration: 0.18, ease: 'easeOut' }}
                           className="absolute left-0 top-8 z-40"
                         >
-                          {(isServices || isSolutions) ? (
+                          {(isServices || isSolutions || isAbout) ? (
                             <div className="w-[720px] rounded-2xl bg-white p-4 ring-1 ring-gi-fog shadow-gi">
                               <ul className="grid grid-cols-2 gap-3">
                                 {effectiveChildren.slice(0,4).map((c) => (
                                   <li key={c.title}>
                                     <Link href={c.href} className="group flex items-start gap-3 rounded-md p-3 hover:bg-gi-fog/60">
                                       <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gi-green/15 ring-1 ring-gi-fog">
-                                        {isSolutions ? renderSolutionIcon(c.title) : (isServices ? renderServiceIcon(c.title) : <span className="h-4 w-4" />)}
+                                        {isSolutions ? renderSolutionIcon(c.title) : (isServices ? renderServiceIcon(c.title) : renderAboutIcon(c.title))}
                                       </span>
                                       <span className="min-w-0">
                                         <span className="block text-sm font-semibold text-gi-text">{c.title}</span>
@@ -281,8 +301,8 @@ export default function Header({
               </nav>
 
               <div className="hidden xl:flex items-center gap-3">
-                <Link href="#plan" className="btn-secondary">Get the 8-Week Plan</Link>
-                <Link href="#contact" className="btn-primary">Talk to an Expert</Link>
+                <Link href="/plan" className="btn-secondary">Get the 8-Week Plan</Link>
+                <Link href="/contact" className="btn-primary">Talk to an Expert</Link>
               </div>
               <div className="flex xl:hidden items-center">
                 <button
@@ -338,7 +358,7 @@ export default function Header({
               );
             })}
             <div className="mt-2 flex gap-2">
-              <Link href="#plan" className="btn-secondary flex-1" onClick={() => setOpenMobile(false)}>
+              <Link href="/plan" className="btn-secondary flex-1" onClick={() => setOpenMobile(false)}>
                 Get the 8-Week Plan
               </Link>
               <Link href="/contact" className="btn-primary flex-1" onClick={() => setOpenMobile(false)}>

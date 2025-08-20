@@ -18,10 +18,10 @@ export type FeaturedOffersProps = {
 
 const DEFAULT_HEADING = 'Your first win starts here';
 const DEFAULT_ITEMS: OfferItem[] = [
-  { title: 'AI & Digital Labor (Agentforce)', body: 'Launch agents with jobs, safe actions, and measurable KPIs.', cta: { label: 'Scope My First Agent', href: '#contact' } },
-  { title: 'MuleSoft Integration (AI-led)', body: 'Design the pipelines and events that let AI agents see, decide, and do.', cta: { label: 'Review My Integration Gaps', href: '#contact' }, flag: 'Flagship' },
-  { title: 'Salesforce Optimization', body: 'Make Salesforce the control room for both humans and agents.', cta: { label: 'Optimize My Org', href: '#contact' } },
-  { title: 'Data & Migrations', body: 'Build the trusted knowledge and real-time context your agents need.', cta: { label: 'Map My Data for AI', href: '#contact' } },
+  { title: 'AI & Digital Labor (Agentforce)', body: 'Launch agents with jobs, safe actions, and measurable KPIs.', cta: { label: 'Scope My First Agent', href: '/contact' } },
+  { title: 'MuleSoft Integration (AI-led)', body: 'Design the pipelines and events that let AI agents see, decide, and do.', cta: { label: 'Review My Integration Gaps', href: '/contact' }, flag: 'Flagship' },
+  { title: 'Salesforce Optimization', body: 'Make Salesforce the control room for both humans and agents.', cta: { label: 'Optimize My Org', href: '/contact' } },
+  { title: 'Data & Migrations', body: 'Build the trusted knowledge and real-time context your agents need.', cta: { label: 'Map My Data for AI', href: '/contact' } },
 ];
 
 export default function FeaturedOffers({ id, className, heading = DEFAULT_HEADING, items = DEFAULT_ITEMS }: FeaturedOffersProps) {
@@ -42,7 +42,7 @@ export default function FeaturedOffers({ id, className, heading = DEFAULT_HEADIN
         <div className="absolute right-[15%] bottom-[8%] h-[260px] w-[260px] rounded-full bg-gi-green opacity-[0.12] blur-[120px]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 py-24">
+      <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="mx-auto mb-8 h-px w-16 bg-gi-line" />
 
         <h2 className="text-center text-3xl md:text-4xl font-semibold text-gi-text tracking-tight text-balance">

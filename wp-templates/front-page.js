@@ -1,20 +1,24 @@
 import Head from "next/head";
+import dynamic from 'next/dynamic';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { SITE_DATA_QUERY } from "../queries/SiteSettingsQuery";
 import { HEADER_MENU_QUERY } from "../queries/MenuQueries";
 import { useQuery } from "@apollo/client";
 import { getNextStaticProps } from "@faustwp/core";
-import HeroCenterPro from "../components/HeroCenterPro";
+import HomepageHero from '../components/HomepageHero';
+import LogoTicker from '../components/LogoTicker';
 import TrustStrip from "../components/TrustStrip";
 import ValuePillars from "../components/ValuePillars";
-import FeaturedOffers from "../components/FeaturedOffers";
-import HowItWorksLinear from "../components/HowItWorksLinear";
+import OfferTiles from "../components/OfferTiles";
+import { AiIcon, MuleIcon, SalesforceIcon, DataIcon } from "../components/Header";
 import CustomerStoriesProof from "../components/CustomerStoriesProof";
 import LeadMagnetCTA from "../components/LeadMagnetCTA";
 import PreFooterCTA from "../components/PreFooterCTA";
 import { FRONT_PAGE_SECTIONS_QUERY, FRONT_PAGE_MIN_QUERY } from "../queries/SectionsQueries";
 import { renderSections } from "../lib/sectionRegistry";
+const BackgroundStarsCanvas = dynamic(() => import('../components/BackgroundStarsCanvas'), { ssr: false });
+
 
 const ENABLE_SECTIONS = process.env.NEXT_PUBLIC_ENABLE_WP_SECTIONS === "1";
 
@@ -31,6 +35,7 @@ export default function FrontPage(props) {
     nodes: [],
   };
   const { title: siteTitle, description: siteDescription } = siteData;
+  const effectiveSiteDescription = siteDescription || 'Turning AI into Actual Intelligence';
 
   const sectionsQuery = useQuery(ENABLE_SECTIONS ? FRONT_PAGE_SECTIONS_QUERY : FRONT_PAGE_MIN_QUERY, {
     variables: { uri: "/" },
@@ -41,12 +46,13 @@ export default function FrontPage(props) {
   return (
     <>
       <Head>
-        <title>{siteTitle}</title>
+        <title>{`${siteTitle} | ${effectiveSiteDescription}`}</title>
+        <meta name="description" content={effectiveSiteDescription} />
       </Head>
 
       <Header
         siteTitle={siteTitle}
-        siteDescription={siteDescription}
+        siteDescription={effectiveSiteDescription}
         menuItems={menuItems}
       />
 
@@ -55,36 +61,105 @@ export default function FrontPage(props) {
           renderSections(sections)
         ) : (
           <>
-            <HeroCenterPro />
-            <TrustStrip />
-            <ValuePillars />
-            <FeaturedOffers
-              heading="Our services"
+            <HomepageHero
+              titleLines={[
+                '2× Faster Delivery.',
+                'Offshore Economics.',
+                'Onshore Expertise.',
+              ]}
+              body="Launch your first AI-powered MuleSoft or Salesforce outcome in 8 weeks. Our AI-accelerated delivery cuts timelines in half—without sacrificing quality or price—so your team achieves more, faster."
+              primaryCta={{ label: 'Talk to an Expert', href: '/contact' }}
+              secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '/plan' }}
+              kpis={[
+                {label: 'First outcome in 8 weeks'},
+                {label: 'Delivery cycle time \u2193 50%'},
+                {label: 'Capacity freed without new headcount'}
+              ]}
+              showMedia={false}
+              mediaImage={{ src: '/logos/green-irony/Green-Irony-Logo.svg', alt: 'Green Irony services overview' }}
+            />
+            <LogoTicker
+              items={[
+                { src: '/logos/spirit.svg', alt: 'Spirit Airlines' },
+                { src: '/logos/unc-charlotte.svg', alt: 'UNC Charlotte' },
+                { src: '/logos/air-culinaire.png', alt: 'Air Culinaire' },
+                { src: '/logos/ccu_h.png', alt: 'CCU' },
+                { src: '/logos/college-hunks.png', alt: 'College Hunks' },
+                { src: '/logos/HIVC.png', alt: 'HIVC' },
+                { src: '/logos/Hotwire.svg', alt: 'Hotwire' },
+                { src: '/logos/logo-upc-insurance-story-e1729029847866.webp', alt: 'UPC' },
+                { src: '/logos/PODS-Logo.png', alt: 'PODS' },
+                { src: '/logos/rochelec.png', alt: 'Rochelec' },
+              ]}
+              speedSeconds={45}
+            />
+            <OfferTiles
+              className="mt-12 md:mt-16"
+              title="What we deliver"
               items={[
                 {
-                  title: 'MuleSoft Integration (AI-led)',
-                  body: 'Pipelines & events so agents can see, decide, and do.',
-                  cta: { label: 'Review My Integration Gaps', href: '/services#mulesoft' },
-                  flag: 'Flagship',
+                  title: 'MuleSoft Integration (AI‑led)',
+                  description: 'Pipelines & events so agents can see, decide, and do.',
+                  href: '/services#mulesoft',
+                  icon: <MuleIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
                   title: 'AI & Digital Labor (Agentforce)',
-                  body: 'Launch agents with jobs, safe actions, and KPIs.',
-                  cta: { label: 'Scope My First Agent', href: '/services#agentforce' },
+                  description: 'Launch agents with jobs, safe actions, and KPIs.',
+                  href: '/services#agentforce',
+                  icon: <AiIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
-                  title: 'Salesforce Optimization',
-                  body: 'Make Salesforce the control room for humans + agents.',
-                  cta: { label: 'Optimize My Org', href: '/services#salesforce' },
+                  title: 'Salesforce',
+                  description: 'Make Salesforce the control room for humans + agents.',
+                  href: '/services#salesforce',
+                  icon: <SalesforceIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
                   title: 'Data & Migrations',
-                  body: 'Trusted knowledge and real-time context for agents.',
-                  cta: { label: 'Map My Data for AI', href: '/services#data' },
-                },
+                  description: 'Trusted knowledge and real‑time context for agents.',
+                  href: '/services#data',
+                  icon: <DataIcon className="h-24 w-24 text-gi-green" />
+                }
               ]}
             />
-            <HowItWorksLinear />
+            <TrustStrip />
+            <ValuePillars
+              heading="From investment to impact — fast"
+              subhead="Most AI pilots stall because agents can’t see context, act safely, or scale. We combine integration-first architecture, AI-native agent design, and senior delivery to give you outcomes you can plan around."
+              items={[
+                { title: 'Deflection that scales', body: 'Agents surface answers and take safe actions to reduce live demand.', iconNode: (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                    <circle cx="12" cy="12" r="8" />
+                    <path d="M8 12h5l3-3" />
+                    <path d="M13 9v6" />
+                  </svg>
+                ) },
+                { title: 'Speed to value', body: 'AI‑accelerated MuleSoft delivery cuts cycle time in half; your first working agent in 8 weeks.', iconNode: (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                    <path d="M12 12l7-7" />
+                  </svg>
+                ) },
+                { title: 'Capacity unlocked', body: 'Free experts for strategic work while agents handle structured, repeatable demand.', iconNode: (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                    <circle cx="8" cy="8" r="3" />
+                    <path d="M2 22c1.8-3.6 4.8-6 8-6" />
+                    <circle cx="16" cy="12" r="3" />
+                    <path d="M10 22c1.8-3.6 4.8-6 8-6" />
+                  </svg>
+                ) },
+              ]}
+            />
+            {/* <HowItWorksLinear
+              heading="A lean path to your first AI outcome"
+              steps={[
+                { k: '01', title: 'Align', body: 'Pick the high‑impact workflow and define KPIs—deflection, cycle time, capacity.' },
+                { k: '02', title: 'Launch', body: 'AI‑accelerated integration + agent build; first working agent in ~8 weeks.' },
+                { k: '03', title: 'Measure', body: 'Track deflection lift, cycle‑time reduction, and capacity freed.' },
+                { k: '04', title: 'Scale', body: 'Expand to new workflows, add safe actions, and deepen automation.' },
+              ]}
+            /> */}
             <CustomerStoriesProof />
             <LeadMagnetCTA />
             <PreFooterCTA />

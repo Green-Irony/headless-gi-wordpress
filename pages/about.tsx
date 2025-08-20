@@ -2,6 +2,10 @@ import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HeroCenterPro from '../components/HeroCenterPro';
+import AccordionWithMedia from '../components/AccordionWithMedia';
+import OriginStoryShowcase from '../components/OriginStoryShowcase';
+import MissionBanner from '../components/MissionBanner';
+import HowWeWorkSerpentine from '../components/HowWeWorkSerpentine';
 import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../queries/SiteSettingsQuery';
@@ -31,64 +35,110 @@ const Page: any = function AboutPage(props: any) {
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
       <main>
         <HeroCenterPro
-          title="AI amplifies expertise—yours and ours"
-          body="We rebuilt consulting to deliver real business outcomes fast. By embedding agents into delivery and powering them with integrated systems, we give you predictable speed, capacity, and confidence without the usual overhead."
+          title="We’ve always moved fast. Now we move twice as fast."
+          body="Trusted since 2018 for enterprise‑grade Salesforce and MuleSoft delivery. Today, AI‑native—cutting timelines in half while keeping US‑based quality and predictability."
           primaryCta={{ label: 'Meet the Team', href: '#team' }}
-          secondaryCta={{ label: 'Start Your First Win', href: '#contact' }}
+          secondaryCta={{ label: 'Start Your First Win', href: '/contact' }}
           kpis={[{ label: '⚡ Faster delivery' }, { label: '⬇️ Deflection up' }, { label: '🧠 Capacity unlocked' }]}
           showMedia={false}
         />
 
         {/* Origin Story */}
-        <section className="mx-auto max-w-7xl px-6 py-12">
-          <div className="mx-auto mb-6 h-px w-16 bg-gi-line" />
-          <h2 className="text-2xl font-semibold text-gi-text">Our Origin Story</h2>
-          <p className="mt-3 max-w-4xl text-gi-gray">
-            Founded on the lessons of large-scale integration and delivery, Green Irony evolved from traditional consulting into an <strong>AI-native delivery engine</strong>. What used to take months to scope, integrate, and stabilize is now compressed into predictable eight-week first wins—thanks to agentic automation, senior-led architecture, and integration-first execution. The same operational rigor that powered major event-driven initiatives (like at Spirit Airlines) is now available without enterprise bloat.
-          </p>
-
-          <ul className="mt-6 grid list-disc gap-2 pl-6 text-gi-gray marker:text-gi-green/80">
-            <li>Built in 2016 with deep roots in middleware, MuleSoft, and Salesforce delivery.</li>
-            <li>Reimagined in 2025 as an AI-native firm where agents are part of the operating system—not an afterthought.</li>
-            <li>Combines “offshore economics with onshore expertise at the speed of AI.”</li>
-            <li>Focused on measurable business outcomes: faster delivery, deflection, capacity unlocked.</li>
-          </ul>
+        <section className="mx-auto max-w-7xl px-0 py-12">
+          <OriginStoryShowcase
+            title="Our Origin Story"
+            lead="Founded on the lessons of large-scale integration and delivery, Green Irony evolved from traditional consulting into an AI-native delivery engine. What used to take months to scope, integrate, and stabilize is now compressed into predictable eight-week first wins—thanks to agentic automation, senior-led architecture, and integration-first execution. The same operational rigor that powered major event-driven initiatives (like at Spirit Airlines) is now available without enterprise bloat."
+            milestones={[
+              {
+                k: '2016',
+                label: 'Roots',
+                title: 'Built on Salesforce',
+                body: 'Salesforce delivery at scale.',
+                impacts: ['Solutions that match business processes'],
+              },
+              {
+                k: '2018',
+                label: 'Roots',
+                title: 'Integration builds the backbone of a business',
+                body: 'MuleSoft connects the enterprise at the middleware.',
+                impacts: ['Event-driven foundations'],
+              },
+              {
+                k: '2024',
+                label: 'Pivot',
+                title: 'Reimagined as AI-native',
+                body: 'Agents embedded in delivery to compress time-to-value.',
+                impacts: ['Agent job design', 'Safe actions'],
+              },
+              {
+                k: 'Now',
+                label: 'Today',
+                title: 'Eight-week first wins',
+                body: 'Predictable outcomes: speed, deflection, capacity unlocked.',
+                impacts: ['½ delivery time', 'Deflection ↑', 'Capacity ↑'],
+              },
+            ]}
+            poster={{ imageSrc: '/images/accordion-sample.svg', imageAlt: 'Origin story visual', badge: 'AI‑Native' }}
+            showCredibilityRow={false}
+            initialMilestone={'Now'}
+            imageLeft={false}
+          />
         </section>
 
         {/* Mission */}
-        <section className="mx-auto max-w-7xl px-6 py-12">
-          <div className="mx-auto mb-6 h-px w-16 bg-gi-line" />
-          <h2 className="text-2xl font-semibold text-gi-text">Mission</h2>
-          <p className="mt-3 max-w-4xl text-gi-gray">
-            <strong>To make enterprise-grade AI and integration accessible to organizations of all sizes</strong> by delivering predictable, scalable business outcomes through agent-native digital labor.
-          </p>
-        </section>
+        <MissionBanner
+          eyebrow="Our Company Mission"
+          headline="To make enterprise-grade AI and integration accessible to organizations of all sizes by delivering predictable, scalable business outcomes through agent-native digital labor."
+          highlight={{ text: 'accessible to organizations of all sizes' }}
+          promises={[
+            'Eight-week first wins',
+            'Integration before intelligence',
+            'Safe actions, measurable outcomes',
+          ]}
+          //primaryCta={{ label: 'Plan my first win', href: '/contact' }}
+          //secondaryCta={{ label: 'See how we deliver', href: '/services' }}
+          badge="AI‑Native"
+          background={{ pattern: 'curves', intensity: 1 }}
+          align="center"
+        />
 
         {/* Differentiators */}
         <section className="mx-auto max-w-7xl px-6 py-12">
           <div className="mx-auto mb-6 h-px w-16 bg-gi-line" />
-          <h2 className="text-2xl font-semibold text-gi-text">What Makes Us Different</h2>
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <div className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi">
-              <h3 className="font-semibold text-gi-text">AI-Native from Day One</h3>
-              <p className="mt-1 text-gi-gray">Agents aren’t bolt-ons—they’re embedded in scoping, execution, and iteration. That means faster pilots, safer actions, and clearer expansion paths.</p>
-            </div>
-            <div className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi">
-              <h3 className="font-semibold text-gi-text">Integration as the Engine</h3>
-              <p className="mt-1 text-gi-gray">We don’t add AI on top of broken systems. We connect the right data and events first so agents can see, decide, and act with real impact.</p>
-            </div>
-            <div className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi">
-              <h3 className="font-semibold text-gi-text">Senior-Led, Amplified by AI</h3>
-              <p className="mt-1 text-gi-gray">Experienced architects guide every engagement, using AI to accelerate delivery—delivering the leverage of a larger team without dilution.</p>
-            </div>
-            <div className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi">
-              <h3 className="font-semibold text-gi-text">Outcome Orientation</h3>
-              <p className="mt-1 text-gi-gray">Every project starts with the business result (speed, deflection, capacity) and works backward to the technical design.</p>
-            </div>
-            <div className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi md:col-span-2">
-              <h3 className="font-semibold text-gi-text">Lean Partner Mentality</h3>
-              <p className="mt-1 text-gi-gray">We act as embedded extensions, especially for resource-constrained SMBs and nimble enterprise initiatives—prioritizing high-leverage wins over bloated roadmaps.</p>
-            </div>
+          <div className="mt-6">
+            <AccordionWithMedia
+              heading="What makes us different"
+              imageSrc="/images/accordion-sample.svg"
+              imageAlt="Illustration of Green Irony services"
+              imageRight={false}
+              items={[
+                {
+                  title: 'AI-Native from Day One',
+                  body:
+                    "Agents aren’t bolt-ons—they’re embedded in scoping, execution, and iteration. That means faster pilots, safer actions, and clearer expansion paths.",
+                },
+                {
+                  title: 'Integration as the Engine',
+                  body:
+                    'We don’t add AI on top of broken systems. We connect the right data and events first so agents can see, decide, and act with real impact.',
+                },
+                {
+                  title: 'Senior-Led, Amplified by AI',
+                  body:
+                    'Experienced architects guide every engagement, using AI to accelerate delivery—delivering the leverage of a larger team without dilution.',
+                },
+                {
+                  title: 'Outcome Orientation',
+                  body:
+                    'Every project starts with the business result (speed, deflection, capacity) and works backward to the technical design.',
+                },
+                {
+                  title: 'Lean Partner Mentality',
+                  body:
+                    'We act as embedded extensions, especially for resource-constrained SMBs and nimble enterprise initiatives—prioritizing high-leverage wins over bloated roadmaps.',
+                },
+              ]}
+            />
           </div>
         </section>
 
@@ -106,27 +156,21 @@ const Page: any = function AboutPage(props: any) {
           <p className="mt-4 text-sm text-gi-gray">Optional badges/credentials to display: Salesforce partner expertise, MuleSoft delivery track record, case study logos, certifications.</p>
         </section>
 
-        {/* Values */}
-        <section className="mx-auto max-w-7xl px-6 py-12">
-          <div className="mx-auto mb-6 h-px w-16 bg-gi-line" />
-          <h2 className="text-2xl font-semibold text-gi-text">Values</h2>
-          <ul className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-            <li className="rounded-lg border border-gi-fog bg-white p-4">Outcome over activity</li>
-            <li className="rounded-lg border border-gi-fog bg-white p-4">Speed with reliability</li>
-            <li className="rounded-lg border border-gi-fog bg-white p-4">Transparency in automation</li>
-            <li className="rounded-lg border border-gi-fog bg-white p-4">Integration before intelligence</li>
-            <li className="rounded-lg border border-gi-fog bg-white p-4">Human + agent collaboration</li>
-            <li className="rounded-lg border border-gi-fog bg-white p-4">Partner, not vendor</li>
-          </ul>
-        </section>
-
         {/* How we work */}
-        <section className="mx-auto max-w-7xl px-6 py-12">
-          <div className="mx-auto mb-6 h-px w-16 bg-gi-line" />
-          <h2 className="text-2xl font-semibold text-gi-text">How We Work</h2>
-          <h3 className="mt-2 text-lg font-semibold text-gi-text">Align → Prove → Scale</h3>
-          <p className="mt-2 max-w-4xl text-gi-gray">We begin with a focused first win, build an AI-native system that works, measure real impact, and then expand the agent portfolio—never shipping uncertainty.</p>
-        </section>
+        <HowWeWorkSerpentine
+          title="How We Work"
+          subhead="Align → Prove → Scale"
+          steps={[
+            { k: '01', title: 'Align', caption: 'Choose the first win and KPIs' },
+            { k: '02', title: 'Blueprint', caption: 'Minimal integrations for agent action' },
+            { k: '03', title: 'Build', caption: 'Pilot with safe actions' },
+            { k: '04', title: 'Prove', caption: 'Measure speed, deflection, capacity' },
+            { k: '05', title: 'Scale', caption: 'Adopt and expand predictably' },
+          ]}
+          variant="serpentine"
+          showNumbers
+          progressIndex={null}
+        />
 
         {/* FAQ */}
         <section className="mx-auto max-w-7xl px-6 py-12">

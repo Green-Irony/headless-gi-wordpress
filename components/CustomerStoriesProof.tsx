@@ -24,7 +24,7 @@ const DEFAULT_ITEMS: StoryItem[] = [
   { brand: 'Spirit Airlines', title: 'Event-driven integration powering operational agentic workflows', blurb: 'How event-driven MuleSoft work enabled real-time ops and agent actions.', kpis: ['⚡ Delivery cycle time ↓ 50%', '⬇️ Deflection rate up', '🧠 Capacity freed'], posterUrl: '/logos/spirit.svg', videoId: 'SPIRIT_VIDEO_ID' },
   { brand: 'UNC Charlotte', title: '24/7 deflection and capacity reallocated to strategic advising', blurb: 'Persistent agents improve student engagement and reduce live load.', kpis: ['⬇️ Deflection rate up', '⚡ Faster time-to-value', '🧠 Capacity freed'], posterUrl: '/logos/unc-charlotte.svg', videoId: 'UNC_VIDEO_ID' },
 ];
-const DEFAULT_CTA = { label: 'Start Your Success Plan', href: '#contact' };
+const DEFAULT_CTA = { label: 'Start Your Success Plan', href: '/contact' };
 
 export default function CustomerStoriesProof({ id, className, heading = DEFAULT_HEADING, items = DEFAULT_ITEMS, cta = DEFAULT_CTA }: CustomerStoriesProps) {
   const prefersReduced = useReducedMotion();
@@ -34,7 +34,7 @@ export default function CustomerStoriesProof({ id, className, heading = DEFAULT_
   return (
     <m.section
       id={id}
-      className={`relative isolate bg-white ${className ?? ''}`}
+      className={`relative isolate ${className ?? ''}`}
       initial={{ opacity: 0, y: enterY }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -45,7 +45,7 @@ export default function CustomerStoriesProof({ id, className, heading = DEFAULT_
         <div className="absolute right-[12%] top-[24%] h-[260px] w-[260px] rounded-full bg-gi-pink/20 opacity-[0.12] blur-[120px]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 py-24">
+      <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="mx-auto mb-8 h-px w-16 bg-gi-line" />
 
         <h2 className="text-center text-3xl md:text-4xl font-semibold text-gi-text tracking-tight text-balance">

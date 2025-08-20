@@ -9,7 +9,7 @@ export default function LogoTicker({ items, speedSeconds = 40, className }: { it
 	const duration = `${speedSeconds}s`;
 
 	return (
-		<section className={`overflow-hidden bg-white ${className ?? ''}`} aria-label="Customer logos">
+		<section className={`overflow-hidden ${className ?? ''}`} aria-label="Customer logos">
 			<div className="mx-auto max-w-7xl px-6 py-8">
 				<div>
 					<div className="gi-marquee flex items-center gap-16 md:gap-24 whitespace-nowrap will-change-transform" style={{ animationDuration: duration }}>

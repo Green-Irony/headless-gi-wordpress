@@ -1,8 +1,18 @@
 'use client';
 import { motion as m, useReducedMotion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
-export type PillarItem = { title: string; body: string; icon?: string; accentStrength?: number };
+export type PillarItem = {
+  title: string;
+  body: string;
+  /** Optional: pass a React node (e.g., inline SVG) to render inside the green circle */
+  iconNode?: React.ReactNode;
+  /** Optional: path to an image (preferably a white SVG). Rendered centered in the green circle */
+  iconSrc?: string;
+  iconAlt?: string;
+  accentStrength?: number;
+};
 export type ValuePillarsProps = {
   id?: string;
   className?: string;
@@ -11,12 +21,12 @@ export type ValuePillarsProps = {
   items?: PillarItem[];
 };
 
-const DEFAULT_HEADING = 'From promise to predictable impact';
+const DEFAULT_HEADING = 'From investment to impact — fast';
 const DEFAULT_SUBHEAD = 'Most AI pilots stall because agents can’t see context, act safely, or scale. We combine integration-first architecture, AI-native agent design, and senior delivery to give you outcomes you can plan around.';
 const DEFAULT_ITEMS: PillarItem[] = [
-  { title: 'Deflection that scales', body: 'Automate routine requests with agents that surface answers and take safe actions—reducing load on your live teams.' },
-  { title: 'Speed to value', body: 'AI-infused MuleSoft delivery cuts cycle time in half; your first working agent in eight weeks.' },
-  { title: 'Capacity unlocked', body: 'Free your experts for strategic work while agents handle structured, repeatable demand.' },
+  { title: 'Deflection that scales', body: 'Agents surface answers and take safe actions to reduce live demand.' },
+  { title: 'Speed to value', body: 'AI‑accelerated MuleSoft delivery cuts cycle time in half; your first working agent in 8 weeks.' },
+  { title: 'Capacity unlocked', body: 'Free experts for strategic work while agents handle structured, repeatable demand.' },
 ];
 
 export default function ValuePillars({ id, className, heading = DEFAULT_HEADING, subhead = DEFAULT_SUBHEAD, items = DEFAULT_ITEMS }: ValuePillarsProps) {
@@ -66,7 +76,7 @@ export default function ValuePillars({ id, className, heading = DEFAULT_HEADING,
         <div className="absolute left-[20%] top-[20%] h-[280px] w-[280px] rounded-full bg-gi-pink/20 opacity-[0.14] blur-[120px]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 py-24">
+      <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="mx-auto mb-8 h-px w-16 bg-gi-line" />
 
         <h2 className="text-center text-3xl md:text-4xl font-semibold text-gi-text tracking-tight text-balance">
@@ -85,7 +95,7 @@ export default function ValuePillars({ id, className, heading = DEFAULT_HEADING,
           viewport={{ once: true, amount: 0.2 }}
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.06 } } }}
         >
-          {items.map(({ title, body }) => (
+          {items.map(({ title, body, iconNode, iconSrc, iconAlt }) => (
             <m.li
               key={title}
               className="relative overflow-visible h-full"
@@ -96,10 +106,20 @@ export default function ValuePillars({ id, className, heading = DEFAULT_HEADING,
             >
               <div className="h-full rounded-2xl bg-gradient-to-r from-gi-green/35 via-gi-pink/20 to-gi-green/35 p-[1px]">
                 <div className="vp-card flex h-full flex-col rounded-[16px] bg-white p-6 shadow-gi transition-transform duration-200 will-change-transform group-hover:-translate-y-0.5" style={cardMinHeight ? { minHeight: cardMinHeight } : undefined}>
-                  <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-gi-green/15 ring-1 ring-gi-fog">
-                    <span className="h-5 w-5" />
+                  <div className="mb-2 flex items-center gap-3">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gi-green/50 ring-1 ring-gi-fog">
+                      {iconSrc ? (
+                        <Image src={iconSrc} alt={iconAlt ?? ''} width={20} height={20} className="h-5 w-5 object-contain" />
+                      ) : iconNode && React.isValidElement(iconNode) ? (
+                        <span className="text-white">
+                          {React.cloneElement(iconNode as any, { className: 'h-5 w-5 text-white' })}
+                        </span>
+                      ) : (
+                        <span className="h-5 w-5" />
+                      )}
+                    </div>
+                    <h3 className="text-base font-semibold text-gi-text">{title}</h3>
                   </div>
-                  <h3 className="text-base font-semibold text-gi-text">{title}</h3>
                   <p className="mt-2 text-sm text-gi-gray">{body}</p>
                   <div className="mt-auto" />
                 </div>

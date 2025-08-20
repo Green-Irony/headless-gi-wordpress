@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="800" height="600" fill="url(#bg)"/>
+
+  <!-- Card background -->
+  <rect x="120" y="110" width="560" height="380" rx="16" fill="#FFFFFF" stroke="#E5E7EB"/>
+
+  <!-- Header bar -->
+  <rect x="120" y="110" width="560" height="56" rx="16" fill="#1DB954"/>
+  <text x="150" y="146" font-family="Inter, ui-sans-serif, system-ui" font-size="22" fill="#FFFFFF" font-weight="700">Green Irony</text>
+
+  <!-- Placeholder rows -->
+  <rect x="160" y="200" width="480" height="16" rx="4" fill="#D1FAE5"/>
+  <rect x="160" y="230" width="420" height="12" rx="4" fill="#E5E7EB"/>
+
+  <rect x="160" y="270" width="480" height="16" rx="4" fill="#BBF7D0"/>
+  <rect x="160" y="300" width="420" height="12" rx="4" fill="#E5E7EB"/>
+
+  <rect x="160" y="340" width="480" height="16" rx="4" fill="#86EFAC"/>
+  <rect x="160" y="370" width="420" height="12" rx="4" fill="#E5E7EB"/>
+
+  <rect x="160" y="410" width="320" height="16" rx="4" fill="#4ADE80"/>
+  <rect x="160" y="440" width="420" height="12" rx="4" fill="#E5E7EB"/>
+
+  <!-- Badge -->
+  <rect x="560" y="132" width="100" height="28" rx="14" fill="#0EA5E9"/>
+  <text x="610" y="151" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui" font-size="12" fill="#FFFFFF" font-weight="700">AI-Native</text>
+
+  <!-- Logo placeholder -->
+  <circle cx="132" cy="138" r="8" fill="#FFFFFF"/>
+  <circle cx="150" cy="138" r="8" fill="#BBF7D0"/>
+</svg>
