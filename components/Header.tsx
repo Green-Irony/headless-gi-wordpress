@@ -23,10 +23,10 @@ const FALLBACK_NAV: Array<{ label: string; href: string }> = [
 ];
 
 const DEFAULT_SERVICES_CHILDREN = [
-  { href: '/services#agentforce', title: 'AI & Digital Labor', desc: 'Jobs, safe actions, and KPIs.' },
-  { href: '/services#mulesoft', title: 'MuleSoft Integration (AI-led)', desc: 'Pipelines & events for agents.' },
-  { href: '/services#salesforce', title: 'Salesforce Optimization', desc: 'Control room for humans + agents.' },
-  { href: '/services#data', title: 'Data & Migrations', desc: 'Trusted knowledge and real-time context.' },
+  { href: '/services/agentforce', title: 'AI & Digital Labor', desc: 'Jobs, safe actions, and KPIs.' },
+  { href: '/services/mulesoft', title: 'MuleSoft Integration (AI-led)', desc: 'Pipelines & events for agents.' },
+  { href: '/services/salesforce', title: 'Salesforce Optimization', desc: 'Control room for humans + agents.' },
+  { href: '/services/data', title: 'Data & Migrations', desc: 'Trusted knowledge and real-time context.' },
 ];
 
 // Default Solutions submenu links if WP is not populated
@@ -44,10 +44,9 @@ const DEFAULT_ABOUT_CHILDREN = [
 function toServicesAnchor(href: string): string {
   try {
     if (!href) return href;
-    if (href.startsWith('/services#')) return href;
-    if (href.startsWith('/services/')) {
-      const seg = href.split('/')[2] || '';
-      if (['agentforce', 'mulesoft', 'salesforce', 'data'].includes(seg)) return `/services#${seg}`;
+    if (href.startsWith('/services#')) {
+      const seg = href.split('#')[1] || '';
+      if (['agentforce', 'mulesoft', 'salesforce', 'data'].includes(seg)) return `/services/${seg}`;
     }
     return href;
   } catch {
@@ -246,9 +245,15 @@ export default function Header({
                       onMouseEnter={() => { clearCloseTimer(); setOpenDesktopIdx(idx); }}
                       onMouseLeave={() => scheduleClose(180)}
                     >
-                      <Link href={item.uri} className="relative px-1 text-sm font-medium text-gi-navy hover:text-gi-text">
-                        {item.label}
-                      </Link>
+                      {isServices ? (
+                        <span className="relative px-1 text-sm font-medium text-gi-navy cursor-default" aria-disabled="true">
+                          {item.label}
+                        </span>
+                      ) : (
+                        <Link href={item.uri} className="relative px-1 text-sm font-medium text-gi-navy hover:text-gi-text">
+                          {item.label}
+                        </Link>
+                      )}
                       {hasChildren && (
                         <m.div
                           onMouseEnter={clearCloseTimer}
@@ -340,9 +345,15 @@ export default function Header({
 
               return (
                 <div key={item.id || item.label} className="rounded-md">
-                  <Link href={item.uri} className="block rounded-md px-2 py-2 text-sm font-medium text-gi-text hover:bg-gi-fog/60" onClick={() => setOpenMobile(false)}>
-                    {item.label}
-                  </Link>
+                  {isServices ? (
+                    <span className="block rounded-md px-2 py-2 text-sm font-medium text-gi-text cursor-default" aria-disabled="true">
+                      {item.label}
+                    </span>
+                  ) : (
+                    <Link href={item.uri} className="block rounded-md px-2 py-2 text-sm font-medium text-gi-text hover:bg-gi-fog/60" onClick={() => setOpenMobile(false)}>
+                      {item.label}
+                    </Link>
+                  )}
                   {effectiveChildren.length > 0 && (
                     <ul className="ml-2 border-l border-gi-fog pl-2">
                       {effectiveChildren.map((c) => (

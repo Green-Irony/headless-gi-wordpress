@@ -101,25 +101,25 @@ export default function FrontPage(props) {
                 {
                   title: 'MuleSoft Integration (AI‑led)',
                   description: 'API‑led, event‑driven integration so agents can see, decide, and do.',
-                  href: '/services#mulesoft',
+                  href: '/services/mulesoft',
                   icon: <MuleIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
                   title: 'AI & Digital Labor (Agentforce)',
                   description: 'Launch agents with clear jobs, safe actions, and measurable KPIs.',
-                  href: '/services#agentforce',
+                  href: '/services/agentforce',
                   icon: <AiIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
                   title: 'Salesforce (AI‑led)',
                   description: 'Make Salesforce the control room for humans + agents.',
-                  href: '/services#salesforce',
+                  href: '/services/salesforce',
                   icon: <SalesforceIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
                   title: 'Data & Migrations',
                   description: 'Seamless platform migrations, trusted data, and real-time context for reliable agent and human decisions.',
-                  href: '/services#data',
+                  href: '/services/data',
                   icon: <DataIcon className="h-24 w-24 text-gi-green" />
                 }
               ]}

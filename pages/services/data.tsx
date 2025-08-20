@@ -5,6 +5,9 @@ import HeroCenterPro from '../../components/HeroCenterPro';
 import HowItWorksLinear from '../../components/HowItWorksLinear';
 import ValuePillars from '../../components/ValuePillars';
 import PreFooterCTA from '../../components/PreFooterCTA';
+import HeroSimple from '../../components/HeroSimple';
+import DeliverablesWheel from '../../components/DeliverablesWheel';
+import WhyUsBanner from '../../components/WhyUsBanner';
 import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../../queries/SiteSettingsQuery';
@@ -30,36 +33,44 @@ const Page: any = function DataMigrationsPage(props: any) {
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
 
       <main>
-        <HeroCenterPro
-          title="Data & Migrations"
-          body="Trusted knowledge and real-time context for agents—so decisions and actions are reliable."
-          primaryCta={{ label: 'Map My Data for AI', href: '/contact' }}
-          secondaryCta={{ label: 'See how it works', href: '#how' }}
+        <HeroSimple
+          title="Data & Migrations, done right"
+          subhead="Seamless platform migrations and trusted data pipelines so your teams (and future agents) make reliable, real-time decisions—without surprises or downtime."
         />
-
-        <ValuePillars
-          heading="Why data first"
-          subhead="Clean, connected data ensures agents can reason and act with confidence."
+        <DeliverablesWheel
+          heading="What we deliver"
           items={[
-            { title: 'Trusted Knowledge', body: 'Model and govern domains critical to decisions.' },
-            { title: 'Real-time Context', body: 'Stream events and updates for situational awareness.' },
-            { title: 'Migration Expertise', body: 'Move and modernize safely to accelerate value.' },
+            { title: 'Migration strategy & cutover plan', body: 'Risk‑based sequencing, dry runs, and rollback plans so go‑live is smooth and predictable.' },
+            { title: 'Data quality & reconciliation', body: 'Profiling, cleansing, and deduplication with reconciled counts—so stakeholders trust the numbers on day one.' },
+            { title: 'Composable pipelines & events', body: 'Standards‑based, event‑enriched pipelines that keep systems in sync and make downstream automation simpler.' },
+            { title: 'Security, governance & lineage', body: 'Access controls, PII handling, and lineage tracking aligned to your compliance requirements.' },
           ]}
         />
-
         <HowItWorksLinear
-          id="how"
-          heading="Landing data value"
+          id="how-data"
+          heading="From messy data to dependable decisions — fast"
           steps={[
-            { k: '01', title: 'Assess', body: 'Inventory systems, data quality, and gaps.' },
-            { k: '02', title: 'Model & Migrate', body: 'Create governed models and move what matters.' },
-            { k: '03', title: 'Connect', body: 'Stream events; expose real-time context.' },
-            { k: '04', title: 'Operationalize', body: 'Feed agents and dashboards with trusted truth.' },
+            { k: '01', title: 'Minimal downtime', body: 'Migration cutovers planned and tested—so teams stay productive while systems switch over.' },
+            { k: '02', title: 'Trusted from day one', body: 'Clean, reconciled datasets with validation checks that give leaders confidence in every report.' },
+            { k: '03', title: 'Ready for real time', body: 'Event‑driven pipelines that keep data current across systems—and set you up for agent‑readiness when you’re ready.' },
           ]}
           cta={{ label: 'Map My Data for AI', href: '/contact' }}
+          leadInBeforeButton="Need your data clean, migrated, and trusted—without chaos? Let’s plan the fastest safe path to go‑live."
         />
-
-        <PreFooterCTA />
+        <WhyUsBanner
+          bullets={[
+            'AI‑accelerated delivery: Mapping, transformation, and validation move faster without sacrificing accuracy.',
+            'Senior‑led execution: US‑based architects who’ve handled complex, high‑risk migrations.',
+            'Composable patterns: Reusable pipelines and standards that reduce rework and cost.',
+            'Predictable outcomes: Clear plans, visible checkpoints, and no‑surprise go‑lives.',
+          ]}
+        />
+        <PreFooterCTA
+          title="Map your data for AI"
+          body="We’ll define trusted sources, freshness guarantees, and event patterns to power safe agent action."
+          primaryCta={{ label: 'Start a data blueprint', href: '/contact' }}
+          secondaryCta={{ label: 'See migration playbook', href: '/plan' }}
+        />
       </main>
 
       <Footer />

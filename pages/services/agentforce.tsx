@@ -1,9 +1,10 @@
 import Head from 'next/head';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import HeroCenterPro from '../../components/HeroCenterPro';
+import HeroSimple from '../../components/HeroSimple';
+import DeliverablesWheel from '../../components/DeliverablesWheel';
 import HowItWorksLinear from '../../components/HowItWorksLinear';
-import ValuePillars from '../../components/ValuePillars';
+import WhyUsBanner from '../../components/WhyUsBanner';
 import PreFooterCTA from '../../components/PreFooterCTA';
 import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
@@ -30,36 +31,47 @@ const Page: any = function AgentforcePage(props: any) {
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
 
       <main>
-        <HeroCenterPro
-          title="AI & Digital Labor (Agentforce)"
-          body="Launch agents with jobs, safe actions, and KPIs—designed to deliver measurable outcomes in ~8 weeks."
-          primaryCta={{ label: 'Plan my first win', href: '/contact' }}
-          secondaryCta={{ label: 'See how it works', href: '#how' }}
+        <HeroSimple
+          title="AI agents that work—right from the start"
+          subhead="Whether it’s your first agent or your next ten, we design Salesforce‑native agents with clear jobs, safe actions, and measurable KPIs. Delivered by US‑based experts using AI‑accelerated methods, you’ll see value twice as fast—and scale with confidence."
         />
-
-        <ValuePillars
-          heading="Why Agentforce"
-          subhead="Integrate agents with your real workflows to deflect demand, reduce cycle time, and free capacity."
+        <DeliverablesWheel
+          heading="What we deliver"
           items={[
-            { title: 'Jobs + Safe Actions', body: 'Agents that can take real actions in your systems—safely.' },
-            { title: 'Integration-led', body: 'Event-driven pipelines so agents can see, decide, and do.' },
-            { title: 'Measured Outcomes', body: 'KPIs baked in: deflection, cycle time, capacity.' },
+            { title: 'Use-case selection & KPI definition', body: 'Identify the highest‑ROI workflow and define success metrics (deflection, cycle time, capacity uplift).' },
+            { title: 'Knowledge & data architecture', body: 'Give agents a reliable source of truth with retrieval layers, freshness guarantees, and actionable context.' },
+            { title: 'Safe action design', body: 'Build guardrails, approvals, and fallback behaviors so agent actions are always trustworthy.' },
+            { title: 'Pilot build & launch', body: 'Deliver an end‑to‑end working agent with only the integrations needed to prove measurable value fast.' },
+            { title: 'Adoption & iteration plan', body: 'Align stakeholders, close the feedback loop, and expand with confidence—each step tied to measurable outcomes.' },
+            { title: 'Scalability roadmap', body: 'Move from a single pilot to enterprise‑wide digital labor with a step‑by‑step plan to scale agents safely and predictably across teams.' },
           ]}
         />
-
         <HowItWorksLinear
-          id="how"
-          heading="How Agentforce lands value"
+          id="how-agentforce"
+          heading="Outcome promise"
+          subhead="In 8 weeks, you’ll have a live Salesforce‑native agent delivering measurable results—deflecting demand, freeing capacity, and proving the ROI of digital labor."
           steps={[
-            { k: '01', title: 'Align', body: 'Pick the workflow, define KPIs, map actions.' },
-            { k: '02', title: 'Launch', body: 'Integration-first build; working agent in ~8 weeks.' },
-            { k: '03', title: 'Measure', body: 'Scorecard for deflection, cycle time, capacity.' },
-            { k: '04', title: 'Scale', body: 'Expand to new workflows; add safe actions.' },
+            { k: '01', title: 'Working agent in 8 weeks', body: 'Delivers a clear, business-valued outcome.' },
+            { k: '02', title: 'Automation coverage', body: 'Focus on repetitive, structured work to maximize impact.' },
+            { k: '03', title: 'Capacity freed', body: 'Shift routine effort to agents while keeping humans in the loop for escalation.' },
           ]}
           cta={{ label: 'Plan my first win', href: '/contact' }}
         />
-
-        <PreFooterCTA />
+        <WhyUsBanner
+          //body="We orchestrate agents as real operators—job definitions, safe actions, and KPIs—so the first win lands quickly and scales predictably."
+          bullets={[
+            'Proven expertise: Enterprise‑grade Salesforce and MuleSoft partner since 2016.',
+            'AI‑native methods: Every step accelerated with AI for 2× faster delivery.',
+            'US‑based senior talent: Offshore‑competitive economics without the tradeoffs.',
+            'Predictable outcomes: Scope, build, and go‑live you can plan around.',
+          ]}
+        />
+        <PreFooterCTA
+          title="Plan your first agent win"
+          body="Bring a workflow, we’ll shape the job, safe actions, and KPIs to launch in ~8 weeks."
+          primaryCta={{ label: 'Scope My First Agent', href: '/contact' }}
+          secondaryCta={{ label: 'Get the 8-Week Plan', href: '/plan' }}
+        />
       </main>
 
       <Footer />

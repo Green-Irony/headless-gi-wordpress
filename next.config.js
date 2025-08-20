@@ -26,4 +26,9 @@ module.exports = withFaust({
     ],
   },
   trailingSlash: true,
+  async redirects() {
+    return [
+      { source: '/services', destination: '/services/agentforce', permanent: true },
+    ];
+  },
 });
