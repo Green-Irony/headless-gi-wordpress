@@ -7,6 +7,7 @@ import OriginStoryShowcase from '../components/OriginStoryShowcase';
 import MissionBanner from '../components/MissionBanner';
 import HowWeWorkSerpentine from '../components/HowWeWorkSerpentine';
 import { useQuery } from '@apollo/client';
+import FaqSimple from '../components/FaqSimple';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../queries/SiteSettingsQuery';
 import { HEADER_MENU_QUERY } from '../queries/MenuQueries';
@@ -36,9 +37,9 @@ const Page: any = function AboutPage(props: any) {
       <main>
         <HeroCenterPro
           title="We’ve always moved fast. Now we move twice as fast."
-          body="Trusted since 2018 for enterprise‑grade Salesforce and MuleSoft delivery. Today, AI‑native—cutting timelines in half while keeping US‑based quality and predictability."
-          primaryCta={{ label: 'Meet the Team', href: '#team' }}
-          secondaryCta={{ label: 'Start Your First Win', href: '/contact' }}
+          body="Trusted since 2016 for enterprise‑grade Salesforce and MuleSoft delivery. Today, we’re AI‑native—cutting timelines in half while keeping US‑based quality and predictability."
+          primaryCta={{ label: 'Start Your First Win', href: '/contact' }}
+          secondaryCta={{ label: 'Explore Careers', href: '/careers' }}
           kpis={[{ label: '⚡ Faster delivery' }, { label: '⬇️ Deflection up' }, { label: '🧠 Capacity unlocked' }]}
           showMedia={false}
         />
@@ -47,34 +48,34 @@ const Page: any = function AboutPage(props: any) {
         <section className="mx-auto max-w-7xl px-0 py-12">
           <OriginStoryShowcase
             title="Our Origin Story"
-            lead="Founded on the lessons of large-scale integration and delivery, Green Irony evolved from traditional consulting into an AI-native delivery engine. What used to take months to scope, integrate, and stabilize is now compressed into predictable eight-week first wins—thanks to agentic automation, senior-led architecture, and integration-first execution. The same operational rigor that powered major event-driven initiatives (like at Spirit Airlines) is now available without enterprise bloat."
+            lead="We started as senior Salesforce and integration architects who cared about outcomes over headcount. As platforms grew more powerful and projects more complex, we rebuilt our delivery engine around AI. What used to take months to scope and stabilize now turns into predictable wins in weeks—thanks to senior-led architecture, integration-first execution, and AI accelerating every step from discovery to build."
             milestones={[
               {
                 k: '2016',
                 label: 'Roots',
                 title: 'Built on Salesforce',
-                body: 'Salesforce delivery at scale.',
+                body: 'Early implementations focused on quality, adoption, and scale.',
                 impacts: ['Solutions that match business processes'],
               },
               {
                 k: '2018',
                 label: 'Roots',
-                title: 'Integration builds the backbone of a business',
-                body: 'MuleSoft connects the enterprise at the middleware.',
+                title: 'Integration becomes the backbone',
+                body: 'MuleSoft unlocks composable, event-driven delivery.',
                 impacts: ['Event-driven foundations'],
               },
               {
                 k: '2024',
                 label: 'Pivot',
                 title: 'Reimagined as AI-native',
-                body: 'Agents embedded in delivery to compress time-to-value.',
+                body: 'Every phase—discovery, design, delivery—moves 2× faster.',
                 impacts: ['Agent job design', 'Safe actions'],
               },
               {
                 k: 'Now',
                 label: 'Today',
-                title: 'Eight-week first wins',
-                body: 'Predictable outcomes: speed, deflection, capacity unlocked.',
+                title: 'Wins in weeks',
+                body: 'Go live in as little as 3 weeks for new integrations and agents—without sacrificing reliability.',
                 impacts: ['½ delivery time', 'Deflection ↑', 'Capacity ↑'],
               },
             ]}
@@ -88,8 +89,8 @@ const Page: any = function AboutPage(props: any) {
         {/* Mission */}
         <MissionBanner
           eyebrow="Our Company Mission"
-          headline="To make enterprise-grade AI and integration accessible to organizations of all sizes by delivering predictable, scalable business outcomes through agent-native digital labor."
-          highlight={{ text: 'accessible to organizations of all sizes' }}
+          headline="Help organizations realize transformative value by embedding AI into every stage of their integration and Salesforce journey—so teams move faster, decisions get smarter, and outcomes are predictable."
+          highlight={null}
           promises={[
             'Eight-week first wins',
             'Integration before intelligence',
@@ -142,79 +143,32 @@ const Page: any = function AboutPage(props: any) {
           </div>
         </section>
 
-        {/* Team snapshot */}
-        <section id="team" className="mx-auto max-w-7xl px-6 py-12">
-          <div className="mx-auto mb-6 h-px w-16 bg-gi-line" />
-          <h2 className="text-2xl font-semibold text-gi-text">Team / Credibility Snapshot</h2>
-          <p className="mt-3 max-w-4xl text-gi-gray">(Placeholder — replace with real names/photos/bios)</p>
-          <ul className="mt-4 grid gap-4 md:grid-cols-2">
-            <li className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi"><strong>Founder / CEO:</strong> [Name] — Engineer turned operator with deep experience in middleware, Salesforce/MuleSoft integration, and architecting AI-native firms.</li>
-            <li className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi"><strong>Principal Architect:</strong> [Name] — Builds scalable, event-driven systems that power agentic workflows.</li>
-            <li className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi"><strong>AI Delivery Lead:</strong> [Name] — Designs job descriptions for agents and operationalizes safe actions.</li>
-            <li className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi"><strong>Customer Success / Ops:</strong> [Name] — Bridges outcomes back into the business to ensure adoption and scale.</li>
-          </ul>
-          <p className="mt-4 text-sm text-gi-gray">Optional badges/credentials to display: Salesforce partner expertise, MuleSoft delivery track record, case study logos, certifications.</p>
-        </section>
-
         {/* How we work */}
         <HowWeWorkSerpentine
           title="How We Work"
           subhead="Align → Prove → Scale"
           steps={[
-            { k: '01', title: 'Align', caption: 'Choose the first win and KPIs' },
-            { k: '02', title: 'Blueprint', caption: 'Minimal integrations for agent action' },
-            { k: '03', title: 'Build', caption: 'Pilot with safe actions' },
-            { k: '04', title: 'Prove', caption: 'Measure speed, deflection, capacity' },
-            { k: '05', title: 'Scale', caption: 'Adopt and expand predictably' },
+            { k: '01', title: 'Align', caption: 'Focused working sessions to lock goals, constraints, and success metrics.' },
+            { k: '02', title: 'Blueprint', caption: 'Senior architects design the composable foundation and delivery plan.' },
+            { k: '03', title: 'Build', caption: 'AI-accelerated sprints deliver working software faster, with quality gates baked in.' },
+            { k: '04', title: 'Prove', caption: 'UAT and cutover plans ensure smooth go-lives and measurable outcomes.' },
+            { k: '05', title: 'Scale', caption: 'Reuse patterns, expand safely, and continue improving with clear KPIs.' },
           ]}
           variant="serpentine"
           showNumbers
           progressIndex={null}
         />
 
-        {/* FAQ */}
-        <section className="mx-auto max-w-7xl px-6 py-12">
-          <div className="mx-auto mb-6 h-px w-16 bg-gi-line" />
-          <h2 className="text-2xl font-semibold text-gi-text">FAQ</h2>
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
-            <div className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi">
-              <h3 className="font-medium text-gi-text">What does “AI-native” mean?</h3>
-              <p className="mt-1 text-sm text-gi-gray">Agents are part of the delivery system, not a feature added later. Their jobs, data access, and actions are designed from the start.</p>
-            </div>
-            <div className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi">
-              <h3 className="font-medium text-gi-text">How quickly can we see results?</h3>
-              <p className="mt-1 text-sm text-gi-gray">Most first wins are scoped and delivered in approximately eight weeks.</p>
-            </div>
-            <div className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi">
-              <h3 className="font-medium text-gi-text">Do you work with small teams?</h3>
-              <p className="mt-1 text-sm text-gi-gray">Yes. Our model amplifies small teams through digital labor—delivering enterprise-grade outcomes without enterprise overhead.</p>
-            </div>
-            <div className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi">
-              <h3 className="font-medium text-gi-text">What industries do you serve?</h3>
-              <p className="mt-1 text-sm text-gi-gray">Travel, higher education, SMBs, and any organization relying on Salesforce/MuleSoft to run critical workflows.</p>
-            </div>
-            <div className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi md:col-span-2">
-              <h3 className="font-medium text-gi-text">How do you ensure AI actions are safe?</h3>
-              <p className="mt-1 text-sm text-gi-gray">Through scoped agent job definitions, guardrails, approval flows, and observability baked into every action path.</p>
-            </div>
-          </div>
-        </section>
-
-        {/* Careers */}
-        <section className="mx-auto max-w-7xl px-6 py-12">
-          <div className="mx-auto mb-6 h-px w-16 bg-gi-line" />
-          <h2 className="text-2xl font-semibold text-gi-text">Careers / Join Us</h2>
-          <h3 className="mt-2 text-lg font-semibold text-gi-text">Build the future of consulting</h3>
-          <p className="mt-2 max-w-4xl text-gi-gray">Join a flat, AI-native team that values speed, experimentation, and measurable impact. Work on integration-first architectures, agentic delivery, and real customer outcomes.</p>
-          <div className="mt-4"><a className="btn-secondary" href="#contact">View Open Roles / Get in Touch</a></div>
-        </section>
+        <FaqSimple />
 
         {/* Closing CTA */}
         <section className="mx-auto max-w-7xl px-6 py-16">
           <div className="rounded-2xl border border-gi-fog bg-white p-8 text-center shadow-gi">
-            <h2 className="text-2xl font-semibold text-gi-text">Ready to prove your first win?</h2>
-            <p className="mx-auto mt-2 max-w-2xl text-gi-gray">From integration to agent to outcome—we’ll map your eight-week path.</p>
-            <div className="mt-6"><a className="btn-primary" href="#contact">Start Your First Win</a></div>
+            <h2 className="text-2xl font-semibold text-gi-text">Ready to move twice as fast—without the tradeoffs?</h2>
+            <div className="mt-6 flex justify-center gap-3">
+              <a className="btn-primary" href="/contact">Start Your First Win</a>
+              <a className="btn-secondary" href="/careers">Explore Careers</a>
+            </div>
           </div>
         </section>
       </main>

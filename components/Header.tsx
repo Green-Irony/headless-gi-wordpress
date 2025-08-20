@@ -16,7 +16,7 @@ export type MenuItem = {
 
 const FALLBACK_NAV: Array<{ label: string; href: string }> = [
   { label: 'Services', href: '/services' },
-  { label: 'Solutions', href: '/solutions' },
+  //{ label: 'Solutions', href: '/solutions' },
   { label: 'Customer Stories', href: '/customer-stories' },
   { label: 'Insights', href: '/insights' },
   { label: 'About', href: '/about' },

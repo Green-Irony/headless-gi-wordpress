@@ -69,34 +69,37 @@ const Page: any = function CustomerStoriesPage(props: any) {
               vertical="Travel & Transportation / Enterprise"
               logoSrc="/logos/spirit.svg"
               mediaSide="left"
-              challenge="Siloed systems and manual workflows made real-time coordination brittle, slowing response to disruptions and creating operational drag."
-              solution="Designed and implemented an event-driven MuleSoft backbone that fed AI agents with live context, enabling proactive orchestration across crew, customer, and logistics systems."
+              challenge="Legacy systems, siloed data, and manual workflows slowed innovation and strained operations. Spirit’s IT teams were stuck in reactive mode, delivering only one or two major releases a year while guest and crew experiences lagged behind expectations."
+              solution="With Green Irony as a partner, Spirit adopted MuleSoft as the central nervous system of the airline. Together we designed a composable API architecture that unlocked 300+ systems, enabled reuse across projects, and accelerated delivery. From loyalty programs and self-service guest tools to crew scheduling and turnaround automation, every initiative was built for scale, speed, and resilience."
               outcomes={[
-                'Delivery cycle time cut in half by leveraging AI-assisted integration patterns',
-                'Faster decision loops across operations',
-                'Manual coordination overhead reduced, freeing capacity for strategic initiatives',
+                '5× developer productivity and cycle times reduced from 12–18 months to 3–4 months',
+                'Guest self-service for changes, cancellations, seat upgrades, and WiFi purchases — reducing call center strain and improving NPS',
+                'Loyalty program overhaul that drove enrollment and deeper engagement',
+                'Real-time crew and turnaround automation that improved on-time performance',
+                'Resilient third-party integrations that opened new revenue streams without straining legacy systems',
               ]}
               proofTag="Built from Spirit Airlines-scale delivery discipline."
-              quote="Green Irony gave us the real-time operational insight and automation we thought only large incumbents could deliver—faster and with less overhead."
+              quote="Green Irony’s ability to align our API strategy to deliver meaningful business outcomes is what makes them such a valuable partner. Their MuleSoft and enterprise architecture expertise — along with their collaborative and efficient delivery process — has helped us expedite key initiatives. — Sapana Patel, Sr. Director of Solutions Delivery, Spirit Airlines"
               primaryCta={{ label: 'Start your Travel success plan', href: '/contact' }}
               secondaryCta={{ label: 'Review integration gaps', href: '/contact' }}
             />
 
             <CaseStudyTile
-              brand="Higher Education (UNC Charlotte-style)"
+              brand="UNC Charlotte"
               title="24/7 student support without scaling headcount"
               vertical="Higher Education"
               logoSrc="/logos/unc-charlotte.svg"
               mediaSide="right"
-              challenge="High volume of routine student inquiries overwhelmed staff; fragmented data sources led to inconsistent responses."
-              solution="Built a knowledge-backed Agentforce deployment that unified SIS, FAQ systems, and support workflows—agents handled Tier-1 inquiries while escalating complex cases."
+              challenge="UNC Charlotte’s IT helpdesk was overwhelmed with routine tickets, with over half of staff time spent on password resets. Since support wasn’t available after hours, students were often locked out until the next business day, creating delays and frustration."
+              solution="UNC Charlotte became the first higher-ed institution to implement Salesforce Agentforce. Green Irony delivered a knowledge-backed agent that deflected routine IT tickets (like password resets) and routed complex cases to staff, freeing up advisors to focus on more strategic support."
               outcomes={[
-                'Persistent deflection of routine questions (student-facing load reduced)',
-                'Faster, consistent responses improving student satisfaction',
-                'Staff capacity reclaimed for higher-value advising',
+                '50%+ of tickets deflected immediately after launch',
+                'Password resets — once consuming half of staff time — automated and available 24/7',
+                'Staff capacity reclaimed for higher-value advising and IT innovation',
+                'Faster, consistent responses improving student and faculty satisfaction',
               ]}
-              proofTag="Public-facing AI agents powered by integrated data."
-              quote="The agent feels like a teammate—always on, always informed, and it freed our advisors to focus where humans matter most."
+              proofTag="First higher-ed institution to launch on Salesforce Agentforce."
+              quote="The agent feels like a teammate — always on, always informed, and it freed our IT staff to focus on what mattered most."
               primaryCta={{ label: 'See the Higher-Ed Blueprint', href: '/plan' }}
               secondaryCta={{ label: 'Scope my first agent', href: '/contact' }}
             />
