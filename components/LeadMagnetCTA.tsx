@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { motion as m, useReducedMotion } from 'framer-motion';
+import Image from 'next/image';
 
 export type LeadMagnetProps = {
   id?: string;
@@ -81,31 +82,14 @@ export default function LeadMagnetCTA({ id, className, title = DEFAULT_TITLE, bo
                   <div className="pointer-events-none absolute -right-2 top-6 h-4 w-[92%] rounded-xl bg-gi-fog" />
                   <div className="pointer-events-none absolute -right-4 top-10 h-4 w-[88%] rounded-xl bg-gi-fog/80" />
                   <div className="relative rounded-2xl ring-1 ring-gi-fog transition-transform duration-300 will-change-transform hover:-translate-y-0.5 hover:rotate-[0.2deg]">
-                    <svg viewBox="0 0 720 460" className="block w-full rounded-2xl" xmlns="http://www.w3.org/2000/svg">
-                      <defs>
-                        <linearGradient id="lgBg" x1="0" x2="1">
-                          <stop offset="0" stopColor="#C40084" stopOpacity="0.18" />
-                          <stop offset="1" stopColor="#5AAD5A" stopOpacity="0.18" />
-                        </linearGradient>
-                        <linearGradient id="sweep" x1="0" x2="1">
-                          <stop offset="0" stopColor="#5AAD5A" stopOpacity="0" />
-                          <stop offset="1" stopColor="#5AAD5A" stopOpacity=".45" />
-                        </linearGradient>
-                      </defs>
-                      <rect x="0" y="0" width="720" height="460" rx="18" fill="white" stroke="#E6E6EA" />
-                      <rect x="0" y="0" width="720" height="460" rx="18" fill="url(#lgBg)" />
-                      <g stroke="#E6E6EA"><path d="M40 120h640M40 220h640M40 320h640" /><path d="M200 60v340M360 60v340M520 60v340" /></g>
-                      <g transform="translate(380,120)" fill="none" stroke="#141415" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="0" y="0" width="280" height="220" rx="16" stroke="#E6E6EA" />
-                        <rect x="22" y="40" width="60" height="44" rx="8" />
-                        <circle cx="142" cy="62" r="22" stroke="#5AAD5A" />
-                        <path d="M142 50l8 12h-16l8-12z" fill="#5AAD5A" stroke="none" />
-                        <circle cx="142" cy="50" r="2.4" fill="#5AAD5A" stroke="none" />
-                        <rect x="202" y="48" width="40" height="28" rx="6" />
-                        <path d="M82 62h38M164 62h38" />
-                        <path d="M52 122h168M52 152h168M52 182h168" stroke="url(#sweep)" strokeWidth="6" />
-                      </g>
-                    </svg>
+                    <Image
+                      src="/images/8weekplan.webp"
+                      width={720}
+                      height={460}
+                      alt="8‑Week Agent Launch Plan cover"
+                      className="block w-full rounded-2xl h-auto"
+                      priority
+                    />
                   </div>
                 </div>
               </div>
