@@ -114,30 +114,40 @@ const Page: any = function ServicesPage(props: any) {
             mulesoft: (
               <div>
                 <HeroSimple
-                  title="Integration that makes AI agents act"
-                  subhead="AI‑accelerated, senior‑led MuleSoft delivery cuts integration timelines in half—giving agents the context they need from day one."
+                  title="MuleSoft integration, delivered faster"
+                  subhead="AI-accelerated, senior-led MuleSoft delivery cuts integration timelines in half—so you get rock-solid, enterprise-grade integrations in weeks, not months. (And when you’re ready for AI agents, your architecture will already be prepared.)"
                 />
                 <DeliverablesWheel
                   heading="What we deliver"
                   items={[
-                    { title: 'Reference architecture & governance', body: 'API-led, event-driven design patterns with clear ownership, security, and scalability baked in.' },
-                    { title: 'AI-assisted accelerated implementation', body: 'Senior architects augmented by AI tooling to cut planning and build time—delivering outcomes in weeks, not months.' },
-                    { title: 'Observability & reliability', body: 'Telemetry, error handling, SLAs, and health telemetry so your agents don’t just run—they run with confidence.' },
+                    { title: 'Composable architecture & governance', body: 'Event-driven, standards-based patterns and reusable assets so integrations are fast, consistent, and future-proof.' },
+                    { title: 'AI-accelerated implementation', body: 'Senior MuleSoft architects use AI to build and validate integrations twice as fast—without cutting corners on quality.' },
+                    { title: 'Observability & reliability', body: 'End-to-end monitoring, tracing, and SLAs so issues are visible, recoverable, and rare—giving you confidence in production.' },
                     { title: 'Integration gap assessment', body: 'Quick diagnostic to surface the minimal set of pipelines/events required for your first agentic win.' },
-                    { title: 'Deployment & validation runbook', body: 'Production-ready support: test harnesses, rollback strategies, and performance tuning.' },
+                    { title: 'Deployment & validation runbook', body: 'Documented deployment steps, rollback plans, and validation processes ensure your integrations go live smoothly.' },
                   ]}
                 />
                 <HowItWorksLinear
                   id="how-mulesoft"
                   heading="Outcome promise"
+                  subhead="From integration backlog to business impact — fast"
                   steps={[
-                    { k: '01', title: 'Half the cycle time', body: 'Integration delivery moves twice as fast compared to traditional approaches.' },
-                    { k: '02', title: 'Predictable agent readiness', body: 'Agents have the context and triggers they need from day one.' },
-                    { k: '03', title: 'Scalable foundation', body: 'A future-proof base that doesn’t need to be rebuilt for new agents.' },
+                    { k: '01', title: 'Half the cycle time', body: 'Integration delivery moves twice as fast compared to traditional approaches—going live in as little as 3 weeks.' },
+                    { k: '02', title: 'Predictable performance', body: 'Rock-solid integrations with clear SLAs, monitoring, and reliability you can count on from day one.' },
+                    { k: '03', title: 'Scalable foundation', body: 'A composable base that adapts to future needs—ready for new systems, processes, and even AI agents when you are.' },
                   ]}
                   cta={{ label: 'Review My Integration Gaps', href: '/contact' }}
+                  leadInBeforeButton="Ready to accelerate MuleSoft without sacrificing confidence? Let’s review your integration gaps and build a plan to go live faster."
                 />
-                <WhyUsBanner body="Our senior MuleSoft architects, augmented by AI, ship faster with higher reliability—so your agents can act with confidence." />
+                <WhyUsBanner
+                  body="Our senior MuleSoft architects, augmented by AI, ship faster with higher reliability—so your agents can act with confidence."
+                  bullets={[
+                    'Proven expertise: Trusted in high-stakes environments where uptime matters most.',
+                    'AI-native methods: Every step accelerated with AI for 2× faster delivery.',
+                    'US-based senior team: Offshore-competitive economics without the tradeoffs.',
+                    'Predictable outcomes: Governance and reusable patterns that prevent rework and keep costs in check.',
+                  ]}
+                />
                 <PreFooterCTA
                   title="Review your integration gaps"
                   body="We’ll map the minimal event and pipeline set your first agent needs to act."
@@ -149,16 +159,24 @@ const Page: any = function ServicesPage(props: any) {
             salesforce: (
               <div>
                 <HeroSimple
-                  title="Make Salesforce the control room for digital labor"
-                  subhead="We streamline workflows, remove friction, and prepare your Salesforce org so humans and AI agents operate in flow—doubling throughput without doubling headcount."
+                  title="Salesforce done right — faster"
+                  subhead="From Sales Cloud to Experience Cloud and beyond, our senior architects deliver Salesforce builds that scale. With AI‑accelerated methods, you get predictable outcomes in half the time—without the costly rework that comes from shortcuts."
                 />
                 <DeliverablesWheel
                   heading="What we deliver"
                   items={[
-                    { title: 'Org assessment & quick wins', body: 'Identify and fix the biggest sources of delay and confusion.' },
-                    { title: 'Workflow simplification', body: 'Collapse manual steps, streamline approvals, and remove bottlenecks.' },
-                    { title: 'Automation readiness', body: 'Prepare object model, permissions, and telemetry for safe agent interaction.' },
-                    { title: 'Adoption design', body: 'Embed agent touchpoints into user workflows so humans and AI complement, not compete.' },
+                    { title: 'Smart discovery & design', body: 'Translate business requirements into clear, future‑proof Salesforce designs—accelerated by AI without missing critical details.' },
+                    { title: 'Rapid, reliable implementation', body: 'US‑based senior architects use AI tools to configure and build Salesforce orgs faster, while maintaining enterprise‑grade quality.' },
+                    { title: 'Trusted data & migrations', body: 'Ensure clean, accurate data migrations that fuel adoption, reporting, and decision‑making from day one.' },
+                    { title: 'Optimization & automation', body: 'Streamline workflows and eliminate swivel‑chair processes with Salesforce automation that actually sticks.' },
+                  ]}
+                />
+                <WhyUsBanner
+                  title="From scope to Salesforce impact — in weeks, not months"
+                  bullets={[
+                    'Half the delivery time — Projects go live in as little as 4 weeks with AI‑accelerated methods.',
+                    'Confidence at launch — Builds are tested, validated, and adoption‑ready on day one.',
+                    'Future‑ready foundation — A Salesforce org that scales with your business—and is agent‑ready when you’re ready.',
                   ]}
                 />
                 <HowItWorksLinear
@@ -170,8 +188,17 @@ const Page: any = function ServicesPage(props: any) {
                     { k: '03', title: 'Agent-ready Salesforce', body: 'Reliably surfaces the right context and accepts safe actions.' },
                   ]}
                   cta={{ label: 'Optimize My Org', href: '/contact' }}
+                  leadInBeforeButton="Want Salesforce done right the first time? Let’s design and deliver a build that’s fast, reliable, and built to scale."
                 />
-                <WhyUsBanner body="We redesign Salesforce around outcomes—signal design, safe actions, and enablement—so agents and humans operate as one team." />
+                <WhyUsBanner
+                  body="We redesign Salesforce around outcomes—signal design, safe actions, and enablement—so agents and humans operate as one team."
+                  bullets={[
+                    'Enterprise experience: Trusted Salesforce partner since 2016, delivering for SMBs and enterprises alike.',
+                    'AI‑accelerated delivery: 2× faster without sacrificing quality or predictability.',
+                    'US‑based senior architects: Offshore economics, without the offshore risks.',
+                    'Proven track record: Implementations that last and scale—no costly rebuilds later.',
+                  ]}
+                />
                 <PreFooterCTA
                   title="Optimize your org for digital labor"
                   body="We’ll remove friction and ready Salesforce for reliable agent action."
