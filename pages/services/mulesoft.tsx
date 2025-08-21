@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import HeroCenterPro from '../../components/HeroCenterPro';
-import HowItWorksLinear from '../../components/HowItWorksLinear';
+import ChecklistCard from '../../components/ChecklistCard';
 import ValuePillars from '../../components/ValuePillars';
 import PreFooterCTA from '../../components/PreFooterCTA';
 import HeroSimple from '../../components/HeroSimple';
@@ -47,17 +47,14 @@ const Page: any = function MulesoftPage(props: any) {
             { title: 'Deployment & validation runbook', body: 'Documented deployment steps, rollback plans, and validation processes ensure your integrations go live smoothly.' },
           ]}
         />
-        <HowItWorksLinear
-          id="how-mulesoft"
-          heading="Outcome promise"
-          subhead="From integration backlog to business impact — fast"
-          steps={[
-            { k: '01', title: 'Half the cycle time', body: 'Integration delivery moves twice as fast compared to traditional approaches—going live in as little as 3 weeks.' },
-            { k: '02', title: 'Predictable performance', body: 'Rock-solid integrations with clear SLAs, monitoring, and reliability you can count on from day one.' },
-            { k: '03', title: 'Scalable foundation', body: 'A composable base that adapts to future needs—ready for new systems, processes, and even AI agents when you are.' },
+        <ChecklistCard
+          heading="From integration backlog to business impact — fast"
+          items={[
+            'Half the cycle time — Integrations go live in as little as 3 weeks.',
+            'Predictable performance — Clear SLAs, monitoring, and reliability from day one.',
+            'Scalable foundation — Composable base ready for new systems, processes, and agents.',
           ]}
-          cta={{ label: 'Review My Integration Gaps', href: '/contact' }}
-          leadInBeforeButton="Ready to accelerate MuleSoft without sacrificing confidence? Let’s review your integration gaps and build a plan to go live faster."
+          columns={3}
         />
         <WhyUsBanner
           body="Our senior MuleSoft architects, augmented by AI, ship faster with higher reliability—so your agents can act with confidence."

@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import HeroCenterPro from '../../components/HeroCenterPro';
-import HowItWorksLinear from '../../components/HowItWorksLinear';
+import ChecklistCard from '../../components/ChecklistCard';
 import ValuePillars from '../../components/ValuePillars';
 import PreFooterCTA from '../../components/PreFooterCTA';
 import HeroSimple from '../../components/HeroSimple';
@@ -46,16 +46,14 @@ const Page: any = function DataMigrationsPage(props: any) {
             { title: 'Security, governance & lineage', body: 'Access controls, PII handling, and lineage tracking aligned to your compliance requirements.' },
           ]}
         />
-        <HowItWorksLinear
-          id="how-data"
+        <ChecklistCard
           heading="From messy data to dependable decisions — fast"
-          steps={[
-            { k: '01', title: 'Minimal downtime', body: 'Migration cutovers planned and tested—so teams stay productive while systems switch over.' },
-            { k: '02', title: 'Trusted from day one', body: 'Clean, reconciled datasets with validation checks that give leaders confidence in every report.' },
-            { k: '03', title: 'Ready for real time', body: 'Event‑driven pipelines that keep data current across systems—and set you up for agent‑readiness when you’re ready.' },
+          items={[
+            'Minimal downtime — Cutovers are planned and tested so teams stay productive.',
+            'Trusted from day one — Clean, reconciled datasets with validation checks.',
+            'Ready for real time — Event‑driven pipelines that keep data current across systems.',
           ]}
-          cta={{ label: 'Map My Data for AI', href: '/contact' }}
-          leadInBeforeButton="Need your data clean, migrated, and trusted—without chaos? Let’s plan the fastest safe path to go‑live."
+          columns={3}
         />
         <WhyUsBanner
           bullets={[

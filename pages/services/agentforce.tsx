@@ -3,7 +3,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import HeroSimple from '../../components/HeroSimple';
 import DeliverablesWheel from '../../components/DeliverablesWheel';
-import HowItWorksLinear from '../../components/HowItWorksLinear';
+import ChecklistCard from '../../components/ChecklistCard';
 import WhyUsBanner from '../../components/WhyUsBanner';
 import PreFooterCTA from '../../components/PreFooterCTA';
 import { useQuery } from '@apollo/client';
@@ -46,16 +46,14 @@ const Page: any = function AgentforcePage(props: any) {
             { title: 'Scalability roadmap', body: 'Move from a single pilot to enterprise‑wide digital labor with a step‑by‑step plan to scale agents safely and predictably across teams.' },
           ]}
         />
-        <HowItWorksLinear
-          id="how-agentforce"
+        <ChecklistCard
           heading="Outcome promise"
-          subhead="In 8 weeks, you’ll have a live Salesforce‑native agent delivering measurable results—deflecting demand, freeing capacity, and proving the ROI of digital labor."
-          steps={[
-            { k: '01', title: 'Working agent in 8 weeks', body: 'Delivers a clear, business-valued outcome.' },
-            { k: '02', title: 'Automation coverage', body: 'Focus on repetitive, structured work to maximize impact.' },
-            { k: '03', title: 'Capacity freed', body: 'Shift routine effort to agents while keeping humans in the loop for escalation.' },
+          items={[
+            'Working agent in 8 weeks — Delivers a clear, business-valued outcome.',
+            'Automation coverage — Focus on repetitive, structured work to maximize impact.',
+            'Capacity freed — Shift routine effort to agents while keeping humans in the loop for escalation.',
           ]}
-          cta={{ label: 'Plan my first win', href: '/contact' }}
+          columns={3}
         />
         <WhyUsBanner
           //body="We orchestrate agents as real operators—job definitions, safe actions, and KPIs—so the first win lands quickly and scales predictably."

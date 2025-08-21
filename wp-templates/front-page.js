@@ -111,7 +111,7 @@ export default function FrontPage(props) {
                   icon: <AiIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
-                  title: 'Salesforce (AI‑led)',
+                  title: 'Salesforce Implementation (AI‑led)',
                   description: 'Make Salesforce the control room for humans + agents.',
                   href: '/services/salesforce',
                   icon: <SalesforceIcon className="h-24 w-24 text-gi-green" />

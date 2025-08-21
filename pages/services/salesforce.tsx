@@ -2,12 +2,11 @@ import Head from 'next/head';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import HeroCenterPro from '../../components/HeroCenterPro';
-import HowItWorksLinear from '../../components/HowItWorksLinear';
+import ChecklistCard from '../../components/ChecklistCard';
 import ValuePillars from '../../components/ValuePillars';
 import PreFooterCTA from '../../components/PreFooterCTA';
 import HeroSimple from '../../components/HeroSimple';
 import DeliverablesWheel from '../../components/DeliverablesWheel';
-import ChecklistCard from '../../components/ChecklistCard';
 import WhyUsBanner from '../../components/WhyUsBanner';
 import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
@@ -48,16 +47,14 @@ const Page: any = function SalesforcePage(props: any) {
           ]}
         />
 
-        <HowItWorksLinear
-          id="how-salesforce"
+        <ChecklistCard
           heading="Outcome promise"
-          steps={[
-            { k: '01', title: 'Faster internal throughput', body: 'Achieved by reducing manual handoffs and simplifying flows.' },
-            { k: '02', title: 'Higher adoption', body: 'Changes are low-friction and aligned to real work.' },
-            { k: '03', title: 'Agent-ready Salesforce', body: 'Reliably surfaces the right context and accepts safe actions.' },
+          items={[
+            'Faster internal throughput — Reduce manual handoffs and simplify flows.',
+            'Higher adoption — Changes are low‑friction and aligned to real work.',
+            'Agent‑ready Salesforce — Reliably surfaces the right context and accepts safe actions.',
           ]}
-          cta={{ label: 'Optimize My Org', href: '/contact' }}
-          leadInBeforeButton="Want Salesforce done right the first time? Let’s design and deliver a build that’s fast, reliable, and built to scale."
+          columns={3}
         />
         <WhyUsBanner
           body="We redesign Salesforce around outcomes—signal design, safe actions, and enablement—so agents and humans operate as one team."
