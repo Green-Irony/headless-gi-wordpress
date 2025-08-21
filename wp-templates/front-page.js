@@ -8,7 +8,7 @@ import { useQuery } from "@apollo/client";
 import { getNextStaticProps } from "@faustwp/core";
 import HomepageHero from '../components/HomepageHero';
 import LogoTicker from '../components/LogoTicker';
-import TrustStrip from "../components/TrustStrip";
+import ChecklistCard from "../components/ChecklistCard";
 import ValuePillars from "../components/ValuePillars";
 import RibbonBanner from "../components/RibbonBanner";
 import OfferTiles from "../components/OfferTiles";
