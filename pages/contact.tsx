@@ -2,7 +2,8 @@ import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HeroCenterPro from '../components/HeroCenterPro';
-import ContactForm from '../components/ContactForm';
+import HubSpotForm from '../components/HubSpotForm';
+import ChecklistCard from '../components/ChecklistCard';
 import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../queries/SiteSettingsQuery';
@@ -43,33 +44,34 @@ const Page: any = function ContactPage(props: any) {
         {/* Contact form */}
         <section id="contact-form" className="mx-auto max-w-7xl px-6 py-12">
           <h2 className="text-2xl font-semibold text-gi-text">Start with one measurable outcome</h2>
-          <div className="mt-4">
-            <ContactForm />
+          <div className="mt-4 rounded-2xl border border-gi-fog bg-white p-6 shadow-gi gi-hubspot">
+            <HubSpotForm portalId="23316092" formId="9c04a0a8-3c21-4a28-b1d9-40dda07dfdd1" />
           </div>
         </section>
-
-        {/* Alternative booking embed */}
+        {/*
         <section id="calendar" className="mx-auto max-w-7xl px-6 py-12">
           <h2 className="text-2xl font-semibold text-gi-text">30-minute First-Win Strategy Session</h2>
           <p className="mt-2 max-w-3xl text-gi-gray">Skip the form—pick a time that works. We'll come prepared with a mini diagnostic based on the workflow you want to fix.</p>
           <div className="mt-4 overflow-hidden rounded-2xl border border-gi-fog bg-white p-2 shadow-gi">
-            {/* Replace iframe src with your Calendly/HubSpot URL */}
             <div className="aspect-video w-full">
               <iframe title="Booking Calendar" src="about:blank" className="h-full w-full" />
             </div>
           </div>
-        </section>
+        </section>*/}
 
-        {/* Reassurance / Trust strip */}
-        <section className="mx-auto max-w-7xl px-6 py-12">
-          <div className="rounded-2xl border border-gi-fog bg-white p-6 shadow-gi">
-            <ul className="grid gap-3 md:grid-cols-3 text-sm text-gi-gray">
-              <li>“No boilerplate proposals. One focused outcome in eight weeks.”</li>
-              <li>“Senior architects + AI-native delivery. Predictable, not experimental.”</li>
-              <li>Spirit Airlines heritage · Repeatable first-win playbook · AI-Native badge</li>
-            </ul>
-          </div>
-        </section>
+        {/* Reassurance / Checklist */}
+        <ChecklistCard
+          heading="Why teams choose Green Irony for their first AI win"
+          columns={3}
+          items={[
+            'No boilerplate proposals—one focused outcome in eight weeks',
+            'Senior architects + AI-native delivery',
+            'Predictable, not experimental execution',
+            'Spirit Airlines heritage and enterprise scale',
+            'Repeatable first-win playbook',
+            'AI-Native badge and best practices',
+          ]}
+        />
 
         {/* Secondary paths */}
         <section className="mx-auto max-w-7xl px-6 py-12">
@@ -80,7 +82,7 @@ const Page: any = function ContactPage(props: any) {
             </div>
             <div className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi">
               <h3 className="font-semibold text-gi-text">Careers / Talent</h3>
-              <p className="mt-1 text-sm text-gi-gray">Interested in joining? Tell us what you build. <a className="underline" href="/about#careers">Learn more</a></p>
+              <p className="mt-1 text-sm text-gi-gray">Interested in joining? Tell us what you build. <a className="underline" href="/careers">Learn more</a></p>
             </div>
           </div>
         </section>
