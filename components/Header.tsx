@@ -25,7 +25,7 @@ const FALLBACK_NAV: Array<{ label: string; href: string }> = [
 const DEFAULT_SERVICES_CHILDREN = [
   { href: '/services/agentforce', title: 'AI & Digital Labor', desc: 'Jobs, safe actions, and KPIs.' },
   { href: '/services/mulesoft', title: 'MuleSoft Integration (AI-led)', desc: 'Pipelines & events for agents.' },
-  { href: '/services/salesforce', title: 'Salesforce Optimization', desc: 'Control room for humans + agents.' },
+  { href: '/services/salesforce', title: 'Salesforce Implementation (AI-led)', desc: 'Control room for humans + agents.' },
   { href: '/services/data', title: 'Data & Migrations', desc: 'Trusted knowledge and real-time context.' },
 ];
 
@@ -90,6 +90,22 @@ function CareerIcon() {
     </svg>
   );
 }
+function AboutIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-4 w-4 text-gi-green">
+      <circle cx="12" cy="8" r="3" />
+      <path d="M4 20c1.5-3.5 5-5 8-5s6.5 1.5 8 5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function ContactIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-4 w-4 text-gi-green">
+      <path d="M4 6h16v12H4z" />
+      <path d="M4 7l8 6 8-6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
 function renderSolutionIcon(label: string) {
   const l = (label || '').toLowerCase();
   if (l.includes('travel')) return <TravelIcon />;
@@ -99,8 +115,10 @@ function renderSolutionIcon(label: string) {
 }
 function renderAboutIcon(label: string) {
   const l = (label || '').toLowerCase();
+  if (l.includes('about')) return <AboutIcon />;
   if (l.includes('career')) return <CareerIcon />;
-  return <CareerIcon />;
+  if (l.includes('contact')) return <ContactIcon />;
+  return <AboutIcon />;
 }
 
 // Small inline SVG icons for Services submenu
@@ -268,15 +286,16 @@ export default function Header({
                             pointerEvents: openDesktopIdx === idx ? ('auto' as const) : ('none' as const),
                           }}
                           transition={{ duration: 0.18, ease: 'easeOut' }}
-                          className="absolute left-0 top-8 z-40"
+                          className="absolute left-1/2 top-8 z-40"
                         >
+                          <div className="-translate-x-1/2">
                           {(isServices || isSolutions || isAbout) ? (
-                            <div className="w-[720px] rounded-2xl bg-white p-4 ring-1 ring-gi-fog shadow-gi">
-                              <ul className="grid grid-cols-2 gap-3">
+                            <div className="w-60 rounded-2xl bg-white p-3 ring-1 ring-gi-fog shadow-gi">
+                              <ul className="grid grid-cols-1 gap-1.5">
                                 {effectiveChildren.slice(0,4).map((c) => (
                                   <li key={c.title}>
-                                    <Link href={c.href} className="group flex items-start gap-3 rounded-md p-3 hover:bg-gi-fog/60">
-                                      <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gi-green/15 ring-1 ring-gi-fog">
+                                    <Link href={c.href} className="group flex items-start gap-2 rounded-md p-2 hover:bg-gi-fog/60">
+                                      <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gi-green/15 ring-1 ring-gi-fog [&>svg]:h-3.5 [&>svg]:w-3.5">
                                         {isSolutions ? renderSolutionIcon(c.title) : (isServices ? renderServiceIcon(c.title) : renderAboutIcon(c.title))}
                                       </span>
                                       <span className="min-w-0">
@@ -301,6 +320,7 @@ export default function Header({
                               </ul>
                             </div>
                           )}
+                          </div>
                         </m.div>
                       )}
                     </div>
