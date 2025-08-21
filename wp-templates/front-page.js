@@ -153,6 +153,15 @@ export default function FrontPage(props) {
                 ) },
               ]}
             />
+            <ChecklistCard
+              heading="From scope to Salesforce impact — in weeks, not months"
+              items={[
+                'Half the delivery time — Projects go live in as little as 4 weeks with AI‑accelerated methods.',
+                'Confidence at launch — Builds are tested, validated, and adoption‑ready on day one.',
+                'Future‑ready foundation — A Salesforce org that scales with your business—and is agent‑ready when you’re ready.',
+              ]}
+              columns={3}
+            />
             {/* <HowItWorksLinear
               heading="A lean path to your first AI outcome"
               steps={[

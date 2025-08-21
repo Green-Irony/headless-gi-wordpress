@@ -7,6 +7,7 @@ import ValuePillars from '../../components/ValuePillars';
 import PreFooterCTA from '../../components/PreFooterCTA';
 import HeroSimple from '../../components/HeroSimple';
 import DeliverablesWheel from '../../components/DeliverablesWheel';
+import ChecklistCard from '../../components/ChecklistCard';
 import WhyUsBanner from '../../components/WhyUsBanner';
 import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
@@ -46,34 +47,7 @@ const Page: any = function SalesforcePage(props: any) {
             { title: 'Optimization & automation', body: 'Streamline workflows and eliminate swivel‑chair processes with Salesforce automation that actually sticks.' },
           ]}
         />
-        <section className="mx-auto max-w-7xl px-6 py-10">
-          <div className="relative overflow-hidden rounded-xl border border-gi-fog bg-white shadow-gi">
-            <div aria-hidden className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-gi-pink to-gi-green/80" />
-            <div className="p-6 md:p-8">
-              <h3 className="text-xl font-semibold text-gi-text">From scope to Salesforce impact — in weeks, not months</h3>
-              <ul className="mt-4 grid gap-3 md:grid-cols-3">
-                <li className="flex items-start gap-3">
-                  <span className="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-gi-green/15 text-gi-green ring-1 ring-gi-fog">
-                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
-                  </span>
-                  <span className="text-sm text-gi-text/90">Half the delivery time — Projects go live in as little as 4 weeks with AI‑accelerated methods.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-gi-green/15 text-gi-green ring-1 ring-gi-fog">
-                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
-                  </span>
-                  <span className="text-sm text-gi-text/90">Confidence at launch — Builds are tested, validated, and adoption‑ready on day one.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-gi-green/15 text-gi-green ring-1 ring-gi-fog">
-                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
-                  </span>
-                  <span className="text-sm text-gi-text/90">Future‑ready foundation — A Salesforce org that scales with your business—and is agent‑ready when you’re ready.</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
+
         <HowItWorksLinear
           id="how-salesforce"
           heading="Outcome promise"
