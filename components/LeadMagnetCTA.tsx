@@ -53,7 +53,7 @@ export default function LeadMagnetCTA({ id, className, title = DEFAULT_TITLE, bo
 
             <p className="mt-4 max-w-xl text-gi-gray">{body}</p>
 
-            <ul className="mt-6 space-y-2 text-sm text-gi-text/90">
+            <ul className="mt-6 space-y-2 text-sm text-gi-gray">
               {bullets.map((b) => (
                 <li key={b} className="flex items-start gap-2">
                   <span className="mt-[2px] h-2 w-2 rounded-full bg-gi-green" />
@@ -66,9 +66,9 @@ export default function LeadMagnetCTA({ id, className, title = DEFAULT_TITLE, bo
               <button className="btn-primary" onClick={() => setOpen(true)}>
                 {primaryCta.label}
               </button>
-              <a className="btn-secondary" href={secondaryCta.href}>
+              {/*<a className="btn-secondary" href={secondaryCta.href}>
                 {secondaryCta.label}
-              </a>
+              </a>*/}
             </div>
 
             <p className="mt-3 text-xs text-gi-gray">No spam — just the plan. You'll also get an editable KPI scorecard.</p>

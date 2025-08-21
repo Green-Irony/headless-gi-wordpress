@@ -49,40 +49,44 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           {/* Brand */}
           <div className="md:col-span-4">
-            <Link href="/" aria-label="Green Irony — Home" className="inline-flex items-center gap-2">
-              <Image src="/logos/green-irony/green-logo-long.png" alt="Green Irony" width={140} height={28} className="h-7 w-auto" />
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link href="/" aria-label="Green Irony — Home" className="inline-flex items-center">
+                <Image src="/logos/green-irony/green-logo-long.png" alt="Green Irony" width={140} height={28} className="h-7 w-auto" />
+              </Link>
+              <Image
+                src="/images/salesforce-partner-badge.png"
+                alt="Salesforce Partner"
+                width={200}
+                height={60}
+                className="h-10 w-auto"
+              />
+            </div>
             <p className="mt-4 max-w-sm text-sm text-gi-gray">
               Offshore economics.<br/>Onshore expertise.<br/>At the speed of AI.
             </p>
+            <div className="mt-3 relative inline-block text-sm font-semibold text-gi-text">
+              Turning AI into Actual Intelligence™
+              <UnderlinePink />
+            </div>
           </div>
 
           {/* Link columns */}
-          <div className="md:col-span-5 grid grid-cols-2 gap-8 sm:grid-cols-3">
+          <div className="md:col-span-5 grid grid-cols-1 gap-8 sm:grid-cols-2">
             <div>
               <div className="text-sm font-semibold text-gi-text">Company</div>
               <ul className="mt-3 space-y-2 text-sm">
                 <li><Link href="/about" className={linkUnderline}>About</Link></li>
-                <li><Link href="/customer-stories" className={linkUnderline}>Customer Stories</Link></li>
-                <li><Link href="/insights" className={linkUnderline}>Insights</Link></li>
+                
+                <li><Link href="/services" className={linkUnderline}>Services</Link></li>
                 <li><Link href="/contact" className={linkUnderline}>Contact</Link></li>
-              </ul>
-            </div>
-            <div>
-              <div className="text-sm font-semibold text-gi-text">Services</div>
-              <ul className="mt-3 space-y-2 text-sm">
-                <li><Link href="/services#agentforce" className={linkUnderline}>AI & Digital Labor</Link></li>
-                <li><Link href="/services#mulesoft" className={linkUnderline}>MuleSoft Integration</Link></li>
-                <li><Link href="/services#salesforce" className={linkUnderline}>Salesforce Optimization</Link></li>
-                <li><Link href="/services#data" className={linkUnderline}>Data & Migrations</Link></li>
               </ul>
             </div>
             <div>
               <div className="text-sm font-semibold text-gi-text">Resources</div>
               <ul className="mt-3 space-y-2 text-sm">
+                <li><Link href="/customer-stories" className={linkUnderline}>Customer Stories</Link></li>
+                <li><Link href="/insights" className={linkUnderline}>Insights</Link></li>
                 <li><Link href="/plan" className={linkUnderline}>8-Week Agent Launch Plan</Link></li>
-                <li><Link href="/privacy" className={linkUnderline}>Privacy</Link></li>
-                <li><Link href="/terms" className={linkUnderline}>Terms</Link></li>
               </ul>
             </div>
           </div>
@@ -112,8 +116,6 @@ export default function Footer() {
         <div className="mt-4 flex flex-col items-center justify-between gap-3 text-xs text-gi-gray sm:flex-row">
           <p>© {new Date().getFullYear()} Green Irony. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <Link href="/privacy" className={linkUnderline}>Privacy</Link>
-            <Link href="/terms" className={linkUnderline}>Terms</Link>
             <a href="#top" className={linkUnderline} aria-label="Back to top">Back to top</a>
           </div>
         </div>

@@ -38,7 +38,9 @@ const DEFAULT_SOLUTIONS_CHILDREN = [
 
 // Default About submenu entries
 const DEFAULT_ABOUT_CHILDREN = [
+  { href: '/about', title: 'About' },
   { href: '/careers', title: 'Careers' },
+  { href: '/contact', title: 'Contact' },
 ];
 
 function toServicesAnchor(href: string): string {
@@ -237,6 +239,7 @@ export default function Header({
                   const mappedChildren = isServices ? children.map(c => ({ ...c, uri: toServicesAnchor(c.uri) })) : children;
                   const hasChildren = isServices ? (mappedChildren.length > 0 || DEFAULT_SERVICES_CHILDREN.length > 0) : (isSolutions ? (mappedChildren.length > 0 || DEFAULT_SOLUTIONS_CHILDREN.length > 0) : (isAbout ? (mappedChildren.length > 0 || DEFAULT_ABOUT_CHILDREN.length > 0) : mappedChildren.length > 0));
                   const effectiveChildren = mappedChildren.length > 0 ? mappedChildren.map(c => ({ href: c.uri, title: c.label })) : (isServices ? DEFAULT_SERVICES_CHILDREN : (isSolutions ? DEFAULT_SOLUTIONS_CHILDREN : (isAbout ? DEFAULT_ABOUT_CHILDREN : [])));
+                  const displayLabel = isAbout ? 'Our Company' : item.label;
 
                   return (
                     <div
@@ -245,13 +248,13 @@ export default function Header({
                       onMouseEnter={() => { clearCloseTimer(); setOpenDesktopIdx(idx); }}
                       onMouseLeave={() => scheduleClose(180)}
                     >
-                      {isServices ? (
+                      {(isServices || isAbout) ? (
                         <span className="relative px-1 text-sm font-medium text-gi-navy cursor-default" aria-disabled="true">
-                          {item.label}
+                          {displayLabel}
                         </span>
                       ) : (
                         <Link href={item.uri} className="relative px-1 text-sm font-medium text-gi-navy hover:text-gi-text">
-                          {item.label}
+                          {displayLabel}
                         </Link>
                       )}
                       {hasChildren && (
@@ -339,19 +342,21 @@ export default function Header({
               const item: MenuItem = rawItem as MenuItem;
               const isServices = (item.label || '').toLowerCase().includes('services') || (item.uri ?? '').startsWith('/services');
               const isSolutions = (item.label || '').toLowerCase().includes('solutions') || (item.uri ?? '').startsWith('/solutions');
+              const isAbout = (item.label || '').toLowerCase().includes('about') || (item.uri ?? '').startsWith('/about');
               const children = (item.childItems && item.childItems.nodes) ? item.childItems.nodes : [];
               const mappedChildren = isServices ? children.map(c => ({ ...c, uri: toServicesAnchor(c.uri) })) : children;
-              const effectiveChildren = mappedChildren.length > 0 ? mappedChildren.map(c => ({ href: c.uri, title: c.label })) : (isServices ? DEFAULT_SERVICES_CHILDREN : (isSolutions ? DEFAULT_SOLUTIONS_CHILDREN : []));
+              const effectiveChildren = mappedChildren.length > 0 ? mappedChildren.map(c => ({ href: c.uri, title: c.label })) : (isServices ? DEFAULT_SERVICES_CHILDREN : (isSolutions ? DEFAULT_SOLUTIONS_CHILDREN : (isAbout ? DEFAULT_ABOUT_CHILDREN : [])));
+              const displayLabel = isAbout ? 'Our Company' : item.label;
 
               return (
                 <div key={item.id || item.label} className="rounded-md">
-                  {isServices ? (
+                  {(isServices || isAbout) ? (
                     <span className="block rounded-md px-2 py-2 text-sm font-medium text-gi-text cursor-default" aria-disabled="true">
-                      {item.label}
+                      {displayLabel}
                     </span>
                   ) : (
                     <Link href={item.uri} className="block rounded-md px-2 py-2 text-sm font-medium text-gi-text hover:bg-gi-fog/60" onClick={() => setOpenMobile(false)}>
-                      {item.label}
+                      {displayLabel}
                     </Link>
                   )}
                   {effectiveChildren.length > 0 && (
