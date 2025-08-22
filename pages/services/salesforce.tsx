@@ -13,6 +13,7 @@ import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../../queries/SiteSettingsQuery';
 import { HEADER_MENU_QUERY } from '../../queries/MenuQueries';
+import SalesforcePartnerBadge from 'components/SalesforcePartnerBadge';
 
 const Page: any = function SalesforcePage(props: any) {
   if (props.loading) return <>Loading...</>;
@@ -73,6 +74,7 @@ const Page: any = function SalesforcePage(props: any) {
             'Proven track record: Implementations that last and scale—no costly rebuilds later.',
           ]}
         />
+        <SalesforcePartnerBadge/>
         <PreFooterCTA
           title="Optimize your org for digital labor"
           body="We’ll remove friction and ready Salesforce for reliable agent action."

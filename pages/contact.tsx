@@ -78,7 +78,7 @@ const Page: any = function ContactPage(props: any) {
           <div className="grid gap-4 md:grid-cols-2">
             <div className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi">
               <h3 className="font-semibold text-gi-text">Sales inquiries / Partnerships</h3>
-              <p className="mt-1 text-sm text-gi-gray">Email <a className="underline" href="mailto:partnerships@greenirony.com">partnerships@greenirony.com</a></p>
+              <p className="mt-1 text-sm text-gi-gray">Email <a className="underline" href="mailto:info@greenirony.com">info@greenirony.com</a></p>
             </div>
             <div className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi">
               <h3 className="font-semibold text-gi-text">Careers / Talent</h3>
