@@ -16,42 +16,46 @@ export default function HubSpotForm({ portalId, formId, region, targetId, cssCla
   useEffect(() => {
     const embeddedCss = `
       /* Base layout and spacing */
-      .hs-form { display: grid; gap: 16px; }
-      .hs-form fieldset { border: 0; padding: 0; margin: 0; max-width: 100%; }
-      .hs-form .hs-form-field { width: 100%; }
-      .hs-form .hs-form-field .input { margin: 0; }
+      form.hs-form.gi-overrides { display: grid; gap: 16px; }
+      form.hs-form.gi-overrides fieldset { border: 0; padding: 0; margin: 0; max-width: 100%; }
+      form.hs-form.gi-overrides .hs-form-field { width: 100%; }
+      form.hs-form.gi-overrides .hs-form-field .input { margin: 0; }
 
       /* Labels */
-      .hs-form .hs-form-field label:not(.hs-error-msg) {
-        display: block; font-size: 0.95rem; font-weight: 600; color: #061E4B;
+      form.hs-form.gi-overrides .hs-form-field label:not(.hs-error-msg) {
+        display: block; font-size: 0.95rem; font-weight: 600; color: #061E4B !important;
       }
 
       /* Inputs */
-      .hs-form .hs-input {
-        margin-top: 4px; width: 100%; border-radius: 12px; border: 1px solid #EEF1F6;
-        background: #FFFFFF; color: #061E4B; padding: 10px 12px; line-height: 1.4;
+      form.hs-form.gi-overrides .hs-input {
+        margin-top: 4px; width: 100%; border-radius: 12px !important; border: 1px solid #EEF1F6 !important;
+        background: #FFFFFF !important; color: #061E4B !important; padding: 10px 12px !important; line-height: 1.4;
       }
-      .hs-form .hs-input:focus { outline: none; border-color: #061E4B; box-shadow: 0 0 0 2px rgba(6,30,75,0.15); }
-      .hs-form textarea.hs-input { min-height: 140px; }
+      form.hs-form.gi-overrides .hs-input:focus { outline: none; border-color: #061E4B !important; box-shadow: 0 0 0 2px rgba(6,30,75,0.15); }
+      form.hs-form.gi-overrides textarea.hs-input { min-height: 140px; }
 
       /* Error text */
-      .hs-error-msgs label { color: #DC2626; font-size: 0.875rem; }
+      form.hs-form.gi-overrides .hs-error-msgs label { color: #DC2626; font-size: 0.875rem; }
 
       /* Consent / helper text */
-      .legal-consent-container, .hs-field-desc { color: #58595B; font-size: 0.875rem; }
+      form.hs-form.gi-overrides .legal-consent-container, form.hs-form.gi-overrides .hs-field-desc { color: #58595B; font-size: 0.875rem; }
 
       /* Submit button */
-      .hs-submit input[type="submit"], input.hs-button, .actions .hs-button {
-        background: #5AAD5A; border-color: #5AAD5A; color: #FFFFFF; border-radius: 12px;
-        padding: 12px 20px; font-weight: 600; font-size: 1rem; line-height: 1rem;
+      form.hs-form.gi-overrides .hs-submit input[type="submit"],
+      form.hs-form.gi-overrides input.hs-button,
+      form.hs-form.gi-overrides .actions .hs-button {
+        background: #5AAD5A !important; border-color: #5AAD5A !important; color: #FFFFFF !important; border-radius: 12px !important;
+        padding: 12px 20px !important; font-weight: 600 !important; font-size: 1rem !important; line-height: 1rem !important;
       }
-      .hs-submit input[type="submit"]:hover, input.hs-button:hover, .actions .hs-button:hover {
-        background: rgba(90,173,90,0.85); border-color: rgba(90,173,90,0.85);
+      form.hs-form.gi-overrides .hs-submit input[type="submit"]:hover,
+      form.hs-form.gi-overrides input.hs-button:hover,
+      form.hs-form.gi-overrides .actions .hs-button:hover {
+        background: rgba(90,173,90,0.85) !important; border-color: rgba(90,173,90,0.85) !important;
       }
 
       /* Two-column rows */
-      fieldset.form-columns-2 { display: grid; grid-template-columns: 1fr; gap: 16px; }
-      @media (min-width: 768px) { fieldset.form-columns-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      form.hs-form.gi-overrides fieldset.form-columns-2 { display: grid; grid-template-columns: 1fr; gap: 16px; }
+      @media (min-width: 768px) { form.hs-form.gi-overrides fieldset.form-columns-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     `;
     function loadScript() {
       return new Promise<void>((resolve, reject) => {
@@ -86,6 +90,14 @@ export default function HubSpotForm({ portalId, formId, region, targetId, cssCla
           target: `#${containerId}`,
           region,
           css: embeddedCss,
+          onFormReady: (form: any) => {
+            try {
+              const formEl: HTMLFormElement | null = (form && (form[0] || form)) as HTMLFormElement;
+              if (formEl) {
+                formEl.classList.add('gi-overrides');
+              }
+            } catch {}
+          },
         });
       } catch (e) {
         // eslint-disable-next-line no-console

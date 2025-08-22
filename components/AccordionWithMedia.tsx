@@ -13,6 +13,9 @@ export default function AccordionWithMedia({
   imageSrc,
   imageAlt,
   imageRight = true,
+  imageObjectFit = 'cover',
+  imageAspectClass = 'aspect-[4/3]',
+  imagePadding = false,
   className,
   initialOpenIndex = null,
 }: {
@@ -21,6 +24,9 @@ export default function AccordionWithMedia({
   imageSrc: string;
   imageAlt: string;
   imageRight?: boolean;
+  imageObjectFit?: 'cover' | 'contain';
+  imageAspectClass?: string; // Tailwind aspect utility or custom
+  imagePadding?: boolean;
   className?: string;
   initialOpenIndex?: number | null;
 }) {
@@ -93,8 +99,13 @@ export default function AccordionWithMedia({
 
   const Media = (
     <div className="w-full">
-      <div className="relative mx-auto aspect-[4/3] w-full max-w-xl overflow-hidden rounded-2xl ring-1 ring-gi-fog">
-        <Image src={imageSrc} alt={imageAlt} fill sizes="(min-width: 1024px) 40rem, 100vw" className="object-cover" priority />
+      <div className={[
+        'relative mx-auto',
+        imageAspectClass,
+        'w-full max-w-xl overflow-hidden rounded-2xl ring-1 ring-gi-fog',
+        imagePadding ? 'bg-white p-4' : '',
+      ].filter(Boolean).join(' ')}>
+        <Image src={imageSrc} alt={imageAlt} fill sizes="(min-width: 1024px) 40rem, 100vw" className={imageObjectFit === 'contain' ? 'object-contain' : 'object-cover'} priority />
       </div>
     </div>
   );

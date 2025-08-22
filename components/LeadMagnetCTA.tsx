@@ -79,11 +79,9 @@ export default function LeadMagnetCTA({ id, className, title = DEFAULT_TITLE, bo
               <div aria-hidden className="pointer-events-none absolute inset-x-6 -bottom-4 h-8 rounded-b-[18px] bg-gradient-to-r from-gi-pink/30 via-gi-green/20 to-gi-pink/30 blur-[10px] opacity-90" />
               <div className="rounded-3xl bg-gradient-to-r from-gi-pink/35 via-gi-green/20 to-gi-pink/35 p-[1px]">
                 <div className="relative rounded-[22px] bg-white p-4 shadow-gi">
-                  <div className="pointer-events-none absolute -right-2 top-6 h-4 w-[92%] rounded-xl bg-gi-fog" />
-                  <div className="pointer-events-none absolute -right-4 top-10 h-4 w-[88%] rounded-xl bg-gi-fog/80" />
                   <div className="relative rounded-2xl ring-1 ring-gi-fog transition-transform duration-300 will-change-transform hover:-translate-y-0.5 hover:rotate-[0.2deg]">
                     <Image
-                      src="/images/8weekplan.webp"
+                      src="/images/8-week-launch-home.webp"
                       width={720}
                       height={460}
                       alt="8‑Week Agent Launch Plan cover"

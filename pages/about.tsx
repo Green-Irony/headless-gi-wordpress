@@ -80,7 +80,7 @@ const Page: any = function AboutPage(props: any) {
                 impacts: ['½ delivery time', 'Deflection ↑', 'Capacity ↑'],
               },
             ]}
-            poster={{ imageSrc: '/images/accordion-sample.svg', imageAlt: 'Origin story visual', badge: 'AI‑Native' }}
+            poster={{ imageSrc: '/images/origin-story.webp', imageAlt: 'Origin story visual', badge: 'AI‑Native' }}
             showCredibilityRow={false}
             initialMilestone={'Now'}
             imageLeft={false}
@@ -110,7 +110,7 @@ const Page: any = function AboutPage(props: any) {
           <div className="mt-6">
             <AccordionWithMedia
               heading="What makes us different"
-              imageSrc="/images/accordion-sample.svg"
+              imageSrc="/images/expert-AI.webp"
               imageAlt="Illustration of Green Irony services"
               imageRight={false}
               items={[

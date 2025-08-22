@@ -66,9 +66,12 @@ const Page: any = function PlanPage(props: any) {
         {/* What you get */}
         <AccordionWithMedia
           heading="What you get in 8 weeks"
-          imageSrc="/images/accordion-sample.svg"
+          imageSrc="/images/delivery-worker-with-iconic-boxes.webp"
           imageAlt="Eight‑week plan visual"
           imageRight={true}
+          imageObjectFit="contain"
+          imageAspectClass="aspect-[4/3]"
+          imagePadding={true}
           initialOpenIndex={0}
           items={[
             { title: 'Use‑case selection & KPI scorecard', body: 'A crisp problem statement with measurable outcomes and owners.' },
