@@ -18,6 +18,7 @@ import LeadMagnetCTA from "../components/LeadMagnetCTA";
 import PreFooterCTA from "../components/PreFooterCTA";
 import { FRONT_PAGE_SECTIONS_QUERY, FRONT_PAGE_MIN_QUERY } from "../queries/SectionsQueries";
 import { renderSections } from "../lib/sectionRegistry";
+import PlatformExpertise from "components/PlatformExpertise";
 const BackgroundStarsCanvas = dynamic(() => import('../components/BackgroundStarsCanvas'), { ssr: false });
 
 
@@ -150,6 +151,7 @@ export default function FrontPage(props) {
               ]}
               columns={3}
             />
+            <PlatformExpertise/>
             {/* <HowItWorksLinear
               heading="A lean path to your first AI outcome"
               steps={[
