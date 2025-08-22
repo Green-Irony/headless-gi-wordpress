@@ -54,23 +54,13 @@ const Page: any = function MulesoftPage(props: any) {
           heading="From integration backlog to business impact — fast"
           items={[
             { title: 'Half the cycle time', body: 'Go live in as little as 3 weeks.', iconNode: (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="8" />
-                <path d="M12 8v4l3 2" />
-              </svg>
+              <img src="/icons/agent_astro.svg" alt="" />
             ) },
             { title: 'Predictable performance', body: 'Clear SLAs, monitoring, and reliability from day one.', iconNode: (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 12l7-7 3 3 8-8" />
-              </svg>
+              <img src="/icons/mixed_sources_mapping.svg" alt="" />
             ) },
             { title: 'Scalable foundation', body: 'Composable base ready for new systems, processes, and agents.', iconNode: (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="7" height="7" rx="1.5" />
-                <rect x="14" y="3" width="7" height="7" rx="1.5" />
-                <rect x="3" y="14" width="7" height="7" rx="1.5" />
-                <rect x="14" y="14" width="7" height="7" rx="1.5" />
-              </svg>
+              <img src="/icons/high_velocity_sales.svg" alt="" />
             ) },
           ]}
         />

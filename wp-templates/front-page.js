@@ -130,26 +130,14 @@ export default function FrontPage(props) {
               heading="From investment to impact — fast"
               subhead="Most AI pilots stall because agents can’t see context, act safely, or scale. We combine integration-first architecture, AI-native agent design, and senior delivery to give you outcomes you can plan around."
               items={[
-                { title: 'Deflection that scales', body: 'Agents surface answers and take safe actions to reduce live demand.', iconNode: (
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-                    <circle cx="12" cy="12" r="8" />
-                    <path d="M8 12h5l3-3" />
-                    <path d="M13 9v6" />
-                  </svg>
+                { title: '2x Faster Delivery', body: 'AI‑accelerated methods cut cycle time in half—go live in weeks, not months.', iconNode: (
+                  <img src="/icons/clock.svg" alt="" className="h-5 w-5" />
                 ) },
-                { title: 'Speed to value', body: 'AI‑accelerated delivery cuts cycle time in half; go live in 8 weeks.', iconNode: (
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-                    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-                    <path d="M12 12l7-7" />
-                  </svg>
+                { title: 'Offshore Economics, Onshore Expertise', body: 'US‑based senior team with offshore‑competitive economics.', iconNode: (
+                  <img src="/icons/skill.svg" alt="" className="h-5 w-5" />
                 ) },
-                { title: 'Capacity unlocked', body: 'Free experts for strategic work while agents handle structured, repeatable demand.', iconNode: (
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-                    <circle cx="8" cy="8" r="3" />
-                    <path d="M2 22c1.8-3.6 4.8-6 8-6" />
-                    <circle cx="16" cy="12" r="3" />
-                    <path d="M10 22c1.8-3.6 4.8-6 8-6" />
-                  </svg>
+                { title: 'Predictable Outcomes', body: 'Outcome‑driven scope, SLAs, and quality you can plan around.', iconNode: (
+                  <img src="/icons/line_chart.svg" alt="" className="h-5 w-5" />
                 ) },
               ]}
             />

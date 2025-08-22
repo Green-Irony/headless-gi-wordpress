@@ -49,34 +49,17 @@ const Page: any = function DataMigrationsPage(props: any) {
             { title: 'Security, governance & lineage', body: 'Access controls, PII handling, and lineage tracking aligned to your compliance requirements.' },
           ]}
         />
-        <ChecklistCard
-          heading="From messy data to dependable decisions — fast"
-          items={[
-            'Minimal downtime — Cutovers are planned and tested so teams stay productive.',
-            'Trusted from day one — Clean, reconciled datasets with validation checks.',
-            'Ready for real time — Event‑driven pipelines that keep data current across systems.',
-          ]}
-          columns={3}
-        />
         <ValuePillars
           heading="From messy data to dependable decisions — fast"
           items={[
-            { title: 'Minimal downtime', body: 'Planned and tested cutovers keep teams productive.', iconNode: (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-                <path d="M12 12l7-7" />
-              </svg>
+            { title: 'Foundation for speed', body: 'Strong models and governed domains unlock fast, safe change.', iconNode: (
+              <img src="/icons/data_model.svg" alt="" />
             ) },
-            { title: 'Trusted from day one', body: 'Clean, reconciled datasets with validation checks.', iconNode: (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 12l6 6L20 6" />
-              </svg>
+            { title: 'Trust you can build on', body: 'Reconciled, validated data becomes the source of truth for every team.', iconNode: (
+              <img src="/icons/check.svg" alt="" />
             ) },
-            { title: 'Ready for real time', body: 'Event‑driven pipelines keep data current across systems.', iconNode: (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M2 12h20" />
-                <path d="M12 2v20" />
-              </svg>
+            { title: 'Real‑time ready', body: 'Event‑driven pipelines keep context fresh—powering agents and new experiences.', iconNode: (
+              <img src="/icons/data_cloud.svg" alt="" />
             ) },
           ]}
         />

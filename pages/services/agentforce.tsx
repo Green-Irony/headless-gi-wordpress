@@ -53,21 +53,13 @@ const Page: any = function AgentforcePage(props: any) {
           heading="Outcome promise"
           items={[
             { title: 'Working agent in 8 weeks', body: 'Delivers a clear, business‑valued outcome.', iconNode: (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="8" />
-                <path d="M12 8v4l3 2" />
-              </svg>
+              <img src="/icons/agent_astro.svg" alt="" />
             ) },
             { title: 'Automation coverage', body: 'Focus on repetitive, structured work to maximize impact.', iconNode: (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 17l6-6 4 4 7-7" />
-                <path d="M14 5h7v7" />
-              </svg>
+              <img src="/icons/data_transforms.svg" alt="" />
             ) },
             { title: 'Capacity freed', body: 'Shift routine effort to agents while keeping humans in the loop.', iconNode: (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 17l6-6 4 4 7-7" />
-              </svg>
+              <img src="/icons/graph.svg" alt="" />
             ) },
           ]}
         />
