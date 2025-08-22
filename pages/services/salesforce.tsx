@@ -54,10 +54,7 @@ const Page: any = function SalesforcePage(props: any) {
           heading="Outcome promise"
           items={[
             { title: 'Faster internal throughput', body: 'Reduce manual handoffs and simplify flows.', iconNode: (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 12h18" />
-                <path d="M12 5l7 7-7 7" />
-              </svg>
+              <img src="/icons/add_source.svg" alt="" className="color-gi-green"/>
             ) },
             { title: 'Higher adoption', body: 'Changes are low‑friction and aligned to real work.', iconNode: (
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -66,9 +63,7 @@ const Page: any = function SalesforcePage(props: any) {
               </svg>
             ) },
             { title: 'Agent‑ready Salesforce', body: 'Surfaces the right context and accepts safe actions.', iconNode: (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 12l6 6L20 6" />
-              </svg>
+              <img src="/icons/agent_astro.svg" alt="" />
             ) },
           ]}
         />
