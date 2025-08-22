@@ -52,7 +52,7 @@ const Page: any = function DataMigrationsPage(props: any) {
         <ValuePillars
           heading="From messy data to dependable decisions — fast"
           items={[
-            { title: 'Foundation for speed', body: 'Strong models and governed domains unlock fast, safe change.', iconNode: (
+            { title: 'Foundation for speed', body: 'Strong data models and governed domains unlock fast, safe change.', iconNode: (
               <img src="/icons/data_model.svg" alt="" />
             ) },
             { title: 'Trust you can build on', body: 'Reconciled, validated data becomes the source of truth for every team.', iconNode: (
