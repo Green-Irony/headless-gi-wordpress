@@ -45,7 +45,7 @@ const Page: any = function ContactPage(props: any) {
         <section id="contact-form" className="mx-auto max-w-7xl px-6 py-12">
           <h2 className="text-2xl font-semibold text-gi-text">Start with one measurable outcome</h2>
           <div className="mt-4 rounded-2xl border border-gi-fog bg-white p-6 shadow-gi gi-hubspot">
-            <HubSpotForm portalId="23316092" formId="9c04a0a8-3c21-4a28-b1d9-40dda07dfdd1" />
+            <HubSpotForm portalId="23316092" formId="8c2769e4-7153-4aa4-93da-50065481f9d0" />
           </div>
         </section>
         {/*
