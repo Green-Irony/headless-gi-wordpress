@@ -65,7 +65,7 @@ export default function ValuePillars({ id, className, heading = DEFAULT_HEADING,
   return (
     <m.section
       id={id}
-      className={`relative isolate ${className ?? ''}`}
+      className={`relative isolate mb-24 ${className ?? ''}`}
       initial={{ opacity: 0, y: enterY }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}

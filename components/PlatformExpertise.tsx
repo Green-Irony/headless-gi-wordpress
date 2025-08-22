@@ -12,11 +12,11 @@ type CloudItem = {
 const CLOUDS: CloudItem[] = [
   { name: 'Sales Cloud', logoSrc: '/logos/salesforce/sales-cloud.png', alt: 'Sales Cloud' },
   { name: 'Service Cloud', logoSrc: '/logos/salesforce/service-cloud.png', alt: 'Service Cloud' },
-  { name: 'Agentforce', logoSrc: '/icons/agent_astro.svg', alt: 'Agentforce' },
-  { name: 'MuleSoft', logoSrc: '/icons/mulesoft.svg', alt: 'MuleSoft' },
+  { name: 'Agentforce', logoSrc: '/logos/salesforce/agentforce.webp', alt: 'Agentforce' },
+  { name: 'MuleSoft', logoSrc: '/logos/salesforce/mulesoft.png', alt: 'MuleSoft' },
   { name: 'Experience Cloud', logoSrc: '/logos/salesforce/experience-cloud.webp', alt: 'Experience Cloud' },
   { name: 'Revenue Cloud', logoSrc: '/logos/salesforce/sales-cloud.png', alt: 'Revenue Cloud' }, // placeholder
-  { name: 'Data Cloud', logoSrc: '/icons/data_cloud.svg', alt: 'Data Cloud', logoClass: 'scale-110 md:scale-125 origin-center' },
+  { name: 'Data Cloud', logoSrc: '/logos/salesforce/datacloud.png', alt: 'Data Cloud', logoClass: 'scale-110 md:scale-125 origin-center' },
 ];
 
 export default function PlatformExpertise({ id, className }: { id?: string; className?: string }) {

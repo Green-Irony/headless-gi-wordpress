@@ -73,7 +73,7 @@ const Page: any = function AgentforcePage(props: any) {
             'Predictable outcomes: Scope, build, and go‑live you can plan around.',
           ]}
         />
-        <section className="mx-auto max-w-7xl px-6 py-10">
+        <section className="mx-auto max-w-7xl px-6 py-24">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-2xl font-semibold text-gi-text">Featured customer story</h2>
             <a href="/customer-stories" className="text-sm font-semibold text-gi-text hover:underline">See all</a>
