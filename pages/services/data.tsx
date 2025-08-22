@@ -8,6 +8,7 @@ import PreFooterCTA from '../../components/PreFooterCTA';
 import HeroSimple from '../../components/HeroSimple';
 import DeliverablesWheel from '../../components/DeliverablesWheel';
 import WhyUsBanner from '../../components/WhyUsBanner';
+import ServiceHero from '../../components/ServiceHero';
 import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../../queries/SiteSettingsQuery';
@@ -33,9 +34,11 @@ const Page: any = function DataMigrationsPage(props: any) {
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
 
       <main>
-        <HeroSimple
+        <ServiceHero
           title="Data & Migrations, done right"
           subhead="Seamless platform migrations and trusted data pipelines so your teams (and future agents) make reliable, real-time decisions—without surprises or downtime."
+          image={{ src: '/images/delivery-worker-with-iconic-boxes.webp', alt: 'Data migrations' }}
+          primaryCta={{ label: 'Map My Data for AI', href: '/contact' }}
         />
         <DeliverablesWheel
           heading="What we deliver"
@@ -54,6 +57,28 @@ const Page: any = function DataMigrationsPage(props: any) {
             'Ready for real time — Event‑driven pipelines that keep data current across systems.',
           ]}
           columns={3}
+        />
+        <ValuePillars
+          heading="From messy data to dependable decisions — fast"
+          items={[
+            { title: 'Minimal downtime', body: 'Planned and tested cutovers keep teams productive.', iconNode: (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                <path d="M12 12l7-7" />
+              </svg>
+            ) },
+            { title: 'Trusted from day one', body: 'Clean, reconciled datasets with validation checks.', iconNode: (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 12l6 6L20 6" />
+              </svg>
+            ) },
+            { title: 'Ready for real time', body: 'Event‑driven pipelines keep data current across systems.', iconNode: (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M2 12h20" />
+                <path d="M12 2v20" />
+              </svg>
+            ) },
+          ]}
         />
         <WhyUsBanner
           bullets={[

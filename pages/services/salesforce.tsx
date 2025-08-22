@@ -8,6 +8,7 @@ import PreFooterCTA from '../../components/PreFooterCTA';
 import HeroSimple from '../../components/HeroSimple';
 import DeliverablesWheel from '../../components/DeliverablesWheel';
 import WhyUsBanner from '../../components/WhyUsBanner';
+import ServiceHero from '../../components/ServiceHero';
 import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../../queries/SiteSettingsQuery';
@@ -33,9 +34,11 @@ const Page: any = function SalesforcePage(props: any) {
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
 
       <main>
-        <HeroSimple
+        <ServiceHero
           title="Salesforce done right — faster"
           subhead="From Sales Cloud to Experience Cloud and beyond, our senior architects deliver Salesforce builds that scale. With AI‑accelerated methods, you get predictable outcomes in half the time—without the costly rework that comes from shortcuts."
+          image={{ src: '/images/8-week-launch-home.webp', alt: 'Salesforce optimization' }}
+          primaryCta={{ label: 'Optimize My Org', href: '/contact' }}
         />
         <DeliverablesWheel
           heading="What we deliver"
@@ -47,14 +50,27 @@ const Page: any = function SalesforcePage(props: any) {
           ]}
         />
 
-        <ChecklistCard
+        <ValuePillars
           heading="Outcome promise"
           items={[
-            'Faster internal throughput — Reduce manual handoffs and simplify flows.',
-            'Higher adoption — Changes are low‑friction and aligned to real work.',
-            'Agent‑ready Salesforce — Reliably surfaces the right context and accepts safe actions.',
+            { title: 'Faster internal throughput', body: 'Reduce manual handoffs and simplify flows.', iconNode: (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 12h18" />
+                <path d="M12 5l7 7-7 7" />
+              </svg>
+            ) },
+            { title: 'Higher adoption', body: 'Changes are low‑friction and aligned to real work.', iconNode: (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 21c2-4 6-6 8-6s6 2 8 6" />
+              </svg>
+            ) },
+            { title: 'Agent‑ready Salesforce', body: 'Surfaces the right context and accepts safe actions.', iconNode: (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 12l6 6L20 6" />
+              </svg>
+            ) },
           ]}
-          columns={3}
         />
         <WhyUsBanner
           body="We redesign Salesforce around outcomes—signal design, safe actions, and enablement—so agents and humans operate as one team."

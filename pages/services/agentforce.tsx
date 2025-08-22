@@ -3,9 +3,10 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import HeroSimple from '../../components/HeroSimple';
 import DeliverablesWheel from '../../components/DeliverablesWheel';
-import ChecklistCard from '../../components/ChecklistCard';
+import ValuePillars from '../../components/ValuePillars';
 import WhyUsBanner from '../../components/WhyUsBanner';
 import PreFooterCTA from '../../components/PreFooterCTA';
+import ServiceHero from '../../components/ServiceHero';
 import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../../queries/SiteSettingsQuery';
@@ -31,9 +32,11 @@ const Page: any = function AgentforcePage(props: any) {
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
 
       <main>
-        <HeroSimple
+        <ServiceHero
           title="AI agents that work—right from the start"
           subhead="Whether it’s your first agent or your next ten, we design Salesforce‑native agents with clear jobs, safe actions, and measurable KPIs. Delivered by US‑based experts using AI‑accelerated methods, you’ll see value twice as fast—and scale with confidence."
+          image={{ src: '/images/expert-AI.webp', alt: 'Expert AI' }}
+          primaryCta={{ label: 'Plan my first win', href: '/contact' }}
         />
         <DeliverablesWheel
           heading="What we deliver"
@@ -46,14 +49,27 @@ const Page: any = function AgentforcePage(props: any) {
             { title: 'Scalability roadmap', body: 'Move from a single pilot to enterprise‑wide digital labor with a step‑by‑step plan to scale agents safely and predictably across teams.' },
           ]}
         />
-        <ChecklistCard
+        <ValuePillars
           heading="Outcome promise"
           items={[
-            'Working agent in 8 weeks — Delivers a clear, business-valued outcome.',
-            'Automation coverage — Focus on repetitive, structured work to maximize impact.',
-            'Capacity freed — Shift routine effort to agents while keeping humans in the loop for escalation.',
+            { title: 'Working agent in 8 weeks', body: 'Delivers a clear, business‑valued outcome.', iconNode: (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="8" />
+                <path d="M12 8v4l3 2" />
+              </svg>
+            ) },
+            { title: 'Automation coverage', body: 'Focus on repetitive, structured work to maximize impact.', iconNode: (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 17l6-6 4 4 7-7" />
+                <path d="M14 5h7v7" />
+              </svg>
+            ) },
+            { title: 'Capacity freed', body: 'Shift routine effort to agents while keeping humans in the loop.', iconNode: (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 17l6-6 4 4 7-7" />
+              </svg>
+            ) },
           ]}
-          columns={3}
         />
         <WhyUsBanner
           //body="We orchestrate agents as real operators—job definitions, safe actions, and KPIs—so the first win lands quickly and scales predictably."

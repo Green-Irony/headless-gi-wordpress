@@ -8,6 +8,7 @@ import PreFooterCTA from '../../components/PreFooterCTA';
 import HeroSimple from '../../components/HeroSimple';
 import DeliverablesWheel from '../../components/DeliverablesWheel';
 import WhyUsBanner from '../../components/WhyUsBanner';
+import ServiceHero from '../../components/ServiceHero';
 import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../../queries/SiteSettingsQuery';
@@ -33,9 +34,11 @@ const Page: any = function MulesoftPage(props: any) {
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
 
       <main>
-        <HeroSimple
+        <ServiceHero
           title="MuleSoft integration, delivered faster"
           subhead="AI-accelerated, senior-led MuleSoft delivery cuts integration timelines in half—so you get rock-solid, enterprise-grade integrations in weeks, not months. (And when you’re ready for AI agents, your architecture will already be prepared.)"
+          image={{ src: '/images/investment-to-impact.webp', alt: 'Integration pipelines and events' }}
+          primaryCta={{ label: 'Review My Integration Gaps', href: '/contact' }}
         />
         <DeliverablesWheel
           heading="What we deliver"
@@ -47,14 +50,29 @@ const Page: any = function MulesoftPage(props: any) {
             { title: 'Deployment & validation runbook', body: 'Documented deployment steps, rollback plans, and validation processes ensure your integrations go live smoothly.' },
           ]}
         />
-        <ChecklistCard
+        <ValuePillars
           heading="From integration backlog to business impact — fast"
           items={[
-            'Half the cycle time — Integrations go live in as little as 3 weeks.',
-            'Predictable performance — Clear SLAs, monitoring, and reliability from day one.',
-            'Scalable foundation — Composable base ready for new systems, processes, and agents.',
+            { title: 'Half the cycle time', body: 'Go live in as little as 3 weeks.', iconNode: (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="8" />
+                <path d="M12 8v4l3 2" />
+              </svg>
+            ) },
+            { title: 'Predictable performance', body: 'Clear SLAs, monitoring, and reliability from day one.', iconNode: (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 12l7-7 3 3 8-8" />
+              </svg>
+            ) },
+            { title: 'Scalable foundation', body: 'Composable base ready for new systems, processes, and agents.', iconNode: (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                <rect x="14" y="14" width="7" height="7" rx="1.5" />
+              </svg>
+            ) },
           ]}
-          columns={3}
         />
         <WhyUsBanner
           body="Our senior MuleSoft architects, augmented by AI, ship faster with higher reliability—so your agents can act with confidence."
