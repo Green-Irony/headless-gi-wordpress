@@ -7,6 +7,7 @@ import ValuePillars from '../../components/ValuePillars';
 import WhyUsBanner from '../../components/WhyUsBanner';
 import PreFooterCTA from '../../components/PreFooterCTA';
 import ServiceHero from '../../components/ServiceHero';
+import FeaturedCustomer from '../../components/FeaturedCustomer';
 import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../../queries/SiteSettingsQuery';
@@ -72,12 +73,19 @@ const Page: any = function AgentforcePage(props: any) {
             'Predictable outcomes: Scope, build, and go‑live you can plan around.',
           ]}
         />
-        <PreFooterCTA
+        <section className="mx-auto max-w-7xl px-6 py-10">
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-2xl font-semibold text-gi-text">Featured customer story</h2>
+            <a href="/customer-stories" className="text-sm font-semibold text-gi-text hover:underline">See all</a>
+          </div>
+          <FeaturedCustomer />
+        </section>
+        {/*<PreFooterCTA
           title="Plan your first agent win"
           body="Bring a workflow, we’ll shape the job, safe actions, and KPIs to launch in ~8 weeks."
           primaryCta={{ label: 'Scope My First Agent', href: '/contact' }}
           secondaryCta={{ label: 'Get the 8-Week Plan', href: '/plan' }}
-        />
+        />*/}
       </main>
 
       <Footer />

@@ -104,7 +104,7 @@ const Page: any = function CustomerStoriesPage(props: any) {
               proofTag="First higher-ed institution to launch on Salesforce Agentforce."
               quote="The agent feels like a teammate — always on, always informed, and it freed our IT staff to focus on what mattered most."
               primaryCta={{ label: 'Read the full story', href: '/customer-stories/unc-charlotte' }}
-              secondaryCta={{ label: 'Scope my first agent', href: '/contact' }}
+              secondaryCta={{ label: 'Scope my first agent', href: '/plan' }}
             />
 
             <CaseStudyTile
