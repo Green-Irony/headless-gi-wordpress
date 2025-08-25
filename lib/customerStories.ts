@@ -28,7 +28,7 @@ export type StorySection =
   | { type: 'solutionSteps'; steps: Array<{ title: string; body: string; icon?: string }> }
   | { type: 'architectureHighlights'; items: string[] }
   | { type: 'kpis'; items: Array<{ label: string; value?: string }> }
-  | { type: 'results'; items: string[]; title?: string; bg?: 'white' | 'navy' | 'pink' | 'green'; text?: 'white' | 'navy' | 'pink' | 'green' }
+  | { type: 'results'; items: string[]; title?: string; body?: string; bg?: 'white' | 'navy' | 'pink' | 'green'; text?: 'white' | 'navy' | 'pink' | 'green' }
   | { type: 'testimonial'; quote: string; author: string; role?: string; logoSrc?: string; portraitSrc?: string }
   | { type: 'whyUs'; title?: string; bullets?: string[] }
   | { type: 'deliverables'; heading?: string; items: Array<{ title: string; body: string }> }
