@@ -1,5 +1,6 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion as m, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 
@@ -27,6 +28,20 @@ export default function LeadMagnetCTA({ id, className, title = DEFAULT_TITLE, bo
   const prefersReduced = useReducedMotion();
   const enterY = prefersReduced ? 0 : 10;
   const [open, setOpen] = useState(false);
+
+  // Lock page scroll when modal is open (align with CustomerStoriesProof behavior)
+  useEffect(() => {
+    if (open) {
+      const prevHtmlOverflow = document.documentElement.style.overflow;
+      const prevBodyOverflow = document.body.style.overflow;
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.documentElement.style.overflow = prevHtmlOverflow;
+        document.body.style.overflow = prevBodyOverflow;
+      };
+    }
+  }, [open]);
 
   return (
     <m.section
@@ -96,29 +111,7 @@ export default function LeadMagnetCTA({ id, className, title = DEFAULT_TITLE, bo
         </div>
       </div>
 
-      {open && (
-        <div role="dialog" aria-modal="true" className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm" onClick={() => setOpen(false)}>
-          <div className="relative w-full max-w-lg rounded-2xl bg-white p-6 shadow-gi ring-1 ring-gi-fog" onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setOpen(false)} aria-label="Close" className="absolute right-3 top-3 rounded-md bg-white px-2 py-1 text-xs font-medium text-gi-text ring-1 ring-gi-fog hover:bg-gi-fog/60">Close</button>
-            <h3 className="text-lg font-semibold text-gi-text">{title}</h3>
-            <p className="mt-2 text-sm text-gi-gray">Enter your email and we’ll send the PDF, plus the editable KPI scorecard.</p>
-            <form className="mt-6 space-y-3">
-              <div>
-                <label className="block text-sm font-medium text-gi-text">Work email</label>
-                <input type="email" required className="mt-1 w-full rounded-md border border-gi-fog bg-white px-3 py-2 text-sm outline-none ring-0 focus:border-gi-green" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gi-text">First name</label>
-                <input type="text" className="mt-1 w-full rounded-md border border-gi-fog bg-white px-3 py-2 text-sm outline-none ring-0 focus:border-gi-green" />
-              </div>
-              <div className="pt-2">
-                <button type="submit" className="btn-primary w-full">Email me the plan</button>
-              </div>
-            </form>
-            <p className="mt-3 text-[11px] text-gi-gray">By submitting, you agree to receive the guide and occasional updates. You can unsubscribe at any time.</p>
-          </div>
-        </div>
-      )}
+      {open && <LeadMagnetModal onClose={() => setOpen(false)} />}
     </m.section>
   );
 }
@@ -209,11 +202,16 @@ function UnderlinePink() {
 }
 
 function LeadMagnetModal({ onClose }: { onClose: () => void }) {
-  return (
+  // Mount guard for SSR/Next to ensure document is available before portal
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null as any;
+
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
@@ -251,6 +249,7 @@ function LeadMagnetModal({ onClose }: { onClose: () => void }) {
           By submitting, you agree to receive the guide and occasional updates. You can unsubscribe at any time.
         </p>
       </div>
-    </div>
+    </div>,
+    document.body
   );
-} 
+}
