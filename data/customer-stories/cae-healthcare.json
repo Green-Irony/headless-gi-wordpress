@@ -1,0 +1,68 @@
+{
+  "slug": "cae-healthcare",
+  "brand": "CAE Healthcare",
+  "title": "Salesforce CPQ for Complex Product Quoting",
+  "vertical": "Healthcare",
+  "products": ["Salesforce CPQ", "Pardot", "Service Cloud", "Field Service Lightning", "Communities"],
+  "image": { "src": "/logos/logo-cae.webp", "alt": "CAE Healthcare" },
+  "excerpt": "Margin control, quote accuracy, and a single source of truth with Salesforce.",
+  "tags": ["salesforce", "cpq", "margin-control"],
+  "hero": {
+    "title": "Salesforce CPQ for Complex Product Quoting",
+    "subhead": "Margin control, quote accuracy, and a unified source of truth across business units.",
+    "image": { "src": "/logos/logo-cae.webp", "alt": "CAE Healthcare" },
+    "primaryCta": { "label": "Talk to an Expert", "href": "/contact" },
+    "secondaryCta": { "label": "See Salesforce Services", "href": "/services/salesforce" }
+  },
+  "sections": [
+    {
+        "type": "testimonial",
+        "quote": "Prior to Salesforce CPQ, we had challenges managing the complexity of our quotes due to the number of permutations of products. As a result of this complexity, margin control on a quote-to-quote level was not always within the thresholds set forth by our business. After partnering with Green Irony and Salesforce, we now have the fine-grained control over product configuration, pricing, and overall margin control on a deal-to-deal basis that we need.",
+        "author": "Steve Silva",
+        "role": "CFO"
+    },
+    { 
+        "type": "challenge",
+        "title": "Healthcare is rapidly evolving and the training and education of the next generation of healthcare professionals must keep pace. CAE Healthcare is at the forefront of this revolution, delivering educational tools and simulation products that help train professionals to provide safe, high-quality patient care. With a broad array of products, CAE is able to offer targeted training to hospitals, medical schools, emergency response teams, military branches and nursing, respiratory, and allied health programs. CAE needed to better manage its complex product line and provide accurate quoting, fine-grained promotional discount control, and margin protection for its state-of-the-art patient simulator product lines.",
+        "align": "left"
+    },
+    {
+      "type": "objectives",
+      "body": "Enable accurate quoting and margin control while unifying customer data for a 360° view.",
+      "items": [
+        { "title": "Real-time Quoting", "body": "Give sellers real-time margin visibility prior to sending quotes." },
+        { "title": "360° Customer View", "body": "Unify Pardot, CPQ, Service, FSL, and Communities for a single customer truth." },
+        { "title": "Single Source of Truth", "body": "Standardize data and processes to ensure accuracy across business units." }
+      ]
+    },
+    {
+      "type": "solution",
+      "title": "Solution",
+      "subhead": "CPQ-led quoting and data unification",
+      "image": { "src": "/images/cae-solution.png", "alt": "CAE Healthcare" },
+      "imageSide": "right",
+      "bullets": [
+        { "title": "Process Design", "body": "End-to-end solution from prospecting to renewals." },
+        { "title": "Data Migration", "body": "Unify data for real-time 360° visibility." },
+        { "title": "CPQ Rollout", "body": "Margin control, approvals, bundling, and automated renewals." }
+      ]
+    },
+    {
+      "type": "results",
+      "items": [
+        "Salesforce CPQ has enabled CAE to overcome unique challenges related to the complexity of its product line and put it in a position to drive additional organizational efficiencies into downstream processes.",
+        "With a single source of truth, CAE has the visibility and business intelligence it needs to know exactly what is being quoted to the customer.",
+        "Accurate data at the close of a deal allows CAE to kick off business processes like shipping, installation and professional services, field service and warranty workflows, accounting and revenue recognition, and customer service engagement, all based on the data collected while quoting.",
+        "With a 360-degree view of the customer, CAE is now able to provide best-in-class service to its loyal customers."
+      ]
+    }
+  ],
+  "seo": {
+    "title": "CAE Healthcare: Salesforce CPQ Transformation",
+    "description": "Complex quoting tamed with CPQ and a unified data model.",
+    "canonical": "/customer-stories/cae-healthcare",
+    "locale": "en-US"
+  }
+}
+
+

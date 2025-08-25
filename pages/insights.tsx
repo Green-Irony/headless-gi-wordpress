@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import InsightsHeroSearch from '../components/InsightsHeroSearch';
 import FeaturedPost from '../components/FeaturedPost';
+import CustomerStoryCard from '../components/CustomerStoryCard';
 import { gql, useQuery } from '@apollo/client';
 import PostTile from '../components/PostTile';
 import { POST_LIST_FRAGMENT } from '../fragments/PostListFragment';
@@ -10,6 +11,7 @@ import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../queries/SiteSettingsQuery';
 import { HEADER_MENU_QUERY } from '../queries/MenuQueries';
 import React from 'react';
+import { loadAllStories, CustomerStory } from '../lib/customerStories';
 
 // Simple latest posts query (9 most recent)
 export const LATEST_POSTS_QUERY = gql`
@@ -48,7 +50,7 @@ function useDebouncedValue<T>(value: T, delayMs = 300): T {
   return debounced;
 }
 
-const Page: any = function InsightsPage(props: any) {
+const Page: any = function InsightsPage(props: any & { stories: CustomerStory[] }) {
   if (props.loading) return <>Loading...</>;
 
   const siteDataQuery = useQuery(SITE_DATA_QUERY) || {};
@@ -175,6 +177,20 @@ const Page: any = function InsightsPage(props: any) {
           onClear={() => setQ('')}
         />
 
+        {/* Customer Stories */}
+        {Array.isArray(props.stories) && props.stories.length > 0 ? (
+          <section className="mx-auto max-w-7xl px-6 py-12">
+            <div className="mx-auto mb-6 h-px w-16 bg-gi-line" />
+            <h2 className="text-2xl font-semibold text-gi-text">Customer Stories</h2>
+            <p className="mt-2 max-w-3xl text-gi-gray">Outcome-focused case studies across industries. Each story includes a summary, visuals, and tags for discovery.</p>
+            <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {props.stories.map((s: CustomerStory) => (
+                <CustomerStoryCard key={s.slug} story={s} />
+              ))}
+            </div>
+          </section>
+        ) : null}
+
         <section className="mx-auto max-w-7xl px-6 py-12">
           {/* Filters button (right-aligned) + selected chips */}
           <div className="mb-6">
@@ -250,7 +266,8 @@ const Page: any = function InsightsPage(props: any) {
 export default Page;
 
 export async function getStaticProps(context: any) {
-  return getNextStaticProps(context, { Page, revalidate: 60 });
+  const stories = loadAllStories();
+  return getNextStaticProps(context, { Page, revalidate: 60, props: { stories } });
 }
 
 (Page as any).queries = [
