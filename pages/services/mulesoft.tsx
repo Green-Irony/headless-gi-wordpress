@@ -53,7 +53,7 @@ const Page: any = function MulesoftPage(props: any) {
         />
         <ValuePillars
           heading="From integration backlog to business impact — fast"
-          subhead="AI-accelerated, senior-led MuleSoft delivery cuts integration timelines in half—so you get rock-solid, enterprise-grade integrations in weeks, not months. (And when you’re ready for AI agents, your architecture will already be prepared.)"
+          subhead="Cut integration cycle time by 50% with composable patterns, observability, and CI/CD — so you go live in as little as 3 weeks with rock-solid reliability you can plan around."
           items={[
             { title: 'Half the cycle time', body: 'Go live in as little as 3 weeks.', iconNode: (
               <img src="/icons/agent_astro.svg" alt="" />

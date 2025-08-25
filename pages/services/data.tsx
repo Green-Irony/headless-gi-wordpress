@@ -51,7 +51,7 @@ const Page: any = function DataMigrationsPage(props: any) {
         />
         <ValuePillars
           heading="From messy data to dependable decisions — fast"
-          subhead="We migrate data for AI‑powered outcomes—so you get predictable, reliable, and scalable results in half the time."
+          subhead="Move without chaos. Execute cutovers with minimal downtime, land trusted, reconciled data on day one, and stand up event-driven pipelines that keep everything current in real time."
           items={[
             { title: 'Foundation for speed', body: 'Strong data models and governed domains unlock fast, safe change.', iconNode: (
               <img src="/icons/data_model.svg" alt="" />

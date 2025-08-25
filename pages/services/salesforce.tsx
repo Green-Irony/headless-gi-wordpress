@@ -53,7 +53,7 @@ const Page: any = function SalesforcePage(props: any) {
 
         <ValuePillars
           heading="Outcome promise"
-          subhead="We optimize Salesforce for AI‑powered outcomes—so you get predictable, reliable, and scalable results in half the time."
+          subhead="Deliver Salesforce the right way — AI-accelerated discovery, design, and build that go live in as little as 4 weeks, drive adoption on day one, and avoid costly rework."
           items={[
             { title: 'Faster internal throughput', body: 'Reduce manual handoffs and simplify flows.', iconNode: (
               <img src="/icons/add_source.svg" alt="" />
