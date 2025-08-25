@@ -37,7 +37,7 @@ export type StorySection =
   | { type: 'faq'; items: Array<{ q: string; a: string }> }
   | { type: 'relatedLinks'; items: Array<{ label: string; href: string }> }
   | { type: 'solution'; title?: string; subhead?: string; image?: { src: string; alt?: string }; imageSide?: 'left' | 'right'; bullets?: Array<{ title?: string; body: string }>; bg?: 'white' | 'navy' | 'pink' | 'green'; textPrimary?: 'white' | 'navy' | 'pink' | 'green'; textSecondary?: 'white' | 'navy' | 'pink' | 'green'; bodyBefore?: string; bodyAfter?: string }
-  | { type: 'titleBullets'; title?: string; bullets: string[]; bg?: 'white' | 'navy' | 'pink' | 'green'; text?: 'white' | 'navy' | 'pink' | 'green'; center?: boolean };
+  | { type: 'titleBullets'; title?: string; body?: string; bullets: string[]; bg?: 'white' | 'navy' | 'pink' | 'green'; text?: 'white' | 'navy' | 'pink' | 'green'; center?: boolean };
 
 export type CustomerStory = {
   slug: string;

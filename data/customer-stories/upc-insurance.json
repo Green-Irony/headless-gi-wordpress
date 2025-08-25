@@ -39,9 +39,9 @@
       "type": "solution",
       "title": "Here's the Solution",
       "image": { "src": "/images/banks-has-the-solution.webp", "alt": "Banks has the solution" },
-      "bg": "navy",
-      "textPrimary": "white",
-      "textSecondary": "white",
+      "bg": "white",
+      "textPrimary": "navy",
+      "textSecondary": "navy",
       "imageSide": "left",
       "bodyBefore": "To enable UPC’s integration needs for the implementation of the new policy system, the Green Irony team applied a collaborative solutioning process, working tightly with UPC’s key stakeholders on business goals and their corresponding technology solutions. The collaborative partnership between teams removed roadblocks and led to early success on the platform, uncovering additional integration opportunities and API reuse scenarios to support claims processing and mobile initiatives. The team used the API design patterns promoted by MuleSoft to increase velocity of future development projects and provide the ability to quickly address integration changes.",
       "bullets": [
@@ -62,6 +62,8 @@
     {
       "type": "results",
       "title": "Outcome Highlights",
+      "bg": "navy",
+      "text": "white",
       "items": [
         "Eliminated integration challenges allowing UPC to focus on innovating core business",
         "Designed API strategy that promotes reuse and expansion for future projects",
