@@ -10,13 +10,13 @@ type CloudItem = {
 };
 
 const CLOUDS: CloudItem[] = [
-  { name: 'Sales Cloud', logoSrc: '/logos/salesforce/sales-cloud.png', alt: 'Sales Cloud' },
-  { name: 'Service Cloud', logoSrc: '/logos/salesforce/service-cloud.png', alt: 'Service Cloud' },
-  { name: 'Agentforce', logoSrc: '/logos/salesforce/agentforce.webp', alt: 'Agentforce' },
-  { name: 'MuleSoft', logoSrc: '/logos/salesforce/mulesoft.png', alt: 'MuleSoft' },
-  { name: 'Experience Cloud', logoSrc: '/logos/salesforce/experience-cloud.webp', alt: 'Experience Cloud' },
-  { name: 'Revenue Cloud', logoSrc: '/logos/salesforce/sales-cloud.png', alt: 'Revenue Cloud' }, // placeholder
-  { name: 'Data Cloud', logoSrc: '/logos/salesforce/datacloud.png', alt: 'Data Cloud', logoClass: 'scale-110 md:scale-125 origin-center' },
+  { name: 'Sales Cloud', logoSrc: '/logos/salesforce/icons/icon-sales.svg', alt: 'Sales Cloud' },
+  { name: 'Service Cloud', logoSrc: '/logos/salesforce/icons/icon-service.svg', alt: 'Service Cloud' },
+  { name: 'CPQ & Revenue Cloud', logoSrc: '/logos/salesforce/icons/icon-cpq.png', alt: 'Revenue Cloud' }, // placeholder
+  { name: 'Experience Cloud', logoSrc: '/logos/salesforce/icons/icon-exp.webp', alt: 'Experience Cloud' },
+  { name: 'MuleSoft', logoSrc: '/logos/salesforce/icons/icon-mulesoft.svg', alt: 'MuleSoft' },
+  { name: 'Agentforce', logoSrc: '/logos/salesforce/icons/icon-agentforce.svg', alt: 'Agentforce' },
+  { name: 'Data Cloud', logoSrc: '/logos/salesforce/icons/icon-data-cloud.svg', alt: 'Data Cloud', logoClass: 'scale-110 md:scale-125 origin-center' },
 ];
 
 export default function PlatformExpertise({ id, className }: { id?: string; className?: string }) {
@@ -54,7 +54,7 @@ export default function PlatformExpertise({ id, className }: { id?: string; clas
         <div className="absolute right-[8%] bottom-[12%] h-[420px] w-[420px] rounded-full bg-sky-400/30 blur-[140px]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 py-16">
+      <div className="w-full px-6 py-16">
         <div className="mx-auto mb-8 h-px w-16 bg-gi-line" />
         <h2 className="text-center text-3xl md:text-4xl font-semibold text-gi-text tracking-tight">Platform Expertise</h2>
         <p className="mx-auto mt-4 max-w-2xl text-center text-gi-gray">
@@ -62,7 +62,7 @@ export default function PlatformExpertise({ id, className }: { id?: string; clas
         </p>
 
         <m.ul
-          className="mx-auto mt-12 max-w-5xl flex flex-wrap justify-center gap-5"
+          className="mx-auto mt-12 flex w-full flex-wrap justify-center gap-8"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
@@ -71,24 +71,22 @@ export default function PlatformExpertise({ id, className }: { id?: string; clas
           {CLOUDS.map((cloud, idx) => (
             <m.li
               key={cloud.name}
-              className="relative overflow-visible basis-1/2 sm:basis-1/3 md:basis-1/4"
+              className="relative w-[180px] overflow-visible"
               variants={itemVariants}
             >
-              <div className="group rounded-2xl bg-white/70 ring-1 ring-gi-fog backdrop-blur shadow-gi p-4">
-                <div className="flex flex-col items-center gap-3">
+              <div className="flex flex-col items-center">
+                <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-white ring-1 ring-gi-fog shadow-gi">
                   <m.img
                     src={cloud.logoSrc}
                     alt={cloud.alt}
-                    className={`h-10 w-auto md:h-12 drop-shadow-sm ${cloud.logoClass ?? ''}`}
+                    className={`h-10 w-auto md:h-12 ${cloud.logoClass ?? ''}`}
                     initial={false}
                     animate={prefersReduced ? {} : { y: [0, -6, 0, 6, 0] }}
                     transition={{ duration: 6 + (idx % 3), repeat: Infinity, ease: 'easeInOut' }}
                     loading="lazy"
                   />
-                  <div className="text-center">
-                    <div className="text-sm font-medium text-gi-text">{cloud.name}</div>
-                  </div>
                 </div>
+                <div className="mt-3 text-center text-sm font-medium text-gi-text">{cloud.name}</div>
               </div>
             </m.li>
           ))}
