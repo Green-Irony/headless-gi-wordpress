@@ -5,6 +5,17 @@ module.exports = {
     './pages/**/*.{js,jsx,ts,tsx}',
     './wp-templates/**/*.{js,jsx,ts,tsx}',
   ],
+  safelist: [
+    // Dynamic classes used via template strings in components (e.g., Solution)
+    'text-gi-white',
+    'text-gi-navy',
+    'text-gi-pink',
+    'text-gi-green',
+    'bg-gi-white',
+    'bg-gi-navy',
+    'bg-gi-pink',
+    'bg-gi-green',
+  ],
   theme: {
     extend: {
       colors: {
