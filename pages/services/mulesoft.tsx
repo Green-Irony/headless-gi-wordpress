@@ -48,10 +48,12 @@ const Page: any = function MulesoftPage(props: any) {
             { title: 'Observability & reliability', body: 'End-to-end monitoring, tracing, and SLAs so issues are visible, recoverable, and rare—giving you confidence in production.' },
             { title: 'Integration gap assessment', body: 'Quick diagnostic to surface the minimal set of pipelines/events required for your first agentic win.' },
             { title: 'Deployment & validation runbook', body: 'Documented deployment steps, rollback plans, and validation processes ensure your integrations go live smoothly.' },
+            { title: 'CI/CD & environment strategy', body: 'Automated pipelines, promotion gates, and secrets management across dev/test/stage/prod so every release is repeatable, auditable, and fast.' },
           ]}
         />
         <ValuePillars
           heading="From integration backlog to business impact — fast"
+          subhead="AI-accelerated, senior-led MuleSoft delivery cuts integration timelines in half—so you get rock-solid, enterprise-grade integrations in weeks, not months. (And when you’re ready for AI agents, your architecture will already be prepared.)"
           items={[
             { title: 'Half the cycle time', body: 'Go live in as little as 3 weeks.', iconNode: (
               <img src="/icons/agent_astro.svg" alt="" />
