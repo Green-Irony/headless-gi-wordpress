@@ -37,7 +37,7 @@ const Page: any = function DataMigrationsPage(props: any) {
         <ServiceHero
           title="Data & Migrations, done right"
           subhead="Seamless platform migrations and trusted data pipelines so your teams (and future agents) make reliable, real-time decisions—without surprises or downtime."
-          image={{ src: '/images/delivery-worker-with-iconic-boxes.webp', alt: 'Data migrations' }}
+          image={{ src: '/images/data-migration.webp', alt: 'Data migrations' }}
           primaryCta={{ label: 'Map My Data for AI', href: '/contact' }}
         />
         <DeliverablesWheel

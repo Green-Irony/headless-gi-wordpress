@@ -1,5 +1,5 @@
 'use client';
-import { motion as m, useReducedMotion } from 'framer-motion';
+import { motion as m, useReducedMotion, type Variants } from 'framer-motion';
 import React from 'react';
 
 type CloudItem = {
@@ -22,6 +22,21 @@ const CLOUDS: CloudItem[] = [
 export default function PlatformExpertise({ id, className }: { id?: string; className?: string }) {
   const prefersReduced = useReducedMotion();
   const enterY = prefersReduced ? 0 : 10;
+  const listVariants: Variants = {
+    hidden: {},
+    show: prefersReduced ? {} : { transition: { staggerChildren: 0.2 } },
+  };
+  const itemVariants: Variants = prefersReduced
+    ? { hidden: { opacity: 1, y: 0, scale: 1 }, show: { opacity: 1, y: 0, scale: 1 } }
+    : {
+        hidden: { opacity: 0, y: 12, scale: 0.96 },
+        show: {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          transition: { type: 'spring' as const, stiffness: 720, damping: 18, mass: 0.7 },
+        },
+      };
 
   return (
     <m.section
@@ -51,13 +66,13 @@ export default function PlatformExpertise({ id, className }: { id?: string; clas
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.06 } } }}
+          variants={listVariants}
         >
           {CLOUDS.map((cloud, idx) => (
             <m.li
               key={cloud.name}
               className="relative overflow-visible basis-1/2 sm:basis-1/3 md:basis-1/4"
-              variants={{ hidden: { opacity: 0, y: enterY }, show: { opacity: 1, y: 0, transition: { duration: 0.22, ease: 'easeOut' } } }}
+              variants={itemVariants}
             >
               <div className="group rounded-2xl bg-white/70 ring-1 ring-gi-fog backdrop-blur shadow-gi p-4">
                 <div className="flex flex-col items-center gap-3">

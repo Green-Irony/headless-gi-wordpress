@@ -36,7 +36,7 @@ const Page: any = function AgentforcePage(props: any) {
         <ServiceHero
           title="AI agents that work—right from the start"
           subhead="Whether it’s your first agent or your next ten, we design Salesforce‑native agents with clear jobs, safe actions, and measurable KPIs. Delivered by US‑based experts using AI‑accelerated methods, you’ll see value twice as fast—and scale with confidence."
-          image={{ src: '/images/expert-AI.webp', alt: 'Expert AI' }}
+          image={{ src: '/images/investment-to-impact2.webp', alt: 'Expert AI' }}
           primaryCta={{ label: 'Plan my first win', href: '/contact' }}
         />
         <DeliverablesWheel

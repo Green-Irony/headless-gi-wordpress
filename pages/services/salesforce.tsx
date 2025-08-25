@@ -38,7 +38,7 @@ const Page: any = function SalesforcePage(props: any) {
         <ServiceHero
           title="Salesforce done right — faster"
           subhead="From Sales Cloud to Experience Cloud and beyond, our senior architects deliver Salesforce builds that scale. With AI‑accelerated methods, you get predictable outcomes in half the time—without the costly rework that comes from shortcuts."
-          image={{ src: '/images/8-week-launch-home.webp', alt: 'Salesforce optimization' }}
+          image={{ src: '/images/investment-to-impact.webp', alt: 'Salesforce optimization' }}
           primaryCta={{ label: 'Optimize My Org', href: '/contact' }}
         />
         <DeliverablesWheel

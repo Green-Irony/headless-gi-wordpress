@@ -37,7 +37,7 @@ const Page: any = function MulesoftPage(props: any) {
         <ServiceHero
           title="MuleSoft integration, delivered faster"
           subhead="AI-accelerated, senior-led MuleSoft delivery cuts integration timelines in half—so you get rock-solid, enterprise-grade integrations in weeks, not months. (And when you’re ready for AI agents, your architecture will already be prepared.)"
-          image={{ src: '/images/investment-to-impact.webp', alt: 'Integration pipelines and events' }}
+          image={{ src: '/images/services-mulesoft-hero.webp', alt: 'Integration pipelines and events' }}
           primaryCta={{ label: 'Review My Integration Gaps', href: '/contact' }}
         />
         <DeliverablesWheel

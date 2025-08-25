@@ -88,9 +88,9 @@ const Page: any = function PlanPage(props: any) {
           heading="Why this works"
           subhead="Integration‑first architecture + AI‑native delivery + senior leadership = predictable outcomes you can plan around."
           items={[
-            { title: 'Deflection that scales', body: 'Agents surface answers and take safe actions to reduce live demand.' },
-            { title: 'Speed to value', body: 'AI‑accelerated MuleSoft delivery cuts cycle time in half; your first working agent in ~8 weeks.' },
-            { title: 'Capacity unlocked', body: 'Free experts for strategic work while agents handle structured, repeatable demand.' },
+            { title: 'Deflection that scales', body: 'Agents surface answers and take safe actions to reduce live demand.', iconSrc: '/icons/robot.svg', iconAlt: 'AI agent' },
+            { title: 'Speed to value', body: 'AI‑accelerated MuleSoft delivery cuts cycle time in half; your first working agent in ~8 weeks.', iconSrc: '/icons/clock.svg', iconAlt: 'Faster time to value' },
+            { title: 'Capacity unlocked', body: 'Free experts for strategic work while agents handle structured, repeatable demand.', iconSrc: '/icons/groups.svg', iconAlt: 'Team capacity' },
           ]}
         />
 

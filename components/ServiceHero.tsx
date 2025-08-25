@@ -44,20 +44,20 @@ export default function ServiceHero({ title, subhead, image, primaryCta, seconda
           </div>
 
           <div className="md:col-span-6">
-            <div className="relative mx-auto w-full max-w-[560px]">
+            <div className="relative mx-auto w-full max-w-[560px] h-[320px] md:h-[400px]">
               <div aria-hidden className="pointer-events-none absolute inset-x-8 -bottom-4 h-8 rounded-b-[18px] bg-gradient-to-r from-gi-green/30 via-gi-pink/20 to-gi-green/30 blur-[10px] opacity-90" />
-              <div className="relative">
+              <div className="relative h-full">
                 {image?.src ? (
                   <Image
                     src={image.src}
                     alt={image.alt ?? ''}
-                    width={image.width ?? 960}
-                    height={image.height ?? 720}
-                    className="block w-full h-auto"
+                    fill
+                    sizes="(min-width: 768px) 560px, 100vw"
+                    className="w-full h-full object-contain"
                     priority
                   />
                 ) : (
-                  <div className="aspect-[4/3] w-full rounded-2xl bg-gi-fog" />
+                  <div className="h-full w-full rounded-2xl bg-gi-fog" />
                 )}
               </div>
             </div>
