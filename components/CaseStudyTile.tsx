@@ -56,7 +56,7 @@ export default function CaseStudyTile(props: CaseStudyTileProps) {
 
 			{/* Glass content panel */}
 			<div className="mt-4 sm:mt-6 lg:mt-8 px-4 pb-6 md:px-6">
-				<div className="mx-auto max-w-5xl rounded-2xl bg-white/80 px-6 py-6 backdrop-blur shadow-gi ring-1 ring-gi-fog/60">
+				<div className="mx-auto max-w-5xl">
 					<div className="flex flex-wrap items-center gap-2">
 						<span className="inline-flex items-center rounded-full bg-gi-green/15 px-2 py-0.5 text-[11px] font-semibold text-gi-text ring-1 ring-gi-fog">{brand}</span>
 						{vertical ? <span className="h-px w-6 bg-gi-line" /> : null}
