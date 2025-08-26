@@ -17,10 +17,21 @@ export async function getServerSideProps(ctx) {
   // Collect static routes
   const staticPaths = [
     '/',
+    // Top-level pages
+    '/about/', '/careers/', '/contact/', '/customer-stories/', '/insights/', '/plan/', '/privacy/', '/terms/',
+    // Services index + leaf pages
     '/services/', '/services/agentforce/', '/services/mulesoft/', '/services/salesforce/', '/services/data/',
-    '/customer-stories/', '/insights/',
-    '/solutions/', '/solutions/higher-education/', '/solutions/smb/', '/solutions/travel/',
-    '/about/', '/careers/', '/contact/', '/plan/', '/privacy/', '/terms/',
+    // Marketing landing pages
+    '/agentforce-job-description/',
+    '/ai-grant-management-guide-for-higher-education/',
+    '/grant-agent/',
+    '/grant-agent-demo-video/',
+    '/mulesoft-reviver/',
+    // Thank-you pages
+    '/thank-you-grant-agent-demo-video/',
+    '/thank-you-grant-agent-higher-ed-guide/',
+    '/thank-you-mulesoft-reviver/',
+    '/thanks/',
   ];
 
   // Collect customer story routes
