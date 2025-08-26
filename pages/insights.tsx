@@ -72,7 +72,7 @@ const Page: any = function InsightsPage(props: any & { stories: any[] }) {
   const { data: postsData, error: postsError, fetchMore, refetch } = useQuery(LATEST_POSTS_QUERY, {
     variables: { first: 9, after: null, categoryIn: selectedCategoryIds.length ? selectedCategoryIds : undefined, search: debouncedQ || undefined },
     notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'no-cache',
+    fetchPolicy: 'cache-first',
     nextFetchPolicy: 'cache-first',
   });
   const initialPosts = postsData?.posts?.nodes || [];
@@ -220,12 +220,30 @@ const Page: any = function InsightsPage(props: any & { stories: any[] }) {
   const isBrowsingNoFilters = selectedType === 'all' && selectedTopics.length === 0 && !debouncedQ;
   const postsLoaded = (accPosts || []).length > 0;
 
+  // Build ItemList JSON-LD for initial items (up to 10)
+  const itemList = (accPosts || []).slice(0, 10).map((p: any, idx: number) => ({
+    '@type': 'ListItem',
+    position: idx + 1,
+    url: p?.uri && !p.uri.startsWith('?p=') ? p.uri : (p?.slug ? `/blog/${p.slug}/` : undefined),
+    name: p?.title,
+  })).filter((x: any) => !!x.url);
+
   return (
     <>
       <Head>
         <title>{siteTitle ? `${siteTitle} — Clarity in the age of AI` : 'Clarity in the age of AI'}</title>
         {canonical ? <link rel="canonical" href={canonical} /> : null}
         {canonical ? <meta property="og:url" content={canonical} /> : null}
+        <link rel="alternate" type="application/rss+xml" title="Green Irony Insights" href="/insights/rss.xml" />
+        {itemList.length > 0 ? (
+          <script
+            type="application/ld+json"
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: itemList }),
+            }}
+          />
+        ) : null}
       </Head>
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
       <main>
