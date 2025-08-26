@@ -12,7 +12,8 @@
   ],
   "image": { "src": "/logos/logo-cae.webp", "alt": "CAE Healthcare" },
   "excerpt": "Margin control, quote accuracy, and a single source of truth with Salesforce.",
-  "tags": ["salesforce", "cpq", "margin-control"],
+  "tags": ["Salesforce", "CPQ"],
+  "datePublished": "2018-05-01",
   "hero": {
     "title": "Salesforce CPQ for Complex Product Quoting",
     "subhead": "Margin control, quote accuracy, and a unified source of truth across business units.",

@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import InsightsHeroSearch from '../components/InsightsHeroSearch';
 import FeaturedPost from '../components/FeaturedPost';
+import CombinedTile, { CombinedItem } from '../components/CombinedTile';
 import CustomerStoryCard from '../components/CustomerStoryCard';
 import { gql, useQuery } from '@apollo/client';
 import PostTile from '../components/PostTile';
@@ -11,7 +12,7 @@ import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../queries/SiteSettingsQuery';
 import { HEADER_MENU_QUERY } from '../queries/MenuQueries';
 import React from 'react';
-import { loadAllStories, CustomerStory } from '../lib/customerStories';
+import { loadAllStories } from '../lib/customerStories';
 
 // Simple latest posts query (9 most recent)
 export const LATEST_POSTS_QUERY = gql`
@@ -50,7 +51,7 @@ function useDebouncedValue<T>(value: T, delayMs = 300): T {
   return debounced;
 }
 
-const Page: any = function InsightsPage(props: any & { stories: CustomerStory[] }) {
+const Page: any = function InsightsPage(props: any & { stories: any[] }) {
   if (props.loading) return <>Loading...</>;
 
   const siteDataQuery = useQuery(SITE_DATA_QUERY) || {};
@@ -79,8 +80,7 @@ const Page: any = function InsightsPage(props: any & { stories: CustomerStory[] 
   const sentinelRef = React.useRef<HTMLDivElement | null>(null);
 
   React.useEffect(() => {
-    setAccPosts([]);
-    setPageInfo(undefined);
+    // Keep current posts visible while refetching to avoid UI flicker to stories-only
     refetch({ first: 9, after: null, categoryIn: selectedCategoryIds.length ? selectedCategoryIds : undefined, search: debouncedQ || undefined });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategoryIds, debouncedQ]);
@@ -148,46 +148,89 @@ const Page: any = function InsightsPage(props: any & { stories: CustomerStory[] 
 
   // Modernized Filters UI (modal)
   const [filtersOpen, setFiltersOpen] = React.useState(false);
-  const [tempSelectedIds, setTempSelectedIds] = React.useState<number[]>([]);
-  function openFilters() {
-    setTempSelectedIds(selectedCategoryIds);
-    setFiltersOpen(true);
-  }
-  function applyFilters() {
-    setSelectedCategoryIds(tempSelectedIds);
-    setFiltersOpen(false);
-  }
-  function toggleTemp(id: number) {
-    setTempSelectedIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
-  }
+  function openFilters() { setFiltersOpen(true); }
+  function applyFilters() { setFiltersOpen(false); }
+
+  // Build combined list (posts + stories)
+  const normalizedPosts: CombinedItem[] = (accPosts || []).map((p: any) => ({
+    id: p.id,
+    type: 'post',
+    title: p.title,
+    href: p.uri && !p.uri.startsWith('?p=') ? p.uri : (p.slug ? `/blog/${p.slug}/` : '#'),
+    date: p.date,
+    image: p.featuredImage?.node?.sourceUrl ? { src: p.featuredImage.node.sourceUrl, alt: p.featuredImage?.node?.altText } : undefined,
+    tags: (p.categories?.nodes || []).map((c: any) => c.name),
+    searchText: `${p.title || ''} ${(p.excerpt || '').replace(/<[^>]+>/g,' ')} ${((p.categories?.nodes||[]).map((c:any)=>c.name).join(' '))}`.toLowerCase(),
+  }));
+  const normalizedStories: CombinedItem[] = (props.stories || []).map((s: any) => ({
+    id: s.slug,
+    type: 'story',
+    title: s.title,
+    href: `/customer-stories/${s.slug}`,
+    date: s.datePublished,
+    image: s.image?.src ? { src: s.image.src, alt: s.image?.alt } : undefined,
+    tags: s.tags || [],
+    searchText: `${s.title || ''} ${s.excerpt || ''} ${(s.tags||[]).join(' ')} ${s.brand || ''} ${(s.products||[]).join(' ')} ${s.vertical || ''}`.toLowerCase(),
+  }));
+
+  // Base combined list (full set). Thresholding for jank avoidance is applied later when no search query.
+  const combinedAll = React.useMemo(() => {
+    const posts = (normalizedPosts || []).filter((p) => !!p.date);
+    const stories = (normalizedStories || []).filter((s) => !!s.date);
+    const list = [...posts, ...stories];
+    return list.sort((a, b) => (new Date(b.date).getTime() - new Date(a.date).getTime()));
+  }, [normalizedPosts, normalizedStories]);
+
+  // Type + Topics filters
+  const [selectedType, setSelectedType] = React.useState<'all' | 'post' | 'story'>('all');
+  const allTopics = React.useMemo(() => {
+    const set = new Set<string>();
+    normalizedPosts.forEach((p) => (p.tags || []).forEach((t) => set.add(t)));
+    normalizedStories.forEach((s) => (s.tags || []).forEach((t) => set.add(t)));
+    return Array.from(set).sort();
+  }, [normalizedPosts, normalizedStories]);
+  const [selectedTopics, setSelectedTopics] = React.useState<string[]>([]);
+
+  const filteredCombined = React.useMemo(() => {
+    let items = combinedAll;
+    const hasTypeFilter = selectedType !== 'all';
+    const hasTopicFilter = selectedTopics.length > 0;
+    const q = (debouncedQ || '').toLowerCase();
+    const hasSearch = !!q;
+
+    if (hasTypeFilter) items = items.filter((i) => i.type === selectedType);
+    if (hasTopicFilter) items = items.filter((i) => (i.tags || []).some((t) => selectedTopics.includes(t)));
+    if (hasSearch) items = items.filter((i) => (i.searchText || i.title?.toLowerCase()).includes(q));
+
+    // Apply threshold ONLY in the unfiltered, no-search, browsing state (to prevent lazy-load jank)
+    if (!hasTypeFilter && !hasTopicFilter && !hasSearch) {
+      const posts = items.filter((i) => i.type === 'post');
+      if (posts.length === 0) return items; // nothing to threshold yet
+      const oldestPostDate = posts.reduce((min, p) => (new Date(p.date) < new Date(min) ? p.date : min), posts[0].date);
+      return items.filter((i) => i.type === 'story' ? (new Date(i.date) >= new Date(oldestPostDate)) : true);
+    }
+
+    return items;
+  }, [combinedAll, selectedType, selectedTopics, debouncedQ]);
+
+  const isBrowsingNoFilters = selectedType === 'all' && selectedTopics.length === 0 && !debouncedQ;
+  const postsLoaded = (accPosts || []).length > 0;
 
   return (
     <>
       <Head><title>{siteTitle ? `${siteTitle} — Clarity in the age of AI` : 'Clarity in the age of AI'}</title></Head>
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
       <main>
-      {featuredPost ? (
-          <section className="mx-auto max-w-7xl px-6 py-6">
-            <FeaturedPost post={featuredPost} />
-          </section>
-        ) : null}
+
         <InsightsHeroSearch
           value={q}
           onChange={setQ}
           onClear={() => setQ('')}
         />
 
-        {/* Customer Stories */}
-        {Array.isArray(props.stories) && props.stories.length > 0 ? (
-          <section className="mx-auto max-w-7xl px-6 py-12">
-            <div className="mx-auto mb-6 h-px w-16 bg-gi-line" />
-            <h2 className="text-2xl font-semibold text-gi-text">Customer Stories</h2>
-            <p className="mt-2 max-w-3xl text-gi-gray">Outcome-focused case studies across industries. Each story includes a summary, visuals, and tags for discovery.</p>
-            <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {props.stories.map((s: CustomerStory) => (
-                <CustomerStoryCard key={s.slug} story={s} />
-              ))}
-            </div>
+{featuredPost ? (
+          <section className="mx-auto max-w-7xl px-6 py-6">
+            <FeaturedPost post={featuredPost} />
           </section>
         ) : null}
 
@@ -213,14 +256,27 @@ const Page: any = function InsightsPage(props: any & { stories: CustomerStory[] 
               </div>
             ) : null}
           </div>
-          {postsError ? (
-            <p className="max-w-3xl text-gi-gray">Error loading posts: {String(postsError.message)}</p>
-          ) : accPosts.length === 0 ? (
-            <p className="max-w-3xl text-gi-gray">No articles published yet.</p>
+          {(!postsLoaded && isBrowsingNoFilters) ? (
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="overflow-hidden rounded-2xl ring-1 ring-gi-fog bg-white">
+                  <div className="h-40 w-full animate-pulse bg-gi-fog/60" />
+                  <div className="p-4">
+                    <div className="h-3 w-24 animate-pulse rounded bg-gi-fog/60" />
+                    <div className="mt-3 h-4 w-3/4 animate-pulse rounded bg-gi-fog/60" />
+                    <div className="mt-2 h-4 w-1/2 animate-pulse rounded bg-gi-fog/60" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : postsError ? (
+            <p className="max-w-3xl text-gi-gray">Error loading content: {String(postsError.message)}</p>
+          ) : filteredCombined.length === 0 ? (
+            <p className="max-w-3xl text-gi-gray">No items found.</p>
           ) : (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {accPosts.map((post: any) => (
-                <PostTile key={post.id} post={post} />
+              {filteredCombined.map((it: CombinedItem) => (
+                <CombinedTile key={`${it.type}-${it.id}`} item={it} />
               ))}
             </div>
           )}
@@ -234,24 +290,34 @@ const Page: any = function InsightsPage(props: any & { stories: CustomerStory[] 
                 <h3 className="text-lg font-semibold text-gi-text">Filter by category</h3>
                 <button className="text-sm text-gi-gray underline" onClick={() => setFiltersOpen(false)}>Close</button>
               </div>
-              {categories.length === 0 ? (
-                <p className="text-sm text-gi-gray">No categories available.</p>
-              ) : (
-                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                  {categories.map((c) => {
-                    const active = tempSelectedIds.includes(c.databaseId);
-                    return (
-                      <label key={c.slug} className={`flex cursor-pointer items-center gap-2 rounded-lg border p-3 text-sm transition-colors ${active ? 'border-gi-green bg-gi-green/10' : 'border-gi-fog hover:bg-gi-subtle'}`}>
-                        <input type="checkbox" checked={active} onChange={() => toggleTemp(c.databaseId)} />
-                        <span className="flex-1">{c.name}</span>
-                        <span className="text-gi-gray">{c.count}</span>
-                      </label>
-                    );
-                  })}
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                <div className="rounded-lg border p-3">
+                  <div className="text-sm font-semibold text-gi-text mb-2">Type</div>
+                  {(['all','post','story'] as const).map((t) => (
+                    <label key={t} className="mr-3 text-sm">
+                      <input type="radio" name="type" className="mr-1" checked={selectedType===t} onChange={() => setSelectedType(t)} />
+                      {t === 'all' ? 'All' : t === 'post' ? 'Blog Posts' : 'Customer Stories'}
+                    </label>
+                  ))}
                 </div>
-              )}
+                <div className="rounded-lg border p-3">
+                  <div className="text-sm font-semibold text-gi-text mb-2">Topics</div>
+                  {allTopics.length === 0 ? (
+                    <p className="text-sm text-gi-gray">No topics available.</p>
+                  ) : (
+                    <div className="flex flex-wrap gap-2">
+                      {allTopics.map((t) => {
+                        const active = selectedTopics.includes(t);
+                        return (
+                          <button key={t} type="button" onClick={() => setSelectedTopics((prev)=> prev.includes(t) ? prev.filter(x=>x!==t) : [...prev, t])} className={`rounded-full px-3 py-1 text-sm ring-1 ${active ? 'bg-gi-green/15 ring-gi-green text-gi-text' : 'bg-white ring-gi-fog text-gi-gray'}`}>{t}</button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              </div>
               <div className="mt-6 flex flex-wrap items-center justify-end gap-3">
-                <button type="button" className="btn-secondary" onClick={() => setTempSelectedIds([])}>Clear</button>
+                <button type="button" className="btn-secondary" onClick={() => { setSelectedType('all'); setSelectedTopics([]); setQ(''); setFiltersOpen(false); }}>Clear</button>
                 <button type="button" className="btn-primary" onClick={applyFilters}>Apply</button>
               </div>
             </div>

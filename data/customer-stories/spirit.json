@@ -6,7 +6,8 @@
   "products": ["MuleSoft", "Azure"],
   "image": { "src": "/logos/spirit.svg", "alt": "Spirit Airlines" },
   "excerpt": "API-led architecture and bots enabling guest self-service, upgrades, and faster changes.",
-  "tags": ["mulesoft", "api-led", "event-driven"],
+  "tags": ["MuleSoft", "Digital Transformation"],
+  "datePublished": "2021-07-01",
   "hero": {
     "title": "Scaling Customer Support: How Spirit Airlines Implemented a Chatbot Amid IT Constraints",
     "subhead": "Event-driven API stack powering chatbots and guest experiences without a lift-and-shift burden.",
