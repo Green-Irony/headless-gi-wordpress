@@ -14,7 +14,7 @@ export default function CustomerStoryCarousel({ stories }: { stories: any[] }) {
   return (
     <div className="relative">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-xl font-semibold text-gi-text">Customer Stories</h3>
+        <h3 className="text-xl font-semibold text-gi-text">All Customer Stories</h3>
         <div className="flex gap-2">
           <button type="button" aria-label="Previous" onClick={() => scrollByDelta(-1)} className="inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-gi-fog bg-white text-gi-text hover:bg-gi-subtle">
             <span className="sr-only">Previous</span>
@@ -34,7 +34,7 @@ export default function CustomerStoryCarousel({ stories }: { stories: any[] }) {
         {stories.map((s: any) => (
           <div key={s.slug} className="snap-start shrink-0 basis-[85%] sm:basis-[60%] lg:basis-[33%]">
             <div className="h-full">
-              <CustomerStoryCard story={s} />
+              <CustomerStoryCard story={s} compactImage />
             </div>
           </div>
         ))}

@@ -2,20 +2,34 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { CustomerStory } from '../lib/customerStories';
 
-export default function CustomerStoryCard({ story }: { story: CustomerStory }) {
+export default function CustomerStoryCard({ story, compactImage = false }: { story: CustomerStory; compactImage?: boolean }) {
   const href = `/customer-stories/${story.slug}`;
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-gi ring-1 ring-gi-fog">
       <Link href={href} className="block">
-        <div className="relative aspect-[16/9] w-full bg-white">
+        <div className={`relative aspect-[16/9] w-full bg-white`}>
           {story.image?.src ? (
-            <Image
-              src={story.image.src}
-              alt={story.image.alt || story.title}
-              fill
-              className="object-contain object-center"
-              sizes="(min-width: 1024px) 33vw, 100vw"
-            />
+            compactImage ? (
+              <div className="absolute inset-0 p-6 sm:p-8">
+                <div className="relative h-full w-full">
+                  <Image
+                    src={story.image.src}
+                    alt={story.image.alt || story.title}
+                    fill
+                    className="object-contain object-center scale-[0.85]"
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                  />
+                </div>
+              </div>
+            ) : (
+              <Image
+                src={story.image.src}
+                alt={story.image.alt || story.title}
+                fill
+                className="object-contain object-center"
+                sizes="(min-width: 1024px) 33vw, 100vw"
+              />
+            )
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-gi-fog/40 text-sm text-gi-gray">No image</div>
           )}

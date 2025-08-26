@@ -10,7 +10,6 @@ import { SITE_DATA_QUERY } from '../queries/SiteSettingsQuery';
 import { HEADER_MENU_QUERY } from '../queries/MenuQueries';
 import TrustStrip from '../components/TrustStrip';
 import React from 'react';
-import CustomerStoryCard from '../components/CustomerStoryCard';
 import CustomerStoryCarousel from '../components/CustomerStories/CustomerStoryCarousel';
 import PreFooterCTA from '../components/PreFooterCTA';
 
@@ -73,8 +72,10 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
           speedSeconds={45}
         />
 
+      {/*
       <TrustStrip />
-
+      */}
+      
       <section className="mx-auto max-w-7xl px-6 py-12">
           <div className="flex flex-col gap-8">
             <CaseStudyTile
