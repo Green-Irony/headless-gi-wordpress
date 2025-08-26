@@ -60,7 +60,15 @@ export function loadAllStories(): CustomerStory[] {
   try {
     const entries = fs.readdirSync(DATA_DIR, { withFileTypes: true });
     const files = entries.filter((e) => e.isFile() && e.name.endsWith('.json')).map((e) => path.join(DATA_DIR, e.name));
-    return files.map((file) => JSON.parse(fs.readFileSync(file, 'utf8')) as CustomerStory).sort((a, b) => a.brand.localeCompare(b.brand));
+    return files
+      .map((file) => JSON.parse(fs.readFileSync(file, 'utf8')) as CustomerStory)
+      .sort((a, b) => {
+        const da = a?.datePublished ? new Date(a.datePublished).getTime() : 0;
+        const db = b?.datePublished ? new Date(b.datePublished).getTime() : 0;
+        if (db !== da) return db - da; // newest first
+        // fallback stable sort by brand
+        return (a.brand || '').localeCompare(b.brand || '');
+      });
   } catch (e) {
     return [];
   }

@@ -5,7 +5,7 @@ import { CustomerStory } from '../lib/customerStories';
 export default function CustomerStoryCard({ story }: { story: CustomerStory }) {
   const href = `/customer-stories/${story.slug}`;
   return (
-    <article className="overflow-hidden rounded-2xl bg-white shadow-gi ring-1 ring-gi-fog">
+    <article className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-gi ring-1 ring-gi-fog">
       <Link href={href} className="block">
         <div className="relative aspect-[16/9] w-full bg-white">
           {story.image?.src ? (
