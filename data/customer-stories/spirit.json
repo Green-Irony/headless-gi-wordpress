@@ -31,15 +31,27 @@
       "type": "objectives",
       "body": "How can we meet the needs of our customers, IT, and business leaders?",
       "items": [
-        { "title": "Scalable data backbone", "body": "Build an API‑led data infrastructure and pipeline on MuleSoft that supports future airline growth and unlocks new customer offerings." },
-        { "title": "Expert-led integration delivery", "body": "Bring in implementation consultants with deep platform and enterprise integration expertise to solve complex scenarios and align IT with business outcomes." },
-        { "title": "Rapid adoption without disruption", "body": "Leverage MuleSoft quickly using an incremental, reusable approach that delivers on time and avoids a risky lift‑and‑shift or added burden on internal teams." }
+        {
+          "title": "Scalable data backbone",
+          "body": "Build an API‑led data infrastructure and pipeline on MuleSoft that supports future airline growth and unlocks new customer offerings."
+        },
+        {
+          "title": "Expert-led integration delivery",
+          "body": "Bring in implementation consultants with deep platform and enterprise integration expertise to solve complex scenarios and align IT with business outcomes."
+        },
+        {
+          "title": "Rapid adoption without disruption",
+          "body": "Leverage MuleSoft quickly using an incremental, reusable approach that delivers on time and avoids a risky lift‑and‑shift or added burden on internal teams."
+        }
       ]
     },
     {
       "type": "solution",
       "title": "What the solution looked like",
-      "image": { "src": "/images/spirit-tail-wing.webp", "alt": "Spirit Airlines" },
+      "image": {
+        "src": "/images/spirit-tail-wing.webp",
+        "alt": "Spirit Airlines"
+      },
       "bg": "navy",
       "textPrimary": "white",
       "textSecondary": "white",

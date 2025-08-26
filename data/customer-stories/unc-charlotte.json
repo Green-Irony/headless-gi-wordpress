@@ -2,7 +2,10 @@
   "slug": "unc-charlotte",
   "brand": "UNC Charlotte",
   "title": "UNC Charlotte: 24/7 IT Support with AI",
-  "image": { "src": "/logos/GI-UNCC.webp", "alt": "UNC Charlotte and Green Irony company logos" },
+  "image": {
+    "src": "/logos/GI-UNCC.webp",
+    "alt": "UNC Charlotte and Green Irony company logos"
+  },
   "excerpt": "How UNC Charlotte transformed IT support with AI-powered knowledge and Agentforce availability to deliver 24/7 excellence.",
   "tags": ["higher-education", "service-cloud", "agentforce", "data-cloud"],
   "vertical": "Higher Education",
@@ -10,52 +13,93 @@
   "hero": {
     "title": "Transforming Higher Education IT Support",
     "subhead": "How UNC Charlotte achieved 24/7 excellence through AI implementation—combining Einstein, Data Cloud knowledge, and Agentforce availability for real outcomes.",
-    "image": { "src": "/logos/GI-UNCC.webp", "alt": "UNC Charlotte and Green Irony company logos" },
+    "image": {
+      "src": "/logos/GI-UNCC.webp",
+      "alt": "UNC Charlotte and Green Irony company logos"
+    },
     "primaryCta": { "label": "Talk to an Expert", "href": "/contact" },
-    "secondaryCta": { "label": "Get the 8-Week Agent Launch Plan", "href": "/plan" }
+    "secondaryCta": {
+      "label": "Get the 8-Week Agent Launch Plan",
+      "href": "/plan"
+    }
   },
   "sections": [
-    { 
-        "type": "challenge",
-        "title": "As a leading research institution, UNC Charlotte faced the universal higher education challenge of delivering responsive IT support despite limited resources. With thousands of students, faculty, and staff requiring assistance at all hours, their existing support infrastructure couldn’t scale to meet demand—especially outside regular hours when support staff availability was limited. The university needed to transform their approach to knowledge management and support delivery while demonstrating clear ROI to institutional leadership.",
-        "promises": ["After-hours demand", "Staffing limits", "Password resets"]
+    {
+      "type": "challenge",
+      "title": "As a leading research institution, UNC Charlotte faced the universal higher education challenge of delivering responsive IT support despite limited resources. With thousands of students, faculty, and staff requiring assistance at all hours, their existing support infrastructure couldn’t scale to meet demand—especially outside regular hours when support staff availability was limited. The university needed to transform their approach to knowledge management and support delivery while demonstrating clear ROI to institutional leadership.",
+      "promises": ["After-hours demand", "Staffing limits", "Password resets"]
     },
     {
-        "type": "solution",
-        "title": "The Solution",
-        "subhead": "AI-Powered, Data-Driven Support",
-        "image": { "src": "/logos/unc-c-lamp-post-1.webp", "alt": "UNC Charlotte Lamp Post" },
-        "imageSide": "left",
-        "bodyBefore": "Green Irony partnered with UNC Charlotte’s Office of the CIO to bridge the gap between technology promises and practical outcomes. Our implementation approach focused on three strategic pillars:",
-        "bullets": [
-          { "title": "Foundation Building", "body": "We integrated Einstein AI capabilities into Service Cloud, creating an intelligent system that could understand and respond to common support inquiries with human-like comprehension." },
-          { "title": "Knowledge Architecture", "body": "Rather than simply deploying AI, we developed a Data Cloud-backed knowledge base that ensures the AI always accesses the most current, accurate information—transforming thousands of FAQs and knowledge articles into actionable intelligence." },
-          { "title": "Agentforce Availability", "body": "We implemented a public-facing Agentforce chat agent that provides 24/7 support with a conversational interface, designed specifically for the unique needs of students, faculty, and staff." }
-        ],
-        "bodyAfter": "This implementation transformed theoretical AI potential into practical support solutions, aligned with UNC Charlotte’s vision for academic and operational excellence."
+      "type": "solution",
+      "title": "The Solution",
+      "subhead": "AI-Powered, Data-Driven Support",
+      "image": {
+        "src": "/logos/unc-c-lamp-post-1.webp",
+        "alt": "UNC Charlotte Lamp Post"
+      },
+      "imageSide": "left",
+      "bodyBefore": "Green Irony partnered with UNC Charlotte’s Office of the CIO to bridge the gap between technology promises and practical outcomes. Our implementation approach focused on three strategic pillars:",
+      "bullets": [
+        {
+          "title": "Foundation Building",
+          "body": "We integrated Einstein AI capabilities into Service Cloud, creating an intelligent system that could understand and respond to common support inquiries with human-like comprehension."
+        },
+        {
+          "title": "Knowledge Architecture",
+          "body": "Rather than simply deploying AI, we developed a Data Cloud-backed knowledge base that ensures the AI always accesses the most current, accurate information—transforming thousands of FAQs and knowledge articles into actionable intelligence."
+        },
+        {
+          "title": "Agentforce Availability",
+          "body": "We implemented a public-facing Agentforce chat agent that provides 24/7 support with a conversational interface, designed specifically for the unique needs of students, faculty, and staff."
+        }
+      ],
+      "bodyAfter": "This implementation transformed theoretical AI potential into practical support solutions, aligned with UNC Charlotte’s vision for academic and operational excellence."
     },
     {
-        "type": "solution",
-        "title": "Measurable Transformation",
-        "image": { "src": "/logos/unc-c-lamp-post-1.webp", "alt": "UNC Charlotte Lamp Post" },
-        "imageSide": "right",
-        "bodyBefore": "UNC Charlotte’s IT transformation turned a once-overwhelming support model into a strategic advantage:",
-        "bullets": [
-            { "title": "Improved response time and accuracy"},
-            { "title": "Scalable support without adding headcount"},
-            { "title": "Enhanced user experience for students, faculty, and staff"},
-            { "title": "Foundation laid for future AI integrations and innovations"}
-        ],
-        "textPrimary": "navy",
-        "textSecondary": "green",
-        "bg": "white"
+      "type": "solution",
+      "title": "Measurable Transformation",
+      "image": {
+        "src": "/logos/unc-c-lamp-post-1.webp",
+        "alt": "UNC Charlotte Lamp Post"
+      },
+      "imageSide": "right",
+      "bodyBefore": "UNC Charlotte’s IT transformation turned a once-overwhelming support model into a strategic advantage:",
+      "bullets": [
+        { "title": "Improved response time and accuracy" },
+        { "title": "Scalable support without adding headcount" },
+        {
+          "title": "Enhanced user experience for students, faculty, and staff"
+        },
+        {
+          "title": "Foundation laid for future AI integrations and innovations"
+        }
+      ],
+      "textPrimary": "navy",
+      "textSecondary": "green",
+      "bg": "white"
     },
-    { "type": "deliverables", "heading": "Implementation Highlights", "items": [
-      { "title": "Strategic AI Integration", "body": "Implemented Einstein capabilities in Service Cloud, creating an intelligent foundation for automated support." },
-      { "title": "Knowledge Transformation", "body": "Developed a Data Cloud‑backed knowledge architecture ensuring AI access to current, accurate information." },
-      { "title": "Experience Design", "body": "Deployed conversational Agentforce chat agents tailored to higher education user needs." },
-      { "title": "Continuous Optimization", "body": "Established metrics and feedback loops for ongoing improvement." }
-    ] }
+    {
+      "type": "deliverables",
+      "heading": "Implementation Highlights",
+      "items": [
+        {
+          "title": "Strategic AI Integration",
+          "body": "Implemented Einstein capabilities in Service Cloud, creating an intelligent foundation for automated support."
+        },
+        {
+          "title": "Knowledge Transformation",
+          "body": "Developed a Data Cloud‑backed knowledge architecture ensuring AI access to current, accurate information."
+        },
+        {
+          "title": "Experience Design",
+          "body": "Deployed conversational Agentforce chat agents tailored to higher education user needs."
+        },
+        {
+          "title": "Continuous Optimization",
+          "body": "Established metrics and feedback loops for ongoing improvement."
+        }
+      ]
+    }
   ],
   "seo": {
     "title": "UNC Charlotte: 24/7 IT Support with AI | Green Irony Case Story",
@@ -65,5 +109,3 @@
     "locale": "en-US"
   }
 }
-
-

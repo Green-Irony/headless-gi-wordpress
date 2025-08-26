@@ -4,15 +4,24 @@
   "title": "API-Led Integration on MuleSoft",
   "vertical": "Financial Services Industry",
   "products": ["MuleSoft", "Duck Creek"],
-  "image": { "src": "/logos/logo-upc-insurance-story-e1729029847866.webp", "alt": "UPC Insurance" },
+  "image": {
+    "src": "/logos/logo-upc-insurance-story-e1729029847866.webp",
+    "alt": "UPC Insurance"
+  },
   "excerpt": "Experience, Process, and System APIs enabling reuse and rapid change.",
   "tags": ["mulesoft", "api-led", "insurance"],
   "hero": {
     "title": "Innovating with API-Led Integration Architecture Built on MuleSoft",
     "subhead": "Experience, Process, and System APIs that unlock reuse and faster change across the business.",
-    "image": { "src": "/logos/logo-upc-insurance-story-e1729029847866.webp", "alt": "UPC Insurance" },
+    "image": {
+      "src": "/logos/logo-upc-insurance-story-e1729029847866.webp",
+      "alt": "UPC Insurance"
+    },
     "primaryCta": { "label": "Talk to an Expert", "href": "/contact" },
-    "secondaryCta": { "label": "Explore MuleSoft Services", "href": "/services/mulesoft" }
+    "secondaryCta": {
+      "label": "Explore MuleSoft Services",
+      "href": "/services/mulesoft"
+    }
   },
   "sections": [
     {
@@ -30,15 +39,27 @@
       "type": "objectives",
       "title": "Objectives",
       "items": [
-        { "title": "API-Led Integration Architecture", "body": "Design the integration architecture using MuleSoft’s API-led approach and avoid point-to-point integrations" },
-        { "title": "Reusable, Future-Ready APIs", "body": "Design APIs with an eye toward future use cases, promoting asset reuse driven by strategic product management" },
-        { "title": "Avoid Vendor Lock-In", "body": "Prevent vendor lock with APIs, allowing UPC to swap third-party vendors on demand" }
+        {
+          "title": "API-Led Integration Architecture",
+          "body": "Design the integration architecture using MuleSoft’s API-led approach and avoid point-to-point integrations"
+        },
+        {
+          "title": "Reusable, Future-Ready APIs",
+          "body": "Design APIs with an eye toward future use cases, promoting asset reuse driven by strategic product management"
+        },
+        {
+          "title": "Avoid Vendor Lock-In",
+          "body": "Prevent vendor lock with APIs, allowing UPC to swap third-party vendors on demand"
+        }
       ]
     },
     {
       "type": "solution",
       "title": "Here's the Solution",
-      "image": { "src": "/images/banks-has-the-solution.webp", "alt": "Banks has the solution" },
+      "image": {
+        "src": "/images/banks-has-the-solution.webp",
+        "alt": "Banks has the solution"
+      },
       "bg": "white",
       "textPrimary": "navy",
       "textSecondary": "navy",
@@ -79,5 +100,3 @@
     "locale": "en-US"
   }
 }
-
-
