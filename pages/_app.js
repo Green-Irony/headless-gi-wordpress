@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { FaustProvider } from "@faustwp/core";
 import "../styles/globals.css";
 import Head from "next/head";
+import { toAbsoluteUrl } from "../lib/seo";
 import { fetchSiteIconUrl } from "../queries/SiteSettingsQuery";
 
 export default function MyApp({ Component, pageProps }) {
@@ -29,6 +30,38 @@ export default function MyApp({ Component, pageProps }) {
         ) : (
           <link rel="icon" href="/logos/green-irony/banksy-solo-transparent.png" type="image/png" />
         )}
+        {/* Global Organization & WebSite JSON-LD */}
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Green Irony",
+              url: toAbsoluteUrl('/') || undefined,
+              logo: toAbsoluteUrl('/logos/green-irony/Green-Irony-Logo.svg') || undefined,
+              sameAs: [],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Green Irony",
+              url: toAbsoluteUrl('/') || undefined,
+              potentialAction: {
+                "@type": "SearchAction",
+                target: toAbsoluteUrl('/insights?q={search_term_string}') || undefined,
+                "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
+        />
       </Head>
       <FaustProvider pageProps={pageProps}>
         <div className="min-h-screen flex flex-col" style={{ paddingTop: 'var(--gi-header-offset,64px)' }}>

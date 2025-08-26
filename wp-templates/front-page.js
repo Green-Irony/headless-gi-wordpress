@@ -1,4 +1,6 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { buildCanonicalUrl } from "../lib/seo";
 import dynamic from 'next/dynamic';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -38,6 +40,8 @@ export default function FrontPage(props) {
   };
   const { title: siteTitle, description: siteDescription } = siteData;
   const effectiveSiteDescription = siteDescription || 'Turning AI into Actual Intelligence';
+  const router = useRouter();
+  const canonicalUrl = buildCanonicalUrl(router?.asPath || '/');
 
   const sectionsQuery = useQuery(ENABLE_SECTIONS ? FRONT_PAGE_SECTIONS_QUERY : FRONT_PAGE_MIN_QUERY, {
     variables: { uri: "/" },
@@ -50,6 +54,8 @@ export default function FrontPage(props) {
       <Head>
         <title>{`${siteTitle} | ${effectiveSiteDescription}`}</title>
         <meta name="description" content={effectiveSiteDescription} />
+        {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
+        {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
       </Head>
 
       <Header

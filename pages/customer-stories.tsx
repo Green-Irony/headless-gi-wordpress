@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { buildCanonicalUrl } from '../lib/seo';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HeroCenterPro from '../components/HeroCenterPro';
@@ -28,6 +30,9 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
   const pageTitle = 'Customer Stories & Case Studies | Green Irony';
   const metaDescription = 'Real-world outcomes from AI-native delivery—see how we cut cycle time, improved deflection, and unlocked capacity for enterprises, higher ed, and SMBs.';
 
+  const router = useRouter();
+  const canonicalUrl = buildCanonicalUrl(router?.asPath || '/');
+
   // Local UI state for "See All Customer Stories"
   const [showAll, setShowAll] = React.useState(false);
   // Expose a tiny helper for our inline IIFE above (avoids lifting too much code)
@@ -38,6 +43,8 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={metaDescription} />
+        {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
+        {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={metaDescription} />
       </Head>
@@ -93,8 +100,8 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
               ]}
               proofTag="Built from Spirit Airlines-scale delivery discipline."
               quote="Green Irony gave us the real-time operational insight and automation we thought only large incumbents could deliver—faster and with less overhead."
-              primaryCta={{ label: 'Start your Travel success plan', href: '/contact' }}
-              secondaryCta={{ label: 'Review integration gaps', href: '/contact' }}
+              primaryCta={{ label: 'Read the Spirit story', href: '/customer-stories/spirit' }}
+              secondaryCta={{ label: 'Explore MuleSoft Services', href: '/services/mulesoft' }}
             />
 
             <CaseStudyTile
@@ -112,8 +119,8 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
               ]}
               proofTag="Public-facing AI agents powered by integrated data."
               quote="The agent feels like a teammate—always on, always informed, and it freed our advisors to focus where humans matter most."
-              primaryCta={{ label: 'See the Higher-Ed Blueprint', href: '/plan' }}
-              secondaryCta={{ label: 'Scope my first agent', href: '/contact' }}
+              primaryCta={{ label: 'Read the UNC Charlotte story', href: '/customer-stories/unc-charlotte' }}
+              secondaryCta={{ label: 'Agentforce Services', href: '/services/agentforce' }}
             />
 
             <CaseStudyTile
@@ -131,7 +138,7 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
               proofTag="Partner-level attention with AI-level leverage."
               quote="We didn’t have the resources for a big program. Green Irony made our first AI win feel immediate and expandable."
               primaryCta={{ label: 'Start My First-Win', href: '/contact' }}
-              secondaryCta={{ label: 'Get the 8-Week Plan', href: '/plan' }}
+              secondaryCta={{ label: 'Agentforce Services', href: '/services/agentforce' }}
             />
           </div>
         </section>

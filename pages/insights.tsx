@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { buildCanonicalUrl } from '../lib/seo';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import InsightsHeroSearch from '../components/InsightsHeroSearch';
@@ -60,6 +62,8 @@ const Page: any = function InsightsPage(props: any & { stories: any[] }) {
   const siteData = siteDataQuery?.data?.generalSettings || {};
   const menuItems = headerMenuDataQuery?.data?.primaryMenuItems?.nodes || { nodes: [] };
   const { title: siteTitle, description: siteDescription } = siteData;
+  const router = useRouter();
+  const canonical = buildCanonicalUrl(router?.asPath || '/insights');
 
   const [selectedCategoryIds, setSelectedCategoryIds] = React.useState<number[]>([]);
   const [q, setQ] = React.useState<string>('');
@@ -218,7 +222,11 @@ const Page: any = function InsightsPage(props: any & { stories: any[] }) {
 
   return (
     <>
-      <Head><title>{siteTitle ? `${siteTitle} — Clarity in the age of AI` : 'Clarity in the age of AI'}</title></Head>
+      <Head>
+        <title>{siteTitle ? `${siteTitle} — Clarity in the age of AI` : 'Clarity in the age of AI'}</title>
+        {canonical ? <link rel="canonical" href={canonical} /> : null}
+        {canonical ? <meta property="og:url" content={canonical} /> : null}
+      </Head>
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
       <main>
 

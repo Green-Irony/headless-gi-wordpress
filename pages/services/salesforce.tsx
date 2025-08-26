@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { buildCanonicalUrl } from '../../lib/seo';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import HeroCenterPro from '../../components/HeroCenterPro';
@@ -25,11 +27,16 @@ const Page: any = function SalesforcePage(props: any) {
   const menuItems = headerMenuDataQuery?.data?.primaryMenuItems?.nodes || { nodes: [] };
   const { title: siteTitle, description: siteDescription } = siteData;
 
+  const router = useRouter();
+  const canonicalUrl = buildCanonicalUrl(router?.asPath || '/');
+
   return (
     <>
       <Head>
         <title>Salesforce Optimization | Green Irony</title>
         <meta name="description" content="Make Salesforce the control room for both humans and agents to unlock real outcomes." />
+        {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
+        {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
       </Head>
 
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />

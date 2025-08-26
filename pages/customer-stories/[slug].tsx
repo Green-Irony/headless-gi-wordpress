@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { buildCanonicalUrl, toAbsoluteUrl } from '../../lib/seo';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import PreFooterCTA from '../../components/PreFooterCTA';
@@ -22,8 +24,9 @@ export default function CustomerStoryPage(props: any & { story: CustomerStory | 
   const story: CustomerStory | null = props.story || null;
   const seoTitle = story?.seo?.title || (story?.title ? `${story.title} | Customer Story` : 'Customer Story');
   const seoDesc = story?.seo?.description || story?.excerpt || '';
-  const seoImage = story?.seo?.ogImage || story?.image?.src || '';
-  const canonical = story?.seo?.canonical || undefined;
+  const router = useRouter();
+  const canonical = story?.seo?.canonical || buildCanonicalUrl(router?.asPath || '/');
+  const seoImage = toAbsoluteUrl(story?.seo?.ogImage || story?.image?.src || '');
   const locale = story?.seo?.locale || undefined;
   const faqItems = story?.seo?.faqs || (story?.sections || []).flatMap((s: any) => (s.type === 'faq' ? s.items : []));
   const breadcrumbs = story?.seo?.breadcrumbs || [
@@ -52,6 +55,7 @@ export default function CustomerStoryPage(props: any & { story: CustomerStory | 
         <title>{seoTitle}</title>
         {seoDesc ? <meta name="description" content={seoDesc} /> : null}
         {canonical ? <link rel="canonical" href={canonical} /> : null}
+        {canonical ? <meta property="og:url" content={canonical} /> : null}
         {locale ? <meta httpEquiv="content-language" content={locale} /> : null}
         {/* JSON-LD Article-like schema for case study */}
         <script
@@ -67,7 +71,7 @@ export default function CustomerStoryPage(props: any & { story: CustomerStory | 
               image: seoImage || undefined,
               about: story.brand,
               inLanguage: locale || undefined,
-              mainEntityOfPage: { "@type": "WebPage", "@id": typeof window !== 'undefined' ? window.location.href : '' },
+              mainEntityOfPage: canonical ? { "@type": "WebPage", "@id": canonical } : undefined,
             }),
           }}
         />

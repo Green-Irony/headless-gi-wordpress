@@ -1,5 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { buildCanonicalUrl } from "../lib/seo";
 import ArticleHeader from "../components/ArticleHeader";
 import ArticleBody from "../components/ArticleBody";
 import ArticleFooter from "../components/ArticleFooter";
@@ -56,6 +58,8 @@ export default function Component(props) {
   };
   const { title: siteTitle, description: siteDescription } = siteData;
   const { title, content, date, author, featuredImage, categories, tags } = contentQuery?.post || {};
+  const router = useRouter();
+  const canonicalUrl = buildCanonicalUrl(router?.asPath || '/');
 
   // Reading time estimation (~200 wpm)
   const plainText = typeof content === 'string' ? content.replace(/<[^>]+>/g, ' ') : '';
@@ -97,6 +101,8 @@ export default function Component(props) {
       <Head>
         <title>{`${title} - ${siteTitle}`}</title>
         <meta name="description" content={description} />
+        {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
+        {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
         {/* JSON-LD Article schema */}
         <script
           type="application/ld+json"
@@ -110,12 +116,16 @@ export default function Component(props) {
               dateModified: date,
               author: author?.node?.name ? { "@type": "Person", name: author.node.name } : undefined,
               image: featuredImage?.node?.sourceUrl || undefined,
-              mainEntityOfPage: { "@type": "WebPage", "@id": typeof window !== 'undefined' ? window.location.href : '' },
+              mainEntityOfPage: canonicalUrl ? { "@type": "WebPage", "@id": canonicalUrl } : undefined,
             }),
           }}
         />
         {/* Open Graph / Twitter */}
         <meta property="og:type" content="article" />
+        {categories?.nodes?.[0]?.name ? <meta property="article:section" content={categories.nodes[0].name} /> : null}
+        {date ? <meta property="article:published_time" content={date} /> : null}
+        {date ? <meta property="article:modified_time" content={date} /> : null}
+        {author?.node?.name ? <meta property="article:author" content={author.node.name} /> : null}
         <meta property="og:title" content={title} />
         {description ? <meta property="og:description" content={description} /> : null}
         {featuredImage?.node?.sourceUrl ? <meta property="og:image" content={featuredImage.node.sourceUrl} /> : null}

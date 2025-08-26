@@ -1,5 +1,7 @@
 import { gql } from "@apollo/client";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { buildCanonicalUrl } from "../lib/seo";
 import PageHero from "../components/PageHero";
 import PageBody from "../components/PageBody";
 import Footer from "../components/Footer";
@@ -29,6 +31,8 @@ export default function Component(props) {
   const contentQuery = useFaustQuery(PAGE_QUERY) || {};
   const siteDataQuery = useFaustQuery(SITE_DATA_QUERY) || {};
   const headerMenuDataQuery = useFaustQuery(HEADER_MENU_QUERY) || {};
+
+  const router = useRouter();
 
   const siteData = siteDataQuery?.generalSettings || {};
   const menuItems = headerMenuDataQuery?.primaryMenuItems?.nodes || {
@@ -60,6 +64,8 @@ export default function Component(props) {
   const decodedTitle = decodeHtmlEntities(title || '');
   const decodedDescription = decodeHtmlEntities(description);
 
+  const canonicalUrl = buildCanonicalUrl(router?.asPath || '/');
+
   if (!title) {
     return <p>No pages have been published</p>;
   }
@@ -69,6 +75,8 @@ export default function Component(props) {
       <Head>
         <title>{`${decodedTitle} - ${siteTitle}`}</title>
         {decodedDescription ? <meta name="description" content={decodedDescription} /> : null}
+        {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
+        {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
         {/* JSON-LD WebPage schema */}
         <script
           type="application/ld+json"
@@ -82,7 +90,7 @@ export default function Component(props) {
               datePublished: date || undefined,
               dateModified: date || undefined,
               image: featuredImage?.node?.sourceUrl || undefined,
-              mainEntityOfPage: { "@type": "WebPage", "@id": typeof window !== 'undefined' ? window.location.href : '' },
+              mainEntityOfPage: canonicalUrl ? { "@type": "WebPage", "@id": canonicalUrl } : undefined,
             }),
           }}
         />

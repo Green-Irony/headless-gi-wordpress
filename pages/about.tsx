@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { buildCanonicalUrl } from '../lib/seo';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HeroCenterPro from '../components/HeroCenterPro';
@@ -25,11 +27,16 @@ const Page: any = function AboutPage(props: any) {
   const pageTitle = 'About Green Irony | AI-Native Consulting & Digital Labor';
   const metaDescription = 'Learn how Green Irony rebuilt consulting around agentic AI to deliver faster, smarter, and more affordable outcomes—combining integration-first foundations with senior expertise.';
 
+  const router = useRouter();
+  const canonicalUrl = buildCanonicalUrl(router?.asPath || '/');
+
   return (
     <>
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={metaDescription} />
+        {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
+        {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={metaDescription} />
       </Head>
