@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { buildCanonicalUrl } from '../lib/seo';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HeroCenterPro from '../components/HeroCenterPro';
@@ -8,8 +10,14 @@ import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../queries/SiteSettingsQuery';
 import { HEADER_MENU_QUERY } from '../queries/MenuQueries';
+import TrustStrip from '../components/TrustStrip';
+import React from 'react';
+import CustomerStoryCarousel from '../components/CustomerStories/CustomerStoryCarousel';
+import PreFooterCTA from '../components/PreFooterCTA';
 
-const Page: any = function CustomerStoriesPage(props: any) {
+import { loadAllStories, CustomerStory } from '../lib/customerStories';
+
+const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerStory[] }) {
   if (props.loading) return <>Loading...</>;
 
   const siteDataQuery = useQuery(SITE_DATA_QUERY) || {};
@@ -22,11 +30,21 @@ const Page: any = function CustomerStoriesPage(props: any) {
   const pageTitle = 'Customer Stories & Case Studies | Green Irony';
   const metaDescription = 'Real-world outcomes from AI-native delivery—see how we cut cycle time, improved deflection, and unlocked capacity for enterprises, higher ed, and SMBs.';
 
+  const router = useRouter();
+  const canonicalUrl = buildCanonicalUrl(router?.asPath || '/');
+
+  // Local UI state for "See All Customer Stories"
+  const [showAll, setShowAll] = React.useState(false);
+  // Expose a tiny helper for our inline IIFE above (avoids lifting too much code)
+  ;(Page as any)._useShowAllStories = () => [showAll, setShowAll] as const;
+
   return (
     <>
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={metaDescription} />
+        {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
+        {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={metaDescription} />
       </Head>
@@ -61,7 +79,11 @@ const Page: any = function CustomerStoriesPage(props: any) {
           speedSeconds={45}
         />
 
-        <section className="mx-auto max-w-7xl px-6 py-12">
+      {/*
+      <TrustStrip />
+      */}
+      
+      <section className="mx-auto max-w-7xl px-6 py-12">
           <div className="flex flex-col gap-8">
             <CaseStudyTile
               brand="Spirit Airlines"
@@ -78,8 +100,8 @@ const Page: any = function CustomerStoriesPage(props: any) {
               ]}
               proofTag="Built from Spirit Airlines-scale delivery discipline."
               quote="Green Irony gave us the real-time operational insight and automation we thought only large incumbents could deliver—faster and with less overhead."
-              primaryCta={{ label: 'Start your Travel success plan', href: '/contact' }}
-              secondaryCta={{ label: 'Review integration gaps', href: '/contact' }}
+              primaryCta={{ label: 'Read the Spirit story', href: '/customer-stories/spirit' }}
+              secondaryCta={{ label: 'Explore MuleSoft Services', href: '/services/mulesoft' }}
             />
 
             <CaseStudyTile
@@ -97,8 +119,8 @@ const Page: any = function CustomerStoriesPage(props: any) {
               ]}
               proofTag="Public-facing AI agents powered by integrated data."
               quote="The agent feels like a teammate—always on, always informed, and it freed our advisors to focus where humans matter most."
-              primaryCta={{ label: 'See the Higher-Ed Blueprint', href: '/plan' }}
-              secondaryCta={{ label: 'Scope my first agent', href: '/contact' }}
+              primaryCta={{ label: 'Read the UNC Charlotte story', href: '/customer-stories/unc-charlotte' }}
+              secondaryCta={{ label: 'Agentforce Services', href: '/services/agentforce' }}
             />
 
             <CaseStudyTile
@@ -116,24 +138,45 @@ const Page: any = function CustomerStoriesPage(props: any) {
               proofTag="Partner-level attention with AI-level leverage."
               quote="We didn’t have the resources for a big program. Green Irony made our first AI win feel immediate and expandable."
               primaryCta={{ label: 'Start My First-Win', href: '/contact' }}
-              secondaryCta={{ label: 'Get the 8-Week Plan', href: '/plan' }}
+              secondaryCta={{ label: 'Agentforce Services', href: '/services/agentforce' }}
             />
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-6 pb-20">
-          <div className="mx-auto mb-6 h-px w-16 bg-gi-line" />
-          <h2 className="text-2xl font-semibold text-gi-text">Why these stories matter</h2>
-          <p className="mt-3 max-w-3xl text-gi-gray">
-            We don’t sell concepts—we show what works. Each story follows the same path: identify the business pain, launch an AI-native, integration-powered pilot, measure real outcomes, and then scale. That’s the repeatable playbook we bring to every client.
-          </p>
-
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a className="btn-secondary" href="#quiz">Compare your challenge</a>
-            <a className="btn-secondary" href="#scorecard">Download the First-Win Scorecard</a>
-            <a className="btn-primary" href="/contact">Talk to an Expert</a>
-          </div>
+        {/* See all customer stories (lazy reveal) */}
+        <section className="mx-auto max-w-7xl px-6 py-8">
+          {props.stories && props.stories.length > 0 ? (
+            (() => {
+              const [showAll, setShowAll] = (Page as any)._useShowAllStories?.() || [];
+              // Fallback if hook isn't set (SSR safety)
+              if (!showAll && !(Page as any)._useShowAllStories) {
+                return (
+                  <div className="text-center">
+                    <button type="button" className="btn-primary" onClick={() => {}} disabled>
+                      See All Customer Stories
+                    </button>
+                  </div>
+                );
+              }
+              return !showAll ? (
+                <div className="text-center">
+                  <button type="button" className="btn-primary" onClick={() => setShowAll(true)}>
+                    See All Customer Stories
+                  </button>
+                </div>
+              ) : (
+                <CustomerStoryCarousel stories={props.stories} />
+              );
+            })()
+          ) : null}
         </section>
+
+        <PreFooterCTA
+          title="Become your own success story"
+          body="Now that you've heard about some of our customer successes, become your own success story. Talk to an expert and map your first win."
+          primaryCta={{ label: 'Contact Us', href: '/contact' }}
+          secondaryCta={undefined}
+        />
       </main>
       <Footer />
     </>
@@ -143,7 +186,8 @@ const Page: any = function CustomerStoriesPage(props: any) {
 export default Page;
 
 export async function getStaticProps(context: any) {
-  return getNextStaticProps(context, { Page, revalidate: 60 });
+  const stories = loadAllStories();
+  return getNextStaticProps(context, { Page, revalidate: 60, props: { stories } });
 }
 
 (Page as any).queries = [

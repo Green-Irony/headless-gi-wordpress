@@ -1,0 +1,95 @@
+{
+  "slug": "spirit",
+  "brand": "Spirit Airlines",
+  "title": "Scaling Customer Support Amid IT Constraints",
+  "vertical": "Travel, Transportation, Hospitality",
+  "products": ["MuleSoft", "Azure"],
+  "image": { "src": "/logos/spirit.svg", "alt": "Spirit Airlines" },
+  "excerpt": "API-led architecture and bots enabling guest self-service, upgrades, and faster changes.",
+  "tags": ["MuleSoft", "Digital Transformation"],
+  "datePublished": "2021-07-01",
+  "hero": {
+    "title": "Scaling Customer Support: How Spirit Airlines Implemented a Chatbot Amid IT Constraints",
+    "subhead": "Event-driven API stack powering chatbots and guest experiences without a lift-and-shift burden.",
+    "image": { "src": "/logos/spirit.svg", "alt": "Spirit Airlines" },
+    "primaryCta": { "label": "Talk to an Expert", "href": "/contact" }
+  },
+  "sections": [
+    {
+      "type": "testimonial",
+      "quote": "Green Irony’s ability to align our API strategy to deliver meaningful business outcomes is what makes them such a valuable partner. Their MuleSoft and enterprise architecture expertise along with their collaborative and efficient delivery process has helped us expedite key initiatives.",
+      "author": "Sapana Patel",
+      "role": "Sr. Director, Solution Delivery & Architecture",
+      "logoSrc": "/logos/spirit.svg"
+    },
+    {
+      "type": "challenge",
+      "title": "Traveling happens fast. Between flight changes, getting through security, and worrying about luggage, passengers need to be able to make changes on the fly. Spirit Airlines recognized this opportunity to better serve its customers by implementing a new chatbot service. Spirit decided to bring in additional outside support to make their latest investment in the Guest projects a reality.",
+      "promises": ["IT constraints", "Guest agility", "Avoid rework"],
+      "align": "center"
+    },
+    {
+      "type": "objectives",
+      "body": "How can we meet the needs of our customers, IT, and business leaders?",
+      "items": [
+        {
+          "title": "Scalable data backbone",
+          "body": "Build an API‑led data infrastructure and pipeline on MuleSoft that supports future airline growth and unlocks new customer offerings."
+        },
+        {
+          "title": "Expert-led integration delivery",
+          "body": "Bring in implementation consultants with deep platform and enterprise integration expertise to solve complex scenarios and align IT with business outcomes."
+        },
+        {
+          "title": "Rapid adoption without disruption",
+          "body": "Leverage MuleSoft quickly using an incremental, reusable approach that delivers on time and avoids a risky lift‑and‑shift or added burden on internal teams."
+        }
+      ]
+    },
+    {
+      "type": "solution",
+      "title": "What the solution looked like",
+      "image": {
+        "src": "/images/spirit-tail-wing.webp",
+        "alt": "Spirit Airlines"
+      },
+      "bg": "navy",
+      "textPrimary": "white",
+      "textSecondary": "white",
+      "imageSide": "left",
+      "bodyBefore": "To enable their integration needs, the Green Irony team worked closely with Spirit’s business stakeholders and technology teams to identify areas that would move the business forward and eliminate roadblocks in customer interactions. Once Green Irony and Spirit aligned on the specific business outcomes and requirements needed for Spirit to achieve their goals, Green Irony planned and designed the solutions to enable Spirit to scale to meet future needs. What Green Irony accomplished:",
+      "bullets": [
+        {
+          "body": "Designed the event-driven system with an API stack that allows customers to retrieve booking information, make flight changes, add special service requests, update baggage information, and more through conversation bots and live customer service support"
+        },
+        {
+          "body": "Built an API-led architecture that combined MuleSoft and Azure offerings"
+        },
+        {
+          "body": "Decoupled guest loyalty events from high-traffic APIs to increase speed and fuel scalable architecture"
+        },
+        {
+          "body": "Connected Spirit’s legacy core APIs with their customer reservation system"
+        }
+      ]
+    },
+    {
+      "type": "results",
+      "title": "Outcome Highlights",
+      "body": "The API-led integration architecture built on MuleSoft has provided Spirit Airlines with the ability to rapidly integrate and connect external and internal data systems in a safe and easily monitored environment. As a result, Spirit Airlines can reuse data components for future projects and enable them to grow in a scalable fashion. With the powers of Green Irony and MuleSoft combined, Spirit Airlines has:",
+      "items": [
+        "Enhanced onboarding of individual third-party partners and data providers.",
+        "Enabled a new chat and social media engagements that allow customers to purchase upgrades (including wifi), and make changes to reservations, bookings, and scheduling transactions.",
+        "Increased velocity on internal processes, allowing them to scale smarter and faster.",
+        "Enabled additional channels to communicate with customers by reusing the capabilities unlocked through the chatbot integration."
+      ]
+    }
+  ],
+  "seo": {
+    "title": "Spirit Airlines: Scaling Customer Support with API-led Architecture",
+    "description": "How Spirit scaled guest support with MuleSoft and event-driven architecture.",
+    "ogImage": "/logos/spirit.svg",
+    "canonical": "/customer-stories/spirit",
+    "locale": "en-US"
+  }
+}

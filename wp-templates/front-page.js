@@ -1,4 +1,6 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { buildCanonicalUrl } from "../lib/seo";
 import dynamic from 'next/dynamic';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -8,8 +10,9 @@ import { useQuery } from "@apollo/client";
 import { getNextStaticProps } from "@faustwp/core";
 import HomepageHero from '../components/HomepageHero';
 import LogoTicker from '../components/LogoTicker';
-import TrustStrip from "../components/TrustStrip";
+import ChecklistCard from "../components/ChecklistCard";
 import ValuePillars from "../components/ValuePillars";
+import RibbonBanner from "../components/RibbonBanner";
 import OfferTiles from "../components/OfferTiles";
 import { AiIcon, MuleIcon, SalesforceIcon, DataIcon } from "../components/Header";
 import CustomerStoriesProof from "../components/CustomerStoriesProof";
@@ -17,6 +20,7 @@ import LeadMagnetCTA from "../components/LeadMagnetCTA";
 import PreFooterCTA from "../components/PreFooterCTA";
 import { FRONT_PAGE_SECTIONS_QUERY, FRONT_PAGE_MIN_QUERY } from "../queries/SectionsQueries";
 import { renderSections } from "../lib/sectionRegistry";
+import PlatformExpertise from "components/PlatformExpertise";
 const BackgroundStarsCanvas = dynamic(() => import('../components/BackgroundStarsCanvas'), { ssr: false });
 
 
@@ -36,6 +40,8 @@ export default function FrontPage(props) {
   };
   const { title: siteTitle, description: siteDescription } = siteData;
   const effectiveSiteDescription = siteDescription || 'Turning AI into Actual Intelligence';
+  const router = useRouter();
+  const canonicalUrl = buildCanonicalUrl(router?.asPath || '/');
 
   const sectionsQuery = useQuery(ENABLE_SECTIONS ? FRONT_PAGE_SECTIONS_QUERY : FRONT_PAGE_MIN_QUERY, {
     variables: { uri: "/" },
@@ -48,6 +54,8 @@ export default function FrontPage(props) {
       <Head>
         <title>{`${siteTitle} | ${effectiveSiteDescription}`}</title>
         <meta name="description" content={effectiveSiteDescription} />
+        {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
+        {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
       </Head>
 
       <Header
@@ -99,58 +107,57 @@ export default function FrontPage(props) {
               items={[
                 {
                   title: 'MuleSoft Integration (AI‑led)',
-                  description: 'Pipelines & events so agents can see, decide, and do.',
-                  href: '/services#mulesoft',
+                  description: 'API‑led, event‑driven integration so agents can see, decide, and do.',
+                  href: '/services/mulesoft',
                   icon: <MuleIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
                   title: 'AI & Digital Labor (Agentforce)',
-                  description: 'Launch agents with jobs, safe actions, and KPIs.',
-                  href: '/services#agentforce',
+                  description: 'Launch agents with clear jobs, safe actions, and measurable KPIs.',
+                  href: '/services/agentforce',
                   icon: <AiIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
-                  title: 'Salesforce',
+                  title: 'Salesforce Implementation (AI‑led)',
                   description: 'Make Salesforce the control room for humans + agents.',
-                  href: '/services#salesforce',
+                  href: '/services/salesforce',
                   icon: <SalesforceIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
                   title: 'Data & Migrations',
-                  description: 'Trusted knowledge and real‑time context for agents.',
-                  href: '/services#data',
+                  description: 'Seamless platform migrations, trusted data, and real-time context for reliable agent and human decisions.',
+                  href: '/services/data',
                   icon: <DataIcon className="h-24 w-24 text-gi-green" />
                 }
               ]}
             />
-            <TrustStrip />
+            <RibbonBanner title="Why partner with Green Irony?" />
+            
             <ValuePillars
               heading="From investment to impact — fast"
               subhead="Most AI pilots stall because agents can’t see context, act safely, or scale. We combine integration-first architecture, AI-native agent design, and senior delivery to give you outcomes you can plan around."
               items={[
-                { title: 'Deflection that scales', body: 'Agents surface answers and take safe actions to reduce live demand.', iconNode: (
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-                    <circle cx="12" cy="12" r="8" />
-                    <path d="M8 12h5l3-3" />
-                    <path d="M13 9v6" />
-                  </svg>
+                { title: '2x Faster Delivery', body: 'AI‑accelerated methods cut cycle time in half—go live in weeks, not months.', iconNode: (
+                  <img src="/icons/clock.svg" alt="" className="h-5 w-5" />
                 ) },
-                { title: 'Speed to value', body: 'AI‑accelerated MuleSoft delivery cuts cycle time in half; your first working agent in 8 weeks.', iconNode: (
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-                    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-                    <path d="M12 12l7-7" />
-                  </svg>
+                { title: 'Offshore Economics, Onshore Expertise', body: 'US‑based senior team with offshore‑competitive economics.', iconNode: (
+                  <img src="/icons/skill.svg" alt="" className="h-5 w-5" />
                 ) },
-                { title: 'Capacity unlocked', body: 'Free experts for strategic work while agents handle structured, repeatable demand.', iconNode: (
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-                    <circle cx="8" cy="8" r="3" />
-                    <path d="M2 22c1.8-3.6 4.8-6 8-6" />
-                    <circle cx="16" cy="12" r="3" />
-                    <path d="M10 22c1.8-3.6 4.8-6 8-6" />
-                  </svg>
+                { title: 'Predictable Outcomes', body: 'Outcome‑driven scope, SLAs, and quality you can plan around.', iconNode: (
+                  <img src="/icons/line_chart.svg" alt="" className="h-5 w-5" />
                 ) },
               ]}
             />
+            <ChecklistCard
+              heading="From scope to Salesforce impact — in weeks, not months"
+              items={[
+                'Half the delivery time — Projects go live in as little as 4 weeks with AI‑accelerated methods.',
+                'Confidence at launch — Builds are tested, validated, and adoption‑ready on day one.',
+                'Future‑ready foundation — A Salesforce org that scales with your business—and is agent‑ready when you’re ready.',
+              ]}
+              columns={3}
+            />
+            <PlatformExpertise/>
             {/* <HowItWorksLinear
               heading="A lean path to your first AI outcome"
               steps={[

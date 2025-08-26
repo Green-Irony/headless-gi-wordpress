@@ -1,68 +1,108 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 import Head from "next/head";
-import EntryHeader from "../components/EntryHeader";
+import { useRouter } from "next/router";
+import { buildCanonicalUrl } from "../lib/seo";
+import PageHero from "../components/PageHero";
+import PageBody from "../components/PageBody";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { SITE_DATA_QUERY } from "../queries/SiteSettingsQuery";
 import { HEADER_MENU_QUERY } from "../queries/MenuQueries";
-import { getNextStaticProps } from "@faustwp/core";
+import { useFaustQuery } from "@faustwp/core";
 
 const PAGE_QUERY = gql`
   query GetPage($databaseId: ID!, $asPreview: Boolean = false) {
     page(id: $databaseId, idType: DATABASE_ID, asPreview: $asPreview) {
+      databaseId
       title
       content
+      date
+      featuredImage { node { sourceUrl altText } }
     }
   }
 `;
 
-export default function SinglePage(props) {
+export default function Component(props) {
+  // Loading state for previews
   if (props.loading) {
     return <>Loading...</>;
   }
 
-  const databaseId = props.__SEED_NODE__.databaseId;
-  const asPreview = props.__SEED_NODE__.asPreview;
+  const contentQuery = useFaustQuery(PAGE_QUERY) || {};
+  const siteDataQuery = useFaustQuery(SITE_DATA_QUERY) || {};
+  const headerMenuDataQuery = useFaustQuery(HEADER_MENU_QUERY) || {};
 
-  const {
-    data,
-    loading = true,
-    error,
-  } = useQuery(PAGE_QUERY, {
-    variables: {
-      databaseId: databaseId,
-      asPreview: asPreview,
-    },
-    notifyOnNetworkStatusChange: true,
-    fetchPolicy: "cache-and-network",
-  });
+  const router = useRouter();
 
-  const siteDataQuery = useQuery(SITE_DATA_QUERY) || {};
-  const headerMenuDataQuery = useQuery(HEADER_MENU_QUERY) || {};
-
-  if (loading && !data)
-    return (
-      <div className="container-main flex justify-center py-20">Loading...</div>
-    );
-
-  if (error) return <p>Error! {error.message}</p>;
-
-  if (!data?.page) {
-    return <p>No pages have been published</p>;
-  }
-
-
-  const siteData = siteDataQuery?.data?.generalSettings || {};
-  const menuItems = headerMenuDataQuery?.data?.primaryMenuItems?.nodes || {
+  const siteData = siteDataQuery?.generalSettings || {};
+  const menuItems = headerMenuDataQuery?.primaryMenuItems?.nodes || {
     nodes: [],
   };
   const { title: siteTitle, description: siteDescription } = siteData;
-  const { title, content } = data?.page || {};
+  const { title, content, date, featuredImage } = contentQuery?.page || {};
+
+  // Utility: decode HTML entities (supports named, decimal, and hex)
+  function decodeHtmlEntities(str = "") {
+    return str
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&quot;/g, '"')
+      .replace(/&apos;|&#39;/g, "'")
+      .replace(/&nbsp;/g, " ")
+      .replace(/&#(\d+);/g, (_, dec) => {
+        try { return String.fromCodePoint(parseInt(dec, 10)); } catch { return _; }
+      })
+      .replace(/&#x([0-9a-fA-F]+);/g, (_, hex) => {
+        try { return String.fromCodePoint(parseInt(hex, 16)); } catch { return _; }
+      });
+  }
+
+  // Derive a short description/subtitle from content
+  const plainText = typeof content === 'string' ? content.replace(/<[^>]+>/g, ' ') : '';
+  const description = plainText.replace(/\s+/g, ' ').trim().slice(0, 160);
+  const decodedTitle = decodeHtmlEntities(title || '');
+  const decodedDescription = decodeHtmlEntities(description);
+
+  const canonicalUrl = buildCanonicalUrl(router?.asPath || '/');
+
+  if (!title) {
+    return <p>No pages have been published</p>;
+  }
 
   return (
     <>
       <Head>
-        <title>{`${title} - ${siteTitle}`}</title>
+        <title>{`${decodedTitle} - ${siteTitle}`}</title>
+        {decodedDescription ? <meta name="description" content={decodedDescription} /> : null}
+        {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
+        {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
+        {/* JSON-LD WebPage schema */}
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              name: title,
+              description: description || undefined,
+              datePublished: date || undefined,
+              dateModified: date || undefined,
+              image: featuredImage?.node?.sourceUrl || undefined,
+              mainEntityOfPage: canonicalUrl ? { "@type": "WebPage", "@id": canonicalUrl } : undefined,
+            }),
+          }}
+        />
+        {/* Open Graph / Twitter */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={decodedTitle} />
+        {decodedDescription ? <meta property="og:description" content={decodedDescription} /> : null}
+        {featuredImage?.node?.sourceUrl ? <meta property="og:image" content={featuredImage.node.sourceUrl} /> : null}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={decodedTitle} />
+        {decodedDescription ? <meta name="twitter:description" content={decodedDescription} /> : null}
+        {featuredImage?.node?.sourceUrl ? <meta name="twitter:image" content={featuredImage.node.sourceUrl} /> : null}
       </Head>
 
       <Header
@@ -71,9 +111,13 @@ export default function SinglePage(props) {
         menuItems={menuItems}
       />
 
-      <main className="container">
-        <EntryHeader title={title} />
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+      <main>
+        <PageHero
+          title={decodedTitle}
+          //subtitle={decodedDescription}
+          featuredImage={{ src: featuredImage?.node?.sourceUrl, alt: featuredImage?.node?.altText }}
+        />
+        <PageBody html={content || ''} />
       </main>
 
       <Footer />
@@ -81,8 +125,7 @@ export default function SinglePage(props) {
   );
 }
 
-
-SinglePage.queries = [
+Component.queries = [
   {
     query: PAGE_QUERY,
     variables: ({ databaseId }, ctx) => ({

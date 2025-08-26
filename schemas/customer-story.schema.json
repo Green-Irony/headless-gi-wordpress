@@ -1,0 +1,385 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://green-irony.com/schemas/customer-story.schema.json",
+  "title": "CustomerStory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["slug", "brand", "title"],
+  "properties": {
+    "slug": { "type": "string", "minLength": 1 },
+    "brand": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "image": {
+      "$ref": "#/definitions/Image"
+    },
+    "excerpt": { "type": "string" },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "vertical": { "type": "string" },
+    "products": { "type": "array", "items": { "type": "string" } },
+    "datePublished": { "type": "string" },
+    "hero": { "$ref": "#/definitions/StoryHero" },
+    "sections": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/StorySection" }
+    },
+    "seo": { "$ref": "#/definitions/StorySeo" }
+  },
+  "definitions": {
+    "Image": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["src"],
+      "properties": {
+        "src": { "type": "string", "minLength": 1 },
+        "alt": { "type": "string" },
+        "width": { "type": "number" },
+        "height": { "type": "number" }
+      }
+    },
+    "Cta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "href"],
+      "properties": {
+        "label": { "type": "string" },
+        "href": { "type": "string" }
+      }
+    },
+    "StoryHero": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title"],
+      "properties": {
+        "title": { "type": "string" },
+        "subhead": { "type": "string" },
+        "image": { "$ref": "#/definitions/Image" },
+        "primaryCta": { "$ref": "#/definitions/Cta" },
+        "secondaryCta": { "$ref": "#/definitions/Cta" }
+      }
+    },
+    "StorySeo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "ogImage": { "type": "string" },
+        "canonical": { "type": "string" },
+        "locale": { "type": "string" },
+        "faqs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["q", "a"],
+            "properties": {
+              "q": { "type": "string" },
+              "a": { "type": "string" }
+            }
+          }
+        },
+        "breadcrumbs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "href"],
+            "properties": {
+              "name": { "type": "string" },
+              "href": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "StorySection": {
+      "oneOf": [
+        { "$ref": "#/definitions/SecRichText" },
+        { "$ref": "#/definitions/SecChallenge" },
+        { "$ref": "#/definitions/SecObjectives" },
+        { "$ref": "#/definitions/SecSolutionSteps" },
+        { "$ref": "#/definitions/SecArchitectureHighlights" },
+        { "$ref": "#/definitions/SecKpis" },
+        { "$ref": "#/definitions/SecResults" },
+        { "$ref": "#/definitions/SecTestimonial" },
+        { "$ref": "#/definitions/SecWhyUs" },
+        { "$ref": "#/definitions/SecDeliverables" },
+        { "$ref": "#/definitions/SecMedia" },
+        { "$ref": "#/definitions/SecCtaBanner" },
+        { "$ref": "#/definitions/SecFaq" },
+        { "$ref": "#/definitions/SecRelatedLinks" },
+        { "$ref": "#/definitions/SecSolution" },
+        { "$ref": "#/definitions/SecTitleBullets" }
+      ]
+    },
+    "SecRichText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "html"],
+      "properties": {
+        "type": { "const": "richText" },
+        "html": { "type": "string" }
+      }
+    },
+    "SecChallenge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "challenge" },
+        "title": { "type": "string" },
+        "body": { "type": "string" },
+        "promises": { "type": "array", "items": { "type": "string" } },
+        "align": { "enum": ["center", "left"] }
+      },
+      "anyOf": [
+        { "required": ["body"] },
+        { "required": ["title"] }
+      ]
+    },
+    "SecObjectives": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "objectives" },
+        "body": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["title"],
+                "properties": {
+                  "title": { "type": "string" },
+                  "body": { "type": "string" },
+                  "iconSrc": { "type": "string" },
+                  "iconAlt": { "type": "string" }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "SecSolutionSteps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "steps"],
+      "properties": {
+        "type": { "const": "solutionSteps" },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["title", "body"],
+            "properties": {
+              "title": { "type": "string" },
+              "body": { "type": "string" },
+              "icon": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "SecArchitectureHighlights": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "items"],
+      "properties": {
+        "type": { "const": "architectureHighlights" },
+        "items": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "SecKpis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "items"],
+      "properties": {
+        "type": { "const": "kpis" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["label"],
+            "properties": {
+              "label": { "type": "string" },
+              "value": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "SecResults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "items"],
+      "properties": {
+        "type": { "const": "results" },
+        "title": { "type": "string" },
+        "body": { "type": "string" },
+        "items": { "type": "array", "items": { "type": "string" } },
+        "bg": { "enum": ["white", "navy", "pink", "green"] },
+        "text": { "enum": ["white", "navy", "pink", "green"] }
+      }
+    },
+    "SecTestimonial": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "quote", "author"],
+      "properties": {
+        "type": { "const": "testimonial" },
+        "quote": { "type": "string" },
+        "author": { "type": "string" },
+        "role": { "type": "string" },
+        "logoSrc": { "type": "string" },
+        "portraitSrc": { "type": "string" }
+      }
+    },
+    "SecWhyUs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "whyUs" },
+        "title": { "type": "string" },
+        "bullets": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "SecDeliverables": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "items"],
+      "properties": {
+        "type": { "const": "deliverables" },
+        "heading": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["title", "body"],
+            "properties": {
+              "title": { "type": "string" },
+              "body": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "SecMedia": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "kind"],
+      "properties": {
+        "type": { "const": "media" },
+        "kind": { "enum": ["image", "video", "embed"] },
+        "src": { "type": "string" },
+        "alt": { "type": "string" },
+        "embedHtml": { "type": "string" }
+      }
+    },
+    "SecCtaBanner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "title"],
+      "properties": {
+        "type": { "const": "ctaBanner" },
+        "title": { "type": "string" },
+        "body": { "type": "string" },
+        "primaryCta": { "$ref": "#/definitions/Cta" },
+        "secondaryCta": { "$ref": "#/definitions/Cta" }
+      }
+    },
+    "SecFaq": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "items"],
+      "properties": {
+        "type": { "const": "faq" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["q", "a"],
+            "properties": {
+              "q": { "type": "string" },
+              "a": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "SecRelatedLinks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "items"],
+      "properties": {
+        "type": { "const": "relatedLinks" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["label", "href"],
+            "properties": {
+              "label": { "type": "string" },
+              "href": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "SecSolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "solution" },
+        "title": { "type": "string" },
+        "subhead": { "type": "string" },
+        "image": { "$ref": "#/definitions/Image" },
+        "imageSide": { "enum": ["left", "right"] },
+        "bullets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["body"],
+            "properties": {
+              "title": { "type": "string" },
+              "body": { "type": "string" }
+            }
+          }
+        },
+        "bg": { "enum": ["white", "navy", "pink", "green"] },
+        "textPrimary": { "enum": ["white", "navy", "pink", "green"] },
+        "textSecondary": { "enum": ["white", "navy", "pink", "green"] },
+        "bodyBefore": { "type": "string" },
+        "bodyAfter": { "type": "string" }
+      }
+    },
+    "SecTitleBullets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "bullets"],
+      "properties": {
+        "type": { "const": "titleBullets" },
+        "title": { "type": "string" },
+        "body": { "type": "string" },
+        "bullets": { "type": "array", "items": { "type": "string" } },
+        "bg": { "enum": ["white", "navy", "pink", "green"] },
+        "text": { "enum": ["white", "navy", "pink", "green"] },
+        "center": { "type": "boolean" }
+      }
+    }
+  }
+}
+
+

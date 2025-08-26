@@ -49,40 +49,44 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           {/* Brand */}
           <div className="md:col-span-4">
-            <Link href="/" aria-label="Green Irony — Home" className="inline-flex items-center gap-2">
-              <Image src="/logos/green-irony/green-logo-long.png" alt="Green Irony" width={140} height={28} className="h-7 w-auto" />
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link href="/" aria-label="Green Irony — Home" className="inline-flex items-center">
+                <Image src="/logos/green-irony/green-logo-long.png" alt="Green Irony" width={140} height={28} className="h-7 w-auto" />
+              </Link>
+              <Image
+                src="/images/salesforce-partner-badge.png"
+                alt="Salesforce Partner"
+                width={200}
+                height={60}
+                className="h-10 w-auto"
+              />
+            </div>
             <p className="mt-4 max-w-sm text-sm text-gi-gray">
               Offshore economics.<br/>Onshore expertise.<br/>At the speed of AI.
             </p>
+            <div className="mt-3 relative inline-block text-sm font-semibold text-gi-text">
+              Turning AI into Actual Intelligence™
+              <UnderlinePink />
+            </div>
           </div>
 
           {/* Link columns */}
-          <div className="md:col-span-5 grid grid-cols-2 gap-8 sm:grid-cols-3">
+          <div className="md:col-span-5 grid grid-cols-1 gap-8 sm:grid-cols-2">
             <div>
               <div className="text-sm font-semibold text-gi-text">Company</div>
               <ul className="mt-3 space-y-2 text-sm">
                 <li><Link href="/about" className={linkUnderline}>About</Link></li>
-                <li><Link href="/customer-stories" className={linkUnderline}>Customer Stories</Link></li>
-                <li><Link href="/insights" className={linkUnderline}>Insights</Link></li>
+                
+                <li><Link href="/services" className={linkUnderline}>Services</Link></li>
                 <li><Link href="/contact" className={linkUnderline}>Contact</Link></li>
-              </ul>
-            </div>
-            <div>
-              <div className="text-sm font-semibold text-gi-text">Services</div>
-              <ul className="mt-3 space-y-2 text-sm">
-                <li><Link href="/services#agentforce" className={linkUnderline}>AI & Digital Labor</Link></li>
-                <li><Link href="/services#mulesoft" className={linkUnderline}>MuleSoft Integration</Link></li>
-                <li><Link href="/services#salesforce" className={linkUnderline}>Salesforce Optimization</Link></li>
-                <li><Link href="/services#data" className={linkUnderline}>Data & Migrations</Link></li>
               </ul>
             </div>
             <div>
               <div className="text-sm font-semibold text-gi-text">Resources</div>
               <ul className="mt-3 space-y-2 text-sm">
+                <li><Link href="/customer-stories" className={linkUnderline}>Customer Stories</Link></li>
+                <li><Link href="/insights" className={linkUnderline}>Insights</Link></li>
                 <li><Link href="/plan" className={linkUnderline}>8-Week Agent Launch Plan</Link></li>
-                <li><Link href="/privacy" className={linkUnderline}>Privacy</Link></li>
-                <li><Link href="/terms" className={linkUnderline}>Terms</Link></li>
               </ul>
             </div>
           </div>
@@ -112,8 +116,35 @@ export default function Footer() {
         <div className="mt-4 flex flex-col items-center justify-between gap-3 text-xs text-gi-gray sm:flex-row">
           <p>© {new Date().getFullYear()} Green Irony. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <Link href="/privacy" className={linkUnderline}>Privacy</Link>
-            <Link href="/terms" className={linkUnderline}>Terms</Link>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://www.linkedin.com/company/green-irony"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="text-gi-gray hover:text-gi-text"
+              >
+                <LinkedInIcon className="h-5 w-5" />
+              </a>
+              <a
+                href="http://www.twitter.com/greenirony"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter"
+                className="text-gi-gray hover:text-gi-text"
+              >
+                <TwitterIcon className="h-5 w-5" />
+              </a>
+              <a
+                href="http://www.facebook.com/greenirony"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="text-gi-gray hover:text-gi-text"
+              >
+                <FacebookIcon className="h-5 w-5" />
+              </a>
+            </div>
             <a href="#top" className={linkUnderline} aria-label="Back to top">Back to top</a>
           </div>
         </div>
@@ -145,3 +176,27 @@ function UnderlinePink() {
     </svg>
   );
 } 
+
+function LinkedInIcon({ className = 'h-5 w-5' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden className={className}>
+      <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708C16 15.487 15.474 16 14.825 16H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.219c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.539-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zM13.458 13.394V9.359c0-2.158-1.152-3.162-2.688-3.162-1.24 0-1.797.68-2.106 1.157V6.169H6.263c.03.68 0 7.225 0 7.225h2.401v-4.035c0-.216.016-.432.08-.586.176-.432.576-.88 1.249-.88.88 0 1.232.664 1.232 1.64v3.861h2.233z" />
+    </svg>
+  );
+}
+
+function TwitterIcon({ className = 'h-5 w-5' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden className={className}>
+      <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.01-.422A6.673 6.673 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.084.797A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.431 3.289 3.289 0 0 0 1.018 4.381A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
+    </svg>
+  );
+}
+
+function FacebookIcon({ className = 'h-5 w-5' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden className={className}>
+      <path d="M16 8.049C16 3.604 12.418 0 8 0S0 3.604 0 8.049C0 12.06 2.925 15.396 6.75 16v-5.624H4.72V8.05H6.75V6.275c0-2.02 1.195-3.132 3.022-3.132.875 0 1.791.157 1.791.157v1.98h-1.01c-.996 0-1.307.62-1.307 1.258V8.05h2.223l-.355 2.327H9.246V16C13.075 15.396 16 12.06 16 8.049z" />
+    </svg>
+  );
+}

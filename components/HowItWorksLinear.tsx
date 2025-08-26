@@ -9,6 +9,7 @@ export type HowItWorksProps = {
   subhead?: string;
   steps?: HowStep[];
   cta?: { label: string; href: string };
+  leadInBeforeButton?: string;
 };
 
 const DEFAULT_HEADING = 'A lean path to your first AI outcome';
@@ -20,7 +21,7 @@ const DEFAULT_STEPS: HowStep[] = [
 ];
 const DEFAULT_CTA = { label: 'Get the 8-Week Agent Launch Plan', href: '/plan' };
 
-export default function HowItWorksLinear({ id, className, heading = DEFAULT_HEADING, subhead, steps = DEFAULT_STEPS, cta = DEFAULT_CTA }: HowItWorksProps) {
+export default function HowItWorksLinear({ id, className, heading = DEFAULT_HEADING, subhead, steps = DEFAULT_STEPS, cta = DEFAULT_CTA, leadInBeforeButton }: HowItWorksProps) {
   const prefersReduced = useReducedMotion();
   const enterY = prefersReduced ? 0 : 10;
 
@@ -127,6 +128,9 @@ export default function HowItWorksLinear({ id, className, heading = DEFAULT_HEAD
           </ol>
         </div>
 
+        {leadInBeforeButton && (
+          <p className="mt-8 text-center text-sm text-gi-gray max-w-3xl mx-auto px-6">{leadInBeforeButton}</p>
+        )}
         <div className="mt-10 flex justify-center">
           <a className="btn-primary" href={cta.href}>
             {cta.label}

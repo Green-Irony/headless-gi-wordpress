@@ -22,10 +22,10 @@ export type ValuePillarsProps = {
 };
 
 const DEFAULT_HEADING = 'From investment to impact — fast';
-const DEFAULT_SUBHEAD = 'Most AI pilots stall because agents can’t see context, act safely, or scale. We combine integration-first architecture, AI-native agent design, and senior delivery to give you outcomes you can plan around.';
+const DEFAULT_SUBHEAD = 'Most AI pilots stall because agents can\'t see context, act safely, or scale. We combine integration-first architecture, AI-native agent design, and senior delivery to give you outcomes you can plan around.';
 const DEFAULT_ITEMS: PillarItem[] = [
   { title: 'Deflection that scales', body: 'Agents surface answers and take safe actions to reduce live demand.' },
-  { title: 'Speed to value', body: 'AI‑accelerated MuleSoft delivery cuts cycle time in half; your first working agent in 8 weeks.' },
+  { title: 'Speed to value', body: 'AI-accelerated delivery cuts cycle time in half; go live in 8 weeks.' },
   { title: 'Capacity unlocked', body: 'Free experts for strategic work while agents handle structured, repeatable demand.' },
 ];
 
@@ -65,7 +65,7 @@ export default function ValuePillars({ id, className, heading = DEFAULT_HEADING,
   return (
     <m.section
       id={id}
-      className={`relative isolate ${className ?? ''}`}
+      className={`relative isolate mb-24 ${className ?? ''}`}
       initial={{ opacity: 0, y: enterY }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -104,34 +104,21 @@ export default function ValuePillars({ id, className, heading = DEFAULT_HEADING,
                 show: { opacity: 1, y: 0, transition: { duration: 0.2, ease: 'easeOut' } },
               }}
             >
-              <div className="h-full rounded-2xl bg-gradient-to-r from-gi-green/35 via-gi-pink/20 to-gi-green/35 p-[1px]">
-                <div className="vp-card flex h-full flex-col rounded-[16px] bg-white p-6 shadow-gi transition-transform duration-200 will-change-transform group-hover:-translate-y-0.5" style={cardMinHeight ? { minHeight: cardMinHeight } : undefined}>
-                  <div className="mb-2 flex items-center gap-3">
-                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gi-green/50 ring-1 ring-gi-fog">
-                      {iconSrc ? (
-                        <Image src={iconSrc} alt={iconAlt ?? ''} width={20} height={20} className="h-5 w-5 object-contain" />
-                      ) : iconNode && React.isValidElement(iconNode) ? (
-                        <span className="text-white">
-                          {React.cloneElement(iconNode as any, { className: 'h-5 w-5 text-white' })}
-                        </span>
-                      ) : (
-                        <span className="h-5 w-5" />
-                      )}
-                    </div>
-                    <h3 className="text-base font-semibold text-gi-text">{title}</h3>
-                  </div>
-                  <p className="mt-2 text-sm text-gi-gray">{body}</p>
-                  <div className="mt-auto" />
+              <div className="flex h-full flex-col items-center text-center px-4">
+                <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-white ring-2 ring-gi-pink/70">
+                  {iconSrc ? (
+                    <Image src={iconSrc} alt={iconAlt ?? ''} width={28} height={28} className="h-7 w-7 object-contain" />
+                  ) : iconNode && React.isValidElement(iconNode) ? (
+                    <span className="text-gi-pink">
+                      {React.cloneElement(iconNode as any, { className: 'h-7 w-7 text-gi-pink' })}
+                    </span>
+                  ) : (
+                    <span className="h-7 w-7" />
+                  )}
                 </div>
+                <h3 className="text-lg md:text-xl font-semibold text-gi-text">{title}</h3>
+                <p className="mt-2 max-w-xs text-sm md:text-base text-gi-gray">{body}</p>
               </div>
-
-              <div
-                aria-hidden
-                className="pointer-events-none absolute left-3 right-3 -bottom-3 h-6 rounded-b-[18px]
-                           bg-gradient-to-r from-gi-green/30 via-gi-pink/20 to-gi-green/30
-                           blur-[10px] opacity-80 md:opacity-90
-                           [mask-image:linear-gradient(to_bottom,transparent,black_40%)]"
-              />
             </m.li>
           ))}
         </m.ul>

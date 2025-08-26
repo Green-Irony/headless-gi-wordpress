@@ -13,6 +13,7 @@ export type DeliverablesWheelProps = {
   heading?: string;
   subhead?: string;
   items: WheelDeliverable[]; // 3–6
+  showIcons?: boolean;
 };
 
 const DEFAULT_HEADING = 'What we deliver';
@@ -23,7 +24,7 @@ const DEFAULT_HEADING = 'What we deliver';
  * - md+: 3-column grid: left and right cabins alternate around a central mast with a vertical line and dots
  *   This avoids trigonometry/position math and stays stable for 3–6 items.
  */
-export default function DeliverablesWheel({ id, className, heading = DEFAULT_HEADING, subhead, items }: DeliverablesWheelProps) {
+export default function DeliverablesWheel({ id, className, heading = DEFAULT_HEADING, subhead, items, showIcons = true }: DeliverablesWheelProps) {
   const prefersReduced = useReducedMotion();
   const enterY = prefersReduced ? 0 : 8;
   const safe = Array.isArray(items) ? items.slice(0, 6) : [];
@@ -71,16 +72,33 @@ export default function DeliverablesWheel({ id, className, heading = DEFAULT_HEA
 
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="mx-auto mb-8 h-px w-16 bg-gi-line" />
-        <h2 className="text-center text-3xl md:text-4xl font-semibold text-gi-text tracking-tight text-balance">{heading}</h2>
+        <h2 className="text-center text-[2rem] md:text-[2.5rem] font-semibold text-gi-text tracking-tight text-balance">{heading}</h2>
         {subhead && <p className="mx-auto mt-4 max-w-3xl text-center text-gi-gray text-balance">{subhead}</p>}
 
         {/* Mobile: list */}
         <div className="mt-10 grid grid-cols-1 gap-5 md:hidden" role="list">
           {safe.map((d) => (
-            <div key={d.title} className="rounded-2xl border border-gi-fog bg-white p-6 shadow-gi" role="listitem">
-              <h3 className="text-base font-semibold text-gi-text">{d.title}</h3>
-              <p className="mt-2 text-sm text-gi-gray">{d.body}</p>
-            </div>
+            <m.div
+              key={d.title}
+              className="relative rounded-2xl border border-gi-fog bg-white p-6 shadow-gi transition-transform will-change-transform hover:-translate-y-0.5"
+              role="listitem"
+              whileHover={{ y: -4, scale: 1.01 }}
+              whileTap={{ scale: 0.995 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 18 }}
+            >
+              <div aria-hidden className="absolute left-0 top-0 h-full w-1.5 rounded-l-2xl bg-gradient-to-b from-gi-pink to-gi-green/80" />
+              <div className="pl-3">
+                <div className="flex items-start gap-3">
+                  {showIcons && (
+                    <span className="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-gi-green/15 text-gi-green ring-1 ring-gi-fog">
+                      <svg viewBox='0 0 24 24' className='h-4 w-4' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'><path d='M20 6L9 17l-5-5' /></svg>
+                    </span>
+                  )}
+                  <h3 className="text-[1.05rem] font-semibold text-gi-text">{d.title}</h3>
+                </div>
+                <p className="mt-2 text-sm text-gi-gray">{d.body}</p>
+              </div>
+            </m.div>
           ))}
         </div>
 
@@ -100,17 +118,29 @@ export default function DeliverablesWheel({ id, className, heading = DEFAULT_HEA
                 <div>
                   {left && (
                     <m.div
-                      className="dw-card rounded-xl bg-white p-5 shadow-gi ring-1 ring-gi-fog/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gi-green"
+                      className="dw-card relative rounded-xl bg-white p-5 shadow-gi ring-1 ring-gi-fog/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gi-green transition-transform will-change-transform hover:-translate-y-0.5"
                       role="listitem"
                       tabIndex={0}
                       initial={{ opacity: 0, y: enterY }}
                       whileInView={{ opacity: 1, y: 0 }}
+                      whileHover={{ y: -4, scale: 1.01 }}
+                      whileTap={{ scale: 0.995 }}
                       viewport={{ once: true, amount: 0.2 }}
-                      transition={{ duration: 0.18, ease: 'easeOut' }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 18 }}
                       style={cardMinHeight ? { minHeight: cardMinHeight } : undefined}
                     >
-                      <h3 className="text-[0.95rem] font-semibold text-gi-text">{left.title}</h3>
-                      <p className="mt-1 text-sm text-gi-gray">{left.body}</p>
+                      <div aria-hidden className="absolute left-0 top-0 h-full w-1.5 rounded-l-xl bg-gradient-to-b from-gi-pink to-gi-green/80" />
+                      <div className="pl-3">
+                        <div className="flex items-start gap-3">
+                          {showIcons && (
+                            <span className="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-gi-green/15 text-gi-green ring-1 ring-gi-fog">
+                              <svg viewBox='0 0 24 24' className='h-4 w-4' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'><path d='M20 6L9 17l-5-5' /></svg>
+                            </span>
+                          )}
+                          <h3 className="text-[1.05rem] font-semibold text-gi-text">{left.title}</h3>
+                        </div>
+                        <p className="mt-2 text-sm text-gi-gray">{left.body}</p>
+                      </div>
                     </m.div>
                   )}
                 </div>
@@ -122,17 +152,29 @@ export default function DeliverablesWheel({ id, className, heading = DEFAULT_HEA
                 <div>
                   {right && (
                     <m.div
-                      className="dw-card rounded-xl bg-white p-5 shadow-gi ring-1 ring-gi-fog/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gi-green"
+                      className="dw-card relative rounded-xl bg-white p-5 shadow-gi ring-1 ring-gi-fog/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gi-green transition-transform will-change-transform hover:-translate-y-0.5"
                       role="listitem"
                       tabIndex={0}
                       initial={{ opacity: 0, y: enterY }}
                       whileInView={{ opacity: 1, y: 0 }}
+                      whileHover={{ y: -4, scale: 1.01 }}
+                      whileTap={{ scale: 0.995 }}
                       viewport={{ once: true, amount: 0.2 }}
-                      transition={{ duration: 0.18, ease: 'easeOut' }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 18 }}
                       style={cardMinHeight ? { minHeight: cardMinHeight } : undefined}
                     >
-                      <h3 className="text-[0.95rem] font-semibold text-gi-text">{right.title}</h3>
-                      <p className="mt-1 text-sm text-gi-gray">{right.body}</p>
+                      <div aria-hidden className="absolute left-0 top-0 h-full w-1.5 rounded-l-xl bg-gradient-to-b from-gi-pink to-gi-green/80" />
+                      <div className="pl-3">
+                        <div className="flex items-start gap-3">
+                          {showIcons && (
+                            <span className="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-gi-green/15 text-gi-green ring-1 ring-gi-fog">
+                              <svg viewBox='0 0 24 24' className='h-4 w-4' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'><path d='M20 6L9 17l-5-5' /></svg>
+                            </span>
+                          )}
+                          <h3 className="text-[1.05rem] font-semibold text-gi-text">{right.title}</h3>
+                        </div>
+                        <p className="mt-2 text-sm text-gi-gray">{right.body}</p>
+                      </div>
                     </m.div>
                   )}
                 </div>

@@ -7,9 +7,9 @@ export default function TrustStrip() {
   const enterY = prefersReduced ? 0 : 8;
 
   const captions = [
-    { name: 'Spirit Airlines', blurb: 'Event-driven ops at scale' },
-    { name: 'Higher-ed / Agentforce exemplar', blurb: '24/7 deflection and intelligence' },
-    { name: 'Customer X', blurb: 'Capacity freed across support and operations' },
+    { name: 'Spirit Airlines', blurb: 'Event-driven, real-time workflows across flight operations, irregular ops, and ticketing changes/cancellations.' },
+    { name: 'Higher Ed', blurb: '24/7 deflection and intelligence' },
+    { name: 'SMB Manufacturer', blurb: 'Capacity freed across support and operations' },
   ];
 
   return (

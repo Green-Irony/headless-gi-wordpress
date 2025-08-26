@@ -67,6 +67,25 @@
     transform: scaleX(0); transform-origin: left; transition: transform .18s ease-out;
   }
   .link-underline:hover::after { transform: scaleX(1); }
+
+  /* HubSpot form normalization to match GI styles */
+  .gi-hubspot .hs-form { @apply grid gap-4; }
+  .gi-hubspot .hs-form fieldset { @apply border-0 p-0 m-0; }
+  .gi-hubspot .hs-form .hs-form-field { @apply w-full; }
+  .gi-hubspot .hs-form .hs-form-field label { @apply block text-sm font-medium text-gi-text; }
+  .gi-hubspot .hs-form .hs-input { @apply mt-1 w-full rounded-xl border border-gi-fog bg-white px-3 py-2 text-gi-text placeholder-gi-gray/70 focus:outline-none focus:ring-2 focus:ring-gi-navy focus:ring-offset-1; }
+  .gi-hubspot .hs-form textarea.hs-input { @apply min-h-[140px]; }
+  .gi-hubspot .hs-form .inputs-list { @apply mt-1 space-y-2; }
+  .gi-hubspot .hs-form .inputs-list li label { @apply inline-flex items-center gap-2 text-sm text-gi-text; }
+  .gi-hubspot .hs-form .inputs-list input { @apply rounded border-gi-fog text-gi-text; }
+  .gi-hubspot .hs-error-msgs { @apply mt-1 text-sm text-red-600; }
+  .gi-hubspot .hs-form .legal-consent-container { @apply text-sm text-gi-gray; }
+  .gi-hubspot .hs-submit input[type="submit"],
+  .gi-hubspot input.hs-button,
+  .gi-hubspot .actions .hs-button { @apply inline-flex items-center justify-center rounded-xl px-5 py-3 bg-gi-green text-gi-white font-semibold hover:bg-gi-green/85 focus:outline-none focus:ring-2 focus:ring-gi-green focus:ring-offset-1; }
+  /* two-column rows */
+  .gi-hubspot .hs-form fieldset.form-columns-2 { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @screen md { .gi-hubspot .hs-form fieldset.form-columns-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 }
 
 /* 3D flip helpers used by OfferTiles */

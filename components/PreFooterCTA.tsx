@@ -6,7 +6,7 @@ export type PreFooterProps = {
   title?: string;
   body?: string;
   primaryCta?: { label: string; href: string };
-  secondaryCta?: { label: string; href: string };
+  secondaryCta?: { label?: string; href?: string };
 };
 
 const DEFAULT_TITLE = 'Ready to launch predictable AI outcomes?';
@@ -28,7 +28,9 @@ export default function PreFooterCTA({ id, className, title = DEFAULT_TITLE, bod
             <h2 className="text-2xl md:text-3xl font-semibold text-gi-text">{title}</h2>
             <p className="mx-auto mt-3 max-w-2xl text-gi-gray">{body}</p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <Link href={secondaryCta.href} className="btn-secondary">{secondaryCta.label}</Link>
+              {secondaryCta?.label && secondaryCta?.href ? (
+                <Link href={secondaryCta.href} className="btn-secondary">{secondaryCta.label}</Link>
+              ) : null}
               <Link href={primaryCta.href} className="btn-primary">{primaryCta.label}</Link>
             </div>
           </div>

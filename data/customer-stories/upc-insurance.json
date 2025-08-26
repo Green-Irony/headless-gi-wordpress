@@ -1,0 +1,103 @@
+{
+  "slug": "upc-insurance",
+  "brand": "UPC Insurance",
+  "title": "API-Led Integration on MuleSoft",
+  "vertical": "Financial Services Industry",
+  "products": ["MuleSoft", "Duck Creek"],
+  "image": {
+    "src": "/logos/logo-upc-insurance-story-e1729029847866.webp",
+    "alt": "UPC Insurance"
+  },
+  "excerpt": "Experience, Process, and System APIs enabling reuse and rapid change.",
+  "tags": ["MuleSoft", "Digital Transformation"],
+  "datePublished": "2020-08-01",
+  "hero": {
+    "title": "Innovating with API-Led Integration Architecture Built on MuleSoft",
+    "subhead": "Experience, Process, and System APIs that unlock reuse and faster change across the business.",
+    "image": {
+      "src": "/logos/logo-upc-insurance-story-e1729029847866.webp",
+      "alt": "UPC Insurance"
+    },
+    "primaryCta": { "label": "Talk to an Expert", "href": "/contact" },
+    "secondaryCta": {
+      "label": "Explore MuleSoft Services",
+      "href": "/services/mulesoft"
+    }
+  },
+  "sections": [
+    {
+      "type": "testimonial",
+      "quote": "Green Irony's MuleSoft expertise, integration strategy, and API architecture have set the foundation for our future innovation initiatives. We're now positioned to scale and efficiently deliver the customer and stakeholder experiences required to be more competitive and profitable.",
+      "author": "Chris Griffith",
+      "role": "CIO"
+    },
+    {
+      "type": "challenge",
+      "title": "UPC Insurance, a property and casualty insurance provider, decided they needed a modern insurance policy system and selected Duck Creek OnDemand. They chose MuleSoft Anypoint Platform to serve as the backbone to their modern integration strategy, which they identified as one of the most critical components driving success or failure of the rollout. Duck Creek needed to integrate over 20 third-party systems to support automated policy quoting based on property conditions, risk assessment and profitability projections, policy creation, document printing, claims, payments, and more",
+      "align": "left"
+    },
+    {
+      "type": "objectives",
+      "title": "Objectives",
+      "items": [
+        {
+          "title": "API-Led Integration Architecture",
+          "body": "Design the integration architecture using MuleSoft’s API-led approach and avoid point-to-point integrations"
+        },
+        {
+          "title": "Reusable, Future-Ready APIs",
+          "body": "Design APIs with an eye toward future use cases, promoting asset reuse driven by strategic product management"
+        },
+        {
+          "title": "Avoid Vendor Lock-In",
+          "body": "Prevent vendor lock with APIs, allowing UPC to swap third-party vendors on demand"
+        }
+      ]
+    },
+    {
+      "type": "solution",
+      "title": "Here's the Solution",
+      "image": {
+        "src": "/images/banks-has-the-solution.webp",
+        "alt": "Banks has the solution"
+      },
+      "bg": "white",
+      "textPrimary": "navy",
+      "textSecondary": "navy",
+      "imageSide": "left",
+      "bodyBefore": "To enable UPC’s integration needs for the implementation of the new policy system, the Green Irony team applied a collaborative solutioning process, working tightly with UPC’s key stakeholders on business goals and their corresponding technology solutions. The collaborative partnership between teams removed roadblocks and led to early success on the platform, uncovering additional integration opportunities and API reuse scenarios to support claims processing and mobile initiatives. The team used the API design patterns promoted by MuleSoft to increase velocity of future development projects and provide the ability to quickly address integration changes.",
+      "bullets": [
+        {
+          "body": "Experience APIs were designed to match Duck Creek’s data schema, eliminating the need to perform data transformation and execute business logic within the policy system itself, accelerating integrations."
+        },
+        {
+          "body": "Process APIs used the property address to orchestrate the collection and aggregation of critical third-party property data to fuel accurate policy quotes and validate underwriting of profitable policies."
+        },
+        {
+          "body": "A Data Normalization System API increased flexibility of the application network using a data-driven lookup to align values from multiple sources in the Experience API."
+        },
+        {
+          "body": "System APIs promoted reuse to support claims, mobile, and other capabilities that provide a competitive advantage through speed and agility."
+        }
+      ]
+    },
+    {
+      "type": "results",
+      "title": "Outcome Highlights",
+      "bg": "navy",
+      "text": "white",
+      "items": [
+        "Eliminated integration challenges allowing UPC to focus on innovating core business",
+        "Designed API strategy that promotes reuse and expansion for future projects",
+        "Reduced dependency on individual third-party partners who provide business data",
+        "Empowered UPC’s technology team through education on application networks, API design, and DevOps"
+      ]
+    }
+  ],
+  "seo": {
+    "title": "UPC Insurance: API-led Integration on MuleSoft",
+    "description": "How UPC enabled reuse and faster change with Experience, Process, and System APIs.",
+    "canonical": "/customer-stories/upc-insurance",
+    "locale": "en-US"
+  }
+}

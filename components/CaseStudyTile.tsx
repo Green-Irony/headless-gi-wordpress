@@ -39,39 +39,33 @@ export default function CaseStudyTile(props: CaseStudyTileProps) {
 	const contentOrderClass = mediaSide === 'right' ? 'md:order-1' : 'md:order-2';
 
 	return (
-		<article className={`relative overflow-hidden rounded-2xl border border-gi-fog bg-white shadow-gi ${className ?? ''}`}>
-			<div className="absolute inset-0 bg-gradient-to-br from-gi-green/10 via-transparent to-gi-pink/10" aria-hidden />
-			<div className="relative grid gap-6 p-6 md:grid-cols-12 md:gap-8 md:p-8">
-				{/* Media + title column */}
-				<div className={`flex flex-col gap-4 ${mediaOrderClass} md:col-span-5`}>
-					{logoSrc || imageSrc ? (
-						<div className="relative w-full overflow-hidden rounded-xl bg-white ring-1 ring-gi-fog">
-							{imageSrc ? (
-								<Image src={imageSrc} alt={`${brand}`} width={640} height={360} className="h-auto w-full object-cover" />
-							) : (
-								<div className="relative h-[200px]">
-									<Image src={logoSrc as string} alt={`${brand} logo`} fill className="object-contain p-6" sizes="340px" />
-								</div>
-							)}
-						</div>
-					) : null}
-					{proofTag && (
-						<div className="self-start rounded-full bg-white px-3 py-1 text-xs font-medium text-gi-text ring-1 ring-gi-fog">
-							{proofTag}
-						</div>
-					)}
-					<h3 className="mt-1 text-2xl font-semibold text-gi-text">{title}</h3>
-				</div>
-
-				{/* Content column */}
-				<div className={`min-w-0 ${contentOrderClass} md:col-span-7`}>
-					<div className="flex flex-wrap items-center gap-3">
-						<span className="text-xs font-semibold uppercase tracking-wide text-gi-gray">{brand}</span>
-						{vertical && <span className="h-px w-8 bg-gi-line" />}
-						{vertical && <span className="text-xs text-gi-gray">{vertical}</span>}
+		<article className={`relative overflow-hidden rounded-3xl bg-white py-8 sm:py-10 ${className ?? ''}`}>
+			{/* Curved image header */}
+			{(logoSrc || imageSrc) ? (
+				<div className="relative h-[120px] sm:h-[160px] lg:h-[180px] w-full bg-white">
+					<div className="absolute inset-0 rounded-[24%_56%_40%_50%/50%_42%_58%_45%] bg-gi-fog/25" aria-hidden />
+					<div className="absolute inset-0 flex items-center justify-center">
+						{imageSrc ? (
+							<Image src={imageSrc} alt={`${brand}`} fill className="object-contain object-center p-6 sm:p-8 rounded-[24%_56%_40%_50%/50%_42%_58%_45%]" />
+						) : (
+							<Image src={logoSrc as string} alt={`${brand} logo`} fill className="object-contain p-8" />
+						)}
 					</div>
+				</div>
+			) : null}
 
-					<div className="mt-4 grid gap-4 sm:grid-cols-2">
+			{/* Glass content panel */}
+			<div className="mt-4 sm:mt-6 lg:mt-8 px-4 pb-6 md:px-6">
+				<div className="mx-auto max-w-5xl">
+					<div className="flex flex-wrap items-center gap-2">
+						<span className="inline-flex items-center rounded-full bg-gi-green/15 px-2 py-0.5 text-[11px] font-semibold text-gi-text ring-1 ring-gi-fog">{brand}</span>
+						{vertical ? <span className="h-px w-6 bg-gi-line" /> : null}
+						{vertical ? <span className="text-xs text-gi-gray">{vertical}</span> : null}
+						{proofTag ? <span className="ml-auto inline-flex items-center rounded-full bg-white px-2 py-0.5 text-[11px] font-semibold text-gi-text ring-1 ring-gi-fog">{proofTag}</span> : null}
+					</div>
+					<h3 className="mt-3 text-[1.4rem] font-semibold text-gi-text">{title}</h3>
+
+					<div className="mt-4 grid gap-4 md:grid-cols-2">
 						<div>
 							<div className="text-sm font-semibold text-gi-text">Challenge</div>
 							<p className="mt-1 text-sm text-gi-gray">{challenge}</p>
@@ -91,16 +85,16 @@ export default function CaseStudyTile(props: CaseStudyTileProps) {
 						</ul>
 					</div>
 
-					{quote && (
+					{quote ? (
 						<blockquote className="mt-4 border-l-2 border-gi-fog pl-3 text-sm italic text-gi-text">“{quote}”</blockquote>
-					)}
+					) : null}
 
-					{(primaryCta || secondaryCta) && (
+					{(primaryCta || secondaryCta) ? (
 						<div className="mt-6 flex flex-wrap items-center gap-3">
-							{primaryCta && <a href={primaryCta.href} className="btn-primary">{primaryCta.label}</a>}
-							{secondaryCta && <a href={secondaryCta.href} className="btn-secondary">{secondaryCta.label}</a>}
+							{primaryCta ? <a href={primaryCta.href} className="btn-primary">{primaryCta.label}</a> : null}
+							{secondaryCta ? <a href={secondaryCta.href} className="btn-secondary">{secondaryCta.label}</a> : null}
 						</div>
-					)}
+					) : null}
 				</div>
 			</div>
 		</article>
