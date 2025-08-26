@@ -20,7 +20,7 @@ export async function getServerSideProps(ctx) {
     // Top-level pages
     '/about/', '/careers/', '/contact/', '/customer-stories/', '/insights/', '/plan/', '/privacy/', '/terms/',
     // Services index + leaf pages
-    '/services/', '/services/agentforce/', '/services/mulesoft/', '/services/salesforce/', '/services/data/',
+    '/services/agentforce/', '/services/mulesoft/', '/services/salesforce/', '/services/data/',
     // Marketing landing pages
     '/agentforce-job-description/',
     '/ai-grant-management-guide-for-higher-education/',

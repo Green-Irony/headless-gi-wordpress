@@ -1,0 +1,109 @@
+{
+  "slug": "virginia-dare",
+  "brand": "Virginia Dare",
+  "title": "Secure, Role-Driven Service Operations",
+  "vertical": "CPG / Food & Beverage Manufacturing",
+  "products": ["Salesforce Service Cloud"],
+  "image": {
+    "src": "/logos/virginia-dare-logo.png",
+    "alt": "Virginia Dare"
+  },
+  "datePublished": "2025-09-01",
+  "excerpt": "Role-driven case management with confidential access and executive visibility across regulatory, pricing, complaints, and vendor compliance.",
+  "tags": [
+    "Salesforce",
+    "MuleSoft"
+  ],
+  "hero": {
+    "title": "Service operations that are fast, clear, and secure",
+    "subhead": "Digitized casework for regulatory, pricing, complaints, and vendor compliance with the right people seeing the right data at the right time.",
+    "image": {
+      "src": "/logos/virginia-dare-logo.png",
+      "alt": "Virginia Dare"
+    },
+    "primaryCta": {
+      "label": "Talk to an Expert",
+      "href": "/contact"
+    }
+  },
+  "sections": [
+    {
+      "type": "testimonial",
+      "quote": "Exactly what we needed: secure access, clear ownership, and reporting that reflects reality.",
+      "author": "[Customer Stakeholder]",
+      "role": "[Title]"
+    },
+    {
+      "type": "challenge",
+      "title": "Manual, ambiguous processes created risk across regulatory, pricing, complaints, and vendor compliance.",
+      "promises": [
+        "Role clarity",
+        "Confidential handling",
+        "Executive visibility"
+      ],
+      "align": "center"
+    },
+    {
+      "type": "objectives",
+      "body": "What success looked like for Virginia Dare",
+      "items": [
+        {
+          "title": "Define service roles & access",
+          "body": "Clarify responsibilities and permissions for regulatory, pricing, complaints, vendor compliance, and sales."
+        },
+        {
+          "title": "Improve process efficiency",
+          "body": "Guided, role-based workflows aligned to best practices; less swivel-chair work."
+        },
+        {
+          "title": "Enable reporting without overexposure",
+          "body": "Managers and executives see real-time metrics without unnecessary data access."
+        }
+      ]
+    },
+    {
+      "type": "solution",
+      "title": "What we built",
+      "image": {
+        "src": "/images/case/placeholder-service-cloud.png",
+        "alt": "Service Cloud workflows"
+      },
+      "bg": "navy",
+      "textPrimary": "white",
+      "textSecondary": "white",
+      "imageSide": "left",
+      "bodyBefore": "Green Irony implemented secure, role-driven service operations on Salesforce Service Cloud.",
+      "bullets": [
+        {
+          "body": "Requirements workshops; mapped user personas to platform capabilities."
+        },
+        {
+          "body": "Responsibility matrices for regulatory agents, pricing agents, complaint managers, sales, and executives\u2014including confidential edge cases."
+        },
+        {
+          "body": "Granular access protocols by case type; confidential complaints limited to designated managers."
+        },
+        {
+          "body": "Role-driven case lifecycles (intake \u2192 assignment \u2192 work \u2192 reporting) plus executive dashboards and account-level visibility."
+        }
+      ]
+    },
+    {
+      "type": "results",
+      "title": "Outcome Highlights",
+      "body": "With role-driven workflows and granular access on Service Cloud, Virginia Dare achieved:",
+      "items": [
+        "Clear division of duties and auditable access for sensitive data.",
+        "Faster resolution and fewer errors via guided, role-based workflows.",
+        "Real-time visibility for managers and executives\u2014without exposing restricted information."
+      ]
+    }
+  ],
+  "seo": {
+    "title": "Virginia Dare: Secure, Role-Driven Service on Salesforce Service Cloud",
+    "description": "How Virginia Dare modernized service operations with role-driven case management, confidential access controls, and executive visibility.",
+    "ogImage": "/logos/virginia-dare.svg",
+    "canonical": "/customer-stories/virginia-dare/",
+    "locale": "en-US"
+  }
+}

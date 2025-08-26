@@ -25,7 +25,8 @@ export default function CustomerStoryPage(props: any & { story: CustomerStory | 
   const seoTitle = story?.seo?.title || (story?.title ? `${story.title} | Customer Story` : 'Customer Story');
   const seoDesc = story?.seo?.description || story?.excerpt || '';
   const router = useRouter();
-  const canonical = story?.seo?.canonical || buildCanonicalUrl(router?.asPath || '/');
+  const canonical = story?.seo?.canonical || '';
+  const resolvedCanonical = toAbsoluteUrl(canonical) || buildCanonicalUrl(router?.asPath || '/');
   const seoImage = toAbsoluteUrl(story?.seo?.ogImage || story?.image?.src || '');
   const locale = story?.seo?.locale || undefined;
   const faqItems = story?.seo?.faqs || (story?.sections || []).flatMap((s: any) => (s.type === 'faq' ? s.items : []));
@@ -54,8 +55,8 @@ export default function CustomerStoryPage(props: any & { story: CustomerStory | 
       <Head>
         <title>{seoTitle}</title>
         {seoDesc ? <meta name="description" content={seoDesc} /> : null}
-        {canonical ? <link rel="canonical" href={canonical} /> : null}
-        {canonical ? <meta property="og:url" content={canonical} /> : null}
+        {resolvedCanonical ? <link rel="canonical" href={resolvedCanonical} /> : null}
+        {resolvedCanonical ? <meta property="og:url" content={resolvedCanonical} /> : null}
         {locale ? <meta httpEquiv="content-language" content={locale} /> : null}
         {/* JSON-LD Article-like schema for case study */}
         <script
@@ -71,7 +72,7 @@ export default function CustomerStoryPage(props: any & { story: CustomerStory | 
               image: seoImage || undefined,
               about: story.brand,
               inLanguage: locale || undefined,
-              mainEntityOfPage: canonical ? { "@type": "WebPage", "@id": canonical } : undefined,
+              mainEntityOfPage: resolvedCanonical ? { "@type": "WebPage", "@id": resolvedCanonical } : undefined,
             }),
           }}
         />
