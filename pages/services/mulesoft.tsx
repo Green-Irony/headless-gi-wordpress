@@ -13,6 +13,7 @@ import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../../queries/SiteSettingsQuery';
 import { HEADER_MENU_QUERY } from '../../queries/MenuQueries';
+import FeaturedCustomer from '../../components/FeaturedCustomer';
 
 const Page: any = function MulesoftPage(props: any) {
   if (props.loading) return <>Loading...</>;
@@ -75,6 +76,19 @@ const Page: any = function MulesoftPage(props: any) {
             'Predictable outcomes: Governance and reusable patterns that prevent rework and keep costs in check.',
           ]}
         />
+        <section className="mx-auto max-w-7xl px-6 py-24">
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-2xl font-semibold text-gi-text">Featured customer story</h2>
+            <a href="/customer-stories" className="text-sm font-semibold text-gi-text hover:underline">See all</a>
+          </div>
+          <FeaturedCustomer
+            title="Spirit Airlines: Event-driven operations at scale"
+            href="/customer-stories/spirit"
+            img={{ src: '/logos/spirit.svg', alt: 'Spirit Airlines' }}
+            excerpt="How composable MuleSoft integrations enabled faster time-to-value for IT investments."
+            tag="Travel & Transportation"
+          />
+        </section>
         <PreFooterCTA
           title="Review your integration gaps"
           body="We’ll map the minimal event and pipeline set your first agent needs to act."
