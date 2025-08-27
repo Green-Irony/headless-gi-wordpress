@@ -98,7 +98,7 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
             { src: '/logos/HIVC.png', alt: 'HIVC' },
             { src: '/logos/spirit.svg', alt: 'Spirit Airlines' },
             { src: '/logos/unc-charlotte.svg', alt: 'UNC Charlotte' },
-            { src: '/logos/virginia-dare-logo.png', alt: 'Virginia Dare Extracts' },
+            { src: '/logos/virginia-dare-extracts-logo.webp', alt: 'Virginia Dare Extracts' },
             { src: '/logos/Hotwire.svg', alt: 'Hotwire' },
             { src: '/logos/logo-cae.webp', alt: 'CAE Healthcare' },
             { src: '/logos/logo-upc-insurance-story-e1729029847866.webp', alt: 'UPC Insurance' },
@@ -156,7 +156,7 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
               brand="Virginia Dare"
               title="From legacy tickets to role-driven service"
               vertical="CPG / Food & Beverage Manufacturing"
-              logoSrc="/logos/virginia-dare-logo.png"
+              logoSrc="/logos/virginia-dare-extracts-logo.webp"
               mediaSide="left"
               challenge="An aging ticket system and email-based handoffs led to delays, inconsistent responses, and unclear ownership. Virginia Dare needed to migrate to Salesforce Service Cloud, bring in-flight tickets forward as Cases, and establish secure, efficient processes across multiple case types."
               solution="Implemented a role-driven Service Cloud foundation: imported in-flight tickets; standardized case models and workflows; added granular access by case type (confidential types limited to designated managers); built automation to cut email dependence; and enabled case creation from Outlook. Delivered manager dashboards for trustworthy reporting."
