@@ -34,12 +34,7 @@
     },
     {
       "type": "challenge",
-      "title": "Manual, ambiguous processes created risk across regulatory, pricing, complaints, and vendor compliance.",
-      "promises": [
-        "Role clarity",
-        "Confidential handling",
-        "Executive visibility"
-      ],
+      "title": "Legacy ticketing + email-driven processes created delays, inconsistent handling, and unclear ownership across teams. Virginia Dare needed to migrate from a legacy system to Salesforce Service Cloud, bring in-flight tickets forward as Cases, and establish a modern, role-driven model to accelerate case mitigation across the organization.",
       "align": "center"
     },
     {
@@ -48,7 +43,7 @@
       "items": [
         {
           "title": "Define service roles & access",
-          "body": "Clarify responsibilities and permissions for regulatory, pricing, complaints, vendor compliance, and sales."
+          "body": "Define clear responsibilities and permissions across multiple case types."
         },
         {
           "title": "Improve process efficiency",
@@ -64,31 +59,27 @@
       "type": "solution",
       "title": "What we built",
       "image": {
-        "src": "/images/case/placeholder-service-cloud.png",
-        "alt": "Service Cloud workflows"
+        "src": "/images/data-migration.webp",
+        "alt": "Data Clarity Image"
       },
-      "bg": "navy",
-      "textPrimary": "white",
-      "textSecondary": "white",
+      "bg": "white",
+      "textPrimary": "navy",
+      "textSecondary": "pink",
       "imageSide": "left",
-      "bodyBefore": "Green Irony implemented secure, role-driven service operations on Salesforce Service Cloud.",
+      "bodyBefore": "We implemented a secure, role-driven Service Cloud foundation and streamlined the day-to-day work:",
       "bullets": [
-        {
-          "body": "Requirements workshops; mapped user personas to platform capabilities."
-        },
-        {
-          "body": "Responsibility matrices for regulatory agents, pricing agents, complaint managers, sales, and executives\u2014including confidential edge cases."
-        },
-        {
-          "body": "Granular access protocols by case type; confidential complaints limited to designated managers."
-        },
-        {
-          "body": "Role-driven case lifecycles (intake \u2192 assignment \u2192 work \u2192 reporting) plus executive dashboards and account-level visibility."
-        }
+        { "body": "Mapped legacy data and imported in-flight tickets into Salesforce as Cases." },
+        { "body": "Standardized case models and workflows across multiple case types with clear ownership and paths to resolution." },
+        { "body": "Granular access protocols by case type; confidential case types limited to designated managers." },
+        { "body": "Built automation to cut email dependencies and move work inside Salesforce (routing, escalations, notifications)." },
+        { "body": "Enabled integrated case creation from Outlook (Salesforce for Outlook) to capture requests at the source." },
+        { "body": "Delivered role-based dashboards for managers/executives with trustworthy metrics." }
       ]
     },
     {
       "type": "results",
+      "bg": "navy",
+      "text": "white",
       "title": "Outcome Highlights",
       "body": "With role-driven workflows and granular access on Service Cloud, Virginia Dare achieved:",
       "items": [

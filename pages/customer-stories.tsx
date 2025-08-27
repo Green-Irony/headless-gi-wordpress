@@ -153,21 +153,21 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
             />
 
             <CaseStudyTile
-              brand="SMB Composite"
-              title="Big outcomes with constrained teams"
-              vertical="SMB / Growth"
+              brand="Virginia Dare"
+              title="From legacy tickets to role-driven service"
+              vertical="CPG / Food & Beverage Manufacturing"
+              logoSrc="/logos/virginia-dare-logo.png"
               mediaSide="left"
-              challenge="Swivel-chair context switching, disconnected tools, and limited bandwidth made scaling automation feel out of reach."
-              solution="Scoped a high-impact workflow, built minimal MuleSoft integrations, and launched an AI agent to automate routine qualification/support tasks—paired with a lightweight adoption loop."
+              challenge="An aging ticket system and email-based handoffs led to delays, inconsistent responses, and unclear ownership. Virginia Dare needed to migrate to Salesforce Service Cloud, bring in-flight tickets forward as Cases, and establish secure, efficient processes across multiple case types."
+              solution="Implemented a role-driven Service Cloud foundation: imported in-flight tickets; standardized case models and workflows; added granular access by case type (confidential types limited to designated managers); built automation to cut email dependence; and enabled case creation from Outlook. Delivered manager dashboards for trustworthy reporting."
               outcomes={[
-                'One working agent delivered in eight weeks',
-                'Manual handoffs reduced significantly (capacity uplift)',
-                'Faster customer response time, improving retention and throughput',
+                'Unified handling across multiple case types → faster routing & resolution',
+                'Email handoffs reduced with Outlook → Case creation and in-platform workflows',
+                'Confidential cases protected; managers gain reliable visibility',
               ]}
-              proofTag="Partner-level attention with AI-level leverage."
-              quote="We didn’t have the resources for a big program. Green Irony made our first AI win feel immediate and expandable."
-              primaryCta={{ label: 'Start My First-Win', href: '/contact/' }}
-              secondaryCta={{ label: 'Agentforce Services', href: '/services/agentforce/' }}
+              quote="We moved off the legacy tool without losing momentum—now there’s clear ownership and faster responses."
+              primaryCta={{ label: 'Read the Virginia Dare story', href: '/customer-stories/virginia-dare/' }}
+              secondaryCta={{ label: 'Salesforce Services', href: '/services/salesforce/' }}
             />
           </div>
         </section>
