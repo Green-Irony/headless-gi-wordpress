@@ -329,7 +329,7 @@ export default function Header({
               </nav>
 
               <div className="hidden xl:flex items-center gap-3">
-                <Link href="/plan" className="btn-secondary">Get the 8-Week Plan</Link>
+                <Link href="/agentforce-job-description" className="btn-secondary">Get the 8-Week Plan</Link>
                 <Link href="/contact" className="btn-primary">Talk to an Expert</Link>
               </div>
               <div className="flex xl:hidden items-center">
@@ -394,7 +394,7 @@ export default function Header({
               );
             })}
             <div className="mt-2 flex gap-2">
-              <Link href="/plan" className="btn-secondary flex-1" onClick={() => setOpenMobile(false)}>
+              <Link href="/agentforce-job-description" className="btn-secondary flex-1" onClick={() => setOpenMobile(false)}>
                 Get the 8-Week Plan
               </Link>
               <Link href="/contact" className="btn-primary flex-1" onClick={() => setOpenMobile(false)}>

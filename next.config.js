@@ -29,6 +29,8 @@ module.exports = withFaust({
   async redirects() {
     return [
       { source: '/services', destination: '/services/agentforce', permanent: true },
+      { source: '/plan', destination: '/agentforce-job-description', permanent: true },
+      { source: '/8-week-plan', destination: '/agentforce-job-description', permanent: true },
     ];
   },
 });

@@ -45,7 +45,7 @@ export default function FeaturedCustomer(props: FeaturedCustomerProps = {}) {
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-3">
             <Link href={href} className="inline-block"><span className="btn-secondary">Read more</span></Link>
-            <Link href="/plan" className="inline-block"><span className="btn-primary">Build your first Agent</span></Link>
+            <Link href="/agentforce-job-description" className="inline-block"><span className="btn-primary">Build your first Agent</span></Link>
           </div>
         </div>
       </div>

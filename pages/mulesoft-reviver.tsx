@@ -9,6 +9,7 @@ import { useQuery } from '@apollo/client';
 import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../queries/SiteSettingsQuery';
 import { HEADER_MENU_QUERY } from '../queries/MenuQueries';
+import { toAbsoluteUrl, buildCanonicalUrl } from '../lib/seo';
 
 const Page: any = function MuleSoftReviverPage(props: any) {
   if (props.loading) return <>Loading...</>;
@@ -23,8 +24,37 @@ const Page: any = function MuleSoftReviverPage(props: any) {
   return (
     <>
       <Head>
-        <title>Reviver for MuleSoft | Green Irony</title>
-        <meta name="description" content="A rapid, expert-led diagnostic + recovery plan for teams stalled in MuleSoft. What used to take weeks now takes 48 hours—at no cost to you." />
+        <title>MuleSoft Reviver — Fix what’s broken fast | 48‑hour diagnostic</title>
+        <meta name="description" content="AI‑native recovery for MuleSoft. Get a 48‑hour RCA, a clear recovery plan, and a path to stability in weeks—not months." />
+        {/* Open Graph */}
+        <meta property="og:title" content="MuleSoft Reviver — Fix what’s broken fast | 48‑hour diagnostic" />
+        <meta property="og:description" content="AI‑native recovery for MuleSoft. Get a 48‑hour RCA, a clear recovery plan, and a path to stability in weeks—not months." />
+        <meta property="og:url" content={buildCanonicalUrl('/mulesoft-reviver/')} />
+        <meta property="og:image" content={toAbsoluteUrl('/images/mulesoft-reviver-hero.svg')} />
+        {/* Twitter Card */}
+        <meta name="twitter:title" content="MuleSoft Reviver — Fix what’s broken fast | 48‑hour diagnostic" />
+        <meta name="twitter:description" content="AI‑native recovery for MuleSoft. Get a 48‑hour RCA, a clear recovery plan, and a path to stability in weeks—not months." />
+        <meta name="twitter:image" content={toAbsoluteUrl('/images/mulesoft-reviver-hero.svg')} />
+        {/* WebPage JSON-LD */}
+        {/* eslint-disable-next-line react/no-danger */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              name: "MuleSoft Reviver — Fix what’s broken fast | 48‑hour diagnostic",
+              url: buildCanonicalUrl('/mulesoft-reviver/') || undefined,
+              description:
+                "AI‑native recovery for MuleSoft. Get a 48‑hour RCA, a clear recovery plan, and a path to stability in weeks—not months.",
+              isPartOf: {
+                "@type": "WebSite",
+                name: "Green Irony",
+                url: toAbsoluteUrl('/') || undefined,
+              },
+            }),
+          }}
+        />
       </Head>
 
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
@@ -32,9 +62,9 @@ const Page: any = function MuleSoftReviverPage(props: any) {
       <main>
         <ServiceHero
           title="Reviver for MuleSoft"
-          subhead="A rapid, expert-led diagnostic + recovery plan for teams stalled in MuleSoft. What used to take weeks now takes 48 hours—at no cost to you."
+          subhead="MuleSoft not performing? Fix what’s broken—fast. Our AI‑native recovery pairs senior US‑based architects with digital labor to deliver a 48‑hour root‑cause readout and a clear plan to restore stability in weeks, not months."
           image={{ src: '/images/mulesoft-reviver-hero.svg', alt: 'MuleSoft Reviver Hero Image' }}
-          primaryCta={{ label: 'Get Started', href: '#reviver-form' }}
+          primaryCta={{ label: 'Book the 48‑hour diagnostic', href: '#reviver-form' }}
         />
 
         
@@ -42,7 +72,7 @@ const Page: any = function MuleSoftReviverPage(props: any) {
         {/* Form */}
         <section id="reviver-form" className="mx-auto max-w-5xl px-6 pb-6">
           <h2 className="text-2xl font-semibold text-gi-text">Claim Your Expert Diagnostic</h2>
-          <p className="mt-2 max-w-3xl text-gi-gray">Fill out the form to get started. We’ll schedule a quick intake and start your MuleSoft Reviver Plan.</p>
+          <p className="mt-2 max-w-3xl text-gi-gray">Fill out the form and we’ll schedule a short intake. Within 48 hours, you’ll have a concise RCA and a prioritized recovery plan—timeline, budget, and next steps you can act on immediately.</p>
           <div className="mt-6 rounded-2xl border border-gi-fog bg-white p-6 shadow-gi">
             <HubSpotForm
               portalId="23316092"
@@ -56,38 +86,37 @@ const Page: any = function MuleSoftReviverPage(props: any) {
         <section className="mx-auto max-w-5xl px-6 py-10">
           <h3 className="text-2xl font-semibold text-gi-text">In just 48 hours, you’ll get:</h3>
           <ul className="mt-4 space-y-3 text-gi-text">
-            <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" /><strong>Deep-Dive Diagnostic</strong> of existing MuleSoft org, powered by our proprietary AI-driven solutions</li>
-            <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" /><strong>Root Cause Clarity</strong> to identify issues blocking progress (not just symptoms)</li>
-            <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" /><strong>Custom Recovery Plan</strong> with timeline, budget, and action plan for success</li>
-            <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" /><strong>Expert-Led Guidance</strong> with our in-house MuleSoft experts, tailored to your goals</li>
-            <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" /><strong>$25K+ Worth of Value,</strong> now delivered at no cost—for a limited time</li>
+            <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Root‑cause analysis of architecture, flows, environments, and policies.</li>
+            <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />A clear recovery plan with milestones, owners, and budget.</li>
+            <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Performance benchmarks and reliability targets (dashboards/SLAs).</li>
+            <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Senior‑led guidance amplified by AI to accelerate fixes.</li>
           </ul>
         </section>
 
         {/* Why Reviver */}
         <section className="mx-auto max-w-5xl px-6 py-10">
           <h3 className="text-2xl font-semibold text-gi-text">Why MuleSoft Reviver?</h3>
-          <p className="mt-3 max-w-3xl text-gi-text">Most technology health checks just scratch the surface. The vendor runs a checklist, hands you a PDF, and moves on. <strong>Green Irony’s MuleSoft Reviver solution is different — because we built it differently.</strong></p>
+          <p className="mt-3 max-w-3xl text-gi-text">We go beyond health‑check checklists. Reviver pinpoints the real blockers—design debt, non‑performant flows, brittle error handling, environment drift, and missing observability—and gets you back to reliable delivery fast.</p>
           <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
             <div className="rounded-2xl border border-gi-fog bg-white p-5 shadow-gi">
-              <h4 className="text-lg font-semibold text-gi-text">AI-Powered Analysis</h4>
-              <p className="mt-2 text-gi-gray">What used to take weeks and thousands of consulting project dollars, now takes just 48 hours—thanks to Green Irony’s proprietary AI solution design.</p>
+              <h4 className="text-lg font-semibold text-gi-text">2× faster delivery</h4>
+              <p className="mt-2 text-gi-gray">AI‑accelerated analysis and senior execution cut recovery timelines in half—without sacrificing quality.</p>
             </div>
             <div className="rounded-2xl border border-gi-fog bg-white p-5 shadow-gi">
-              <h4 className="text-lg font-semibold text-gi-text">Accelerated Frameworks</h4>
-              <p className="mt-2 text-gi-gray">We’ve fixed broken integrations for Fortune 500 clients—now we’re packaging that expertise at a scale and speed right-sized for SMBs.</p>
+              <h4 className="text-lg font-semibold text-gi-text">On‑shore expertise at offshore economics</h4>
+              <p className="mt-2 text-gi-gray">Seasoned US‑based MuleSoft architects deliver with the efficiency of digital labor, matching offshore price points.</p>
             </div>
             <div className="rounded-2xl border border-gi-fog bg-white p-5 shadow-gi">
-              <h4 className="text-lg font-semibold text-gi-text">Senior MuleSoft Expertise</h4>
-              <p className="mt-2 text-gi-gray">Integration is our core. We’re not a generalist agency—our certified specialists live and breathe MuleSoft every day.</p>
+              <h4 className="text-lg font-semibold text-gi-text">Predictable outcomes</h4>
+              <p className="mt-2 text-gi-gray">Accurate plans, quality gates, and clear SLAs reduce rework and surprises so you can plan with confidence.</p>
             </div>
           </div>
         </section>
 
         <PreFooterCTA
           title="MuleSoft on Life Support?"
-          body="We'll rescue your project before it flatlines—fast and free."
-          primaryCta={{ label: 'Get Started', href: '#reviver-form' }}
+          body="We stabilize quickly and set a future‑proof foundation—composable patterns, CI/CD, and full observability—often in as little as 3 weeks, depending on scope."
+          primaryCta={{ label: 'Book the 48‑hour diagnostic', href: '#reviver-form' }}
           secondaryCta={{}}
         />
       </main>

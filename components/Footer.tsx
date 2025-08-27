@@ -86,7 +86,7 @@ export default function Footer() {
               <ul className="mt-3 space-y-2 text-sm">
                 <li><Link href="/customer-stories" className={linkUnderline}>Customer Stories</Link></li>
                 <li><Link href="/insights" className={linkUnderline}>Insights</Link></li>
-                <li><Link href="/plan" className={linkUnderline}>8-Week Agent Launch Plan</Link></li>
+                <li><Link href="/agentforce-job-description" className={linkUnderline}>8-Week Agent Launch Plan</Link></li>
               </ul>
             </div>
           </div>

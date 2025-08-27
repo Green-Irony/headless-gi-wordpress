@@ -23,7 +23,7 @@ const Page: any = function AgentforceJobDescriptionPage(props: any) {
     <>
       <Head>
         <title>Write Your Agentforce Job Description | Green Irony</title>
-        <meta name="description" content="Book a 30‑minute 1:1 session with a Green Irony Agentforce expert and leave with a drafted AI Job Description tailored to your needs." />
+        <meta name="description" content="Book a 45‑minute working session with a senior architect. We’ll define your Agent’s Job Description and map the fastest safe path to a live Agentforce pilot—in as little as 3 weeks." />
       </Head>
 
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
@@ -31,12 +31,12 @@ const Page: any = function AgentforceJobDescriptionPage(props: any) {
       <main className="flex-1">
         <HeroSimple
           title="Write Your Agentforce Job Description"
-          subhead="Book a 30‑minute 1:1 session with a Green Irony Agentforce expert. We’ll help you define the ideal AI assistant role for your organization—and you’ll walk away with a fully drafted AI Job Description you can use to get started."
+          subhead="Book a 45‑minute working session with a senior architect. We’ll define your Agent’s Job Description (responsibilities, guardrails, KPIs) and map the fastest safe path to a live Agentforce pilot—in as little as 3 weeks."
           
         />
 
         <section className="mx-auto max-w-5xl px-6 -mt-10 pb-2">
-          <p className="mx-auto max-w-3xl text-center text-gi-text font-semibold">Zero cost. Immediate clarity on your next AI Assistant.</p>
+          <p className="mx-auto max-w-3xl text-center text-gi-text font-semibold">Zero cost. Immediate clarity on the fastest path to a working agent.</p>
         </section>
 
         <section className="mx-auto max-w-5xl px-6 py-8">
@@ -46,43 +46,42 @@ const Page: any = function AgentforceJobDescriptionPage(props: any) {
 
               {/* Step 1 */}
               <div className="mt-6 rounded-2xl border border-gi-fog bg-white p-6 shadow-gi">
-                <h3 className="text-xl font-semibold text-gi-text">Step 1: Laying the Foundation for Digital Labor Success</h3>
-                <p className="mt-1 text-sm text-gi-gray"><span className="inline-flex items-center rounded-full bg-gi-subtle px-2 py-1 text-gi-text">📍 You are here</span></p>
+                <h3 className="text-xl font-semibold text-gi-text">Step 1: Define the job (Agent Job Description)</h3>
                 <ul className="mt-3 space-y-2 text-gi-text">
-                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Identify critical use cases for Agentforce</li>
-                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Define Agentforce agent roles</li>
-                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Set clear, actionable goals</li>
-                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Tailor agent to pinpoint substantial improvement opportunities</li>
+                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Identify a high-impact outcome (deflection, capacity, speed, predictability)</li>
+                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Specify responsibilities, inputs/outputs, and human handoffs</li>
+                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Set guardrails (approvals, limits, auditability)</li>
+                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Confirm KPIs and success criteria</li>
                 </ul>
               </div>
 
               {/* Step 2 */}
               <div className="mt-6 rounded-2xl border border-gi-fog bg-white p-6 shadow-gi">
-                <h3 className="text-xl font-semibold text-gi-text">Step 2: Driving Seamless Digital Transformation</h3>
+                <h3 className="text-xl font-semibold text-gi-text">Step 2: Build the pilot (non-prod)</h3>
                 <ul className="mt-3 space-y-2 text-gi-text">
-                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Conclude initial assessments</li>
-                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Launch and activate Agentforce solutions</li>
-                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Implement a tailored digital workforce system</li>
-                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Ensure alignment with business needs</li>
+                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Connect safe credentials to non‑prod systems (Salesforce, Slack, MuleSoft APIs, knowledge)</li>
+                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Implement 1–2 priority workflows from the AJD end‑to‑end</li>
+                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Add approvals, logging, and rollback behaviors</li>
+                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Stand up dashboards for transparency and learning</li>
                 </ul>
               </div>
 
               {/* Step 3 */}
               <div className="mt-6 rounded-2xl border border-gi-fog bg-white p-6 shadow-gi">
-                <h3 className="text-xl font-semibold text-gi-text">Step 3: Adapting and Evolving for Long-Term Growth</h3>
+                <h3 className="text-xl font-semibold text-gi-text">Step 3: Prove and plan production</h3>
                 <ul className="mt-3 space-y-2 text-gi-text">
-                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Adapt to changing market dynamics</li>
-                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Update and refine digital labor solutions</li>
-                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Maintain system effectiveness and competitiveness</li>
-                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Scale operations to match evolving business environment</li>
+                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />UAT with real scenarios; tune prompts, guardrails, and throughput</li>
+                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Finalize cutover approach and production access patterns</li>
+                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Map the 3–8 week plan to go‑live and scale to the next jobs</li>
+                  <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Lock owners, quality gates, and timeline</li>
                 </ul>
               </div>
             </div>
 
             <div className="md:col-span-5">
               <div className="p-6 gi-hubspot">
-                <h3 className="text-xl font-semibold text-gi-text">Book your Free Agentforce Consultation</h3>
-                <p className="mt-1 text-sm text-gi-gray">Let’s map out your first AI role—book a free 30-minute strategy session with an expert.</p>
+                <h3 className="text-xl font-semibold text-gi-text">Book your 8‑Week Outcomes Workshop</h3>
+                <p className="mt-1 text-sm text-gi-gray">Let’s design the job and show it working. Request a 45‑minute session with an expert—your AJD and week‑by‑week plan arrive in the next few business days.</p>
                 <div className="mt-6">
                   <HubSpotForm
                     portalId="23316092"
@@ -95,9 +94,23 @@ const Page: any = function AgentforceJobDescriptionPage(props: any) {
           </div>
         </section>
 
+        {/* Timeline */}
+        <section className="mx-auto max-w-2xl px-6 py-8">
+          <h2 className="text-2xl md:text-3xl font-semibold text-gi-text">Timeline</h2>
+          <div className="mt-6 rounded-2xl border border-gi-fog bg-white p-6 shadow-gi">
+            <h3 className="text-xl font-semibold text-gi-text">A fast, safe path to live</h3>
+            <ul className="mt-3 space-y-2 text-gi-text">
+              <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Weeks 0–1: Align & AJD</li>
+              <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Weeks 1–3: Build pilot in non‑prod</li>
+              <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Weeks 3–4: UAT & guardrails</li>
+              <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Weeks 4–8: Production hardening & scale</li>
+            </ul>
+          </div>
+        </section>
+
         <PreFooterCTA
           title="Learn more about our Agentforce services"
-          body="Explore how we design, build, and scale Salesforce‑native agents—from first win to enterprise rollout."
+          body="Explore how we design, pilot, and scale Salesforce‑native agents—built on composable integrations and senior‑led delivery."
           primaryCta={{ label: 'Explore Agentforce services', href: '/services/agentforce' }}
           secondaryCta={{}}
         />
