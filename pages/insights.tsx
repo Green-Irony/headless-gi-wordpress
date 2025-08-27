@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { buildCanonicalUrl } from '../lib/seo';
+import { buildCanonicalUrl, toAbsoluteUrl } from '../lib/seo';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import InsightsHeroSearch from '../components/InsightsHeroSearch';
@@ -64,6 +64,8 @@ const Page: any = function InsightsPage(props: any & { stories: any[] }) {
   const { title: siteTitle, description: siteDescription } = siteData;
   const router = useRouter();
   const canonical = buildCanonicalUrl(router?.asPath || '/insights');
+  const pageTitle = siteTitle ? `${siteTitle} — Clarity in the age of AI` : 'Clarity in the age of AI';
+  const metaDescription = 'Insights, playbooks, and customer stories on AI-native delivery, integration foundations, and getting a working agent live fast.';
 
   const [selectedCategoryIds, setSelectedCategoryIds] = React.useState<number[]>([]);
   const [q, setQ] = React.useState<string>('');
@@ -231,9 +233,16 @@ const Page: any = function InsightsPage(props: any & { stories: any[] }) {
   return (
     <>
       <Head>
-        <title>{siteTitle ? `${siteTitle} — Clarity in the age of AI` : 'Clarity in the age of AI'}</title>
+        <title>{pageTitle}</title>
+        <meta name="description" content={metaDescription} />
         {canonical ? <link rel="canonical" href={canonical} /> : null}
         {canonical ? <meta property="og:url" content={canonical} /> : null}
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={toAbsoluteUrl('/logos/green-irony/green-logo-long.png')} />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={toAbsoluteUrl('/logos/green-irony/green-logo-long.png')} />
         <link rel="alternate" type="application/rss+xml" title="Green Irony Insights" href="/insights/rss.xml" />
         {itemList.length > 0 ? (
           <script
@@ -244,6 +253,20 @@ const Page: any = function InsightsPage(props: any & { stories: any[] }) {
             }}
           />
         ) : null}
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Blog',
+              name: 'Green Irony Insights',
+              url: canonical || undefined,
+              description: metaDescription,
+              publisher: { '@type': 'Organization', name: 'Green Irony', url: toAbsoluteUrl('/') || undefined },
+            }),
+          }}
+        />
       </Head>
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
       <main>

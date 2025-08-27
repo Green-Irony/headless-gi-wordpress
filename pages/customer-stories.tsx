@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { buildCanonicalUrl } from '../lib/seo';
+import { buildCanonicalUrl, toAbsoluteUrl } from '../lib/seo';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HeroCenterPro from '../components/HeroCenterPro';
@@ -32,6 +32,13 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
 
   const router = useRouter();
   const canonicalUrl = buildCanonicalUrl(router?.asPath || '/');
+  const storiesList = (props.stories || []).slice(0, 10).map((s: CustomerStory, idx: number) => ({
+    '@type': 'ListItem',
+    position: idx + 1,
+    url: `/customer-stories/${s.slug}`,
+    name: s.title,
+    image: s?.image?.src ? toAbsoluteUrl(s.image.src) : undefined,
+  }));
 
   // Local UI state for "See All Customer Stories"
   const [showAll, setShowAll] = React.useState(false);
@@ -47,6 +54,26 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
         {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={toAbsoluteUrl('/logos/green-irony/green-logo-long.png')} />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={toAbsoluteUrl('/logos/green-irony/green-logo-long.png')} />
+        {/* JSON-LD: Collection of Customer Stories */}
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'CollectionPage',
+              name: pageTitle,
+              url: canonicalUrl || undefined,
+              description: metaDescription,
+              isPartOf: { '@type': 'WebSite', name: 'Green Irony', url: toAbsoluteUrl('/') || undefined },
+              hasPart: [{ '@type': 'ItemList', itemListElement: storiesList }],
+            }),
+          }}
+        />
       </Head>
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
       <main>
