@@ -45,8 +45,8 @@ const Page: any = function AboutPage(props: any) {
         <HeroCenterPro
           title="We’ve always moved fast. Now we move twice as fast."
           body="Trusted since 2016 for enterprise‑grade Salesforce and MuleSoft delivery. Today, we’re AI‑native—cutting timelines in half while keeping US‑based quality and predictability."
-          primaryCta={{ label: 'Start Your First Win', href: '/contact' }}
-          secondaryCta={{ label: 'Explore Careers', href: '/careers' }}
+          primaryCta={{ label: 'Start Your First Win', href: '/contact/' }}
+          secondaryCta={{ label: 'Explore Careers', href: '/careers/' }}
           //kpis={[{ label: '⚡ Faster delivery' }, { label: '⬇️ Deflection up' }, { label: '🧠 Capacity unlocked' }]}
           kpis={[]}
           showMedia={false}
@@ -104,7 +104,7 @@ const Page: any = function AboutPage(props: any) {
             'Integration before intelligence',
             'Safe actions, measurable outcomes',
           ]}
-          //primaryCta={{ label: 'Plan my first win', href: '/contact' }}
+          //primaryCta={{ label: 'Plan my first win', href: '/contact/' }}
           //secondaryCta={{ label: 'See how we deliver', href: '/services' }}
           badge="AI‑Native"
           background={{ pattern: 'curves', intensity: 1 }}
@@ -174,8 +174,8 @@ const Page: any = function AboutPage(props: any) {
           <div className="rounded-2xl border border-gi-fog bg-white p-8 text-center shadow-gi">
             <h2 className="text-2xl font-semibold text-gi-text">Ready to move twice as fast—without the tradeoffs?</h2>
             <div className="mt-6 flex justify-center gap-3">
-              <a className="btn-primary" href="/contact">Start Your First Win</a>
-              <a className="btn-secondary" href="/careers">Explore Careers</a>
+              <a className="btn-primary" href="/contact/">Start Your First Win</a>
+              <a className="btn-secondary" href="/careers/">Explore Careers</a>
             </div>
           </div>
         </section>

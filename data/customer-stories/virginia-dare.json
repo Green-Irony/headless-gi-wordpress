@@ -1,0 +1,99 @@
+{
+  "slug": "virginia-dare",
+  "brand": "Virginia Dare",
+  "title": "Secure, Role-Driven Service Operations",
+  "vertical": "CPG / Food & Beverage Manufacturing",
+  "products": ["Salesforce Service Cloud"],
+  "image": {
+    "src": "/logos/virginia-dare-extracts-logo.webp",
+    "alt": "Virginia Dare"
+  },
+  "datePublished": "2025-09-01",
+  "excerpt": "Role-driven case management with confidential access and executive visibility across regulatory, pricing, complaints, and vendor compliance.",
+  "tags": [
+    "Salesforce",
+    "MuleSoft"
+  ],
+  "hero": {
+    "title": "Service operations that are fast, clear, and secure",
+    "subhead": "Digitized casework for regulatory, pricing, complaints, and vendor compliance with the right people seeing the right data at the right time.",
+    "image": {
+      "src": "/logos/virginia-dare-extracts-logo.webp",
+      "alt": "Virginia Dare"
+    },
+    "primaryCta": {
+      "label": "Talk to an Expert",
+      "href": "/contact/"
+    }
+  },
+  "sections": [
+    {
+      "type": "testimonial",
+      "quote": "Exactly what we needed: secure access, clear ownership, and reporting that reflects reality.",
+      "role": "Business System Manager"
+    },
+    {
+      "type": "challenge",
+      "title": "Legacy ticketing + email-driven processes created delays, inconsistent handling, and unclear ownership across teams. Virginia Dare needed to migrate from a legacy system to Salesforce Service Cloud, bring in-flight tickets forward as Cases, and establish a modern, role-driven model to accelerate case mitigation across the organization.",
+      "align": "center"
+    },
+    {
+      "type": "objectives",
+      "body": "What success looked like for Virginia Dare",
+      "items": [
+        {
+          "title": "Define service roles & access",
+          "body": "Define clear responsibilities and permissions across multiple case types."
+        },
+        {
+          "title": "Improve process efficiency",
+          "body": "Guided, role-based workflows aligned to best practices; less swivel-chair work."
+        },
+        {
+          "title": "Enable reporting without overexposure",
+          "body": "Managers and executives see real-time metrics without unnecessary data access."
+        }
+      ]
+    },
+    {
+      "type": "solution",
+      "title": "What we built",
+      "image": {
+        "src": "/images/data-migration.webp",
+        "alt": "Data Clarity Image"
+      },
+      "bg": "white",
+      "textPrimary": "navy",
+      "textSecondary": "pink",
+      "imageSide": "left",
+      "bodyBefore": "We implemented a secure, role-driven Service Cloud foundation and streamlined the day-to-day work:",
+      "bullets": [
+        { "body": "Mapped legacy data and imported in-flight tickets into Salesforce as Cases." },
+        { "body": "Standardized case models and workflows across multiple case types with clear ownership and paths to resolution." },
+        { "body": "Granular access protocols by case type; confidential case types limited to designated managers." },
+        { "body": "Built automation to cut email dependencies and move work inside Salesforce (routing, escalations, notifications)." },
+        { "body": "Enabled integrated case creation from Outlook (Salesforce for Outlook) to capture requests at the source." },
+        { "body": "Delivered role-based dashboards for managers/executives with trustworthy metrics." }
+      ]
+    },
+    {
+      "type": "results",
+      "bg": "navy",
+      "text": "white",
+      "title": "Outcome Highlights",
+      "body": "With role-driven workflows and granular access on Service Cloud, Virginia Dare achieved:",
+      "items": [
+        "Clear division of duties and auditable access for sensitive data.",
+        "Faster resolution and fewer errors via guided, role-based workflows.",
+        "Real-time visibility for managers and executives\u2014without exposing restricted information."
+      ]
+    }
+  ],
+  "seo": {
+    "title": "Virginia Dare: Secure, Role-Driven Service on Salesforce Service Cloud",
+    "description": "How Virginia Dare modernized service operations with role-driven case management, confidential access controls, and executive visibility.",
+    "ogImage": "/logos/virginia-dare.svg",
+    "canonical": "/customer-stories/virginia-dare/",
+    "locale": "en-US"
+  }
+}

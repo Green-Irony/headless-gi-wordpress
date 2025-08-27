@@ -14,15 +14,15 @@ export type LeadMagnetProps = {
   secondaryCta?: { label: string; href: string };
 };
 
-const DEFAULT_TITLE = 'Your 8‑Week Agent Launch Plan';
-const DEFAULT_BODY = 'Pick the right use case, design the minimal integrations, launch a working agent, and measure outcomes—fast.';
+const DEFAULT_TITLE = '8‑Week Outcomes Workshop';
+const DEFAULT_BODY = 'Define your agent’s job (AJD), map the minimal integrations, and launch a working Agentforce pilot in as little as 3 weeks.';
 const DEFAULT_BULLETS = [
-  'KPI scorecard (deflection, cycle time, capacity)',
-  'Integration checklist (events, pipelines, data)',
-  'Expansion plays to add actions and deepen automation',
+  'Agent Job Description — responsibilities, guardrails, KPIs',
+  'Week-by-week plan (3–8 weeks) — milestones, owners, quality gates',
+  'Integration map & data contracts — systems, events, access',
 ];
-const DEFAULT_PRIMARY = { label: 'Download the Plan', href: '/plan' };
-const DEFAULT_SECONDARY = { label: 'Talk to an Expert', href: '/contact' };
+const DEFAULT_PRIMARY = { label: 'Request a Time', href: '/agentforce-job-description/' };
+const DEFAULT_SECONDARY = { label: 'Talk to an Expert', href: '/contact/' };
 
 export default function LeadMagnetCTA({ id, className, title = DEFAULT_TITLE, body = DEFAULT_BODY, bullets = DEFAULT_BULLETS, primaryCta = DEFAULT_PRIMARY, secondaryCta = DEFAULT_SECONDARY }: LeadMagnetProps) {
   const prefersReduced = useReducedMotion();
@@ -78,15 +78,21 @@ export default function LeadMagnetCTA({ id, className, title = DEFAULT_TITLE, bo
             </ul>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <button className="btn-primary" onClick={() => setOpen(true)}>
-                {primaryCta.label}
-              </button>
+              {primaryCta?.href ? (
+                <a className="btn-primary" href={primaryCta.href}>
+                  {primaryCta.label}
+                </a>
+              ) : (
+                <button className="btn-primary" onClick={() => setOpen(true)}>
+                  {primaryCta.label}
+                </button>
+              )}
               {/*<a className="btn-secondary" href={secondaryCta.href}>
                 {secondaryCta.label}
               </a>*/}
             </div>
 
-            <p className="mt-3 text-xs text-gi-gray">No spam — just the plan. You'll also get an editable KPI scorecard.</p>
+            <p className="mt-3 text-xs text-gi-gray">No cost — AJD, week-by-week plan, and an editable scorecard delivered in the next few business days.</p>
           </div>
 
           <div className="order-1 md:order-2 md:col-span-6">
@@ -226,7 +232,7 @@ function LeadMagnetModal({ onClose }: { onClose: () => void }) {
           Close
         </button>
 
-        <h3 className="text-lg font-semibold text-gi-text">Get the 8-Week Agent Launch Plan</h3>
+        <h3 className="text-lg font-semibold text-gi-text">Start the 8-Week Agent Workshop</h3>
         <p className="mt-2 text-sm text-gi-gray">
           Enter your email and we&rsquo;ll send the PDF, plus the editable KPI scorecard.
         </p>

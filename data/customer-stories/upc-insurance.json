@@ -18,10 +18,10 @@
       "src": "/logos/logo-upc-insurance-story-e1729029847866.webp",
       "alt": "UPC Insurance"
     },
-    "primaryCta": { "label": "Talk to an Expert", "href": "/contact" },
+    "primaryCta": { "label": "Talk to an Expert", "href": "/contact/" },
     "secondaryCta": {
       "label": "Explore MuleSoft Services",
-      "href": "/services/mulesoft"
+      "href": "/services/mulesoft/"
     }
   },
   "sections": [
@@ -97,7 +97,7 @@
   "seo": {
     "title": "UPC Insurance: API-led Integration on MuleSoft",
     "description": "How UPC enabled reuse and faster change with Experience, Process, and System APIs.",
-    "canonical": "/customer-stories/upc-insurance",
+    "canonical": "/customer-stories/upc-insurance/",
     "locale": "en-US"
   }
 }

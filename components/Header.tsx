@@ -15,18 +15,18 @@ export type MenuItem = {
 };
 
 const FALLBACK_NAV: Array<{ label: string; href: string }> = [
-  { label: 'Services', href: '/services' },
+  { label: 'Services', href: '/services/' },
   //{ label: 'Solutions', href: '/solutions' },
-  { label: 'Customer Stories', href: '/customer-stories' },
-  { label: 'Insights', href: '/insights' },
-  { label: 'About', href: '/about' },
+  { label: 'Customer Stories', href: '/customer-stories/' },
+  { label: 'Insights', href: '/insights/' },
+  { label: 'About', href: '/about/' },
 ];
 
 const DEFAULT_SERVICES_CHILDREN = [
-  { href: '/services/agentforce', title: 'AI & Digital Labor', desc: 'Jobs, safe actions, and KPIs.' },
-  { href: '/services/mulesoft', title: 'MuleSoft Integration (AI-led)', desc: 'Pipelines & events for agents.' },
-  { href: '/services/salesforce', title: 'Salesforce Implementation (AI-led)', desc: 'Control room for humans + agents.' },
-  { href: '/services/data', title: 'Data & Migrations', desc: 'Trusted knowledge and real-time context.' },
+  { href: '/services/agentforce/', title: 'AI & Digital Labor', desc: 'Jobs, safe actions, and KPIs.' },
+  { href: '/services/mulesoft/', title: 'MuleSoft Integration (AI-led)', desc: 'Pipelines & events for agents.' },
+  { href: '/services/salesforce/', title: 'Salesforce Implementation (AI-led)', desc: 'Control room for humans + agents.' },
+  { href: '/services/data/', title: 'Data & Migrations', desc: 'Trusted knowledge and real-time context.' },
 ];
 
 // Default Solutions submenu links if WP is not populated
@@ -38,9 +38,9 @@ const DEFAULT_SOLUTIONS_CHILDREN = [
 
 // Default About submenu entries
 const DEFAULT_ABOUT_CHILDREN = [
-  { href: '/about', title: 'About' },
-  { href: '/careers', title: 'Careers' },
-  { href: '/contact', title: 'Contact' },
+  { href: '/about/', title: 'About' },
+  { href: '/careers/', title: 'Careers' },
+  { href: '/contact/', title: 'Contact' },
 ];
 
 function toServicesAnchor(href: string): string {
@@ -231,7 +231,7 @@ export default function Header({
 
   return (
     <>
-             <header className="fixed inset-x-0 top-0 z-50">
+             <header id="top" className="fixed inset-x-0 top-0 z-50">
                  <div className={`supports-[backdrop-filter]:backdrop-blur bg-white/85 transition-shadow ${scrolled ? 'shadow-gi' : ''}`}>
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex h-16 items-center justify-between">
@@ -329,8 +329,8 @@ export default function Header({
               </nav>
 
               <div className="hidden xl:flex items-center gap-3">
-                <Link href="/plan" className="btn-secondary">Get the 8-Week Plan</Link>
-                <Link href="/contact" className="btn-primary">Talk to an Expert</Link>
+                <Link href="/agentforce-job-description/" className="btn-secondary">8-Week Agent Workshop</Link>
+                <Link href="/contact/" className="btn-primary">Talk to an Expert</Link>
               </div>
               <div className="flex xl:hidden items-center">
                 <button
@@ -394,10 +394,10 @@ export default function Header({
               );
             })}
             <div className="mt-2 flex gap-2">
-              <Link href="/plan" className="btn-secondary flex-1" onClick={() => setOpenMobile(false)}>
-                Get the 8-Week Plan
+              <Link href="/agentforce-job-description/" className="btn-secondary flex-1" onClick={() => setOpenMobile(false)}>
+                8-Week Agent Workshop
               </Link>
-              <Link href="/contact" className="btn-primary flex-1" onClick={() => setOpenMobile(false)}>
+              <Link href="/contact/" className="btn-primary flex-1" onClick={() => setOpenMobile(false)}>
                 Talk to an Expert
               </Link>
             </div>

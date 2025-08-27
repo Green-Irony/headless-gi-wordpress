@@ -25,7 +25,7 @@ export default function PlaceholderPage({
 
         <div className="mt-8 flex flex-wrap gap-3">
           <Link href={ctaHref} className="btn-primary">{ctaLabel}</Link>
-          <Link href="/contact" className="btn-secondary">Talk to an Expert</Link>
+          <Link href="/contact/" className="btn-secondary">Talk to an Expert</Link>
         </div>
       </div>
     </section>

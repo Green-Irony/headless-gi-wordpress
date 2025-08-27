@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { buildCanonicalUrl } from "../lib/seo";
+import { buildCanonicalUrl, toAbsoluteUrl } from "../lib/seo";
 import ArticleHeader from "../components/ArticleHeader";
 import ArticleBody from "../components/ArticleBody";
 import ArticleFooter from "../components/ArticleFooter";
@@ -103,19 +103,29 @@ export default function Component(props) {
         <meta name="description" content={description} />
         {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
         {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
-        {/* JSON-LD Article schema */}
+        {/* JSON-LD BlogPosting schema */}
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Article",
+              "@type": "BlogPosting",
               headline: title,
               datePublished: date,
               dateModified: date,
               author: author?.node?.name ? { "@type": "Person", name: author.node.name } : undefined,
               image: featuredImage?.node?.sourceUrl || undefined,
+              description: description || undefined,
+              articleSection: categories?.nodes?.[0]?.name || undefined,
+              publisher: {
+                "@type": "Organization",
+                name: siteTitle || 'Green Irony',
+                logo: {
+                  "@type": "ImageObject",
+                  url: toAbsoluteUrl('/logos/green-irony/Green-Irony-Logo.svg') || undefined,
+                },
+              },
               mainEntityOfPage: canonicalUrl ? { "@type": "WebPage", "@id": canonicalUrl } : undefined,
             }),
           }}

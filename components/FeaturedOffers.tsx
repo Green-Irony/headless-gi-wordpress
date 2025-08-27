@@ -18,10 +18,10 @@ export type FeaturedOffersProps = {
 
 const DEFAULT_HEADING = 'Your first win starts here';
 const DEFAULT_ITEMS: OfferItem[] = [
-  { title: 'AI & Digital Labor (Agentforce)', body: 'Launch agents with jobs, safe actions, and measurable KPIs.', cta: { label: 'Scope My First Agent', href: '/contact' } },
-  { title: 'MuleSoft Integration (AI-led)', body: 'Design the pipelines and events that let AI agents see, decide, and do.', cta: { label: 'Review My Integration Gaps', href: '/contact' }, flag: 'Flagship' },
-  { title: 'Salesforce Implementation (AI-led)', body: 'Make Salesforce the control room for both humans and agents.', cta: { label: 'Optimize My Org', href: '/contact' } },
-  { title: 'Data & Migrations', body: 'Build the trusted knowledge and real-time context your agents need.', cta: { label: 'Map My Data for AI', href: '/contact' } },
+  { title: 'AI & Digital Labor (Agentforce)', body: 'Launch agents with jobs, safe actions, and measurable KPIs.', cta: { label: 'Scope My First Agent', href: '/contact/' } },
+  { title: 'MuleSoft Integration (AI-led)', body: 'Design the pipelines and events that let AI agents see, decide, and do.', cta: { label: 'Review My Integration Gaps', href: '/contact/' }, flag: 'Flagship' },
+  { title: 'Salesforce Implementation (AI-led)', body: 'Make Salesforce the control room for both humans and agents.', cta: { label: 'Optimize My Org', href: '/contact/' } },
+  { title: 'Data & Migrations', body: 'Build the trusted knowledge and real-time context your agents need.', cta: { label: 'Map My Data for AI', href: '/contact/' } },
 ];
 
 export default function FeaturedOffers({ id, className, heading = DEFAULT_HEADING, items = DEFAULT_ITEMS }: FeaturedOffersProps) {

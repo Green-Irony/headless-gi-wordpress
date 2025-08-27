@@ -76,8 +76,8 @@ export default function FrontPage(props) {
                 'Onshore Expertise.',
               ]}
               body="Launch your first AI-powered MuleSoft or Salesforce outcome in 8 weeks. Our AI-accelerated delivery cuts timelines in half—without sacrificing quality or price—so your team achieves more, faster."
-              primaryCta={{ label: 'Talk to an Expert', href: '/contact' }}
-              secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '/plan' }}
+              primaryCta={{ label: 'Talk to an Expert', href: '/contact/' }}
+              secondaryCta={{ label: 'Start the 8-Week Agent Workshop', href: '/agentforce-job-description/' }}
               kpis={[
                 {label: 'First outcome in 8 weeks'},
                 {label: 'Delivery cycle time \u2193 50%'},
@@ -88,18 +88,20 @@ export default function FrontPage(props) {
             />
             <LogoTicker
               items={[
-                { src: '/logos/spirit.svg', alt: 'Spirit Airlines' },
-                { src: '/logos/unc-charlotte.svg', alt: 'UNC Charlotte' },
                 { src: '/logos/air-culinaire.png', alt: 'Air Culinaire' },
                 { src: '/logos/ccu_h.png', alt: 'CCU' },
                 { src: '/logos/college-hunks.png', alt: 'College Hunks' },
                 { src: '/logos/HIVC.png', alt: 'HIVC' },
+                { src: '/logos/spirit.svg', alt: 'Spirit Airlines' },
+                { src: '/logos/unc-charlotte.svg', alt: 'UNC Charlotte' },
+                //{ src: '/logos/virginia-dare-extracts-logo.webp', alt: 'Virginia Dare Extracts' },
                 { src: '/logos/Hotwire.svg', alt: 'Hotwire' },
-                { src: '/logos/logo-upc-insurance-story-e1729029847866.webp', alt: 'UPC' },
+                { src: '/logos/logo-cae.webp', alt: 'CAE Healthcare' },
+                { src: '/logos/logo-upc-insurance-story-e1729029847866.webp', alt: 'UPC Insurance' },
                 { src: '/logos/PODS-Logo.png', alt: 'PODS' },
                 { src: '/logos/rochelec.png', alt: 'Rochelec' },
               ]}
-              speedSeconds={45}
+              speedSeconds={30}
             />
             <OfferTiles
               className="mt-12 md:mt-16"
@@ -108,25 +110,25 @@ export default function FrontPage(props) {
                 {
                   title: 'MuleSoft Integration (AI‑led)',
                   description: 'API‑led, event‑driven integration so agents can see, decide, and do.',
-                  href: '/services/mulesoft',
+                  href: '/services/mulesoft/',
                   icon: <MuleIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
                   title: 'AI & Digital Labor (Agentforce)',
                   description: 'Launch agents with clear jobs, safe actions, and measurable KPIs.',
-                  href: '/services/agentforce',
+                  href: '/services/agentforce/',
                   icon: <AiIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
                   title: 'Salesforce Implementation (AI‑led)',
                   description: 'Make Salesforce the control room for humans + agents.',
-                  href: '/services/salesforce',
+                  href: '/services/salesforce/',
                   icon: <SalesforceIcon className="h-24 w-24 text-gi-green" />
                 },
                 {
                   title: 'Data & Migrations',
                   description: 'Seamless platform migrations, trusted data, and real-time context for reliable agent and human decisions.',
-                  href: '/services/data',
+                  href: '/services/data/',
                   icon: <DataIcon className="h-24 w-24 text-gi-green" />
                 }
               ]}

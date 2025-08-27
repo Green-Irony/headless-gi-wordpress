@@ -96,8 +96,8 @@ export default function ContactForm() {
         <button type="submit" className="btn-primary" disabled={downloading} data-gi-analytics="contact-submit">
           {downloading ? 'Submitting…' : 'Start the Conversation'}
         </button>
-        <a className="btn-secondary" href="#calendar">Schedule Strategy Call</a>
-        <a className="btn-secondary" href="/plan">Get the 8-Week Agent Launch Plan</a>
+        <a className="btn-secondary" href="#calendar/">Schedule Strategy Call</a>
+        <a className="btn-secondary" href="/agentforce-job-description/">Get the 8-Week Agent Launch Plan</a>
       </div>
 
       <p className="mt-3 text-xs text-gi-gray">We respond within one business day—often the same day.</p>

@@ -30,8 +30,8 @@ const Page: any = function CareersPage(props: any) {
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gi-text">Careers at Green Irony</h1>
           <p className="mx-auto mt-4 max-w-3xl text-lg text-gi-gray">We move fast, deliver predictably, and design agents that act safely. If you thrive in senior‑led teams and love turning complexity into practical outcomes, we'd love to hear from you.</p>
           <div className="mt-8 flex justify-center gap-3">
-            <a href="/contact#contact-form" className="btn-primary">Introduce Yourself</a>
-            <a href="/insights" className="btn-secondary">See what we're thinking</a>
+            <a href="/contact/#contact-form" className="btn-primary">Introduce Yourself</a>
+            <a href="/insights/" className="btn-secondary">See what we're thinking</a>
           </div>
         </section>
 
@@ -42,7 +42,7 @@ const Page: any = function CareersPage(props: any) {
               <div className="mt-2 text-gi-gray">
                 <p>No open roles right now. We're always happy to meet great people—feel free to introduce yourself.</p>
                 <div className="mt-4">
-                  <a href="/contact#contact-form" className="btn-secondary">Introduce Yourself</a>
+                  <a href="/contact/#contact-form" className="btn-secondary">Introduce Yourself</a>
                 </div>
               </div>
             ) : (

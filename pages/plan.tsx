@@ -44,7 +44,7 @@ const Page: any = function PlanPage(props: any) {
             'Agent Launch Plan',
           ]}
           body="Pick the right use case, design the minimal integrations, launch a working agent, and measure outcomes—fast. Senior‑led, AI‑accelerated delivery so you move twice as fast without sacrificing quality."
-          primaryCta={{ label: 'Talk to an Expert', href: '/contact' }}
+          primaryCta={{ label: 'Talk to an Expert', href: '/contact/' }}
           secondaryCta={{ label: 'Download the Plan', href: '#download' }}
           kpis={[{ label: '⚡ Half the cycle time' }, { label: '🤖 Working agent in ~8 weeks' }, { label: '📈 Deflection, speed, capacity' }]}
           showMedia={false}
@@ -60,7 +60,7 @@ const Page: any = function PlanPage(props: any) {
             { k: 'Wk 4‑6', title: 'Build', body: 'AI‑accelerated MuleSoft integration + agent job design. Guardrails, approvals, and observability.' },
             { k: 'Wk 7‑8', title: 'Prove & Scale', body: 'Pilot launch, KPI scorecard, adoption loop, and a concrete expansion plan.' },
           ]}
-          cta={{ label: 'Start my 8‑week path', href: '/contact' }}
+          cta={{ label: 'Start my 8‑week path', href: '/contact/' }}
         />
 
         {/* What you get */}
@@ -101,7 +101,7 @@ const Page: any = function PlanPage(props: any) {
         <PreFooterCTA
           title="Let’s map your first win"
           body="Bring a workflow—We’ll scope the minimal integrations and safe actions to deliver a working agent in ~8 weeks."
-          primaryCta={{ label: 'Start the Conversation', href: '/contact' }}
+          primaryCta={{ label: 'Start the Conversation', href: '/contact/' }}
           secondaryCta={{ label: 'See services', href: '/services' }}
         />
       </main>

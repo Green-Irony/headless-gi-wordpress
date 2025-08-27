@@ -37,7 +37,7 @@ const Page: any = function AgentforcePage(props: any) {
           title="AI agents that work—right from the start"
           subhead="Whether it’s your first agent or your next ten, we design Salesforce‑native agents with clear jobs, safe actions, and measurable KPIs. Delivered by US‑based experts using AI‑accelerated methods, you’ll see value twice as fast—and scale with confidence."
           image={{ src: '/images/investment-to-impact2.webp', alt: 'Expert AI' }}
-          primaryCta={{ label: 'Plan my first win', href: '/contact' }}
+          primaryCta={{ label: 'Design my agent’s job', href: '/agentforce-job-description/' }}
         />
         <DeliverablesWheel
           heading="What we deliver"
@@ -76,16 +76,10 @@ const Page: any = function AgentforcePage(props: any) {
         <section className="mx-auto max-w-7xl px-6 py-24">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-2xl font-semibold text-gi-text">Featured customer story</h2>
-            <a href="/customer-stories" className="text-sm font-semibold text-gi-text hover:underline">See all</a>
+            <a href="/customer-stories/" className="text-sm font-semibold text-gi-text hover:underline">See all</a>
           </div>
           <FeaturedCustomer />
         </section>
-        {/*<PreFooterCTA
-          title="Plan your first agent win"
-          body="Bring a workflow, we’ll shape the job, safe actions, and KPIs to launch in ~8 weeks."
-          primaryCta={{ label: 'Scope My First Agent', href: '/contact' }}
-          secondaryCta={{ label: 'Get the 8-Week Plan', href: '/plan' }}
-        />*/}
       </main>
 
       <Footer />

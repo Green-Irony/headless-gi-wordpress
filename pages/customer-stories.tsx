@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { buildCanonicalUrl } from '../lib/seo';
+import { buildCanonicalUrl, toAbsoluteUrl } from '../lib/seo';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HeroCenterPro from '../components/HeroCenterPro';
@@ -32,6 +32,13 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
 
   const router = useRouter();
   const canonicalUrl = buildCanonicalUrl(router?.asPath || '/');
+  const storiesList = (props.stories || []).slice(0, 10).map((s: CustomerStory, idx: number) => ({
+    '@type': 'ListItem',
+    position: idx + 1,
+    url: `/customer-stories/${s.slug}`,
+    name: s.title,
+    image: s?.image?.src ? toAbsoluteUrl(s.image.src) : undefined,
+  }));
 
   // Local UI state for "See All Customer Stories"
   const [showAll, setShowAll] = React.useState(false);
@@ -47,14 +54,34 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
         {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={toAbsoluteUrl('/logos/green-irony/green-logo-long.png')} />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={toAbsoluteUrl('/logos/green-irony/green-logo-long.png')} />
+        {/* JSON-LD: Collection of Customer Stories */}
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'CollectionPage',
+              name: pageTitle,
+              url: canonicalUrl || undefined,
+              description: metaDescription,
+              isPartOf: { '@type': 'WebSite', name: 'Green Irony', url: toAbsoluteUrl('/') || undefined },
+              hasPart: [{ '@type': 'ItemList', itemListElement: storiesList }],
+            }),
+          }}
+        />
       </Head>
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
       <main>
         <HeroCenterPro
           title="Prove value, then scale"
           body="Case studies built around business outcomes—speed, deflection, and capacity—powered by integrated systems and AI-native agents. See how we turned complex problems into predictable wins."
-          primaryCta={{ label: 'Start Your Success Plan', href: '/contact' }}
-          secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '/plan' }}
+          primaryCta={{ label: 'Start Your Success Plan', href: '/contact/' }}
+          secondaryCta={{ label: 'Start the 8-Week Outcomes Workshop', href: '/agentforce-job-description/' }}
           kpis={[
             { label: '⚡ ½ delivery time' },
             { label: '🛎️ 24/7 support' },
@@ -65,14 +92,16 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
 
         <LogoTicker
           items={[
-            { src: '/logos/spirit.svg', alt: 'Spirit Airlines' },
-            { src: '/logos/unc-charlotte.svg', alt: 'UNC Charlotte' },
             { src: '/logos/air-culinaire.png', alt: 'Air Culinaire' },
             { src: '/logos/ccu_h.png', alt: 'CCU' },
             { src: '/logos/college-hunks.png', alt: 'College Hunks' },
             { src: '/logos/HIVC.png', alt: 'HIVC' },
+            { src: '/logos/spirit.svg', alt: 'Spirit Airlines' },
+            { src: '/logos/unc-charlotte.svg', alt: 'UNC Charlotte' },
+            { src: '/logos/virginia-dare-extracts-logo.webp', alt: 'Virginia Dare Extracts' },
             { src: '/logos/Hotwire.svg', alt: 'Hotwire' },
-            { src: '/logos/logo-upc-insurance-story-e1729029847866.webp', alt: 'UPC' },
+            { src: '/logos/logo-cae.webp', alt: 'CAE Healthcare' },
+            { src: '/logos/logo-upc-insurance-story-e1729029847866.webp', alt: 'UPC Insurance' },
             { src: '/logos/PODS-Logo.png', alt: 'PODS' },
             { src: '/logos/rochelec.png', alt: 'Rochelec' },
           ]}
@@ -101,7 +130,7 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
               proofTag="Built from Spirit Airlines-scale delivery discipline."
               quote="Green Irony gave us the real-time operational insight and automation we thought only large incumbents could deliver—faster and with less overhead."
               primaryCta={{ label: 'Read the Spirit story', href: '/customer-stories/spirit' }}
-              secondaryCta={{ label: 'Explore MuleSoft Services', href: '/services/mulesoft' }}
+              secondaryCta={{ label: 'Explore MuleSoft Services', href: '/services/mulesoft/' }}
             />
 
             <CaseStudyTile
@@ -120,25 +149,25 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
               proofTag="Public-facing AI agents powered by integrated data."
               quote="The agent feels like a teammate—always on, always informed, and it freed our advisors to focus where humans matter most."
               primaryCta={{ label: 'Read the UNC Charlotte story', href: '/customer-stories/unc-charlotte' }}
-              secondaryCta={{ label: 'Agentforce Services', href: '/services/agentforce' }}
+              secondaryCta={{ label: 'Agentforce Services', href: '/services/agentforce/' }}
             />
 
             <CaseStudyTile
-              brand="SMB Composite"
-              title="Big outcomes with constrained teams"
-              vertical="SMB / Growth"
+              brand="Virginia Dare"
+              title="From legacy tickets to role-driven service"
+              vertical="CPG / Food & Beverage Manufacturing"
+              logoSrc="/logos/virginia-dare-extracts-logo.webp"
               mediaSide="left"
-              challenge="Swivel-chair context switching, disconnected tools, and limited bandwidth made scaling automation feel out of reach."
-              solution="Scoped a high-impact workflow, built minimal MuleSoft integrations, and launched an AI agent to automate routine qualification/support tasks—paired with a lightweight adoption loop."
+              challenge="An aging ticket system and email-based handoffs led to delays, inconsistent responses, and unclear ownership. Virginia Dare needed to migrate to Salesforce Service Cloud, bring in-flight tickets forward as Cases, and establish secure, efficient processes across multiple case types."
+              solution="Implemented a role-driven Service Cloud foundation: imported in-flight tickets; standardized case models and workflows; added granular access by case type (confidential types limited to designated managers); built automation to cut email dependence; and enabled case creation from Outlook. Delivered manager dashboards for trustworthy reporting."
               outcomes={[
-                'One working agent delivered in eight weeks',
-                'Manual handoffs reduced significantly (capacity uplift)',
-                'Faster customer response time, improving retention and throughput',
+                'Unified handling across multiple case types → faster routing & resolution',
+                'Email handoffs reduced with Outlook → Case creation and in-platform workflows',
+                'Confidential cases protected; managers gain reliable visibility',
               ]}
-              proofTag="Partner-level attention with AI-level leverage."
-              quote="We didn’t have the resources for a big program. Green Irony made our first AI win feel immediate and expandable."
-              primaryCta={{ label: 'Start My First-Win', href: '/contact' }}
-              secondaryCta={{ label: 'Agentforce Services', href: '/services/agentforce' }}
+              quote="We moved off the legacy tool without losing momentum—now there’s clear ownership and faster responses."
+              primaryCta={{ label: 'Read the Virginia Dare story', href: '/customer-stories/virginia-dare/' }}
+              secondaryCta={{ label: 'Salesforce Services', href: '/services/salesforce/' }}
             />
           </div>
         </section>
@@ -174,8 +203,8 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
         <PreFooterCTA
           title="Become your own success story"
           body="Now that you've heard about some of our customer successes, become your own success story. Talk to an expert and map your first win."
-          primaryCta={{ label: 'Contact Us', href: '/contact' }}
-          secondaryCta={undefined}
+          primaryCta={{ label: 'Contact Us', href: '/contact/' }}
+          secondaryCta={{ label: 'Get my integration success plan', href: '/mulesoft-reviver' }}
         />
       </main>
       <Footer />
