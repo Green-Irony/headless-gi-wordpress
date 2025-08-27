@@ -12,7 +12,7 @@ export type PreFooterProps = {
 const DEFAULT_TITLE = 'Ready to launch predictable AI outcomes?';
 const DEFAULT_BODY = 'Talk to our team or grab the 8-Week Agent Launch Plan to get your first win on the board.';
 const DEFAULT_PRIMARY = { label: 'Talk to an Expert', href: '/contact' };
-const DEFAULT_SECONDARY = { label: 'Get the 8-Week Plan', href: '/plan' };
+const DEFAULT_SECONDARY = { label: 'Start the 8-Week Agent Workshop', href: '/agentforce-job-description' };
 
 export default function PreFooterCTA({ id, className, title = DEFAULT_TITLE, body = DEFAULT_BODY, primaryCta = DEFAULT_PRIMARY, secondaryCta = DEFAULT_SECONDARY }: PreFooterProps) {
   return (

@@ -86,8 +86,8 @@ const Page: any = function SalesforcePage(props: any) {
         <PreFooterCTA
           title="Optimize your org for digital labor"
           body="We’ll remove friction and ready Salesforce for reliable agent action."
-          primaryCta={{ label: 'Talk to Salesforce experts', href: '/contact' }}
-          secondaryCta={{ label: 'See optimization checklist', href: '/plan' }}
+          secondaryCta={{ label: 'Talk to Salesforce experts', href: '/contact' }}
+          primaryCta={{ label: 'Make Salesforce agent-ready', href: '/agentforce-job-description' }}
         />
       </main>
 

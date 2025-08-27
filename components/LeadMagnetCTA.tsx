@@ -232,7 +232,7 @@ function LeadMagnetModal({ onClose }: { onClose: () => void }) {
           Close
         </button>
 
-        <h3 className="text-lg font-semibold text-gi-text">Get the 8-Week Agent Launch Plan</h3>
+        <h3 className="text-lg font-semibold text-gi-text">Start the 8-Week Agent Workshop</h3>
         <p className="mt-2 text-sm text-gi-gray">
           Enter your email and we&rsquo;ll send the PDF, plus the editable KPI scorecard.
         </p>

@@ -54,7 +54,7 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
           title="Prove value, then scale"
           body="Case studies built around business outcomes—speed, deflection, and capacity—powered by integrated systems and AI-native agents. See how we turned complex problems into predictable wins."
           primaryCta={{ label: 'Start Your Success Plan', href: '/contact' }}
-          secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '/plan' }}
+          secondaryCta={{ label: 'Start the 8-Week Outcomes Workshop', href: '/agentforce-job-description' }}
           kpis={[
             { label: '⚡ ½ delivery time' },
             { label: '🛎️ 24/7 support' },
@@ -175,7 +175,7 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
           title="Become your own success story"
           body="Now that you've heard about some of our customer successes, become your own success story. Talk to an expert and map your first win."
           primaryCta={{ label: 'Contact Us', href: '/contact' }}
-          secondaryCta={undefined}
+          secondaryCta={{ label: 'Get my integration success plan', href: '/mulesoft-reviver' }}
         />
       </main>
       <Footer />

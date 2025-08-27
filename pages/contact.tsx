@@ -33,11 +33,11 @@ const Page: any = function ContactPage(props: any) {
       <Header siteTitle={siteTitle} siteDescription={siteDescription} menuItems={menuItems} />
       <main>
         <HeroCenterPro
-          title="Let’s launch your first win"
-          body="Our senior team will respond within one business day—often the same day."
-          primaryCta={{ label: 'Start the Conversation', href: '#contact-form' }}
-          secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '/plan' }}
-          kpis={[{ label: '⚡ Faster delivery' }, { label: '⬇️ Deflection up' }, { label: '🧠 Capacity unlocked' }]}
+          title="Let’s launch your first win—fast"
+          body="Our team responds within one business day—often the same day. We’ll triage your goals quickly and loop in a senior architect as soon as it’s useful."
+          primaryCta={{ label: 'Talk to our team', href: '#contact-form' }}
+          secondaryCta={{ label: 'Start the 8-Week Agent Workshop', href: '/agentforce-job-description' }}
+          kpis={[{ label: '½ delivery time' }, { label: '50%+ deflection' }, { label: 'Capacity unlocked' }]}
           showMedia={false}
         />
 
@@ -64,12 +64,12 @@ const Page: any = function ContactPage(props: any) {
           heading="Why teams choose Green Irony for their first AI win"
           columns={3}
           items={[
-            'No boilerplate proposals—one focused outcome in eight weeks',
-            'Senior architects + AI-native delivery',
-            'Predictable, not experimental execution',
-            'Spirit Airlines heritage and enterprise scale',
-            'Repeatable first-win playbook',
-            'AI-Native badge and best practices',
+            'Enterprise delivery DNA, bottled for speed',
+            'First AI-native Salesforce partner',
+            'Senior, on-shore architects + AI acceleration',
+            'Composable, agent-ready integrations by default',
+            'One focused outcome in 3–8 weeks',
+            'Predictable plans, budgets, and SLAs',
           ]}
         />
 

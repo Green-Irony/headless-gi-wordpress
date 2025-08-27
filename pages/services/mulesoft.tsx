@@ -39,7 +39,7 @@ const Page: any = function MulesoftPage(props: any) {
           title="MuleSoft integration, delivered faster"
           subhead="AI-accelerated, senior-led MuleSoft delivery cuts integration timelines in half—so you get rock-solid, enterprise-grade integrations in weeks, not months. (And when you’re ready for AI agents, your architecture will already be prepared.)"
           image={{ src: '/images/services-mulesoft-hero.webp', alt: 'Integration pipelines and events' }}
-          primaryCta={{ label: 'Review My Integration Gaps', href: '/contact' }}
+          primaryCta={{ label: 'Book the 48-hour diagnostic', href: '/mulesoft-reviver' }}
         />
         <DeliverablesWheel
           heading="What we deliver"
@@ -87,14 +87,11 @@ const Page: any = function MulesoftPage(props: any) {
             img={{ src: '/logos/spirit.svg', alt: 'Spirit Airlines' }}
             excerpt="How composable MuleSoft integrations enabled faster time-to-value for IT investments."
             tag="Travel & Transportation"
+            ctaLabel="Stabilize & prepare for agents"
+            ctaHref="/mulesoft-reviver"
           />
         </section>
-        <PreFooterCTA
-          title="Review your integration gaps"
-          body="We’ll map the minimal event and pipeline set your first agent needs to act."
-          primaryCta={{ label: 'Book an assessment', href: '/contact' }}
-          secondaryCta={{ label: 'See our accelerators', href: '/plan' }}
-        />
+        {null}
       </main>
 
       <Footer />

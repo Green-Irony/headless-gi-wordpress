@@ -19,7 +19,7 @@ const DEFAULT_STEPS: HowStep[] = [
   { k: '03', title: 'Measure', body: 'Scorecard tracks deflection lift, cycle time reduction, and capacity freed across teams.' },
   { k: '04', title: 'Scale', body: 'Expand to new workflows, add safe actions, and deepen automation with confidence.' },
 ];
-const DEFAULT_CTA = { label: 'Get the 8-Week Agent Launch Plan', href: '/agentforce-job-description' };
+const DEFAULT_CTA = { label: 'Start the 8-Week Agent Workshop', href: '/agentforce-job-description' };
 
 export default function HowItWorksLinear({ id, className, heading = DEFAULT_HEADING, subhead, steps = DEFAULT_STEPS, cta = DEFAULT_CTA, leadInBeforeButton }: HowItWorksProps) {
   const prefersReduced = useReducedMotion();

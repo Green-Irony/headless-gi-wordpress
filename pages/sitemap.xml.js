@@ -18,7 +18,7 @@ export async function getServerSideProps(ctx) {
   const staticPaths = [
     '/',
     // Top-level pages
-    '/about/', '/careers/', '/contact/', '/customer-stories/', '/insights/', '/plan/', '/privacy/', '/terms/',
+    '/about/', '/careers/', '/contact/', '/customer-stories/', '/insights/',
     // Services index + leaf pages
     '/services/agentforce/', '/services/mulesoft/', '/services/salesforce/', '/services/data/',
     // Marketing landing pages

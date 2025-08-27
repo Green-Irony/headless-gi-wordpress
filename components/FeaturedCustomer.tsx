@@ -7,6 +7,8 @@ type FeaturedCustomerProps = {
   img?: { src: string; alt?: string };
   excerpt?: string;
   tag?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
 };
 
 export default function FeaturedCustomer(props: FeaturedCustomerProps = {}) {
@@ -15,6 +17,8 @@ export default function FeaturedCustomer(props: FeaturedCustomerProps = {}) {
   const img = props.img ?? { src: '/logos/GI-UNCC.webp', alt: 'UNC Charlotte and Green Irony company logos' };
   const excerpt = props.excerpt ?? 'How UNC Charlotte transformed IT support with AI-powered knowledge and Agentforce availability to deliver 24/7 excellence.';
   const tag = props.tag ?? 'Higher Education';
+  const ctaLabel = props.ctaLabel ?? 'See a pilot in 3–8 weeks';
+  const ctaHref = props.ctaHref ?? '/agentforce-job-description';
 
   return (
     <article className="overflow-hidden rounded-3xl bg-white ring-1 ring-gi-fog shadow-gi">
@@ -45,7 +49,7 @@ export default function FeaturedCustomer(props: FeaturedCustomerProps = {}) {
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-3">
             <Link href={href} className="inline-block"><span className="btn-secondary">Read more</span></Link>
-            <Link href="/agentforce-job-description" className="inline-block"><span className="btn-primary">Build your first Agent</span></Link>
+            <Link href={ctaHref} className="inline-block"><span className="btn-primary">{ctaLabel}</span></Link>
           </div>
         </div>
       </div>

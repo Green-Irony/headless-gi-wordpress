@@ -38,7 +38,7 @@ const Page: any = function DataMigrationsPage(props: any) {
           title="Data & Migrations, done right"
           subhead="Seamless platform migrations and trusted data pipelines so your teams (and future agents) make reliable, real-time decisions—without surprises or downtime."
           image={{ src: '/images/data-migration.webp', alt: 'Data migrations' }}
-          primaryCta={{ label: 'Map My Data for AI', href: '/contact' }}
+          primaryCta={{ label: 'Define my agent’s data needs', href: '/agentforce-job-description' }}
         />
         <DeliverablesWheel
           heading="What we deliver"
@@ -75,8 +75,8 @@ const Page: any = function DataMigrationsPage(props: any) {
         <PreFooterCTA
           title="Map your data for AI"
           body="We’ll define trusted sources, freshness guarantees, and event patterns to power safe agent action."
-          primaryCta={{ label: 'Start a data blueprint', href: '/contact' }}
-          secondaryCta={{ label: 'See migration playbook', href: '/plan' }}
+          primaryCta={{ label: 'Get my 48-hour integration diagnostic', href: '/mulesoft-reviver' }}
+          secondaryCta={{ label: 'Talk to data & migration experts', href: '/contact' }}
         />
       </main>
 

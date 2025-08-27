@@ -77,7 +77,7 @@ export default function FrontPage(props) {
               ]}
               body="Launch your first AI-powered MuleSoft or Salesforce outcome in 8 weeks. Our AI-accelerated delivery cuts timelines in half—without sacrificing quality or price—so your team achieves more, faster."
               primaryCta={{ label: 'Talk to an Expert', href: '/contact' }}
-              secondaryCta={{ label: 'Get the 8-Week Agent Launch Plan', href: '/plan' }}
+              secondaryCta={{ label: 'Start the 8-Week Agent Workshop', href: '/agentforce-job-description' }}
               kpis={[
                 {label: 'First outcome in 8 weeks'},
                 {label: 'Delivery cycle time \u2193 50%'},
