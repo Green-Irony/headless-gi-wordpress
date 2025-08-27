@@ -46,9 +46,9 @@ export default function Footer() {
       </div>
 
       <div className="mx-auto max-w-7xl px-6 pt-16 pb-10">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-12">
           {/* Brand */}
-          <div className="md:col-span-4">
+          <div className="md:col-span-5">
             <div className="flex items-center gap-4">
               <Link href="/" aria-label="Green Irony — Home" className="inline-flex items-center">
                 <Image src="/logos/green-irony/green-logo-long.png" alt="Green Irony" width={140} height={28} className="h-7 w-auto" />
@@ -71,13 +71,13 @@ export default function Footer() {
           </div>
 
           {/* Link columns */}
-          <div className="md:col-span-5 grid grid-cols-1 gap-8 sm:grid-cols-2">
+          <div className="md:col-span-4 grid grid-cols-1 gap-8 sm:grid-cols-2">
             <div>
               <div className="text-sm font-semibold text-gi-text">Company</div>
               <ul className="mt-3 space-y-2 text-sm">
                 <li><Link href="/about/" className={linkUnderline}>About</Link></li>
                 
-                <li><Link href="/services/" className={linkUnderline}>Services</Link></li>
+                <li><Link href="/services/mulesoft/" className={linkUnderline}>Services</Link></li>
                 <li><Link href="/contact/" className={linkUnderline}>Contact</Link></li>
               </ul>
             </div>
@@ -87,6 +87,7 @@ export default function Footer() {
                 <li><Link href="/customer-stories/" className={linkUnderline}>Customer Stories</Link></li>
                 <li><Link href="/insights/" className={linkUnderline}>Insights</Link></li>
                 <li><Link href="/agentforce-job-description/" className={linkUnderline}>8-Week Agent Launch Plan</Link></li>
+                <li><Link href="/mulesoft-reviver/" className={linkUnderline}>MuleSoft Reviver</Link></li>
               </ul>
             </div>
           </div>

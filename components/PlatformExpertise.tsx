@@ -10,13 +10,13 @@ type CloudItem = {
 };
 
 const CLOUDS: CloudItem[] = [
+  { name: 'MuleSoft', logoSrc: '/logos/salesforce/icons/icon-mulesoft.svg', alt: 'MuleSoft' },
+  { name: 'Agentforce', logoSrc: '/logos/salesforce/icons/icon-agentforce.svg', alt: 'Agentforce' },
+  { name: 'Data Cloud', logoSrc: '/logos/salesforce/icons/icon-data-cloud.svg', alt: 'Data Cloud', logoClass: 'scale-110 md:scale-125 origin-center' },
   { name: 'Sales Cloud', logoSrc: '/logos/salesforce/icons/icon-sales.svg', alt: 'Sales Cloud' },
   { name: 'Service Cloud', logoSrc: '/logos/salesforce/icons/icon-service.svg', alt: 'Service Cloud' },
   { name: 'CPQ & Revenue Cloud', logoSrc: '/logos/salesforce/icons/icon-cpq.png', alt: 'Revenue Cloud' }, // placeholder
   { name: 'Experience Cloud', logoSrc: '/logos/salesforce/icons/icon-exp.webp', alt: 'Experience Cloud' },
-  { name: 'MuleSoft', logoSrc: '/logos/salesforce/icons/icon-mulesoft.svg', alt: 'MuleSoft' },
-  { name: 'Agentforce', logoSrc: '/logos/salesforce/icons/icon-agentforce.svg', alt: 'Agentforce' },
-  { name: 'Data Cloud', logoSrc: '/logos/salesforce/icons/icon-data-cloud.svg', alt: 'Data Cloud', logoClass: 'scale-110 md:scale-125 origin-center' },
 ];
 
 export default function PlatformExpertise({ id, className }: { id?: string; className?: string }) {

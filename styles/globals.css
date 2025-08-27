@@ -39,7 +39,7 @@
 @media (prefers-reduced-motion:no-preference){.gi-blueprint::before{animation:drift 12s ease-in-out infinite;}}
 
 .btn-primary{@apply inline-flex items-center justify-center rounded-xl px-5 py-3 bg-gi-green text-gi-white font-semibold hover:bg-gi-green/85 focus:outline-none focus:ring-2 focus:ring-gi-green focus:ring-offset-1;}
-.btn-secondary{@apply inline-flex items-center justify-center rounded-xl px-5 py-3 border border-gi-fog text-gi-text hover:bg-gi-pink/50 hover:text-gi-white focus:outline-none focus:ring-2 focus:ring-gi-navy focus:ring-offset-1;}
+.btn-secondary{@apply inline-flex items-center justify-center rounded-xl px-5 py-3 border-2 border-gi-fog text-gi-text font-semibold hover:bg-gi-pink/50 hover:text-gi-white focus:outline-none focus:ring-2 focus:ring-gi-navy focus:ring-offset-1;}
 
 .kpi-chip{@apply inline-flex items-center gap-2 rounded-xl px-3 py-2 bg-black/5;}
 .kpi-chip .kpi-bar{@apply h-3 w-1.5 rounded bg-gi-pink;}

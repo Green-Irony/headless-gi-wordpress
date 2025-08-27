@@ -5,9 +5,9 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HeroCenterPro from '../components/HeroCenterPro';
 import AccordionWithMedia from '../components/AccordionWithMedia';
-import OriginStoryShowcase from '../components/OriginStoryShowcase';
+import CoreValues from '../components/CoreValues';
+import PlatformExpertise from '../components/PlatformExpertise';
 import MissionBanner from '../components/MissionBanner';
-import HowWeWorkSerpentine from '../components/HowWeWorkSerpentine';
 import { useQuery } from '@apollo/client';
 import FaqSimple from '../components/FaqSimple';
 import { getNextStaticProps } from '@faustwp/core';
@@ -52,47 +52,7 @@ const Page: any = function AboutPage(props: any) {
           showMedia={false}
         />
 
-        {/* Origin Story */}
-        <section className="mx-auto max-w-7xl px-0 py-12">
-          <OriginStoryShowcase
-            title="Our Origin Story"
-            lead="We started as senior Salesforce and integration architects who cared about outcomes over headcount. As platforms grew more powerful and projects more complex, we rebuilt our delivery engine around AI. What used to take months to scope and stabilize now turns into predictable wins in weeks—thanks to senior-led architecture, integration-first execution, and AI accelerating every step from discovery to build."
-            milestones={[
-              {
-                k: '2016',
-                label: 'Roots',
-                title: 'Built on Salesforce',
-                body: 'Early implementations focused on quality, adoption, and scale.',
-                impacts: ['Solutions that match business processes'],
-              },
-              {
-                k: '2018',
-                label: 'Roots',
-                title: 'Integration becomes the backbone',
-                body: 'MuleSoft unlocks composable, event-driven delivery.',
-                impacts: ['Event-driven foundations'],
-              },
-              {
-                k: '2024',
-                label: 'Pivot',
-                title: 'Reimagined as AI-native',
-                body: 'Every phase—discovery, design, delivery—moves 2× faster.',
-                impacts: ['Agent job design', 'Safe actions'],
-              },
-              {
-                k: 'Now',
-                label: 'Today',
-                title: 'Wins in weeks',
-                body: 'Go live in as little as 3 weeks for new integrations and agents—without sacrificing reliability.',
-                impacts: ['½ delivery time', 'Deflection ↑', 'Capacity ↑'],
-              },
-            ]}
-            poster={{ imageSrc: '/images/origin-story.webp', imageAlt: 'Origin story visual', badge: 'AI‑Native' }}
-            showCredibilityRow={false}
-            initialMilestone={'Now'}
-            imageLeft={false}
-          />
-        </section>
+        {/* Origin Story removed per feedback */}
 
         {/* Mission */}
         <MissionBanner
@@ -109,6 +69,17 @@ const Page: any = function AboutPage(props: any) {
           badge="AI‑Native"
           background={{ pattern: 'curves', intensity: 1 }}
           align="center"
+        />
+
+        {/* Core Values */}
+        <CoreValues
+          heading="Our Core Values"
+          items={[
+            { title: 'AI First', body: "AI isn’t a side tool — it’s the foundation of how we work. There’s nothing in the history of technology that makes pigs fly like AI. At Green Irony, being great at your job means knowing how to use AI to deliver faster, smarter, and better outcomes. Every role is about directing digital labor to multiply your impact." },
+            { title: 'Get It Done', body: 'Clarity + ownership = results. If you’re unclear on what needs to happen, ask questions, get aligned, and then make it happen. We value people who own their work, push through obstacles, and deliver outcomes — not excuses. Speed matters, but so does finishing strong.' },
+            { title: 'No BS', body: 'Straight talk. Real accountability. We believe in honesty, transparency, and cutting through noise. That means no politics, no fluff, and no hiding problems. Respectful candor helps us move faster and trust each other more.' },
+            { title: 'Decompress', body: 'Work smart, recharge hard. We don’t glorify burnout. We work efficiently so we can save our energy for the moments that truly demand it. Decompression fuels creativity, resilience, and long-term performance. We want you at your best — not burned out.' },
+          ]}
         />
 
         {/* Differentiators */}
@@ -151,22 +122,9 @@ const Page: any = function AboutPage(props: any) {
           </div>
         </section>
 
-        {/* How we work */}
-        <HowWeWorkSerpentine
-          title="How We Work"
-          subhead="Align → Prove → Scale"
-          steps={[
-            { k: '01', title: 'Align', caption: 'Focused working sessions to lock goals, constraints, and success metrics.' },
-            { k: '02', title: 'Blueprint', caption: 'Senior architects design the composable foundation and delivery plan.' },
-            { k: '03', title: 'Build', caption: 'AI-accelerated sprints deliver working software faster, with quality gates baked in.' },
-            { k: '04', title: 'Prove', caption: 'UAT and cutover plans ensure smooth go-lives and measurable outcomes.' },
-            { k: '05', title: 'Scale', caption: 'Reuse patterns, expand safely, and continue improving with clear KPIs.' },
-          ]}
-          variant="serpentine"
-          showNumbers
-          progressIndex={null}
-        />
+        {/* How we work removed per feedback */}
 
+        <PlatformExpertise />
         <FaqSimple />
 
         {/* Closing CTA */}

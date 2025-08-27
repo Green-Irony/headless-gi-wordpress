@@ -94,7 +94,7 @@ export default function FrontPage(props) {
                 { src: '/logos/HIVC.png', alt: 'HIVC' },
                 { src: '/logos/spirit.svg', alt: 'Spirit Airlines' },
                 { src: '/logos/unc-charlotte.svg', alt: 'UNC Charlotte' },
-                //{ src: '/logos/virginia-dare-extracts-logo.webp', alt: 'Virginia Dare Extracts' },
+                { src: '/logos/virginia-dare-extracts-logo.webp', alt: 'Virginia Dare Extracts' },
                 { src: '/logos/Hotwire.svg', alt: 'Hotwire' },
                 { src: '/logos/logo-cae.webp', alt: 'CAE Healthcare' },
                 { src: '/logos/logo-upc-insurance-story-e1729029847866.webp', alt: 'UPC Insurance' },
