@@ -231,7 +231,7 @@ export default function Header({
 
   return (
     <>
-             <header className="fixed inset-x-0 top-0 z-50">
+             <header id="top" className="fixed inset-x-0 top-0 z-50">
                  <div className={`supports-[backdrop-filter]:backdrop-blur bg-white/85 transition-shadow ${scrolled ? 'shadow-gi' : ''}`}>
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex h-16 items-center justify-between">

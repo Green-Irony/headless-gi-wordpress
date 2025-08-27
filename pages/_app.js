@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { FaustProvider } from "@faustwp/core";
 import "../styles/globals.css";
 import Head from "next/head";
-import { toAbsoluteUrl } from "../lib/seo";
+import { toAbsoluteUrl, buildCanonicalUrl } from "../lib/seo";
 import { fetchSiteIconUrl } from "../queries/SiteSettingsQuery";
 
 export default function MyApp({ Component, pageProps }) {
@@ -25,11 +25,24 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="index,follow" />
+        <meta name="theme-color" content="#5AAD5A" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Green Irony" />
+        <meta property="og:locale" content="en_US" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="application-name" content="Green Irony" />
         {faviconHref ? (
           <link rel="icon" href={faviconHref} />
         ) : (
           <link rel="icon" href="/logos/green-irony/banksy-solo-transparent.png" type="image/png" />
         )}
+        {/* Canonical URL */}
+        {buildCanonicalUrl(router.asPath) ? (
+          <link rel="canonical" href={buildCanonicalUrl(router.asPath)} key="canonical" />
+        ) : null}
         {/* Global Organization & WebSite JSON-LD */}
         <script
           type="application/ld+json"

@@ -127,22 +127,13 @@ export default function Footer() {
                 <LinkedInIcon className="h-5 w-5" />
               </a>
               <a
-                href="http://www.twitter.com/greenirony"
+                href="https://www.youtube.com/@GreenIrony-SI"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Twitter"
+                aria-label="YouTube"
                 className="text-gi-gray hover:text-gi-text"
               >
-                <TwitterIcon className="h-5 w-5" />
-              </a>
-              <a
-                href="http://www.facebook.com/greenirony"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="text-gi-gray hover:text-gi-text"
-              >
-                <FacebookIcon className="h-5 w-5" />
+                <YouTubeIcon className="h-5 w-5" />
               </a>
             </div>
             <a href="#top" className={linkUnderline} aria-label="Back to top">Back to top</a>
@@ -197,6 +188,14 @@ function FacebookIcon({ className = 'h-5 w-5' }: { className?: string }) {
   return (
     <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden className={className}>
       <path d="M16 8.049C16 3.604 12.418 0 8 0S0 3.604 0 8.049C0 12.06 2.925 15.396 6.75 16v-5.624H4.72V8.05H6.75V6.275c0-2.02 1.195-3.132 3.022-3.132.875 0 1.791.157 1.791.157v1.98h-1.01c-.996 0-1.307.62-1.307 1.258V8.05h2.223l-.355 2.327H9.246V16C13.075 15.396 16 12.06 16 8.049z" />
+    </svg>
+  );
+}
+
+function YouTubeIcon({ className = 'h-5 w-5' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className}>
+      <path d="M23.499 6.203a3.01 3.01 0 0 0-2.12-2.128C19.6 3.5 12 3.5 12 3.5s-7.6 0-9.379.575A3.01 3.01 0 0 0 .5 6.203 31.64 31.64 0 0 0 0 12a31.64 31.64 0 0 0 .5 5.797 3.01 3.01 0 0 0 2.121 2.128C4.4 20.5 12 20.5 12 20.5s7.6 0 9.379-.575a3.01 3.01 0 0 0 2.121-2.128A31.64 31.64 0 0 0 24 12a31.64 31.64 0 0 0-.501-5.797ZM9.75 15.5V8.5l6 3.5-6 3.5Z" />
     </svg>
   );
 }
