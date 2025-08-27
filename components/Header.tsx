@@ -15,11 +15,11 @@ export type MenuItem = {
 };
 
 const FALLBACK_NAV: Array<{ label: string; href: string }> = [
-  { label: 'Services', href: '/services' },
+  { label: 'Services', href: '/services/' },
   //{ label: 'Solutions', href: '/solutions' },
   { label: 'Customer Stories', href: '/customer-stories/' },
-  { label: 'Insights', href: '/insights' },
-  { label: 'About', href: '/about' },
+  { label: 'Insights', href: '/insights/' },
+  { label: 'About', href: '/about/' },
 ];
 
 const DEFAULT_SERVICES_CHILDREN = [
@@ -38,8 +38,8 @@ const DEFAULT_SOLUTIONS_CHILDREN = [
 
 // Default About submenu entries
 const DEFAULT_ABOUT_CHILDREN = [
-  { href: '/about', title: 'About' },
-  { href: '/careers', title: 'Careers' },
+  { href: '/about/', title: 'About' },
+  { href: '/careers/', title: 'Careers' },
   { href: '/contact/', title: 'Contact' },
 ];
 

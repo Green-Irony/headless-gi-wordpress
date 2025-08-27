@@ -63,7 +63,7 @@ const Page: any = function InsightsPage(props: any & { stories: any[] }) {
   const menuItems = headerMenuDataQuery?.data?.primaryMenuItems?.nodes || { nodes: [] };
   const { title: siteTitle, description: siteDescription } = siteData;
   const router = useRouter();
-  const canonical = buildCanonicalUrl(router?.asPath || '/insights');
+  const canonical = buildCanonicalUrl(router?.asPath || '/insights/');
   const pageTitle = siteTitle ? `${siteTitle} — Clarity in the age of AI` : 'Clarity in the age of AI';
   const metaDescription = 'Insights, playbooks, and customer stories on AI-native delivery, integration foundations, and getting a working agent live fast.';
 

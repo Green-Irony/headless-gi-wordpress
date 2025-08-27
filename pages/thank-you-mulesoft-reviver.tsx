@@ -30,7 +30,7 @@ const Page: any = function ThankYouMuleSoftReviverPage(props: any) {
         <HeroSimple
           title="Thank You"
           subhead="Thank you for requesting your MuleSoft Reviver. Our team will reach out to you shortly for a quick intake, and then get your 48-hour diagnostic started."
-          cta={{ label: 'Explore insights', href: '/insights' }}
+          cta={{ label: 'Explore insights', href: '/insights/' }}
         />
       </main>
 

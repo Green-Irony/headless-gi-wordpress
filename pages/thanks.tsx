@@ -69,7 +69,7 @@ const Page: any = function ThanksPage(props: any) {
         <PreFooterCTA
           title="Next: turn your goal into a first win"
           body="Prefer not to wait? Dive into our latest insights, or jump straight to the 8‑Week Agent Launch Plan to see exactly how we execute."
-          primaryCta={{ label: 'Explore Insights', href: '/insights' }}
+          primaryCta={{ label: 'Explore Insights', href: '/insights/' }}
           secondaryCta={{ label: 'Get the 8‑Week Plan', href: '/agentforce-job-description/' }}
         />
       </main>
