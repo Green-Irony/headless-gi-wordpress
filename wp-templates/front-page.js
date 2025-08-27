@@ -40,6 +40,7 @@ export default function FrontPage(props) {
   };
   const { title: siteTitle, description: siteDescription } = siteData;
   const effectiveSiteDescription = siteDescription || 'Turning AI into Actual Intelligence';
+  const siteTitleText = siteTitle || 'Green Irony';
   const router = useRouter();
   const canonicalUrl = buildCanonicalUrl(router?.asPath || '/');
 
@@ -52,7 +53,7 @@ export default function FrontPage(props) {
   return (
     <>
       <Head>
-        <title>{`${siteTitle} | ${effectiveSiteDescription}`}</title>
+        <title>{`${siteTitleText} | ${effectiveSiteDescription}`}</title>
         <meta name="description" content={effectiveSiteDescription} />
         {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
         {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}

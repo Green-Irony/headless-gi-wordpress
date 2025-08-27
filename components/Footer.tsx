@@ -1,11 +1,41 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
+import { useState } from 'react';
 
 const linkUnderline =
   'relative text-gi-gray hover:text-gi-text bg-no-repeat bg-left-bottom bg-[linear-gradient(to_right,#5AAD5A,#C40084,#5AAD5A)] bg-[length:0%_2px] hover:bg-[length:100%_2px] transition-[background-size] duration-200';
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState<string>('');
+
+  async function handleSubscribe(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email) return;
+    setStatus('loading');
+    setMessage('');
+    try {
+      const resp = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, pageUri: typeof window !== 'undefined' ? window.location.href : '' }),
+      });
+      const data = (await resp.json()) as { ok?: boolean; message?: string };
+      if (resp.ok && data?.ok) {
+        setStatus('success');
+        setMessage('Thanks! You\'re subscribed.');
+        setEmail('');
+      } else {
+        setStatus('error');
+        setMessage(data?.message || 'Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      setStatus('error');
+      setMessage('Network error. Please try again.');
+    }
+  }
   return (
     <footer className="relative bg-white overflow-hidden">
       {/* Top wave accent */}
@@ -99,16 +129,23 @@ export default function Footer() {
               <UnderlinePink />
             </div>
             <p className="mt-3 text-sm text-gi-gray">Monthly notes on launching real AI outcomes.</p>
-            <form className="mt-4 flex gap-2" onSubmit={(e) => e.preventDefault()}>
+            <form className="mt-4 flex gap-2" onSubmit={handleSubscribe}>
               <input
                 type="email"
                 required
                 placeholder="Work email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full rounded-md border border-gi-fog bg-white px-3 py-2 text-sm outline-none ring-0 focus:border-gi-green"
               />
-              <button type="submit" className="btn-primary whitespace-nowrap">Subscribe</button>
+              <button type="submit" disabled={status === 'loading'} className="btn-primary whitespace-nowrap">
+                {status === 'loading' ? 'Subscribing…' : 'Subscribe'}
+              </button>
             </form>
             <p className="mt-2 text-[11px] text-gi-gray">No spam. Unsubscribe anytime.</p>
+            {message ? (
+              <p className={`mt-2 text-sm ${status === 'success' ? 'text-gi-text' : 'text-red-600'}`}>{message}</p>
+            ) : null}
           </div>
         </div>
 
