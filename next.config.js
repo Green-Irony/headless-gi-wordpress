@@ -27,6 +27,7 @@ module.exports = withFaust({
   },
   trailingSlash: true,
   async redirects() {
+    const extraRedirects = require('./redirects.js');
     return [
       { source: '/services', destination: '/services/agentforce/', permanent: true },
       { source: '/plan', destination: '/agentforce-job-description/', permanent: true },
@@ -56,6 +57,7 @@ module.exports = withFaust({
       // Consolidate legacy thank-you style pages
       { source: '/thank-you', destination: '/thanks/', permanent: true },
       { source: '/thank-you/:path*', destination: '/thanks/', permanent: true },
+      ...extraRedirects,
     ];
   },
 });

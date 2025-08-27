@@ -43,6 +43,13 @@ export default function MyApp({ Component, pageProps }) {
         {buildCanonicalUrl(router.asPath) ? (
           <link rel="canonical" href={buildCanonicalUrl(router.asPath)} key="canonical" />
         ) : null}
+        {/* Hreflang (single-locale site) */}
+        {buildCanonicalUrl(router.asPath) ? (
+          <>
+            <link rel="alternate" hrefLang="en" href={buildCanonicalUrl(router.asPath)} />
+            <link rel="alternate" hrefLang="x-default" href={buildCanonicalUrl(router.asPath)} />
+          </>
+        ) : null}
         {/* Global Organization & WebSite JSON-LD */}
         <script
           type="application/ld+json"
