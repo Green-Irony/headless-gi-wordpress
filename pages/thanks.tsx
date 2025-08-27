@@ -52,14 +52,14 @@ const Page: any = function ThanksPage(props: any) {
                 <h3 className="font-semibold text-gi-text">See Customer Stories</h3>
                 <p className="mt-1 text-sm text-gi-gray">Real results from teams moving faster with AI‑native integration and delivery.</p>
                 <div className="mt-3">
-                  <Link href="/customer-stories" className="btn-secondary">View Stories</Link>
+                  <Link href="/customer-stories/" className="btn-secondary">View Stories</Link>
                 </div>
               </div>
               <div className="rounded-xl border border-gi-fog bg-white p-5">
                 <h3 className="font-semibold text-gi-text">Get the 8‑Week Plan</h3>
                 <p className="mt-1 text-sm text-gi-gray">Our playbook for scoping, piloting, and proving value with your first agent.</p>
                 <div className="mt-3">
-                  <Link href="/agentforce-job-description" className="btn-secondary">Get the Plan</Link>
+                  <Link href="/agentforce-job-description/" className="btn-secondary">Get the Plan</Link>
                 </div>
               </div>
             </div>
@@ -70,7 +70,7 @@ const Page: any = function ThanksPage(props: any) {
           title="Next: turn your goal into a first win"
           body="Prefer not to wait? Dive into our latest insights, or jump straight to the 8‑Week Agent Launch Plan to see exactly how we execute."
           primaryCta={{ label: 'Explore Insights', href: '/insights' }}
-          secondaryCta={{ label: 'Get the 8‑Week Plan', href: '/agentforce-job-description' }}
+          secondaryCta={{ label: 'Get the 8‑Week Plan', href: '/agentforce-job-description/' }}
         />
       </main>
       <Footer />

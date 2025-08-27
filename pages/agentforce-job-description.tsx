@@ -111,7 +111,7 @@ const Page: any = function AgentforceJobDescriptionPage(props: any) {
         <PreFooterCTA
           title="Learn more about our Agentforce services"
           body="Explore how we design, pilot, and scale Salesforce‑native agents—built on composable integrations and senior‑led delivery."
-          primaryCta={{ label: 'Explore Agentforce services', href: '/services/agentforce' }}
+          primaryCta={{ label: 'Explore Agentforce services', href: '/services/agentforce/' }}
           secondaryCta={{}}
         />
       </main>

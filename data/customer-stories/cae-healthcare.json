@@ -18,10 +18,10 @@
     "title": "Salesforce CPQ for Complex Product Quoting",
     "subhead": "Margin control, quote accuracy, and a unified source of truth across business units.",
     "image": { "src": "/logos/logo-cae.webp", "alt": "CAE Healthcare" },
-    "primaryCta": { "label": "Talk to an Expert", "href": "/contact" },
+    "primaryCta": { "label": "Talk to an Expert", "href": "/contact/" },
     "secondaryCta": {
       "label": "See Salesforce Services",
-      "href": "/services/salesforce"
+      "href": "/services/salesforce/"
     }
   },
   "sections": [

@@ -21,8 +21,8 @@ const DEFAULT_BULLETS = [
   'Week-by-week plan (3–8 weeks) — milestones, owners, quality gates',
   'Integration map & data contracts — systems, events, access',
 ];
-const DEFAULT_PRIMARY = { label: 'Request a Time', href: '/agentforce-job-description' };
-const DEFAULT_SECONDARY = { label: 'Talk to an Expert', href: '/contact' };
+const DEFAULT_PRIMARY = { label: 'Request a Time', href: '/agentforce-job-description/' };
+const DEFAULT_SECONDARY = { label: 'Talk to an Expert', href: '/contact/' };
 
 export default function LeadMagnetCTA({ id, className, title = DEFAULT_TITLE, body = DEFAULT_BODY, bullets = DEFAULT_BULLETS, primaryCta = DEFAULT_PRIMARY, secondaryCta = DEFAULT_SECONDARY }: LeadMagnetProps) {
   const prefersReduced = useReducedMotion();

@@ -13,12 +13,12 @@ type FeaturedCustomerProps = {
 
 export default function FeaturedCustomer(props: FeaturedCustomerProps = {}) {
   const title = props.title ?? 'UNC Charlotte: 24/7 IT Support with AI';
-  const href = props.href ?? '/customer-stories/unc-charlotte';
+  const href = props.href ?? '/customer-stories/unc-charlotte/';
   const img = props.img ?? { src: '/logos/GI-UNCC.webp', alt: 'UNC Charlotte and Green Irony company logos' };
   const excerpt = props.excerpt ?? 'How UNC Charlotte transformed IT support with AI-powered knowledge and Agentforce availability to deliver 24/7 excellence.';
   const tag = props.tag ?? 'Higher Education';
   const ctaLabel = props.ctaLabel ?? 'See a pilot in 3–8 weeks';
-  const ctaHref = props.ctaHref ?? '/agentforce-job-description';
+  const ctaHref = props.ctaHref ?? '/agentforce-job-description/';
 
   return (
     <article className="overflow-hidden rounded-3xl bg-white ring-1 ring-gi-fog shadow-gi">

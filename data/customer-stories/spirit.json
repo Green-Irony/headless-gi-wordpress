@@ -12,7 +12,7 @@
     "title": "Scaling Customer Support: How Spirit Airlines Implemented a Chatbot Amid IT Constraints",
     "subhead": "Event-driven API stack powering chatbots and guest experiences without a lift-and-shift burden.",
     "image": { "src": "/logos/spirit.svg", "alt": "Spirit Airlines" },
-    "primaryCta": { "label": "Talk to an Expert", "href": "/contact" }
+    "primaryCta": { "label": "Talk to an Expert", "href": "/contact/" }
   },
   "sections": [
     {

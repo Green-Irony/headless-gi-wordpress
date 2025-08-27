@@ -36,7 +36,7 @@ const Page: any = function ContactPage(props: any) {
           title="Let’s launch your first win—fast"
           body="Our team responds within one business day—often the same day. We’ll triage your goals quickly and loop in a senior architect as soon as it’s useful."
           primaryCta={{ label: 'Talk to our team', href: '#contact-form' }}
-          secondaryCta={{ label: 'Start the 8-Week Agent Workshop', href: '/agentforce-job-description' }}
+          secondaryCta={{ label: 'Start the 8-Week Agent Workshop', href: '/agentforce-job-description/' }}
           kpis={[{ label: '½ delivery time' }, { label: '50%+ deflection' }, { label: 'Capacity unlocked' }]}
           showMedia={false}
         />
@@ -82,7 +82,7 @@ const Page: any = function ContactPage(props: any) {
             </div>
             <div className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi">
               <h3 className="font-semibold text-gi-text">Careers / Talent</h3>
-              <p className="mt-1 text-sm text-gi-gray">Interested in joining? Tell us what you build. <a className="underline" href="/careers">Learn more</a></p>
+              <p className="mt-1 text-sm text-gi-gray">Interested in joining? Tell us what you build. <a className="underline" href="/careers/">Learn more</a></p>
             </div>
           </div>
         </section>

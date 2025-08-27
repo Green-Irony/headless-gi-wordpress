@@ -32,7 +32,7 @@ export default function CustomerStoryPage(props: any & { story: CustomerStory | 
   const faqItems = story?.seo?.faqs || (story?.sections || []).flatMap((s: any) => (s.type === 'faq' ? s.items : []));
   const breadcrumbs = story?.seo?.breadcrumbs || [
     { name: 'Home', href: '/' },
-    { name: 'Customer Stories', href: '/customer-stories' },
+    { name: 'Customer Stories', href: '/customer-stories/' },
     story ? { name: story.title, href: `/customer-stories/${story.slug}` } : undefined,
   ].filter(Boolean) as Array<{ name: string; href: string }>;
 

@@ -28,12 +28,12 @@ module.exports = withFaust({
   trailingSlash: true,
   async redirects() {
     return [
-      { source: '/services', destination: '/services/agentforce', permanent: true },
-      { source: '/plan', destination: '/agentforce-job-description', permanent: true },
-      { source: '/8-week-plan', destination: '/agentforce-job-description', permanent: true },
+      { source: '/services', destination: '/services/agentforce/', permanent: true },
+      { source: '/plan', destination: '/agentforce-job-description/', permanent: true },
+      { source: '/8-week-plan', destination: '/agentforce-job-description/', permanent: true },
       { source: '/our-company', destination: '/about', permanent: true },
       { source: '/our-team', destination: '/about', permanent: true },
-      { source: '/contact-us', destination: '/contact', permanent: true },
+      { source: '/contact-us', destination: '/contact/', permanent: true },
     ];
   },
 });

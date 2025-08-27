@@ -80,8 +80,8 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
         <HeroCenterPro
           title="Prove value, then scale"
           body="Case studies built around business outcomes—speed, deflection, and capacity—powered by integrated systems and AI-native agents. See how we turned complex problems into predictable wins."
-          primaryCta={{ label: 'Start Your Success Plan', href: '/contact' }}
-          secondaryCta={{ label: 'Start the 8-Week Outcomes Workshop', href: '/agentforce-job-description' }}
+          primaryCta={{ label: 'Start Your Success Plan', href: '/contact/' }}
+          secondaryCta={{ label: 'Start the 8-Week Outcomes Workshop', href: '/agentforce-job-description/' }}
           kpis={[
             { label: '⚡ ½ delivery time' },
             { label: '🛎️ 24/7 support' },
@@ -128,7 +128,7 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
               proofTag="Built from Spirit Airlines-scale delivery discipline."
               quote="Green Irony gave us the real-time operational insight and automation we thought only large incumbents could deliver—faster and with less overhead."
               primaryCta={{ label: 'Read the Spirit story', href: '/customer-stories/spirit' }}
-              secondaryCta={{ label: 'Explore MuleSoft Services', href: '/services/mulesoft' }}
+              secondaryCta={{ label: 'Explore MuleSoft Services', href: '/services/mulesoft/' }}
             />
 
             <CaseStudyTile
@@ -147,7 +147,7 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
               proofTag="Public-facing AI agents powered by integrated data."
               quote="The agent feels like a teammate—always on, always informed, and it freed our advisors to focus where humans matter most."
               primaryCta={{ label: 'Read the UNC Charlotte story', href: '/customer-stories/unc-charlotte' }}
-              secondaryCta={{ label: 'Agentforce Services', href: '/services/agentforce' }}
+              secondaryCta={{ label: 'Agentforce Services', href: '/services/agentforce/' }}
             />
 
             <CaseStudyTile
@@ -164,8 +164,8 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
               ]}
               proofTag="Partner-level attention with AI-level leverage."
               quote="We didn’t have the resources for a big program. Green Irony made our first AI win feel immediate and expandable."
-              primaryCta={{ label: 'Start My First-Win', href: '/contact' }}
-              secondaryCta={{ label: 'Agentforce Services', href: '/services/agentforce' }}
+              primaryCta={{ label: 'Start My First-Win', href: '/contact/' }}
+              secondaryCta={{ label: 'Agentforce Services', href: '/services/agentforce/' }}
             />
           </div>
         </section>
@@ -201,7 +201,7 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
         <PreFooterCTA
           title="Become your own success story"
           body="Now that you've heard about some of our customer successes, become your own success story. Talk to an expert and map your first win."
-          primaryCta={{ label: 'Contact Us', href: '/contact' }}
+          primaryCta={{ label: 'Contact Us', href: '/contact/' }}
           secondaryCta={{ label: 'Get my integration success plan', href: '/mulesoft-reviver' }}
         />
       </main>

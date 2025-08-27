@@ -18,10 +18,10 @@
       "src": "/logos/GI-UNCC.webp",
       "alt": "UNC Charlotte and Green Irony company logos"
     },
-    "primaryCta": { "label": "Talk to an Expert", "href": "/contact" },
+    "primaryCta": { "label": "Talk to an Expert", "href": "/contact/" },
     "secondaryCta": {
       "label": "Start the 8-Week Agent Workshop",
-      "href": "/agentforce-job-description"
+      "href": "/agentforce-job-description/"
     }
   },
   "sections": [

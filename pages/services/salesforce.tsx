@@ -46,7 +46,7 @@ const Page: any = function SalesforcePage(props: any) {
           title="Salesforce done right — faster"
           subhead="From Sales Cloud to Experience Cloud and beyond, our senior architects deliver Salesforce builds that scale. With AI‑accelerated methods, you get predictable outcomes in half the time—without the costly rework that comes from shortcuts."
           image={{ src: '/images/investment-to-impact.webp', alt: 'Salesforce optimization' }}
-          primaryCta={{ label: 'Optimize My Org', href: '/contact' }}
+          primaryCta={{ label: 'Optimize My Org', href: '/contact/' }}
         />
         <DeliverablesWheel
           heading="What we deliver"
@@ -86,8 +86,8 @@ const Page: any = function SalesforcePage(props: any) {
         <PreFooterCTA
           title="Optimize your org for digital labor"
           body="We’ll remove friction and ready Salesforce for reliable agent action."
-          secondaryCta={{ label: 'Talk to Salesforce experts', href: '/contact' }}
-          primaryCta={{ label: 'Make Salesforce agent-ready', href: '/agentforce-job-description' }}
+          secondaryCta={{ label: 'Talk to Salesforce experts', href: '/contact/' }}
+          primaryCta={{ label: 'Make Salesforce agent-ready', href: '/agentforce-job-description/' }}
         />
       </main>
 

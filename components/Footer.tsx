@@ -75,18 +75,18 @@ export default function Footer() {
             <div>
               <div className="text-sm font-semibold text-gi-text">Company</div>
               <ul className="mt-3 space-y-2 text-sm">
-                <li><Link href="/about" className={linkUnderline}>About</Link></li>
+                <li><Link href="/about/" className={linkUnderline}>About</Link></li>
                 
-                <li><Link href="/services" className={linkUnderline}>Services</Link></li>
-                <li><Link href="/contact" className={linkUnderline}>Contact</Link></li>
+                <li><Link href="/services/" className={linkUnderline}>Services</Link></li>
+                <li><Link href="/contact/" className={linkUnderline}>Contact</Link></li>
               </ul>
             </div>
             <div>
               <div className="text-sm font-semibold text-gi-text">Resources</div>
               <ul className="mt-3 space-y-2 text-sm">
-                <li><Link href="/customer-stories" className={linkUnderline}>Customer Stories</Link></li>
-                <li><Link href="/insights" className={linkUnderline}>Insights</Link></li>
-                <li><Link href="/agentforce-job-description" className={linkUnderline}>8-Week Agent Launch Plan</Link></li>
+                <li><Link href="/customer-stories/" className={linkUnderline}>Customer Stories</Link></li>
+                <li><Link href="/insights/" className={linkUnderline}>Insights</Link></li>
+                <li><Link href="/agentforce-job-description/" className={linkUnderline}>8-Week Agent Launch Plan</Link></li>
               </ul>
             </div>
           </div>

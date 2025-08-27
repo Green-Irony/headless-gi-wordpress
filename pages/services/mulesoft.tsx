@@ -79,7 +79,7 @@ const Page: any = function MulesoftPage(props: any) {
         <section className="mx-auto max-w-7xl px-6 py-24">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-2xl font-semibold text-gi-text">Featured customer story</h2>
-            <a href="/customer-stories" className="text-sm font-semibold text-gi-text hover:underline">See all</a>
+            <a href="/customer-stories/" className="text-sm font-semibold text-gi-text hover:underline">See all</a>
           </div>
           <FeaturedCustomer
             title="Spirit Airlines: Event-driven operations at scale"
