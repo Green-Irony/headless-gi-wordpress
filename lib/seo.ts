@@ -45,4 +45,25 @@ export function toAbsoluteUrl(input: string | undefined | null): string {
   }
 }
 
+/**
+ * Build an SEO-friendly <title> with optional brand suffix, capped at maxChars.
+ * - If the base title exceeds maxChars, truncate with an ellipsis.
+ * - If the base title plus suffix exceeds maxChars, omit the suffix.
+ */
+export function generateSeoTitle(baseTitle: string, siteTitle?: string, maxChars: number = 60): string {
+  const title = (baseTitle || '').trim();
+  const suffix = siteTitle ? ` - ${siteTitle}` : '';
+
+  if (title.length > maxChars) {
+    const truncated = title.slice(0, Math.max(1, maxChars - 1)).trimEnd();
+    return `${truncated}…`;
+  }
+
+  if (title.length + suffix.length <= maxChars) {
+    return `${title}${suffix}`;
+  }
+
+  return title;
+}
+
 
