@@ -26,6 +26,12 @@ module.exports = withFaust({
     ],
   },
   trailingSlash: true,
+  async rewrites() {
+    return [
+      // Normalize trailing slashes on API routes so /api/foo/ → /api/foo
+      { source: '/api/:path*/', destination: '/api/:path*' },
+    ];
+  },
   async redirects() {
     const extraRedirects = require('./redirects.js');
     return [

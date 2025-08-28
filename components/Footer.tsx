@@ -22,18 +22,25 @@ export default function Footer() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, pageUri: typeof window !== 'undefined' ? window.location.href : '' }),
       });
-      const data = (await resp.json()) as { ok?: boolean; message?: string };
-      if (resp.ok && data?.ok) {
+      const contentType = resp.headers.get('content-type') || '';
+      let data: { ok?: boolean; message?: string } | null = null;
+      let fallbackText = '';
+      if (contentType.includes('application/json')) {
+        try { data = (await resp.json()) as { ok?: boolean; message?: string }; } catch {}
+      } else {
+        try { fallbackText = await resp.text(); } catch {}
+      }
+      if (resp.ok && ((data?.ok) ?? true)) {
         setStatus('success');
         setMessage('Thanks! You\'re subscribed.');
         setEmail('');
       } else {
         setStatus('error');
-        setMessage(data?.message || 'Something went wrong. Please try again.');
+        setMessage(data?.message || fallbackText || 'Something went wrong. Please try again.');
       }
     } catch (err) {
       setStatus('error');
-      setMessage('Network error. Please try again.');
+      setMessage('Something went wrong. Please try again.');
     }
   }
   return (

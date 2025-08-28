@@ -128,8 +128,64 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     });
 
     if (!resp.ok) {
-      const text = await resp.text();
-      return res.status(502).json({ ok: false, message: text || 'HubSpot submission failed' });
+      // Attempt to parse HubSpot error payload to surface actionable messages
+      const contentType = resp.headers.get('content-type') || '';
+      let rawText = '';
+      let json: any = null;
+      try {
+        if (contentType.includes('application/json')) {
+          json = await resp.json();
+        } else {
+          rawText = await resp.text();
+        }
+      } catch {
+        // ignore parse errors
+      }
+
+      // Explicit detection of HubSpot "BLOCKED_EMAIL" validation (business email required)
+      if (json && Array.isArray(json.errors)) {
+        const isBlockedEmail = json.errors.some((e: any) => e && e.errorType === 'BLOCKED_EMAIL');
+        if (isBlockedEmail) {
+          return res.status(400).json({ ok: false, message: 'Business email required' });
+        }
+      }
+
+      // Heuristics to detect "business email required" validations coming from HubSpot form rules
+      const hubspotMessages: string[] = [];
+      if (json) {
+        if (typeof json.message === 'string') hubspotMessages.push(json.message);
+        if (typeof json.inlineMessage === 'string') hubspotMessages.push(json.inlineMessage);
+        if (Array.isArray(json.errors)) {
+          for (const err of json.errors) {
+            if (err && typeof err.message === 'string') hubspotMessages.push(err.message);
+          }
+        }
+        if (typeof json.reason === 'string') hubspotMessages.push(json.reason);
+      }
+      if (rawText) hubspotMessages.push(rawText);
+
+      const combined = hubspotMessages.join(' \n ').toLowerCase();
+      const mentionsEmailField = combined.includes('email');
+      const businessEmailHints = [
+        'business email',
+        'work email',
+        'company email',
+        'use a business',
+        'free email',
+        'personal email',
+        'disposable email',
+      ];
+      const isBusinessEmailValidation = mentionsEmailField && businessEmailHints.some((h) => combined.includes(h));
+
+      if (isBusinessEmailValidation) {
+        return res.status(400).json({ ok: false, message: 'Business email required' });
+      }
+
+      // Fallback: bubble up HubSpot message or generic failure
+      const bubble = hubspotMessages.find(Boolean) || 'HubSpot submission failed';
+      // Use a 400 for known client-side issues, otherwise proxy the status or fallback to 502
+      const status = resp.status >= 400 && resp.status < 500 ? resp.status : 502;
+      return res.status(status).json({ ok: false, message: bubble });
     }
 
     return res.status(200).json({ ok: true, message: 'Subscribed' });

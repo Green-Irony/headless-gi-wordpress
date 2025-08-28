@@ -84,7 +84,7 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
           secondaryCta={{ label: 'Start the 8-Week Outcomes Workshop', href: '/agentforce-job-description/' }}
           kpis={[
             { label: '⚡ ½ delivery time' },
-            { label: '🛎️ 24/7 support' },
+            { label: '📉 Persistent deflection' },
             { label: '🤖 First agent in 8 weeks' },
           ]}
           showMedia={false}
@@ -121,7 +121,7 @@ const Page: any = function CustomerStoriesPage(props: any & { stories: CustomerS
               logoSrc="/logos/spirit.svg"
               mediaSide="left"
               challenge="Siloed systems and manual workflows made real-time coordination brittle, slowing response to disruptions and creating operational drag."
-              solution="Designed and implemented an event-driven MuleSoft backbone that fed AI agents with live context, enabling proactive orchestration across crew, customer, and logistics systems."
+              solution="Designed and implemented an event-driven MuleSoft backbone that delivered live operational context, enabling proactive orchestration across crew, customer, and logistics systems."
               outcomes={[
                 'Delivery cycle time cut in half by leveraging AI-assisted integration patterns',
                 'Faster decision loops across operations',
