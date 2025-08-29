@@ -61,6 +61,21 @@ export default function HomepageHero(props: HomepageHeroProps) {
   const shouldShowKpis = Array.isArray(kpisToRender) && kpisToRender.length > 0;
   const shouldShowAnyCta = (showPrimaryCta && primaryCta) || (showSecondaryCta && secondaryCta);
 
+  const HIGHLIGHT_PHRASE = 'AI-powered MuleSoft or Salesforce outcome';
+  const renderBody = (text: string) => {
+    const idx = text.indexOf(HIGHLIGHT_PHRASE);
+    if (idx === -1) return text;
+    const before = text.slice(0, idx);
+    const after = text.slice(idx + HIGHLIGHT_PHRASE.length);
+    return (
+      <>
+        {before}
+        <strong className="font-semibold">{HIGHLIGHT_PHRASE}</strong>
+        {after}
+      </>
+    );
+  };
+
   return (
     <m.section
       id={id}
@@ -83,7 +98,7 @@ export default function HomepageHero(props: HomepageHeroProps) {
         <TextCascadeDiagonal inline texts={titleLines} as="h1" />
 
         <p className="mx-auto mt-6 max-w-3xl text-lg text-gi-gray text-balance">
-          {body}
+          {renderBody(body)}
         </p>
 
         {shouldShowAnyCta && (
@@ -102,7 +117,7 @@ export default function HomepageHero(props: HomepageHeroProps) {
             {kpisToRender.map((kpi, idx) => (
               <li key={`${kpi.label}-${idx}`} className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-gi-green" />
-                <span className="text-sm md:text-base">{kpi.label}</span>
+                <span className="text-sm md:text-base font-medium">{kpi.label}</span>
               </li>
             ))}
           </ul>

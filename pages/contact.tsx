@@ -35,16 +35,15 @@ const Page: any = function ContactPage(props: any) {
         <HeroCenterPro
           title="Let’s launch your first win—fast"
           body="Our team responds within one business day—often the same day. We’ll triage your goals quickly and loop in a senior architect as soon as it’s useful."
-          primaryCta={{ label: 'Talk to our team', href: '#contact-form' }}
-          secondaryCta={{ label: 'Start the 8-Week Agent Workshop', href: '/agentforce-job-description/' }}
-          kpis={[{ label: '½ delivery time' }, { label: '50%+ deflection' }, { label: 'Capacity unlocked' }]}
+          kpis={[]}
           showMedia={false}
+          showPrimaryCta={false}
+          showSecondaryCta={false}
         />
 
         {/* Contact form */}
-        <section id="contact-form" className="mx-auto max-w-7xl px-6 py-12">
-          <h2 className="text-2xl font-semibold text-gi-text my-12">Start with one measurable outcome</h2>
-          <div className="mt-4 rounded-2xl border border-gi-fog bg-white p-6 shadow-gi gi-hubspot">
+        <section id="contact-form" className="mx-auto max-w-5xl px-6 pb-36">
+          <div className="rounded-2xl border border-gi-fog bg-white p-6 shadow-gi gi-hubspot">
             <HubSpotForm portalId="23316092" formId="191027ff-631f-4a20-8e8e-36b5d5c91d74" />
           </div>
         </section>
@@ -59,33 +58,7 @@ const Page: any = function ContactPage(props: any) {
           </div>
         </section>*/}
 
-        {/* Reassurance / Checklist */}
-        <ChecklistCard
-          heading="Why teams choose Green Irony for their first AI win"
-          columns={3}
-          items={[
-            'Enterprise delivery DNA, bottled for speed',
-            'First AI-native Salesforce partner',
-            'Senior, on-shore architects + AI acceleration',
-            'Composable, agent-ready integrations by default',
-            'One focused outcome in 3–8 weeks',
-            'Predictable plans, budgets, and SLAs',
-          ]}
-        />
-
-        {/* Secondary paths */}
-        <section className="mx-auto max-w-7xl px-6 py-12">
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi">
-              <h3 className="font-semibold text-gi-text">Sales inquiries / Partnerships</h3>
-              <p className="mt-1 text-sm text-gi-gray">Email <a className="underline" href="mailto:info@greenirony.com">info@greenirony.com</a></p>
-            </div>
-            <div className="rounded-xl border border-gi-fog bg-white p-5 shadow-gi">
-              <h3 className="font-semibold text-gi-text">Careers / Talent</h3>
-              <p className="mt-1 text-sm text-gi-gray">Interested in joining? Tell us what you build. <a className="underline" href="/careers/">Learn more</a></p>
-            </div>
-          </div>
-        </section>
+        {null}
 
       </main>
       <Footer />

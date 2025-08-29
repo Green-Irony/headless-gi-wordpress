@@ -1,11 +1,48 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
+import { useState } from 'react';
 
 const linkUnderline =
   'relative text-gi-gray hover:text-gi-text bg-no-repeat bg-left-bottom bg-[linear-gradient(to_right,#5AAD5A,#C40084,#5AAD5A)] bg-[length:0%_2px] hover:bg-[length:100%_2px] transition-[background-size] duration-200';
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState<string>('');
+
+  async function handleSubscribe(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email) return;
+    setStatus('loading');
+    setMessage('');
+    try {
+      const resp = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, pageUri: typeof window !== 'undefined' ? window.location.href : '' }),
+      });
+      const contentType = resp.headers.get('content-type') || '';
+      let data: { ok?: boolean; message?: string } | null = null;
+      let fallbackText = '';
+      if (contentType.includes('application/json')) {
+        try { data = (await resp.json()) as { ok?: boolean; message?: string }; } catch {}
+      } else {
+        try { fallbackText = await resp.text(); } catch {}
+      }
+      if (resp.ok && ((data?.ok) ?? true)) {
+        setStatus('success');
+        setMessage('Thanks! You\'re subscribed.');
+        setEmail('');
+      } else {
+        setStatus('error');
+        setMessage(data?.message || fallbackText || 'Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      setStatus('error');
+      setMessage('Something went wrong. Please try again.');
+    }
+  }
   return (
     <footer className="relative bg-white overflow-hidden">
       {/* Top wave accent */}
@@ -46,9 +83,9 @@ export default function Footer() {
       </div>
 
       <div className="mx-auto max-w-7xl px-6 pt-16 pb-10">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-12">
           {/* Brand */}
-          <div className="md:col-span-4">
+          <div className="md:col-span-5">
             <div className="flex items-center gap-4">
               <Link href="/" aria-label="Green Irony — Home" className="inline-flex items-center">
                 <Image src="/logos/green-irony/green-logo-long.png" alt="Green Irony" width={140} height={28} className="h-7 w-auto" />
@@ -71,13 +108,13 @@ export default function Footer() {
           </div>
 
           {/* Link columns */}
-          <div className="md:col-span-5 grid grid-cols-1 gap-8 sm:grid-cols-2">
+          <div className="md:col-span-4 grid grid-cols-1 gap-8 sm:grid-cols-2">
             <div>
               <div className="text-sm font-semibold text-gi-text">Company</div>
               <ul className="mt-3 space-y-2 text-sm">
                 <li><Link href="/about/" className={linkUnderline}>About</Link></li>
                 
-                <li><Link href="/services/" className={linkUnderline}>Services</Link></li>
+                <li><Link href="/services/mulesoft/" className={linkUnderline}>Services</Link></li>
                 <li><Link href="/contact/" className={linkUnderline}>Contact</Link></li>
               </ul>
             </div>
@@ -87,6 +124,7 @@ export default function Footer() {
                 <li><Link href="/customer-stories/" className={linkUnderline}>Customer Stories</Link></li>
                 <li><Link href="/insights/" className={linkUnderline}>Insights</Link></li>
                 <li><Link href="/agentforce-job-description/" className={linkUnderline}>8-Week Agent Launch Plan</Link></li>
+                <li><Link href="/mulesoft-reviver/" className={linkUnderline}>MuleSoft Reviver</Link></li>
               </ul>
             </div>
           </div>
@@ -98,16 +136,23 @@ export default function Footer() {
               <UnderlinePink />
             </div>
             <p className="mt-3 text-sm text-gi-gray">Monthly notes on launching real AI outcomes.</p>
-            <form className="mt-4 flex gap-2" onSubmit={(e) => e.preventDefault()}>
+            <form className="mt-4 flex gap-2" onSubmit={handleSubscribe}>
               <input
                 type="email"
                 required
                 placeholder="Work email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full rounded-md border border-gi-fog bg-white px-3 py-2 text-sm outline-none ring-0 focus:border-gi-green"
               />
-              <button type="submit" className="btn-primary whitespace-nowrap">Subscribe</button>
+              <button type="submit" disabled={status === 'loading'} className="btn-primary whitespace-nowrap">
+                {status === 'loading' ? 'Subscribing…' : 'Subscribe'}
+              </button>
             </form>
             <p className="mt-2 text-[11px] text-gi-gray">No spam. Unsubscribe anytime.</p>
+            {message ? (
+              <p className={`mt-2 text-sm ${status === 'success' ? 'text-gi-text' : 'text-red-600'}`}>{message}</p>
+            ) : null}
           </div>
         </div>
 

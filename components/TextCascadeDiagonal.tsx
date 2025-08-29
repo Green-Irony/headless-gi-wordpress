@@ -81,7 +81,7 @@ export default function TextCascadeDiagonal({
         >
           {safeTexts.map((line, i) => (
             <m.div key={`${i}-${line}`} custom={i} variants={lineVariants} className="block">
-              <HeadingTag className="text-5xl md:text-7xl font-bold leading-[1.05] text-gi-text tracking-tight text-balance">
+              <HeadingTag className="text-5xl md:text-7xl font-bold leading-[1.1] text-gi-text tracking-tight text-balance">
                 {line}
               </HeadingTag>
             </m.div>
@@ -116,7 +116,7 @@ export default function TextCascadeDiagonal({
         >
           {safeTexts.map((line, i) => (
             <m.div key={`${i}-${line}`} custom={i} variants={lineVariants} className="block">
-              <HeadingTag className="text-5xl md:text-7xl font-bold leading-[1.05] text-gi-text tracking-tight text-balance">
+              <HeadingTag className="text-5xl md:text-7xl font-bold leading-[1.1] text-gi-text tracking-tight text-balance">
                 {line}
               </HeadingTag>
             </m.div>

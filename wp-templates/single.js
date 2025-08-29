@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { buildCanonicalUrl, toAbsoluteUrl } from "../lib/seo";
+import { buildCanonicalUrl, toAbsoluteUrl, generateSeoTitle } from "../lib/seo";
 import ArticleHeader from "../components/ArticleHeader";
 import ArticleBody from "../components/ArticleBody";
 import ArticleFooter from "../components/ArticleFooter";
@@ -99,7 +99,7 @@ export default function Component(props) {
   return (
     <>
       <Head>
-        <title>{`${title} - ${siteTitle}`}</title>
+        <title>{generateSeoTitle(title || '', siteTitle || 'Green Irony')}</title>
         <meta name="description" content={description} />
         {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
         {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}

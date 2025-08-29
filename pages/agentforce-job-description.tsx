@@ -35,10 +35,6 @@ const Page: any = function AgentforceJobDescriptionPage(props: any) {
           
         />
 
-        <section className="mx-auto max-w-5xl px-6 -mt-10 pb-2">
-          <p className="mx-auto max-w-3xl text-center text-gi-text font-semibold">Zero cost. Immediate clarity on the fastest path to a working agent.</p>
-        </section>
-
         <section className="mx-auto max-w-5xl px-6 py-8">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-12 items-start">
             <div className="md:col-span-7">
