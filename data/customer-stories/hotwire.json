@@ -1,0 +1,86 @@
+{
+  "slug": "hotwire",
+  "brand": "Hotwire Communications",
+  "title": "Accelerating ERP Migration: How Hotwire Communications Unified Systems with Green Irony’s Integration Expertise",
+  "vertical": "Telecommunications",
+  "products": ["MuleSoft", "Dynamics 365"],
+  "image": { "src": "/logos/Hotwire.svg", "alt": "Hotwire Communications" },
+  "excerpt": "Composable integrations that streamline data flow, enhance cross‑functional operations, and accelerate Dynamics 365 adoption—without disrupting business continuity.",
+  "tags": ["MuleSoft", "Dynamics 365", "ERP Migration"],
+  "datePublished": "2024-11-03",
+  "hero": {
+    "title": "Accelerating ERP Migration: How Hotwire Communications Unified Systems with Green Irony’s Integration Expertise",
+    "subhead": "Composable integrations that streamline data flow, enhance cross‑functional operations, and accelerate Dynamics 365 adoption—without disrupting business continuity.",
+    "image": { "src": "/logos/Hotwire.svg", "alt": "Hotwire Communications" },
+    "primaryCta": { "label": "Talk to an Expert", "href": "/contact/" }
+  },
+  "sections": [
+    {
+      "type": "testimonial",
+      "quote": "Green Irony’s integration expertise enabled us to drive our ERP migration and digital operations forward without missing a beat. Our systems are now seamlessly connected, resulting in improved data visibility and efficiency across the business.",
+      "author": "Hotwire Communications Executive To Be Named",
+      "logoSrc": "/logos/Hotwire.svg"
+    },
+    {
+      "type": "challenge",
+      "title": "Hotwire Communications faced a complex ERP migration, requiring real‑time integration across multiple legacy billing, inventory, and job tracking systems. The business needed to minimize operational disruption, maintain complete continuity, and enable new digital workflows—while managing costly downtime risks and resource constraints.",
+      "promises": ["Operational continuity", "Real‑time integration", "Minimize disruption"],
+      "align": "center"
+    },
+    {
+      "type": "objectives",
+      "body": "A multi‑phase, long‑term initiative to modernize core systems and deliver better tools for both field technicians and back‑office teams working in lockstep—each phase designed to unlock measurable value without disrupting day‑to‑day operations.",
+      "items": [
+        {
+          "title": "Seamless integration",
+          "body": "Seamless integration between legacy systems, new platforms, and Dynamics 365"
+        },
+        {
+          "title": "Uninterrupted operations",
+          "body": "Sustain uninterrupted business operations throughout the migration"
+        },
+        {
+          "title": "Accelerated value",
+          "body": "Accelerate value delivery from new automation and workflows"
+        }
+      ]
+    },
+    {
+      "type": "solution",
+      "bg": "white",
+      "textPrimary": "navy",
+      "textSecondary": "pink",
+      "title": "What the solution looked like",
+      "image": { "src": "/images/hero1-connected.svg", "alt": "Connected systems" },
+      "imageSide": "left",
+      "bodyBefore": "Green Irony partnered with Hotwire to architect comprehensive, scalable integrations:",
+      "bullets": [
+        { "body": "Led collaborative discovery sessions to align integration goals and technical strategies." },
+        { "body": "Engineered a scalable, event‑driven API layer interconnecting legacy billing (AMDOCS, D365 Finance), inventory (AMDOCS, SiteTracker), workflow management (OfficeTrack, Salesforce/SiteTracker), travel (Concur), payroll (UKG/Ultipro), and technician task mobile applications." },
+        { "body": "Developed reusable MuleSoft pipelines to future‑proof the environment for ongoing change, and integrated business intelligence data for advanced reporting." },
+        { "body": "Orchestrated project management system integrations and enhanced BI with unified travel and operational data." }
+      ]
+    },
+    {
+      "type": "results",
+      "bg": "navy",
+      "text": "white",
+      "title": "Outcome Highlights",
+      "body": "Unified integrations enabled an accelerated, disruption‑free ERP go‑live and positioned Hotwire for continued automation.",
+      "items": [
+        "Achieved accelerated and disruption‑free ERP go‑live, with synchronized operations across billing, inventory, project management, travel, and payroll systems.",
+        "Enhanced business agility by unifying technician, payroll, and workflow data streams, reducing risk and improving data reliability.",
+        "Delivered a modern, scalable integration architecture that positions Hotwire for continued digital expansion and rapid process automation."
+      ]
+    }
+  ],
+  "seo": {
+    "title": "Hotwire Communications: Accelerating ERP Migration with Composable Integrations",
+    "description": "How Hotwire unified systems and accelerated Dynamics 365 adoption with MuleSoft and event‑driven integrations—without disrupting operations.",
+    "ogImage": "/logos/Hotwire.svg",
+    "canonical": "/customer-stories/hotwire/",
+    "locale": "en-US"
+  }
+}
+
+
