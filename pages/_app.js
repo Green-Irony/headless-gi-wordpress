@@ -12,6 +12,7 @@ export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const [faviconHref, setFaviconHref] = useState(null);
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const HS_PORTAL_ID = process.env.HUBSPOT_PORTAL_ID;
 
   useEffect(() => {
     let isMounted = true;
@@ -38,6 +39,21 @@ export default function MyApp({ Component, pageProps }) {
     };
   }, [router.events, GA_MEASUREMENT_ID]);
 
+  // HubSpot SPA pageview on route changes
+  useEffect(() => {
+    if (!HS_PORTAL_ID) return;
+    const handleRouteChange = (url) => {
+      if (typeof window !== 'undefined' && Array.isArray(window._hsq)) {
+        window._hsq.push(['setPath', url]);
+        window._hsq.push(['trackPageView']);
+      }
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events, HS_PORTAL_ID]);
+
   return (
     <>
       {/* GA4 */}
@@ -56,6 +72,14 @@ export default function MyApp({ Component, pageProps }) {
             `}
           </Script>
         </>
+      ) : null}
+      {/* HubSpot Tracking Code */}
+      {HS_PORTAL_ID ? (
+        <Script
+          id="hs-script-loader"
+          strategy="afterInteractive"
+          src={`https://js.hs-scripts.com/${HS_PORTAL_ID}.js`}
+        />
       ) : null}
       <Head>
         <meta charSet="utf-8" />
