@@ -1,8 +1,9 @@
 'use client';
 import { motion as m, useReducedMotion } from 'framer-motion';
 import React, { useEffect, useRef } from 'react';
+import Image from 'next/image';
 
-export type DynamicPillar = { title: string; body: string; accentStrength?: number };
+export type DynamicPillar = { title: string; body: string; accentStrength?: number; iconNode?: React.ReactNode; iconSrc?: string; iconAlt?: string };
 export type PillarsDynamicProps = {
 	id?: string;
 	className?: string;
@@ -68,7 +69,7 @@ export default function PillarsDynamic({ id, className, heading = DEFAULT_HEADIN
 					viewport={{ once: true, amount: 0.2 }}
 					variants={{ hidden: {}, show: { transition: { staggerChildren: 0.06 } } }}
 				>
-					{items.map(({ title, body }) => (
+					{items.map(({ title, body, iconSrc, iconNode, iconAlt }) => (
 						<m.li
 							key={title}
 							className="relative h-full w-full overflow-visible sm:w-1/2 lg:w-1/3"
@@ -76,10 +77,21 @@ export default function PillarsDynamic({ id, className, heading = DEFAULT_HEADIN
 						>
 							<div className="h-full rounded-2xl bg-gradient-to-r from-gi-green/35 via-gi-pink/20 to-gi-green/35 p-[1px]" data-eq-card>
 								<div className="flex h-full flex-col rounded-[16px] bg-white p-6 shadow-gi">
-									<div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-gi-green/15 ring-1 ring-gi-fog">
-										<span className="h-5 w-5" />
+									<div className="mb-4 inline-flex h-10 items-center gap-3">
+										<span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gi-green/15 ring-1 ring-gi-fog">
+											{(typeof iconSrc !== 'undefined' || typeof iconNode !== 'undefined') ? (
+												<>
+													{/* @ts-ignore dynamic scope of iconSrc/iconNode within map context */}
+													{iconSrc ? <Image src={iconSrc as any} alt={(iconAlt as any) || ''} width={20} height={20} className="h-5 w-5 object-contain" /> : null}
+													{/* @ts-ignore */}
+													{!iconSrc && iconNode ? <span className="text-gi-pink">{iconNode as any}</span> : null}
+												</>
+											) : (
+												<span className="h-5 w-5" />
+											)}
+										</span>
+										<h3 className="text-base font-semibold text-gi-text m-0">{title}</h3>
 									</div>
-									<h3 className="text-base font-semibold text-gi-text">{title}</h3>
 									<p className="mt-2 text-sm text-gi-gray">{body}</p>
 									<div className="mt-auto" />
 								</div>
