@@ -10,10 +10,7 @@ import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../queries/SiteSettingsQuery';
 import { HEADER_MENU_QUERY } from '../queries/MenuQueries';
 import { toAbsoluteUrl, buildCanonicalUrl } from '../lib/seo';
-import HowWeWorkSerpentine from '../components/HowWeWorkSerpentine';
 import ChecklistCard from '../components/ChecklistCard';
-import PillarsDynamic from '../components/PillarsDynamic';
-import ValuePillars from '../components/ValuePillars';
 
 const Page: any = function MuleSoftReviverPage(props: any) {
   if (props.loading) return <>Loading...</>;
@@ -28,16 +25,16 @@ const Page: any = function MuleSoftReviverPage(props: any) {
   return (
     <>
       <Head>
-        <title>MuleSoft Rescue After 'Free' Builds — 48‑Hour Diagnostic | Reviver by Green Irony</title>
-        <meta name="description" content="Offshore or 'free' MuleSoft delivery gone sideways? Get a 48‑hour root‑cause readout and fix‑forward plan with budget and timeline. Stabilize in weeks, not months." />
+        <title>MuleSoft Reviver — Fix what’s broken fast | 48‑hour diagnostic</title>
+        <meta name="description" content="AI‑native recovery for MuleSoft. Get a 48‑hour RCA, a clear recovery plan, and a path to stability in weeks—not months." />
         {/* Open Graph */}
-        <meta property="og:title" content="MuleSoft Rescue After 'Free' Builds — 48‑Hour Diagnostic | Reviver by Green Irony" />
-        <meta property="og:description" content="Offshore or 'free' MuleSoft delivery gone sideways? Get a 48‑hour root‑cause readout and fix‑forward plan with budget and timeline. Stabilize in weeks, not months." />
+        <meta property="og:title" content="MuleSoft Reviver — Fix what’s broken fast | 48‑hour diagnostic" />
+        <meta property="og:description" content="AI‑native recovery for MuleSoft. Get a 48‑hour RCA, a clear recovery plan, and a path to stability in weeks—not months." />
         <meta property="og:url" content={buildCanonicalUrl('/mulesoft-reviver/')} />
         <meta property="og:image" content={toAbsoluteUrl('/images/mulesoft-reviver-hero.svg')} />
         {/* Twitter Card */}
-        <meta name="twitter:title" content="MuleSoft Rescue After 'Free' Builds — 48‑Hour Diagnostic | Reviver by Green Irony" />
-        <meta name="twitter:description" content="Offshore or 'free' MuleSoft delivery gone sideways? Get a 48‑hour root‑cause readout and fix‑forward plan with budget and timeline. Stabilize in weeks, not months." />
+        <meta name="twitter:title" content="MuleSoft Reviver — Fix what’s broken fast | 48‑hour diagnostic" />
+        <meta name="twitter:description" content="AI‑native recovery for MuleSoft. Get a 48‑hour RCA, a clear recovery plan, and a path to stability in weeks—not months." />
         <meta name="twitter:image" content={toAbsoluteUrl('/images/mulesoft-reviver-hero.svg')} />
         {/* WebPage JSON-LD */}
         {/* eslint-disable-next-line react/no-danger */}
@@ -47,10 +44,10 @@ const Page: any = function MuleSoftReviverPage(props: any) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebPage",
-              name: "MuleSoft Rescue After 'Free' Builds — 48‑Hour Diagnostic | Reviver by Green Irony",
+              name: "MuleSoft Reviver — Fix what’s broken fast | 48‑hour diagnostic",
               url: buildCanonicalUrl('/mulesoft-reviver/') || undefined,
               description:
-                "Offshore or 'free' MuleSoft delivery gone sideways? Get a 48‑hour root‑cause readout and fix‑forward plan with budget and timeline. Stabilize in weeks, not months.",
+                "AI‑native recovery for MuleSoft. Get a 48‑hour RCA, a clear recovery plan, and a path to stability in weeks—not months.",
               isPartOf: {
                 "@type": "WebSite",
                 name: "Green Irony",
@@ -65,24 +62,11 @@ const Page: any = function MuleSoftReviverPage(props: any) {
 
       <main>
         <ServiceHero
-          title="MuleSoft rescue after 'free' builds — clarity in 48 hours"
-          subhead="If an offshore or 'free' delivery left you with failing flows, missed SLAs, or finger‑pointing, Reviver gives you a root‑cause readout in 48 hours and a fix‑forward plan with budget and timeline."
+          title="Reviver for MuleSoft"
+          subhead="MuleSoft not performing? Fix what’s broken—fast. Our AI‑native recovery pairs senior US‑based architects with digital labor to deliver a 48‑hour root‑cause readout and a clear plan to restore stability in weeks, not months."
           image={{ src: '/images/mulesoft-reviver-hero.svg', alt: 'MuleSoft Reviver Hero Image' }}
-          primaryCta={{ label: 'Start my 48-hour diagnostic', href: '/mulesoft-reviver/#reviver-form?utm_source=ads&utm_medium=cpc&utm_campaign=offshore_rescue' }}
+          primaryCta={{ label: 'Book the 48‑hour diagnostic', href: '#reviver-form' }}
         />
-
-        {/* Symptoms */}
-        <section className="mx-auto max-w-xl px-6 py-10">
-          <h3 className="text-2xl font-semibold text-gi-text">You're seeing this if…</h3>
-          <ul className="mt-4 space-y-3 text-gi-text list-disc pl-6">
-            <li>Timeouts, retries, or stuck queues</li>
-            <li>Duplicate or missing data between systems</li>
-            <li>No observability or logs you can trust</li>
-            <li>One environment works but prod doesn't</li>
-            <li>Every change breaks something else</li>
-            <li>No one can tell you when it's fixed or what it will cost</li>
-          </ul>
-        </section>
 
         
 
@@ -112,42 +96,25 @@ const Page: any = function MuleSoftReviverPage(props: any) {
           ]}
         />
 
-        {/* How Reviver works */}
-        <HowWeWorkSerpentine
-          title="How Reviver works"
-          subhead="From triage to stabilization"
-          steps={[
-            { k: '01', title: 'Triage & access (same day)', caption: 'Quick intake, read‑only access, non‑prod first.' },
-            { k: '02', title: 'Snapshot', caption: 'Flows, error patterns, runtime metrics, and environment diffs.' },
-            { k: '03', title: 'Map & measure', caption: 'Event‑driven target patterns, observability gaps, and security checks.' },
-            { k: '04', title: 'Readout (48 hours)', caption: 'RCA + plan, budget, and a clear stabilization path.' },
-            { k: '05', title: 'Stabilize (as little as 3 weeks*)', caption: 'Fix‑forward execution with quality gates.' },
-          ]}
-          variant="serpentine"
-        />
-
         {/* Why Reviver */}
-        <PillarsDynamic
-          heading="Why Green Irony vs. offshore 'free'"
-          subhead="We fix forward—not blame. Senior, US‑based architects paired with AI acceleration deliver clarity and stability fast—at offshore‑competitive economics."
-          items={[
-            { title: 'On‑shore, senior, AI‑accelerated', body: 'US‑based team at offshore‑competitive economics.', iconSrc: '/icons/pro_network.svg', iconAlt: 'Team' },
-            { title: 'Composable, event‑driven patterns', body: 'Scale with confidence and operate easily.', iconSrc: '/icons/flow.svg', iconAlt: 'Flow' },
-            { title: 'Governance baked in', body: 'Observability, rollbacks, security, and auditability from day one.', iconSrc: '/icons/graph.svg', iconAlt: 'Governance' },
-            { title: 'Fix forward culture', body: 'No blame memos—we leave you better than we found you.', iconSrc: '/icons/forward_up.svg', iconAlt: 'Forward' },
-            { title: 'Transparent pricing & progress', body: 'You know what’s next and what it costs.', iconSrc: '/icons/line_chart.svg', iconAlt: 'Transparency' },
-          ]}
-        />
-
-        {/* Timeline & investment */}
-        <ValuePillars
-          heading="Timeline & investment"
-          items={[
-            { title: '48‑hour diagnostic', body: 'Flat‑fee; commit to a fix‑forward plan you can run or have us deliver.', iconSrc: '/icons/clock.svg', iconAlt: 'Clock' },
-            { title: 'Stabilization (3–6 weeks)', body: 'Common rescues complete in 3–6 weeks; deeper refactors priced transparently.', iconSrc: '/icons/forward_up.svg', iconAlt: 'Upward arrow' },
-            { title: 'Operate', body: 'Optional support after go‑live.', iconSrc: '/icons/orchestrator.svg', iconAlt: 'Operations orchestration' },
-          ]}
-        />
+        <section className="mx-auto max-w-5xl px-6 py-10">
+          <h3 className="text-2xl font-semibold text-gi-text">Why MuleSoft Reviver?</h3>
+          <p className="mt-3 max-w-3xl text-gi-text">We go beyond health‑check checklists. Reviver pinpoints the real blockers—design debt, non‑performant flows, brittle error handling, environment drift, and missing observability—and gets you back to reliable delivery fast.</p>
+          <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className="rounded-2xl border border-gi-fog bg-white p-5 shadow-gi">
+              <h4 className="text-lg font-semibold text-gi-text">2× faster delivery</h4>
+              <p className="mt-2 text-gi-gray">AI‑accelerated analysis and senior execution cut recovery timelines in half—without sacrificing quality.</p>
+            </div>
+            <div className="rounded-2xl border border-gi-fog bg-white p-5 shadow-gi">
+              <h4 className="text-lg font-semibold text-gi-text">On‑shore expertise at offshore economics</h4>
+              <p className="mt-2 text-gi-gray">Seasoned US‑based MuleSoft architects deliver with the efficiency of digital labor, matching offshore price points.</p>
+            </div>
+            <div className="rounded-2xl border border-gi-fog bg-white p-5 shadow-gi">
+              <h4 className="text-lg font-semibold text-gi-text">Predictable outcomes</h4>
+              <p className="mt-2 text-gi-gray">Accurate plans, quality gates, and clear SLAs reduce rework and surprises so you can plan with confidence.</p>
+            </div>
+          </div>
+        </section>
 
         <PreFooterCTA
           title="MuleSoft on Life Support?"
