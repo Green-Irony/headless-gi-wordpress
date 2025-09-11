@@ -10,6 +10,7 @@ import { getNextStaticProps } from '@faustwp/core';
 import { SITE_DATA_QUERY } from '../queries/SiteSettingsQuery';
 import { HEADER_MENU_QUERY } from '../queries/MenuQueries';
 import { toAbsoluteUrl, buildCanonicalUrl } from '../lib/seo';
+import ChecklistCard from '../components/ChecklistCard';
 
 const Page: any = function MuleSoftReviverPage(props: any) {
   if (props.loading) return <>Loading...</>;
@@ -83,15 +84,17 @@ const Page: any = function MuleSoftReviverPage(props: any) {
         </section>
 
         {/* Benefits */}
-        <section className="mx-auto max-w-5xl px-6 py-10">
-          <h3 className="text-2xl font-semibold text-gi-text">In just 48 hours, you’ll get:</h3>
-          <ul className="mt-4 space-y-3 text-gi-text">
-            <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Root‑cause analysis of architecture, flows, environments, and policies.</li>
-            <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />A clear recovery plan with milestones, owners, and budget.</li>
-            <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Performance benchmarks and reliability targets (dashboards/SLAs).</li>
-            <li className="pl-6 relative"><span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-gi-green" />Senior‑led guidance amplified by AI to accelerate fixes.</li>
-          </ul>
-        </section>
+        <ChecklistCard
+          heading="What you get in 48 hours"
+          columns={2}
+          items={[
+            'Root‑cause analysis with an architecture snapshot.',
+            'Stabilization options with budget & timeline ranges.',
+            'Keep vs. refactor recommendations (we keep what works).',
+            'Risk register and prioritized backlog.',
+            'Readout meeting with stakeholders (recording & deck).',
+          ]}
+        />
 
         {/* Why Reviver */}
         <section className="mx-auto max-w-5xl px-6 py-10">
