@@ -2,6 +2,7 @@ import "../faust.config";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { FaustProvider } from "@faustwp/core";
+import { SessionProvider } from "next-auth/react";
 import "../styles/globals.css";
 import Head from "next/head";
 import Script from "next/script";
@@ -54,8 +55,10 @@ export default function MyApp({ Component, pageProps }) {
     };
   }, [router.events, HS_PORTAL_ID]);
 
+  const isPortal = router.pathname.startsWith('/portal');
+
   return (
-    <>
+    <SessionProvider session={pageProps.session}>
       {/* GA4 */}
       {GA_MEASUREMENT_ID ? (
         <>
@@ -66,7 +69,7 @@ export default function MyApp({ Component, pageProps }) {
           <Script id="gtag-init" strategy="afterInteractive">
             {`
               window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);} 
+              function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ''}', { anonymize_ip: true${process.env.NODE_ENV !== 'production' ? ', debug_mode: true' : ''} });
             `}
@@ -141,11 +144,11 @@ export default function MyApp({ Component, pageProps }) {
         />
       </Head>
       <FaustProvider pageProps={pageProps}>
-        <div className="min-h-screen flex flex-col" style={{ paddingTop: 'var(--gi-header-offset,64px)' }}>
-          <style jsx global>{`:root{--gi-header-offset:64px}`}</style>
+        <div className="min-h-screen flex flex-col" style={isPortal ? undefined : { paddingTop: 'var(--gi-header-offset,64px)' }}>
+          {!isPortal && <style jsx global>{`:root{--gi-header-offset:64px}`}</style>}
           <Component {...pageProps} key={router.asPath} />
         </div>
       </FaustProvider>
-    </>
+    </SessionProvider>
   );
 }
