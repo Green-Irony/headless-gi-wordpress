@@ -1,0 +1,172 @@
+import Link from "next/link";
+import type { QuoteResponse } from "../../lib/portal/types";
+
+const CONFIDENCE_STYLES: Record<
+  QuoteResponse["confidence_level"],
+  string
+> = {
+  High: "bg-green-50 text-gi-green ring-gi-green/20",
+  Medium: "bg-amber-50 text-amber-600 ring-amber-600/20",
+  Low: "bg-red-50 text-red-600 ring-red-600/20",
+};
+
+function ConfidenceBadge({
+  level,
+}: {
+  level: QuoteResponse["confidence_level"];
+}) {
+  return (
+    <span
+      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${CONFIDENCE_STYLES[level]}`}
+    >
+      {level}
+    </span>
+  );
+}
+
+function formatPrice(low: number, high: number) {
+  const fmt = (n: number) =>
+    n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  return `${fmt(low)} – ${fmt(high)}`;
+}
+
+interface QuoteResultsProps {
+  quote: QuoteResponse;
+  onRefine?: () => void;
+}
+
+export default function QuoteResults({ quote, onRefine }: QuoteResultsProps) {
+  const scopeParagraphs = quote.scope_summary.split("\n").filter(Boolean);
+
+  return (
+    <div className="space-y-6">
+      {/* Quote Summary */}
+      <div className="rounded-2xl border border-gi-line bg-white shadow-gi p-6 sm:p-8">
+        <h2 className="text-lg font-semibold text-gi-navy mb-5">
+          Quote Summary
+        </h2>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div>
+            <p className="text-xs text-gi-navy/50 mb-1">Estimated Price Range</p>
+            <p className="text-lg font-semibold text-gi-navy">
+              {formatPrice(quote.price_low, quote.price_high)}
+            </p>
+          </div>
+          <div>
+            <p className="text-xs text-gi-navy/50 mb-1">Offering Tier</p>
+            <p className="text-lg font-semibold text-gi-navy">
+              {quote.offering_tier}
+            </p>
+          </div>
+          <div>
+            <p className="text-xs text-gi-navy/50 mb-1">Timeline</p>
+            <p className="text-lg font-semibold text-gi-navy">
+              ~{quote.timeline_weeks} weeks
+            </p>
+          </div>
+          <div>
+            <p className="text-xs text-gi-navy/50 mb-1">Confidence</p>
+            <div className="mt-1">
+              <ConfidenceBadge level={quote.confidence_level} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Scope Summary */}
+      <div className="rounded-2xl border border-gi-line bg-white shadow-gi p-6 sm:p-8">
+        <h2 className="text-lg font-semibold text-gi-navy mb-4">
+          Scope Summary
+        </h2>
+
+        <div className="space-y-3 text-sm text-gi-navy/80">
+          {scopeParagraphs.map((para, i) => (
+            <p key={i}>{para}</p>
+          ))}
+        </div>
+
+        <div className="mt-6 space-y-5">
+          {[
+            { heading: "Integration Use Cases", items: quote.key_use_cases },
+            { heading: "Assumptions", items: quote.assumptions },
+            { heading: "Not Included", items: quote.not_included },
+          ].map((section) => (
+            <div key={section.heading}>
+              <h3 className="text-sm font-semibold text-gi-navy mb-2">
+                {section.heading}
+              </h3>
+              <ul className="space-y-1.5">
+                {section.items.map((item, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-2 text-sm text-gi-navy/70"
+                  >
+                    <span className="mt-[5px] h-2 w-2 shrink-0 rounded-full bg-gi-green" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          <div>
+            <h3 className="text-sm font-semibold text-gi-navy mb-2">
+              Recommended Next Steps
+            </h3>
+            <p className="text-sm text-gi-navy/70">
+              {quote.recommended_next_steps}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Additional Services Notice */}
+      {quote.additional_services && (
+        <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+          <p className="font-semibold mb-1">
+            Additional Services Identified
+          </p>
+          <p>{quote.additional_services}</p>
+          <p className="mt-2 text-amber-700">
+            Contact your Green Irony AE to discuss these services.
+          </p>
+        </div>
+      )}
+
+      {/* Call to Action */}
+      <div className="rounded-2xl border border-gi-line bg-white shadow-gi p-6 sm:p-8">
+        <div className="flex flex-wrap gap-3">
+          <Link href="/contact/" className="btn-primary">
+            Schedule a call with Green Irony
+          </Link>
+          <button
+            type="button"
+            className="btn-secondary opacity-50 cursor-not-allowed"
+            disabled
+            title="Coming soon"
+          >
+            Download this quote
+          </button>
+          {onRefine && (
+            <button
+              type="button"
+              className="btn-secondary"
+              onClick={onRefine}
+            >
+              Refine this quote
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Disclaimer */}
+      <p className="text-xs text-gi-navy/40 text-center px-4">
+        This quote was generated by Green Irony&apos;s AI-powered quoting
+        engine. For a detailed, customer-ready SOW, connect with your Green
+        Irony AE.
+      </p>
+    </div>
+  );
+}
+
+export { ConfidenceBadge, formatPrice, CONFIDENCE_STYLES };
