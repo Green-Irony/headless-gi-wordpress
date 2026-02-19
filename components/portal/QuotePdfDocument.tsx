@@ -5,6 +5,11 @@ import {
   View,
   Image,
   StyleSheet,
+  Svg,
+  Defs,
+  Stop,
+  LinearGradient,
+  Rect,
   pdf,
 } from "@react-pdf/renderer";
 import type { QuoteResponse } from "../../lib/portal/types";
@@ -13,155 +18,213 @@ import type { QuoteResponse } from "../../lib/portal/types";
 const C = {
   navy: "#061E4B",
   green: "#5AAD5A",
+  darkGreen: "#3F8A3F",
+  midGreen: "#7ECF7E",
+  pink: "#C40084",
+  black: "#141415",
   gray: "#58595B",
-  line: "#E9E9EF",
+  line: "#D1D1D6",
+  lightLine: "#f0f1f3",
   fog: "#EEF1F6",
   white: "#FFFFFF",
-  amber: "#D97706",
-  amberBg: "#FFFBEB",
-  amberBorder: "#FDE68A",
-  red: "#DC2626",
+  totalBg: "#f8fafb",
+  greenCalloutBg: "#F0F7F0",
 };
 
-const CONFIDENCE_COLOR: Record<QuoteResponse["confidence_level"], string> = {
-  High: C.green,
-  Medium: C.amber,
-  Low: C.red,
-};
 
 /* ── Styles ───────────────────────────────────────────── */
 const s = StyleSheet.create({
   page: {
     fontFamily: "Helvetica",
     fontSize: 10,
-    color: C.navy,
-    paddingTop: 40,
-    paddingBottom: 60,
-    paddingHorizontal: 40,
+    color: C.black,
+    padding: 0,
+    paddingBottom: 50,
   },
 
-  /* header */
-  headerRow: {
+  /* Navy header */
+  header: {
+    backgroundColor: C.navy,
+    paddingTop: 30,
+    paddingBottom: 26,
+    paddingHorizontal: 40,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-start",
-    marginBottom: 24,
+    alignItems: "center",
   },
-  logo: { width: 140, height: 30 },
-  headerRight: { alignItems: "flex-end" },
-  title: {
+  headerLeft: { flexDirection: "column", flex: 1, marginRight: 16 },
+  headerTitle: {
     fontFamily: "Helvetica-Bold",
     fontSize: 18,
-    color: C.navy,
-    marginBottom: 4,
+    color: C.white,
+    lineHeight: 1.3,
   },
-  meta: { fontSize: 9, color: C.gray, marginBottom: 1 },
-
-  /* summary grid */
-  grid: {
-    flexDirection: "row",
-    marginBottom: 20,
-  },
-  card: {
-    flex: 1,
-    backgroundColor: C.fog,
-    borderRadius: 6,
-    padding: 10,
-    marginRight: 8,
-  },
-  cardLast: { marginRight: 0 },
-  cardLabel: {
-    fontSize: 8,
-    color: C.gray,
-    marginBottom: 3,
-    textTransform: "uppercase" as const,
-  },
-  cardValue: { fontFamily: "Helvetica-Bold", fontSize: 13, color: C.navy },
-
-  /* confidence badge */
-  badge: {
-    paddingVertical: 2,
-    paddingHorizontal: 8,
-    borderRadius: 10,
-    alignSelf: "flex-start",
-  },
-  badgeText: { fontFamily: "Helvetica-Bold", fontSize: 11 },
-
-  /* section */
-  sectionTitle: {
+  headerSubtitle: {
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
-    fontSize: 12,
-    color: C.navy,
-    marginBottom: 6,
-    marginTop: 16,
+    color: C.pink,
+    letterSpacing: 0.4,
+    marginTop: 6,
   },
-  paragraph: { fontSize: 10, lineHeight: 1.5, color: C.gray, marginBottom: 4 },
+  logo: { width: 130, height: 26 },
 
-  /* bullet list */
-  bulletRow: { flexDirection: "row", marginBottom: 3, paddingLeft: 4 },
+  /* Accent bar */
+  accentBar: { width: "100%", height: 3 },
+
+  /* Body */
+  body: { paddingHorizontal: 40, paddingTop: 28 },
+
+  /* Section label — green uppercase */
+  sectionLabel: {
+    fontSize: 10,
+    fontFamily: "Helvetica-Bold",
+    textTransform: "uppercase" as const,
+    letterSpacing: 1.2,
+    color: C.darkGreen,
+    marginBottom: 10,
+  },
+
+  /* Scope paragraph */
+  scopeText: {
+    fontSize: 11,
+    lineHeight: 1.7,
+    color: C.black,
+    marginBottom: 6,
+  },
+
+  /* Bullet list */
+  bulletRow: {
+    flexDirection: "row",
+    paddingVertical: 6,
+    paddingLeft: 4,
+    borderBottomWidth: 1,
+    borderBottomColor: C.lightLine,
+    alignItems: "flex-start",
+  },
+  bulletRowLast: { borderBottomWidth: 0 },
   bulletDot: {
     width: 6,
     height: 6,
     borderRadius: 3,
     backgroundColor: C.green,
     marginTop: 3,
-    marginRight: 6,
+    marginRight: 8,
   },
-  bulletText: { flex: 1, fontSize: 10, lineHeight: 1.5, color: C.gray },
+  bulletText: { flex: 1, fontSize: 11, lineHeight: 1.5, color: C.black },
 
-  /* amber callout */
+  /* Paragraph section */
+  paragraph: { fontSize: 11, lineHeight: 1.7, color: C.black, marginBottom: 4 },
+
+  /* Green callout */
   callout: {
-    backgroundColor: C.amberBg,
-    borderWidth: 1,
-    borderColor: C.amberBorder,
-    borderRadius: 6,
-    padding: 10,
-    marginTop: 16,
+    backgroundColor: C.greenCalloutBg,
+    borderLeftWidth: 3,
+    borderLeftColor: C.green,
+    borderRadius: 4,
+    padding: 14,
+    marginTop: 4,
   },
   calloutHeading: {
     fontFamily: "Helvetica-Bold",
     fontSize: 10,
-    color: "#92400E",
-    marginBottom: 4,
+    textTransform: "uppercase" as const,
+    letterSpacing: 1.2,
+    color: C.darkGreen,
+    marginBottom: 6,
   },
-  calloutBody: { fontSize: 10, color: "#92400E", lineHeight: 1.4 },
+  calloutBody: { fontSize: 11, color: C.black, lineHeight: 1.5 },
 
-  /* footer */
-  footer: {
-    position: "absolute",
-    bottom: 20,
-    left: 40,
-    right: 40,
+  /* Timeline row */
+  timelineRow: {
+    paddingVertical: 14,
+    paddingHorizontal: 40,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-end",
+    alignItems: "center",
+    marginTop: 28,
     borderTopWidth: 1,
-    borderTopColor: C.line,
-    paddingTop: 8,
+    borderTopColor: C.lightLine,
   },
-  footerDisclaimer: { fontSize: 7, color: C.gray, maxWidth: "70%" },
+  timelineLabel: {
+    fontSize: 11,
+    fontFamily: "Helvetica-Bold",
+    color: C.gray,
+    textTransform: "uppercase" as const,
+    letterSpacing: 0.6,
+  },
+  timelineValue: {
+    fontSize: 14,
+    fontFamily: "Helvetica-Bold",
+    color: C.navy,
+  },
+
+  /* Total bar */
+  totalBar: {
+    backgroundColor: C.totalBg,
+    borderTopWidth: 2,
+    borderTopColor: C.line,
+    paddingVertical: 22,
+    paddingHorizontal: 40,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  totalLabel: {
+    fontSize: 11,
+    fontFamily: "Helvetica-Bold",
+    color: C.gray,
+    textTransform: "uppercase" as const,
+    letterSpacing: 0.6,
+  },
+  totalPrice: {
+    fontSize: 24,
+    fontFamily: "Helvetica-Bold",
+    color: C.green,
+    letterSpacing: -0.2,
+  },
+
+  /* Navy footer (fixed) */
+  footer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: C.navy,
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  footerDisclaimer: {
+    fontSize: 7,
+    color: "rgba(255,255,255,0.45)",
+    maxWidth: "70%",
+    lineHeight: 1.4,
+  },
   footerRight: { alignItems: "flex-end" },
-  footerUrl: { fontSize: 8, color: C.green, marginBottom: 2 },
-  footerPage: { fontSize: 7, color: C.gray },
+  footerBrand: {
+    fontSize: 8,
+    fontFamily: "Helvetica-Bold",
+    color: "rgba(255,255,255,0.45)",
+    marginBottom: 2,
+  },
+  footerPage: { fontSize: 7, color: "rgba(255,255,255,0.35)" },
+
+  /* Spacer between sections */
+  sectionGap: { marginTop: 24 },
 });
 
 /* ── Helpers ──────────────────────────────────────────── */
 function formatPrice(low: number, high: number) {
   const fmt = (n: number) =>
-    n.toLocaleString("en-US", {
+    Number(n).toLocaleString("en-US", {
       style: "currency",
       currency: "USD",
+      minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     });
   return `${fmt(low)} – ${fmt(high)}`;
-}
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
 }
 
 /* ── Bullet list ──────────────────────────────────────── */
@@ -169,7 +232,15 @@ function BulletList({ items }: { items: string[] }) {
   return (
     <View>
       {items.map((item, i) => (
-        <View key={i} style={s.bulletRow} wrap={false}>
+        <View
+          key={i}
+          style={
+            i === items.length - 1
+              ? [s.bulletRow, s.bulletRowLast]
+              : s.bulletRow
+          }
+          wrap={false}
+        >
           <View style={s.bulletDot} />
           <Text style={s.bulletText}>{item}</Text>
         </View>
@@ -181,15 +252,19 @@ function BulletList({ items }: { items: string[] }) {
 /* ── Document ─────────────────────────────────────────── */
 interface QuotePdfDocumentProps {
   quote: QuoteResponse;
-  logoUrl: string;
+  reverseLogoUrl: string;
 }
 
-function QuotePdfDocument({ quote, logoUrl }: QuotePdfDocumentProps) {
+function QuotePdfDocument({
+  quote,
+  reverseLogoUrl,
+}: QuotePdfDocumentProps) {
   const scopeParagraphs = quote.scope_summary.split("\n").filter(Boolean);
-  const confColor = CONFIDENCE_COLOR[quote.confidence_level];
   const disclaimerText =
     quote.disclaimer ??
-    "This quote was generated by Green Irony\u2019s AI-powered quoting engine. For a detailed, customer-ready SOW, connect with your Green Irony AE.";
+    "This quote was generated by Green Irony\u2019s AI-powered quoting engine. Pricing subject to scope confirmation.";
+
+  const timelineValue = quote.schedule ?? `~${quote.timeline_weeks} weeks`;
 
   return (
     <Document
@@ -197,90 +272,94 @@ function QuotePdfDocument({ quote, logoUrl }: QuotePdfDocumentProps) {
       author="Green Irony"
     >
       <Page size="LETTER" style={s.page}>
-        {/* Header */}
-        <View style={s.headerRow}>
-          <Image src={logoUrl} style={s.logo} />
-          <View style={s.headerRight}>
-            <Text style={s.title}>Quote Estimate</Text>
-            <Text style={s.meta}>{quote.customer_name}</Text>
-            <Text style={s.meta}>ID: {quote.quote_id}</Text>
-            <Text style={s.meta}>{formatDate(quote.created_at)}</Text>
-            {quote.requesting_ae_name && (
-              <Text style={s.meta}>AE: {quote.requesting_ae_name}</Text>
-            )}
+        {/* ── Navy header ── */}
+        <View style={s.header} fixed>
+          <View style={s.headerLeft}>
+            <Text style={s.headerTitle}>
+              {quote.customer_name} — {quote.offering_tier}
+            </Text>
+            <Text style={s.headerSubtitle}>Salesforce Services Proposal</Text>
           </View>
+          <Image src={reverseLogoUrl} style={s.logo} />
         </View>
 
-        {/* Quote Summary Grid */}
-        <View style={s.grid}>
-          <View style={s.card}>
-            <Text style={s.cardLabel}>Price Range</Text>
-            <Text style={s.cardValue}>
-              {formatPrice(quote.price_low, quote.price_high)}
+        {/* ── Accent gradient bar ── */}
+        <View style={s.accentBar} fixed>
+          <Svg width="612" height="3" viewBox="0 0 612 3">
+            <Defs>
+              <LinearGradient id="grad" x1="0" y1="0" x2="612" y2="0" gradientUnits="userSpaceOnUse">
+                <Stop offset="0" stopColor={C.green} />
+                <Stop offset="0.5" stopColor={C.midGreen} />
+                <Stop offset="1" stopColor={C.pink} />
+              </LinearGradient>
+            </Defs>
+            <Rect x="0" y="0" width="612" height="3" fill="url(#grad)" />
+          </Svg>
+        </View>
+
+        {/* ── Body ── */}
+        <View style={s.body}>
+          {/* Scope Summary */}
+          <Text style={s.sectionLabel}>Scope</Text>
+          {scopeParagraphs.map((para, i) => (
+            <Text key={i} style={s.scopeText}>
+              {para}
             </Text>
-          </View>
-          <View style={s.card}>
-            <Text style={s.cardLabel}>Offering Tier</Text>
-            <Text style={s.cardValue}>{quote.offering_tier}</Text>
-          </View>
-          <View style={s.card}>
-            <Text style={s.cardLabel}>Timeline</Text>
-            <Text style={s.cardValue}>
-              {quote.schedule ?? `~${quote.timeline_weeks} weeks`}
-            </Text>
-          </View>
-          <View style={[s.card, s.cardLast]}>
-            <Text style={s.cardLabel}>Confidence</Text>
-            <View style={[s.badge, { backgroundColor: `${confColor}18` }]}>
-              <Text style={[s.badgeText, { color: confColor }]}>
-                {quote.confidence_level}
-              </Text>
+          ))}
+
+          {/* Bullet sections */}
+          {[
+            { heading: "Integration Use Cases", items: quote.key_use_cases },
+            { heading: "Assumptions", items: quote.assumptions },
+            { heading: "Not Included", items: quote.not_included },
+          ].map((section) => (
+            <View key={section.heading} style={s.sectionGap}>
+              <Text style={s.sectionLabel}>{section.heading}</Text>
+              <BulletList items={section.items} />
             </View>
+          ))}
+
+          {/* Recommended Next Steps */}
+          <View style={s.sectionGap}>
+            <Text style={s.sectionLabel}>Recommended Next Steps</Text>
+            <Text style={s.paragraph}>{quote.recommended_next_steps}</Text>
           </View>
+
+          {/* Additional Services */}
+          {quote.additional_services && (
+            <View style={s.sectionGap} wrap={false}>
+              <View style={s.callout}>
+                <Text style={s.calloutHeading}>
+                  Additional Services Identified
+                </Text>
+                <Text style={s.calloutBody}>{quote.additional_services}</Text>
+                <Text style={[s.calloutBody, { marginTop: 4 }]}>
+                  Contact your Green Irony AE to discuss these services.
+                </Text>
+              </View>
+            </View>
+          )}
         </View>
 
-        {/* Scope Summary */}
-        <Text style={s.sectionTitle}>Scope Summary</Text>
-        {scopeParagraphs.map((para, i) => (
-          <Text key={i} style={s.paragraph}>
-            {para}
+        {/* ── Timeline estimate ── */}
+        <View style={s.timelineRow} wrap={false}>
+          <Text style={s.timelineLabel}>Estimated Timeline</Text>
+          <Text style={s.timelineValue}>{timelineValue}</Text>
+        </View>
+
+        {/* ── Total price bar ── */}
+        <View style={s.totalBar} wrap={false}>
+          <Text style={s.totalLabel}>Estimated Price Range</Text>
+          <Text style={s.totalPrice}>
+            {formatPrice(quote.price_low, quote.price_high)}
           </Text>
-        ))}
+        </View>
 
-        {/* Bulleted Sections */}
-        {[
-          { heading: "Integration Use Cases", items: quote.key_use_cases },
-          { heading: "Assumptions", items: quote.assumptions },
-          { heading: "Not Included", items: quote.not_included },
-        ].map((section) => (
-          <View key={section.heading} wrap={false}>
-            <Text style={s.sectionTitle}>{section.heading}</Text>
-            <BulletList items={section.items} />
-          </View>
-        ))}
-
-        {/* Recommended Next Steps */}
-        <Text style={s.sectionTitle}>Recommended Next Steps</Text>
-        <Text style={s.paragraph}>{quote.recommended_next_steps}</Text>
-
-        {/* Additional Services */}
-        {quote.additional_services && (
-          <View style={s.callout} wrap={false}>
-            <Text style={s.calloutHeading}>
-              Additional Services Identified
-            </Text>
-            <Text style={s.calloutBody}>{quote.additional_services}</Text>
-            <Text style={[s.calloutBody, { marginTop: 4 }]}>
-              Contact your Green Irony AE to discuss these services.
-            </Text>
-          </View>
-        )}
-
-        {/* Footer (fixed to bottom of every page) */}
+        {/* ── Navy footer (fixed to every page) ── */}
         <View style={s.footer} fixed>
           <Text style={s.footerDisclaimer}>{disclaimerText}</Text>
           <View style={s.footerRight}>
-            <Text style={s.footerUrl}>greenirony.com</Text>
+            <Text style={s.footerBrand}>Green Irony</Text>
             <Text
               style={s.footerPage}
               render={({ pageNumber, totalPages }) =>
@@ -296,10 +375,10 @@ function QuotePdfDocument({ quote, logoUrl }: QuotePdfDocumentProps) {
 
 /* ── Download helper ──────────────────────────────────── */
 export async function downloadQuotePdf(quote: QuoteResponse) {
-  const logoUrl = `${window.location.origin}/logos/green-irony/green-logo-long.png`;
+  const reverseLogoUrl = `${window.location.origin}/logos/green-irony/Green-Irony-Logo-Reverse.png`;
 
   const blob = await pdf(
-    <QuotePdfDocument quote={quote} logoUrl={logoUrl} />,
+    <QuotePdfDocument quote={quote} reverseLogoUrl={reverseLogoUrl} />,
   ).toBlob();
 
   const slug = quote.customer_name
