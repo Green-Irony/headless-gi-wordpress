@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
+import { getBaseUrl, proxyGet } from "../../../../lib/portal/apiProxy";
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,7 +15,23 @@ export default async function handler(
     return res.status(401).json({ message: "Unauthorized" });
   }
 
-  // const { id } = req.query;
-  // TODO: Forward to MuleSoft GET /api/v1/quote/{id} when backend is ready
-  return res.status(501).json({ message: "Backend not connected" });
+  const baseUrl = getBaseUrl();
+  if (!baseUrl) {
+    return res.status(501).json({ message: "Backend not connected" });
+  }
+
+  const { id } = req.query;
+  if (!id || typeof id !== "string") {
+    return res.status(400).json({ message: "Missing quote ID" });
+  }
+
+  try {
+    const accessToken = token.idToken as string | undefined;
+    // API uses /quote/{id} (singular), not /quotes/{id}
+    const result = await proxyGet(`/quote/${encodeURIComponent(id)}`, accessToken);
+    return res.status(result.status).json(result.data);
+  } catch (err) {
+    console.error("GET /api/portal/quotes/[id] proxy error:", err);
+    return res.status(502).json({ message: "Failed to reach backend" });
+  }
 }

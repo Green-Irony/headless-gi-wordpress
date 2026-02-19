@@ -3,11 +3,12 @@ import type { QuoteResponse, QuoteListItem } from "./types";
 export const MOCK_QUOTES: QuoteResponse[] = [
   {
     quote_id: "q-001",
+    status: "completed",
     customer_name: "Acme Corp",
     price_low: 18000,
     price_high: 25000,
     offering_tier: "Growth Integration Package",
-    timeline_weeks: "4-5",
+    timeline_weeks: 5,
     confidence_level: "High",
     scope_summary:
       "This engagement covers a bidirectional integration between Salesforce and your ERP system, enabling real-time data synchronization across sales, order management, and customer service workflows. The solution will be built on MuleSoft's Anypoint Platform using API-led connectivity principles.\n\nThe integration scope includes automated order-to-cash flows, real-time inventory availability checks from within Salesforce, and bidirectional contact/account synchronization. Error handling, retry logic, and operational dashboards are included in the base package.",
@@ -31,15 +32,21 @@ export const MOCK_QUOTES: QuoteResponse[] = [
     ],
     recommended_next_steps:
       "Schedule a discovery call with a Green Irony Solutions Architect to review your integration requirements in detail. Gather and share ERP API documentation (endpoints, auth, schemas). Identify key stakeholders for a 60-minute requirements workshop.",
+    schedule: "~4-5 weeks",
+    requesting_ae_name: "Jackson Nagel",
+    requesting_ae_email: "jackson.nagel@mulesoft.com",
+    disclaimer:
+      "This quote is AI-generated and provides a ballpark estimate. A detailed Statement of Work requires engagement with your Green Irony Account Executive.",
     created_at: "2026-02-15T14:30:00Z",
   },
   {
     quote_id: "q-002",
+    status: "completed",
     customer_name: "TechVentures Inc",
     price_low: 35000,
     price_high: 50000,
     offering_tier: "Enterprise Integration Suite",
-    timeline_weeks: "8-10",
+    timeline_weeks: 9,
     confidence_level: "Medium",
     scope_summary:
       "A multi-system integration connecting Salesforce, SAP S/4HANA, and a custom data warehouse. This project involves building an API-led architecture with experience, process, and system API layers to support both real-time and batch data flows.\n\nThe scope includes customer master data management across all three systems, automated invoice reconciliation, and a self-service API portal for internal development teams. Given the complexity of the SAP landscape, a phased rollout is recommended.",
@@ -65,15 +72,17 @@ export const MOCK_QUOTES: QuoteResponse[] = [
       "Engage Green Irony for a 2-week discovery sprint to map out data flows and integration patterns. Share SAP system landscape documentation and Salesforce org details for initial assessment.",
     additional_services:
       "This engagement may benefit from Salesforce CPQ configuration and SAP consulting services, which fall outside MuleSoft integration scope. Green Irony can coordinate with specialized partners for these workstreams.",
+    schedule: "~8-10 weeks",
     created_at: "2026-02-10T09:15:00Z",
   },
   {
     quote_id: "q-003",
+    status: "completed",
     customer_name: "Retail Solutions Group",
     price_low: 12000,
     price_high: 18000,
     offering_tier: "Starter Integration Package",
-    timeline_weeks: "3-4",
+    timeline_weeks: 4,
     confidence_level: "High",
     scope_summary:
       "A focused integration between Shopify and Salesforce Service Cloud to unify e-commerce order data with customer service workflows. Orders placed in Shopify will be synced to Salesforce in near-real-time, enabling service agents to view complete order history.\n\nThe integration uses MuleSoft's pre-built Shopify connector and includes webhook-based event processing for order creation, updates, and fulfillment status changes.",
@@ -101,11 +110,12 @@ export const MOCK_QUOTES: QuoteResponse[] = [
   },
   {
     quote_id: "q-004",
+    status: "completed",
     customer_name: "HealthFirst Partners",
     price_low: 55000,
     price_high: 80000,
     offering_tier: "Enterprise Integration Suite",
-    timeline_weeks: "12-16",
+    timeline_weeks: 14,
     confidence_level: "Low",
     scope_summary:
       "A complex healthcare integration involving HL7 FHIR-compliant data exchange between an EHR system, Salesforce Health Cloud, and multiple third-party payer systems. This project requires HIPAA-compliant data handling, encryption at rest and in transit, and comprehensive audit logging.\n\nDue to the regulatory requirements and the number of external system interfaces, a detailed discovery phase is essential before finalizing scope. The estimate range reflects uncertainty around payer system API maturity and data standardization requirements.",
@@ -137,6 +147,7 @@ export const MOCK_QUOTES: QuoteResponse[] = [
 
 export const MOCK_QUOTE_LIST: QuoteListItem[] = MOCK_QUOTES.map((q) => ({
   quote_id: q.quote_id,
+  status: q.status,
   customer_name: q.customer_name,
   price_low: q.price_low,
   price_high: q.price_high,

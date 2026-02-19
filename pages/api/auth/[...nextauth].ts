@@ -24,11 +24,16 @@ export const authOptions: NextAuthOptions = {
       const domain = email.split("@")[1]?.toLowerCase();
       return ALLOWED_DOMAINS.includes(domain);
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       if (user) {
         token.email = user.email;
         token.name = user.name;
         token.picture = user.image;
+      }
+      // Persist the Google OAuth id_token — the MuleSoft API validates
+      // this JWT directly to identify the user.
+      if (account?.id_token) {
+        token.idToken = account.id_token;
       }
       return token;
     },

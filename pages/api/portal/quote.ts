@@ -1,5 +1,20 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
+import { getBaseUrl, proxyPostFormData } from "../../../lib/portal/apiProxy";
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+async function readRawBody(req: NextApiRequest): Promise<Buffer> {
+  const chunks: Buffer[] = [];
+  for await (const chunk of req) {
+    chunks.push(typeof chunk === "string" ? Buffer.from(chunk) : chunk);
+  }
+  return Buffer.concat(chunks);
+}
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,6 +29,19 @@ export default async function handler(
     return res.status(401).json({ message: "Unauthorized" });
   }
 
-  // TODO: Forward to MuleSoft POST /api/v1/quote when backend is ready
-  return res.status(501).json({ message: "Backend not connected" });
+  const baseUrl = getBaseUrl();
+  if (!baseUrl) {
+    return res.status(501).json({ message: "Backend not connected" });
+  }
+
+  try {
+    const contentType = req.headers["content-type"] || "";
+    const body = await readRawBody(req);
+    const accessToken = token.idToken as string | undefined;
+    const result = await proxyPostFormData("/quote", body, contentType, accessToken);
+    return res.status(result.status).json(result.data);
+  } catch (err) {
+    console.error("POST /api/portal/quote proxy error:", err);
+    return res.status(502).json({ message: "Failed to reach backend" });
+  }
 }

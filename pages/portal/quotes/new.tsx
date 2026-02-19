@@ -1,10 +1,10 @@
-import { useState, useRef, type DragEvent } from "react";
+import { useState, useRef, useEffect, useCallback, type DragEvent } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { motion as m, AnimatePresence, useReducedMotion } from "framer-motion";
 import PortalShell from "../../../components/portal/PortalShell";
 import QuoteResults from "../../../components/portal/QuoteResults";
-import { generateQuote } from "../../../lib/portal/quoteService";
+import { generateQuote, getQuote } from "../../../lib/portal/quoteService";
 import type { QuoteResponse } from "../../../lib/portal/types";
 
 const ALLOWED_MIME = [
@@ -13,6 +13,9 @@ const ALLOWED_MIME = [
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 ];
 const ALLOWED_EXT = [".txt", ".pdf", ".docx"];
+const MAX_FILES = 5;
+const POLL_INTERVAL_MS = 3000;
+const POLL_TIMEOUT_MS = 180000; // 3 minutes
 
 function isFileAllowed(file: File) {
   const ext = file.name.slice(file.name.lastIndexOf(".")).toLowerCase();
@@ -47,24 +50,74 @@ export default function NewQuotePage() {
   const reduced = !!prefersReduced;
 
   const [view, setView] = useState<ViewState>("input");
-  const [dealContext, setDealContext] = useState("");
-  const [file, setFile] = useState<File | null>(null);
+  const [description, setDescription] = useState("");
+  const [files, setFiles] = useState<File[]>([]);
   const [dragOver, setDragOver] = useState(false);
   const [quote, setQuote] = useState<QuoteResponse | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const canGenerate = dealContext.trim().length > 0 || file !== null;
+  const canGenerate = description.trim().length > 0 || files.length > 0;
+
+  const stopPolling = useCallback(() => {
+    if (pollRef.current) {
+      clearInterval(pollRef.current);
+      pollRef.current = null;
+    }
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+  }, []);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => stopPolling();
+  }, [stopPolling]);
+
+  function startPolling(quoteId: string) {
+    // Set a timeout to abort after POLL_TIMEOUT_MS
+    timeoutRef.current = setTimeout(() => {
+      stopPolling();
+      setErrorMessage(
+        "Quote generation is taking longer than expected. Please check back later or try again.",
+      );
+      setView("error");
+    }, POLL_TIMEOUT_MS);
+
+    pollRef.current = setInterval(async () => {
+      const result = await getQuote(quoteId);
+      if (!result.ok) {
+        stopPolling();
+        setErrorMessage(result.message ?? "Failed to retrieve quote");
+        setView("error");
+        return;
+      }
+
+      const data = result.data!;
+      if (data.status === "completed") {
+        stopPolling();
+        setQuote(data);
+        setView("results");
+      } else if (data.status === "failed") {
+        stopPolling();
+        setErrorMessage("Quote generation failed. Please try again.");
+        setView("error");
+      }
+      // status === "processing" → keep polling
+    }, POLL_INTERVAL_MS);
+  }
 
   async function handleGenerate() {
     setView("generating");
     const result = await generateQuote(
-      { deal_context: dealContext, file: file ?? undefined },
+      { description, files: files.length > 0 ? files : undefined },
       session?.user?.email ?? "",
     );
     if (result.ok && result.data) {
-      setQuote(result.data);
-      setView("results");
+      startPolling(result.data.quote_id);
     } else {
       setErrorMessage(result.message ?? "Something went wrong");
       setView("error");
@@ -76,8 +129,21 @@ export default function NewQuotePage() {
   }
 
   function handleTryAgain() {
+    stopPolling();
     setErrorMessage("");
     setView("input");
+  }
+
+  function addFiles(newFiles: FileList | File[]) {
+    const allowed = Array.from(newFiles).filter(isFileAllowed);
+    setFiles((prev) => {
+      const combined = [...prev, ...allowed];
+      return combined.slice(0, MAX_FILES);
+    });
+  }
+
+  function removeFile(index: number) {
+    setFiles((prev) => prev.filter((_, i) => i !== index));
   }
 
   function handleDragOver(e: DragEvent) {
@@ -91,12 +157,12 @@ export default function NewQuotePage() {
   function handleDrop(e: DragEvent) {
     e.preventDefault();
     setDragOver(false);
-    const dropped = e.dataTransfer.files[0];
-    if (dropped && isFileAllowed(dropped)) setFile(dropped);
+    addFiles(e.dataTransfer.files);
   }
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const selected = e.target.files?.[0];
-    if (selected && isFileAllowed(selected)) setFile(selected);
+    if (e.target.files) addFiles(e.target.files);
+    // Reset the input so the same file can be re-selected
+    if (fileInputRef.current) fileInputRef.current.value = "";
   }
 
   const fade = (delay = 0) => ({
@@ -145,8 +211,8 @@ export default function NewQuotePage() {
 
                 <textarea
                   rows={6}
-                  value={dealContext}
-                  onChange={(e) => setDealContext(e.target.value)}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                   placeholder="e.g. Our client needs a Salesforce ↔ NetSuite integration for order-to-cash. They have MuleSoft Anypoint Platform and want real-time sync. ~200 orders/day, 3 Salesforce orgs..."
                   className="w-full rounded-xl border border-gi-line bg-gi-fog/50 px-4 py-3 text-sm text-gi-navy placeholder:text-gi-navy/40 focus:outline-none focus:ring-2 focus:ring-gi-green focus:border-transparent resize-y"
                 />
@@ -166,51 +232,65 @@ export default function NewQuotePage() {
                     ref={fileInputRef}
                     type="file"
                     accept=".txt,.pdf,.docx"
+                    multiple
                     onChange={handleFileChange}
                     className="hidden"
                   />
 
-                  {file ? (
-                    <div className="flex items-center gap-2 text-sm text-gi-navy">
-                      <svg
-                        className="h-5 w-5 text-gi-green"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-                        />
-                      </svg>
-                      <span className="font-medium">{file.name}</span>
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setFile(null);
-                          if (fileInputRef.current)
-                            fileInputRef.current.value = "";
-                        }}
-                        className="ml-1 text-gi-navy/40 hover:text-gi-pink transition"
-                        aria-label="Remove file"
-                      >
-                        <svg
-                          className="h-4 w-4"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={2}
-                          stroke="currentColor"
+                  {files.length > 0 ? (
+                    <div className="w-full space-y-2">
+                      {files.map((file, index) => (
+                        <div
+                          key={`${file.name}-${index}`}
+                          className="flex items-center gap-2 text-sm text-gi-navy"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M6 18 18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </button>
+                          <svg
+                            className="h-5 w-5 text-gi-green shrink-0"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+                            />
+                          </svg>
+                          <span className="font-medium truncate">
+                            {file.name}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              removeFile(index);
+                            }}
+                            className="ml-auto text-gi-navy/40 hover:text-gi-pink transition shrink-0"
+                            aria-label={`Remove ${file.name}`}
+                          >
+                            <svg
+                              className="h-4 w-4"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth={2}
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M6 18 18 6M6 6l12 12"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                      ))}
+                      {files.length < MAX_FILES && (
+                        <p className="text-xs text-gi-navy/40 text-center pt-1">
+                          Drop or click to add more files ({files.length}/
+                          {MAX_FILES})
+                        </p>
+                      )}
                     </div>
                   ) : (
                     <>
@@ -228,11 +308,11 @@ export default function NewQuotePage() {
                         />
                       </svg>
                       <p className="text-sm text-gi-navy/50">
-                        Have a call recording or transcript? Drop it here for a
-                        more accurate quote.
+                        Have call recordings or transcripts? Drop them here for
+                        a more accurate quote.
                       </p>
                       <p className="text-xs text-gi-navy/30">
-                        .txt, .pdf, or .docx
+                        .txt, .pdf, or .docx — up to {MAX_FILES} files
                       </p>
                     </>
                   )}
@@ -249,7 +329,7 @@ export default function NewQuotePage() {
             </m.div>
           )}
 
-          {/* GENERATING */}
+          {/* GENERATING (polling) */}
           {view === "generating" && (
             <m.div
               key="generating"
@@ -260,6 +340,9 @@ export default function NewQuotePage() {
                 <BouncingDots reduced={reduced} />
                 <p className="text-sm text-gi-navy/60">
                   Analyzing your deal context...
+                </p>
+                <p className="text-xs text-gi-navy/40">
+                  This usually takes 30–60 seconds
                 </p>
               </div>
             </m.div>
