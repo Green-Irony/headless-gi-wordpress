@@ -3,34 +3,49 @@ import type {
   GenerateQuoteInput,
   QuoteListItem,
   QuoteResponse,
+  QuoteSubmitResult,
 } from "./types";
 import { MOCK_QUOTES, MOCK_QUOTE_LIST } from "./mockData";
 
-const USE_MOCK = !process.env.NEXT_PUBLIC_PORTAL_API_URL;
+const USE_MOCK = !process.env.NEXT_PUBLIC_PORTAL_API_ENABLED;
 
-function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+// Track mock quote IDs that have been "polled" at least once, so the second
+// poll returns completed data (simulates async generation).
+const mockPolledOnce = new Set<string>();
 
 export async function generateQuote(
   input: GenerateQuoteInput,
   _userEmail: string,
-): Promise<ApiResult<QuoteResponse>> {
+): Promise<ApiResult<QuoteSubmitResult>> {
   if (USE_MOCK) {
-    await delay(2500);
-    // Return a new quote based on the first mock, with a fresh ID and timestamp
+    const quoteId = `q-${Date.now()}`;
+    // Stash a completed mock so getQuote can find it on the second poll
     const mock: QuoteResponse = {
       ...MOCK_QUOTES[0],
-      quote_id: `q-${Date.now()}`,
+      quote_id: quoteId,
+      status: "completed",
       created_at: new Date().toISOString(),
     };
-    return { ok: true, data: mock };
+    pendingMockQuotes.set(quoteId, mock);
+
+    return {
+      ok: true,
+      data: {
+        quote_id: quoteId,
+        status: "processing",
+        message: "Your quote request has been accepted and is being generated.",
+      },
+    };
   }
 
   try {
     const formData = new FormData();
-    formData.append("deal_context", input.deal_context);
-    if (input.file) formData.append("file", input.file);
+    formData.append("description", input.description);
+    if (input.files) {
+      for (const file of input.files) {
+        formData.append("documents", file);
+      }
+    }
 
     const res = await fetch("/api/portal/quote", {
       method: "POST",
@@ -39,9 +54,61 @@ export async function generateQuote(
 
     if (!res.ok) {
       const body = await res.json().catch(() => ({}));
-      return { ok: false, message: body.message || "Failed to generate quote" };
+      return {
+        ok: false,
+        message: body.message || "Failed to generate quote",
+      };
     }
 
+    const data: QuoteSubmitResult = await res.json();
+    return { ok: true, data };
+  } catch {
+    return { ok: false, message: "Network error — please try again" };
+  }
+}
+
+// In-memory store for mock quotes that were "generated" this session
+const pendingMockQuotes = new Map<string, QuoteResponse>();
+
+export async function getQuote(
+  id: string,
+): Promise<ApiResult<QuoteResponse>> {
+  if (USE_MOCK) {
+    // Check if this is a freshly generated mock quote
+    const pending = pendingMockQuotes.get(id);
+    if (pending) {
+      // First poll returns "processing", second poll returns completed
+      if (!mockPolledOnce.has(id)) {
+        mockPolledOnce.add(id);
+        return {
+          ok: true,
+          data: {
+            ...pending,
+            status: "processing",
+            // Strip result fields to simulate in-progress state
+            scope_summary: "",
+            key_use_cases: [],
+            assumptions: [],
+            not_included: [],
+            recommended_next_steps: "",
+          },
+        };
+      }
+      return { ok: true, data: pending };
+    }
+
+    // Existing mock quote from seed data
+    const quote = MOCK_QUOTES.find((q) => q.quote_id === id);
+    if (!quote) return { ok: false, message: "Quote not found" };
+    return { ok: true, data: quote };
+  }
+
+  try {
+    const res = await fetch(`/api/portal/quotes/${encodeURIComponent(id)}`);
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}));
+      return { ok: false, message: body.message || "Failed to load quote" };
+    }
     const data: QuoteResponse = await res.json();
     return { ok: true, data };
   } catch {
@@ -61,28 +128,6 @@ export async function listQuotes(): Promise<ApiResult<QuoteListItem[]>> {
       return { ok: false, message: body.message || "Failed to load quotes" };
     }
     const data: QuoteListItem[] = await res.json();
-    return { ok: true, data };
-  } catch {
-    return { ok: false, message: "Network error — please try again" };
-  }
-}
-
-export async function getQuote(
-  id: string,
-): Promise<ApiResult<QuoteResponse>> {
-  if (USE_MOCK) {
-    const quote = MOCK_QUOTES.find((q) => q.quote_id === id);
-    if (!quote) return { ok: false, message: "Quote not found" };
-    return { ok: true, data: quote };
-  }
-
-  try {
-    const res = await fetch(`/api/portal/quotes/${encodeURIComponent(id)}`);
-    if (!res.ok) {
-      const body = await res.json().catch(() => ({}));
-      return { ok: false, message: body.message || "Failed to load quote" };
-    }
-    const data: QuoteResponse = await res.json();
     return { ok: true, data };
   } catch {
     return { ok: false, message: "Network error — please try again" };

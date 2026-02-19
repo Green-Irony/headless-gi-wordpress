@@ -11,6 +11,23 @@ import {
 import { listQuotes } from "../../lib/portal/quoteService";
 import type { QuoteListItem } from "../../lib/portal/types";
 
+const STATUS_STYLES: Record<string, string> = {
+  completed: "bg-green-50 text-gi-green ring-gi-green/20",
+  processing: "bg-blue-50 text-blue-600 ring-blue-600/20",
+  failed: "bg-red-50 text-red-600 ring-red-600/20",
+};
+
+function StatusBadge({ status }: { status: string }) {
+  const style = STATUS_STYLES[status] ?? STATUS_STYLES.completed;
+  return (
+    <span
+      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset capitalize ${style}`}
+    >
+      {status}
+    </span>
+  );
+}
+
 export default function PortalDashboard() {
   const { data: session } = useSession();
   const router = useRouter();
@@ -39,6 +56,9 @@ export default function PortalDashboard() {
     animate: { opacity: 1, y: 0 },
     transition: { duration: reduced ? 0.15 : 0.35 },
   };
+
+  // Show status column if any quote is not completed
+  const showStatus = quotes.some((q) => q.status && q.status !== "completed");
 
   return (
     <PortalShell>
@@ -118,6 +138,9 @@ export default function PortalDashboard() {
                       <th className="px-6 py-3 font-medium">Customer</th>
                       <th className="px-6 py-3 font-medium">Price Range</th>
                       <th className="px-6 py-3 font-medium">Confidence</th>
+                      {showStatus && (
+                        <th className="px-6 py-3 font-medium">Status</th>
+                      )}
                       <th className="px-6 py-3 font-medium hidden sm:table-cell">
                         Offering
                       </th>
@@ -136,16 +159,27 @@ export default function PortalDashboard() {
                         className="border-b border-gi-line hover:bg-gi-fog/50 transition-colors cursor-pointer"
                       >
                         <td className="px-6 py-4 font-medium text-gi-navy">
-                          {q.customer_name}
+                          {q.customer_name || "—"}
                         </td>
                         <td className="px-6 py-4 text-gi-navy/70">
-                          {formatPrice(q.price_low, q.price_high)}
+                          {q.status === "processing"
+                            ? "—"
+                            : formatPrice(q.price_low, q.price_high)}
                         </td>
                         <td className="px-6 py-4">
-                          <ConfidenceBadge level={q.confidence_level} />
+                          {q.status === "processing" ? (
+                            <span className="text-gi-navy/40 text-xs">—</span>
+                          ) : (
+                            <ConfidenceBadge level={q.confidence_level} />
+                          )}
                         </td>
+                        {showStatus && (
+                          <td className="px-6 py-4">
+                            <StatusBadge status={q.status} />
+                          </td>
+                        )}
                         <td className="px-6 py-4 text-gi-navy/70 hidden sm:table-cell">
-                          {q.offering_tier}
+                          {q.offering_tier ?? "—"}
                         </td>
                         <td className="px-6 py-4 text-gi-navy/50 hidden md:table-cell">
                           {new Date(q.created_at).toLocaleDateString(

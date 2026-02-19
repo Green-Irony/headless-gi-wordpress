@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { motion as m, useReducedMotion } from "framer-motion";
@@ -6,6 +6,9 @@ import PortalShell from "../../../components/portal/PortalShell";
 import QuoteResults from "../../../components/portal/QuoteResults";
 import { getQuote } from "../../../lib/portal/quoteService";
 import type { QuoteResponse } from "../../../lib/portal/types";
+
+const POLL_INTERVAL_MS = 3000;
+const POLL_TIMEOUT_MS = 180000; // 3 minutes
 
 export default function QuoteDetailPage() {
   const router = useRouter();
@@ -15,7 +18,26 @@ export default function QuoteDetailPage() {
 
   const [quote, setQuote] = useState<QuoteResponse | null>(null);
   const [loading, setLoading] = useState(true);
+  const [polling, setPolling] = useState(false);
   const [error, setError] = useState("");
+  const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const stopPolling = useCallback(() => {
+    if (pollRef.current) {
+      clearInterval(pollRef.current);
+      pollRef.current = null;
+    }
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setPolling(false);
+  }, []);
+
+  useEffect(() => {
+    return () => stopPolling();
+  }, [stopPolling]);
 
   useEffect(() => {
     if (!id || typeof id !== "string") return;
@@ -23,13 +45,49 @@ export default function QuoteDetailPage() {
     setLoading(true);
     getQuote(id).then((result) => {
       if (result.ok && result.data) {
-        setQuote(result.data);
+        const data = result.data;
+        if (data.status === "processing") {
+          setQuote(data);
+          setPolling(true);
+          setLoading(false);
+
+          // Start polling
+          timeoutRef.current = setTimeout(() => {
+            stopPolling();
+            setError(
+              "Quote generation is taking longer than expected. Please check back later.",
+            );
+          }, POLL_TIMEOUT_MS);
+
+          pollRef.current = setInterval(async () => {
+            const pollResult = await getQuote(id);
+            if (!pollResult.ok) {
+              stopPolling();
+              setError(pollResult.message ?? "Failed to retrieve quote");
+              return;
+            }
+            const pollData = pollResult.data!;
+            if (pollData.status === "completed") {
+              stopPolling();
+              setQuote(pollData);
+            } else if (pollData.status === "failed") {
+              stopPolling();
+              setError("Quote generation failed.");
+            }
+          }, POLL_INTERVAL_MS);
+        } else if (data.status === "failed") {
+          setError("This quote failed to generate.");
+          setLoading(false);
+        } else {
+          setQuote(data);
+          setLoading(false);
+        }
       } else {
         setError(result.message ?? "Quote not found");
+        setLoading(false);
       }
-      setLoading(false);
     });
-  }, [id]);
+  }, [id, stopPolling]);
 
   const fade = {
     initial: reduced ? { opacity: 0 } : { opacity: 0, y: 16 },
@@ -68,7 +126,38 @@ export default function QuoteDetailPage() {
           </div>
         )}
 
-        {!loading && error && (
+        {!loading && polling && (
+          <m.div
+            {...fade}
+            className="flex flex-col items-center justify-center py-32"
+          >
+            <div className="rounded-2xl border border-gi-line bg-white shadow-gi p-10 flex flex-col items-center gap-5">
+              <div className="flex items-center justify-center gap-1.5">
+                {[0, 1, 2].map((i) => (
+                  <m.span
+                    key={i}
+                    className="block h-2.5 w-2.5 rounded-full bg-gi-green"
+                    animate={reduced ? {} : { y: [0, -8, 0] }}
+                    transition={{
+                      duration: 0.6,
+                      repeat: Infinity,
+                      delay: i * 0.15,
+                      ease: "easeInOut",
+                    }}
+                  />
+                ))}
+              </div>
+              <p className="text-sm text-gi-navy/60">
+                This quote is still being generated...
+              </p>
+              <p className="text-xs text-gi-navy/40">
+                This usually takes 30–60 seconds
+              </p>
+            </div>
+          </m.div>
+        )}
+
+        {!loading && !polling && error && (
           <m.div
             {...fade}
             className="flex flex-col items-center justify-center py-32"
@@ -100,7 +189,7 @@ export default function QuoteDetailPage() {
           </m.div>
         )}
 
-        {!loading && quote && (
+        {!loading && !polling && !error && quote && (
           <m.div {...fade}>
             <h1 className="text-2xl font-semibold text-gi-navy mb-1">
               {quote.customer_name}
