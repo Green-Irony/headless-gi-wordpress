@@ -135,16 +135,13 @@ export default function PortalDashboard() {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-gi-line text-left text-xs text-gi-navy/50">
-                      <th className="px-6 py-3 font-medium">Customer</th>
-                      <th className="px-6 py-3 font-medium">Price Range</th>
-                      <th className="px-6 py-3 font-medium">Confidence</th>
+                      <th className="px-6 py-3 font-medium" style={{ width: "40%" }}>Customer</th>
+                      <th className="px-6 py-3 font-medium" style={{ width: "20%" }}>Price Range</th>
+                      <th className="px-6 py-3 font-medium" style={{ width: "15%" }}>Confidence</th>
                       {showStatus && (
-                        <th className="px-6 py-3 font-medium">Status</th>
+                        <th className="px-6 py-3 font-medium" style={{ width: "10%" }}>Status</th>
                       )}
-                      <th className="px-6 py-3 font-medium hidden sm:table-cell">
-                        Offering
-                      </th>
-                      <th className="px-6 py-3 font-medium hidden md:table-cell">
+                      <th className="px-6 py-3 font-medium hidden md:table-cell text-right" style={{ width: "15%" }}>
                         Date
                       </th>
                     </tr>
@@ -160,6 +157,11 @@ export default function PortalDashboard() {
                       >
                         <td className="px-6 py-4 font-medium text-gi-navy">
                           {q.customer_name || "—"}
+                          {q.offering_tier && (
+                            <span className="text-gi-navy/40 font-normal">
+                              {" — "}{q.offering_tier}
+                            </span>
+                          )}
                         </td>
                         <td className="px-6 py-4 text-gi-navy/70">
                           {q.status === "processing"
@@ -178,10 +180,7 @@ export default function PortalDashboard() {
                             <StatusBadge status={q.status} />
                           </td>
                         )}
-                        <td className="px-6 py-4 text-gi-navy/70 hidden sm:table-cell">
-                          {q.offering_tier ?? "—"}
-                        </td>
-                        <td className="px-6 py-4 text-gi-navy/50 hidden md:table-cell">
+                        <td className="px-6 py-4 text-gi-navy/50 hidden md:table-cell text-right">
                           {new Date(q.created_at).toLocaleDateString(
                             "en-US",
                             {
