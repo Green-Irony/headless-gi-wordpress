@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Link from "next/link";
 import type { QuoteResponse } from "../../lib/portal/types";
 
@@ -36,7 +37,18 @@ interface QuoteResultsProps {
 }
 
 export default function QuoteResults({ quote, onRefine }: QuoteResultsProps) {
+  const [downloading, setDownloading] = useState(false);
   const scopeParagraphs = quote.scope_summary.split("\n").filter(Boolean);
+
+  async function handleDownload() {
+    setDownloading(true);
+    try {
+      const { downloadQuotePdf } = await import("./QuotePdfDocument");
+      await downloadQuotePdf(quote);
+    } finally {
+      setDownloading(false);
+    }
+  }
 
   return (
     <div className="space-y-6">
@@ -141,11 +153,11 @@ export default function QuoteResults({ quote, onRefine }: QuoteResultsProps) {
           </Link>
           <button
             type="button"
-            className="btn-secondary opacity-50 cursor-not-allowed"
-            disabled
-            title="Coming soon"
+            className="btn-secondary"
+            onClick={handleDownload}
+            disabled={downloading}
           >
-            Download this quote
+            {downloading ? "Generating PDF..." : "Download this quote"}
           </button>
           {onRefine && (
             <button
