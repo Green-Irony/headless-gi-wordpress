@@ -27,7 +27,12 @@ function ConfidenceBadge({
 
 function formatPrice(low: number, high: number) {
   const fmt = (n: number) =>
-    n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+    Number(n).toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    });
   return `${fmt(low)} – ${fmt(high)}`;
 }
 
