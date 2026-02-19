@@ -191,17 +191,9 @@ export default function QuoteDetailPage() {
 
         {!loading && !polling && !error && quote && (
           <m.div {...fade}>
-            <h1 className="text-2xl font-semibold text-gi-navy mb-1">
-              {quote.customer_name}
+            <h1 className="text-2xl font-semibold text-gi-navy mt-4 mb-6">
+              {quote.customer_name} — {quote.offering_tier}
             </h1>
-            <p className="text-sm text-gi-navy/50 mb-6">
-              Generated{" "}
-              {new Date(quote.created_at).toLocaleDateString("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              })}
-            </p>
             <QuoteResults quote={quote} />
           </m.div>
         )}
