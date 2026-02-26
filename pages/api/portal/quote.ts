@@ -39,6 +39,9 @@ export default async function handler(
     const body = await readRawBody(req);
     const accessToken = token.idToken as string | undefined;
     const result = await proxyPostFormData("/quote", body, contentType, accessToken);
+    if (result.status === 401) {
+      return res.status(403).json({ message: "Session expired", code: "TOKEN_EXPIRED" });
+    }
     return res.status(result.status).json(result.data);
   } catch (err) {
     console.error("POST /api/portal/quote proxy error:", err);

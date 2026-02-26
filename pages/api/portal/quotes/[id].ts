@@ -29,6 +29,9 @@ export default async function handler(
     const accessToken = token.idToken as string | undefined;
     // API uses /quote/{id} (singular), not /quotes/{id}
     const result = await proxyGet(`/quote/${encodeURIComponent(id)}`, accessToken);
+    if (result.status === 401) {
+      return res.status(403).json({ message: "Session expired", code: "TOKEN_EXPIRED" });
+    }
     return res.status(result.status).json(result.data);
   } catch (err) {
     console.error("GET /api/portal/quotes/[id] proxy error:", err);
