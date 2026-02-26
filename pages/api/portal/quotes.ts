@@ -23,6 +23,10 @@ export default async function handler(
   try {
     const accessToken = token.idToken as string | undefined;
     const result = await proxyGet("/quotes", accessToken);
+    // MuleSoft rejected the token — signal expiry to the client as 403
+    if (result.status === 401) {
+      return res.status(403).json({ message: "Session expired", code: "TOKEN_EXPIRED" });
+    }
     return res.status(result.status).json(result.data);
   } catch (err) {
     console.error("GET /api/portal/quotes proxy error:", err);

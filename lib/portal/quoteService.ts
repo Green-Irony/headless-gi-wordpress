@@ -1,3 +1,4 @@
+import { signOut } from "next-auth/react";
 import type {
   ApiResult,
   GenerateQuoteInput,
@@ -8,6 +9,27 @@ import type {
 import { MOCK_QUOTES, MOCK_QUOTE_LIST } from "./mockData";
 
 const USE_MOCK = !process.env.NEXT_PUBLIC_PORTAL_API_ENABLED;
+
+/**
+ * Wrapper around fetch that auto-signs the user out when the API returns
+ * 403 with code TOKEN_EXPIRED. This means MuleSoft rejected the Google
+ * id_token (expired or invalid) — as opposed to 401 which is a local
+ * NextAuth cookie issue (e.g. brief race on first load).
+ */
+async function portalFetch(
+  url: string,
+  init?: RequestInit,
+): Promise<Response> {
+  const res = await fetch(url, init);
+  if (res.status === 403) {
+    const body = await res.clone().json().catch(() => ({}));
+    if (body.code === "TOKEN_EXPIRED") {
+      signOut({ callbackUrl: "/portal/sign-in/" });
+      throw new Error("Session expired");
+    }
+  }
+  return res;
+}
 
 // Track mock quote IDs that have been "polled" at least once, so the second
 // poll returns completed data (simulates async generation).
@@ -47,7 +69,7 @@ export async function generateQuote(
       }
     }
 
-    const res = await fetch("/api/portal/quote", {
+    const res = await portalFetch("/api/portal/quote", {
       method: "POST",
       body: formData,
     });
@@ -104,7 +126,7 @@ export async function getQuote(
   }
 
   try {
-    const res = await fetch(`/api/portal/quotes/${encodeURIComponent(id)}`);
+    const res = await portalFetch(`/api/portal/quotes/${encodeURIComponent(id)}`);
     if (!res.ok) {
       const body = await res.json().catch(() => ({}));
       return { ok: false, message: body.message || "Failed to load quote" };
@@ -122,7 +144,7 @@ export async function listQuotes(): Promise<ApiResult<QuoteListItem[]>> {
   }
 
   try {
-    const res = await fetch("/api/portal/quotes");
+    const res = await portalFetch("/api/portal/quotes");
     if (!res.ok) {
       const body = await res.json().catch(() => ({}));
       return { ok: false, message: body.message || "Failed to load quotes" };

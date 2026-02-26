@@ -29,7 +29,7 @@ function StatusBadge({ status }: { status: string }) {
 }
 
 export default function PortalDashboard() {
-  const { data: session } = useSession();
+  const { data: session, status: sessionStatus } = useSession();
   const router = useRouter();
   const prefersReduced = useReducedMotion();
   const reduced = !!prefersReduced;
@@ -41,6 +41,7 @@ export default function PortalDashboard() {
   const firstName = session?.user?.name?.split(" ")[0] ?? "there";
 
   useEffect(() => {
+    if (sessionStatus !== "authenticated") return;
     listQuotes().then((result) => {
       if (result.ok && result.data) {
         setQuotes(result.data);
@@ -49,7 +50,7 @@ export default function PortalDashboard() {
       }
       setLoading(false);
     });
-  }, []);
+  }, [sessionStatus]);
 
   const fade = {
     initial: reduced ? { opacity: 0 } : { opacity: 0, y: 16 },
