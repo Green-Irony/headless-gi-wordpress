@@ -8,6 +8,7 @@ import Head from "next/head";
 import Script from "next/script";
 import { toAbsoluteUrl, buildCanonicalUrl } from "../lib/seo";
 import { fetchSiteIconUrl } from "../queries/SiteSettingsQuery";
+import { PortalAccessProvider } from "../lib/portal/PortalAccessContext";
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -146,7 +147,13 @@ export default function MyApp({ Component, pageProps }) {
       <FaustProvider pageProps={pageProps}>
         <div className="min-h-screen flex flex-col" style={isPortal ? undefined : { paddingTop: 'var(--gi-header-offset,64px)' }}>
           {!isPortal && <style jsx global>{`:root{--gi-header-offset:64px}`}</style>}
-          <Component {...pageProps} key={router.asPath} />
+          {isPortal ? (
+            <PortalAccessProvider>
+              <Component {...pageProps} key={router.asPath} />
+            </PortalAccessProvider>
+          ) : (
+            <Component {...pageProps} key={router.asPath} />
+          )}
         </div>
       </FaustProvider>
     </SessionProvider>

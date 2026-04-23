@@ -16,13 +16,13 @@ const USE_MOCK = !process.env.NEXT_PUBLIC_PORTAL_API_ENABLED;
  * id_token (expired or invalid) — as opposed to 401 which is a local
  * NextAuth cookie issue (e.g. brief race on first load).
  */
-async function portalFetch(
-  url: string,
-  init?: RequestInit,
-): Promise<Response> {
+async function portalFetch(url: string, init?: RequestInit): Promise<Response> {
   const res = await fetch(url, init);
   if (res.status === 403) {
-    const body = await res.clone().json().catch(() => ({}));
+    const body = await res
+      .clone()
+      .json()
+      .catch(() => ({}));
     if (body.code === "TOKEN_EXPIRED") {
       signOut({ callbackUrl: "/portal/sign-in/" });
       throw new Error("Session expired");
@@ -92,9 +92,7 @@ export async function generateQuote(
 // In-memory store for mock quotes that were "generated" this session
 const pendingMockQuotes = new Map<string, QuoteResponse>();
 
-export async function getQuote(
-  id: string,
-): Promise<ApiResult<QuoteResponse>> {
+export async function getQuote(id: string): Promise<ApiResult<QuoteResponse>> {
   if (USE_MOCK) {
     // Check if this is a freshly generated mock quote
     const pending = pendingMockQuotes.get(id);
@@ -126,7 +124,9 @@ export async function getQuote(
   }
 
   try {
-    const res = await portalFetch(`/api/portal/quotes/${encodeURIComponent(id)}`);
+    const res = await portalFetch(
+      `/api/portal/quotes/${encodeURIComponent(id)}`,
+    );
     if (!res.ok) {
       const body = await res.json().catch(() => ({}));
       return { ok: false, message: body.message || "Failed to load quote" };
@@ -147,7 +147,11 @@ export async function listQuotes(): Promise<ApiResult<QuoteListItem[]>> {
     const res = await portalFetch("/api/portal/quotes");
     if (!res.ok) {
       const body = await res.json().catch(() => ({}));
-      return { ok: false, message: body.message || "Failed to load quotes" };
+      return {
+        ok: false,
+        message: body.message || "Failed to load quotes",
+        errorCode: body.error_code,
+      };
     }
     const data: QuoteListItem[] = await res.json();
     return { ok: true, data };
