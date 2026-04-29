@@ -285,8 +285,6 @@ function QuotePdfDocument({
           {/* Bullet sections */}
           {[
             { heading: "Integration Use Cases", items: quote.key_use_cases },
-            { heading: "Assumptions", items: quote.assumptions },
-            { heading: "Not Included", items: quote.not_included },
           ].map((section) => (
             <View key={section.heading} style={s.sectionGap}>
               <Text style={s.sectionLabel}>{section.heading}</Text>

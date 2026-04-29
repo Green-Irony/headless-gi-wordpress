@@ -147,8 +147,6 @@ export default function QuoteResults({ quote, onRefine }: QuoteResultsProps) {
       {/* Bullet sections */}
       {[
         { heading: "Integration Use Cases", items: quote.key_use_cases },
-        { heading: "Assumptions", items: quote.assumptions },
-        { heading: "Not Included", items: quote.not_included },
       ].map((section) => (
         <SectionCard key={section.heading} title={section.heading}>
           <BulletList items={section.items} />
