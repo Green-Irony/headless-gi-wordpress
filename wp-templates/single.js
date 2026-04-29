@@ -21,9 +21,26 @@ const POST_QUERY = gql`
       title
       content
       date
-      featuredImage { node { sourceUrl altText } }
-      categories { nodes { name slug databaseId id } }
-      tags { nodes { name slug } }
+      featuredImage {
+        node {
+          sourceUrl
+          altText
+        }
+      }
+      categories {
+        nodes {
+          name
+          slug
+          databaseId
+          id
+        }
+      }
+      tags {
+        nodes {
+          name
+          slug
+        }
+      }
       author {
         node {
           name
@@ -36,8 +53,18 @@ const POST_QUERY = gql`
 const RELATED_POSTS_QUERY = gql`
   ${POST_LIST_FRAGMENT}
   query RelatedPosts($first: Int!, $categoryIn: [ID], $notIn: [ID]) {
-    posts(first: $first, where: { categoryIn: $categoryIn, notIn: $notIn, status: PUBLISH, orderby: { field: DATE, order: DESC } }) {
-      nodes { ...PostListFragment }
+    posts(
+      first: $first
+      where: {
+        categoryIn: $categoryIn
+        notIn: $notIn
+        status: PUBLISH
+        orderby: { field: DATE, order: DESC }
+      }
+    ) {
+      nodes {
+        ...PostListFragment
+      }
     }
   }
 `;
@@ -57,52 +84,77 @@ export default function Component(props) {
     nodes: [],
   };
   const { title: siteTitle, description: siteDescription } = siteData;
-  const { title, content, date, author, featuredImage, categories, tags } = contentQuery?.post || {};
+  const { title, content, date, author, featuredImage, categories, tags } =
+    contentQuery?.post || {};
   const router = useRouter();
-  const canonicalUrl = buildCanonicalUrl(router?.asPath || '/');
+  const canonicalUrl = buildCanonicalUrl(router?.asPath || "/");
 
   // Reading time estimation (~200 wpm)
-  const plainText = typeof content === 'string' ? content.replace(/<[^>]+>/g, ' ') : '';
+  const plainText =
+    typeof content === "string" ? content.replace(/<[^>]+>/g, " ") : "";
   const wordCount = plainText.trim().split(/\s+/).filter(Boolean).length;
   const readingMinutes = Math.max(1, Math.round(wordCount / 200));
-  const description = plainText.replace(/\s+/g, ' ').trim().slice(0, 160);
+  const rawDescription = plainText.replace(/\s+/g, " ").trim();
+  const description =
+    rawDescription.length > 160
+      ? rawDescription
+          .slice(0, 157)
+          .replace(/\s+\S*$/, "")
+          .replace(/[,;:.!?\s]+$/, "") + "…"
+      : rawDescription;
 
   // Build a simple table of contents: h2/h3 ids and text
   function buildTocAndInjectIds(html) {
     let index = 0;
     const items = [];
-    const newHtml = (html || '').replace(/<h([23])(\b[^>]*)>([\s\S]*?)<\/h\1>/gi, (match, level, attrs = '', inner) => {
-      const text = inner.replace(/<[^>]+>/g, '').trim();
-      const idMatch = attrs.match(/id=["']([^"']+)["']/i);
-      let id = idMatch ? idMatch[1] : '';
-      if (!id) {
-        const base = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
-        id = `${base || 'section'}-${index++}`;
-        attrs = `${attrs} id="${id}"`;
-      }
-      items.push({ id, text });
-      return `<h${level}${attrs}>${inner}</h${level}>`;
-    });
+    const newHtml = (html || "").replace(
+      /<h([23])(\b[^>]*)>([\s\S]*?)<\/h\1>/gi,
+      (match, level, attrs = "", inner) => {
+        const text = inner.replace(/<[^>]+>/g, "").trim();
+        const idMatch = attrs.match(/id=["']([^"']+)["']/i);
+        let id = idMatch ? idMatch[1] : "";
+        if (!id) {
+          const base = text
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/(^-|-$)+/g, "");
+          id = `${base || "section"}-${index++}`;
+          attrs = `${attrs} id="${id}"`;
+        }
+        items.push({ id, text });
+        return `<h${level}${attrs}>${inner}</h${level}>`;
+      },
+    );
     return { html: newHtml, toc: items };
   }
-  const { html: contentWithIds, toc } = buildTocAndInjectIds(content || '');
+  const { html: contentWithIds, toc } = buildTocAndInjectIds(content || "");
 
   // Related posts fetch (same first category, exclude current)
   const primaryCategoryId = categories?.nodes?.[0]?.databaseId;
   const excludeId = contentQuery?.post?.databaseId;
   const { data: relatedData } = useQuery(RELATED_POSTS_QUERY, {
     skip: !primaryCategoryId,
-    variables: { first: 3, categoryIn: primaryCategoryId ? [primaryCategoryId] : [], notIn: excludeId ? [excludeId] : [] },
+    variables: {
+      first: 3,
+      categoryIn: primaryCategoryId ? [primaryCategoryId] : [],
+      notIn: excludeId ? [excludeId] : [],
+    },
   });
-  const relatedPosts = (relatedData?.posts?.nodes || []).filter(p => p?.databaseId !== excludeId).slice(0,3);
+  const relatedPosts = (relatedData?.posts?.nodes || [])
+    .filter((p) => p?.databaseId !== excludeId)
+    .slice(0, 3);
 
   return (
     <>
       <Head>
-        <title>{generateSeoTitle(title || '', siteTitle || 'Green Irony')}</title>
+        <title>
+          {generateSeoTitle(title || "", siteTitle || "Green Irony")}
+        </title>
         <meta name="description" content={description} />
         {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
-        {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
+        {canonicalUrl ? (
+          <meta property="og:url" content={canonicalUrl} />
+        ) : null}
         {/* JSON-LD BlogPosting schema */}
         <script
           type="application/ld+json"
@@ -114,35 +166,90 @@ export default function Component(props) {
               headline: title,
               datePublished: date,
               dateModified: date,
-              author: author?.node?.name ? { "@type": "Person", name: author.node.name } : undefined,
+              author: author?.node?.name
+                ? { "@type": "Person", name: author.node.name }
+                : undefined,
               image: featuredImage?.node?.sourceUrl || undefined,
               description: description || undefined,
               articleSection: categories?.nodes?.[0]?.name || undefined,
               publisher: {
                 "@type": "Organization",
-                name: siteTitle || 'Green Irony',
+                name: siteTitle || "Green Irony",
                 logo: {
                   "@type": "ImageObject",
-                  url: toAbsoluteUrl('/logos/green-irony/Green-Irony-Logo.svg') || undefined,
+                  url:
+                    toAbsoluteUrl("/logos/green-irony/Green-Irony-Logo.svg") ||
+                    undefined,
                 },
               },
-              mainEntityOfPage: canonicalUrl ? { "@type": "WebPage", "@id": canonicalUrl } : undefined,
+              mainEntityOfPage: canonicalUrl
+                ? { "@type": "WebPage", "@id": canonicalUrl }
+                : undefined,
+            }),
+          }}
+        />
+        {/* JSON-LD BreadcrumbList schema */}
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: toAbsoluteUrl("/") || undefined,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Insights",
+                  item: toAbsoluteUrl("/insights/") || undefined,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: title,
+                  item: canonicalUrl || undefined,
+                },
+              ],
             }),
           }}
         />
         {/* Open Graph / Twitter */}
-        <meta property="og:type" content="article" />
-        {categories?.nodes?.[0]?.name ? <meta property="article:section" content={categories.nodes[0].name} /> : null}
-        {date ? <meta property="article:published_time" content={date} /> : null}
+        <meta property="og:type" content="article" key="og:type" />
+        {categories?.nodes?.[0]?.name ? (
+          <meta property="article:section" content={categories.nodes[0].name} />
+        ) : null}
+        {date ? (
+          <meta property="article:published_time" content={date} />
+        ) : null}
         {date ? <meta property="article:modified_time" content={date} /> : null}
-        {author?.node?.name ? <meta property="article:author" content={author.node.name} /> : null}
+        {author?.node?.name ? (
+          <meta property="article:author" content={author.node.name} />
+        ) : null}
         <meta property="og:title" content={title} />
-        {description ? <meta property="og:description" content={description} /> : null}
-        {featuredImage?.node?.sourceUrl ? <meta property="og:image" content={featuredImage.node.sourceUrl} /> : null}
-        <meta name="twitter:card" content="summary_large_image" />
+        {description ? (
+          <meta property="og:description" content={description} />
+        ) : null}
+        {featuredImage?.node?.sourceUrl ? (
+          <meta property="og:image" content={featuredImage.node.sourceUrl} />
+        ) : null}
+        <meta
+          name="twitter:card"
+          content="summary_large_image"
+          key="twitter:card"
+        />
         <meta name="twitter:title" content={title} />
-        {description ? <meta name="twitter:description" content={description} /> : null}
-        {featuredImage?.node?.sourceUrl ? <meta name="twitter:image" content={featuredImage.node.sourceUrl} /> : null}
+        {description ? (
+          <meta name="twitter:description" content={description} />
+        ) : null}
+        {featuredImage?.node?.sourceUrl ? (
+          <meta name="twitter:image" content={featuredImage.node.sourceUrl} />
+        ) : null}
       </Head>
 
       <Header
@@ -156,8 +263,14 @@ export default function Component(props) {
           title={title}
           date={date}
           author={author?.node?.name}
-          featuredImage={{ src: featuredImage?.node?.sourceUrl, alt: featuredImage?.node?.altText }}
-          categories={(categories?.nodes || []).map((c) => ({ name: c.name, slug: c.slug }))}
+          featuredImage={{
+            src: featuredImage?.node?.sourceUrl,
+            alt: featuredImage?.node?.altText,
+          }}
+          categories={(categories?.nodes || []).map((c) => ({
+            name: c.name,
+            slug: c.slug,
+          }))}
           readingMinutes={readingMinutes}
         />
         <ArticleBody html={contentWithIds} tableOfContents={toc} />
@@ -165,24 +278,42 @@ export default function Component(props) {
         {relatedPosts.length > 0 ? (
           <section className="mx-auto max-w-7xl px-6 py-12">
             <div className="mx-auto mb-6 h-px w-16 bg-gi-line" />
-            <h3 className="text-2xl font-semibold text-gi-text">Related posts</h3>
-            <div className={
-              `mt-6 grid gap-6 ` +
-              (relatedPosts.length === 1 ? 'grid-cols-1 sm:grid-cols-1 lg:grid-cols-1' :
-               relatedPosts.length === 2 ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-2' :
-               'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3')
-            }>
+            <h3 className="text-2xl font-semibold text-gi-text">
+              Related posts
+            </h3>
+            <div
+              className={
+                `mt-6 grid gap-6 ` +
+                (relatedPosts.length === 1
+                  ? "grid-cols-1 sm:grid-cols-1 lg:grid-cols-1"
+                  : relatedPosts.length === 2
+                    ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-2"
+                    : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3")
+              }
+            >
               {relatedPosts.map((p) => (
                 <PostTile key={p.id} post={p} />
               ))}
             </div>
             {categories?.nodes?.[0]?.slug ? (
-              <div className="mt-6"><Link className="btn-secondary" href={`/category/${categories.nodes[0].slug}/`}>Browse more from {categories.nodes[0].name}</Link></div>
+              <div className="mt-6">
+                <Link
+                  className="btn-secondary"
+                  href={`/category/${categories.nodes[0].slug}/`}
+                >
+                  Browse more from {categories.nodes[0].name}
+                </Link>
+              </div>
             ) : null}
           </section>
         ) : null}
 
-        <ArticleFooter tags={(tags?.nodes || []).map((t) => ({ name: t.name, slug: t.slug }))} />
+        <ArticleFooter
+          tags={(tags?.nodes || []).map((t) => ({
+            name: t.name,
+            slug: t.slug,
+          }))}
+        />
       </main>
 
       <Footer />

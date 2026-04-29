@@ -31,13 +31,13 @@ export default function MyApp({ Component, pageProps }) {
   useEffect(() => {
     if (!GA_MEASUREMENT_ID) return;
     const handleRouteChange = (url) => {
-      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-        window.gtag('config', GA_MEASUREMENT_ID, { page_path: url });
+      if (typeof window !== "undefined" && typeof window.gtag === "function") {
+        window.gtag("config", GA_MEASUREMENT_ID, { page_path: url });
       }
     };
-    router.events.on('routeChangeComplete', handleRouteChange);
+    router.events.on("routeChangeComplete", handleRouteChange);
     return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
+      router.events.off("routeChangeComplete", handleRouteChange);
     };
   }, [router.events, GA_MEASUREMENT_ID]);
 
@@ -45,18 +45,18 @@ export default function MyApp({ Component, pageProps }) {
   useEffect(() => {
     if (!HS_PORTAL_ID) return;
     const handleRouteChange = (url) => {
-      if (typeof window !== 'undefined' && Array.isArray(window._hsq)) {
-        window._hsq.push(['setPath', url]);
-        window._hsq.push(['trackPageView']);
+      if (typeof window !== "undefined" && Array.isArray(window._hsq)) {
+        window._hsq.push(["setPath", url]);
+        window._hsq.push(["trackPageView"]);
       }
     };
-    router.events.on('routeChangeComplete', handleRouteChange);
+    router.events.on("routeChangeComplete", handleRouteChange);
     return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
+      router.events.off("routeChangeComplete", handleRouteChange);
     };
   }, [router.events, HS_PORTAL_ID]);
 
-  const isPortal = router.pathname.startsWith('/portal');
+  const isPortal = router.pathname.startsWith("/portal");
 
   return (
     <SessionProvider session={pageProps.session}>
@@ -72,7 +72,7 @@ export default function MyApp({ Component, pageProps }) {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ''}', { anonymize_ip: true${process.env.NODE_ENV !== 'production' ? ', debug_mode: true' : ''} });
+              gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ""}', { anonymize_ip: true${process.env.NODE_ENV !== "production" ? ", debug_mode: true" : ""} });
             `}
           </Script>
         </>
@@ -87,28 +87,51 @@ export default function MyApp({ Component, pageProps }) {
       ) : null}
       <Head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
+        />
         <meta name="robots" content="index,follow" />
         <meta name="theme-color" content="#5AAD5A" />
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="website" key="og:type" />
         <meta property="og:site_name" content="Green Irony" />
         <meta property="og:locale" content="en_US" />
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:card"
+          content="summary_large_image"
+          key="twitter:card"
+        />
         <meta name="application-name" content="Green Irony" />
         {faviconHref ? (
           <link rel="icon" href={faviconHref} />
         ) : (
-          <link rel="icon" href="/logos/green-irony/banksy-solo-transparent.png" type="image/png" />
+          <link
+            rel="icon"
+            href="/logos/green-irony/banksy-solo-transparent.png"
+            type="image/png"
+          />
         )}
         {/* Canonical URL */}
         {buildCanonicalUrl(router.asPath) ? (
-          <link rel="canonical" href={buildCanonicalUrl(router.asPath)} key="canonical" />
+          <link
+            rel="canonical"
+            href={buildCanonicalUrl(router.asPath)}
+            key="canonical"
+          />
         ) : null}
         {/* Hreflang (single-locale site) */}
         {buildCanonicalUrl(router.asPath) ? (
           <>
-            <link rel="alternate" hrefLang="en" href={buildCanonicalUrl(router.asPath)} />
-            <link rel="alternate" hrefLang="x-default" href={buildCanonicalUrl(router.asPath)} />
+            <link
+              rel="alternate"
+              hrefLang="en"
+              href={buildCanonicalUrl(router.asPath)}
+            />
+            <link
+              rel="alternate"
+              hrefLang="x-default"
+              href={buildCanonicalUrl(router.asPath)}
+            />
           </>
         ) : null}
         {/* Global Organization & WebSite JSON-LD */}
@@ -120,8 +143,10 @@ export default function MyApp({ Component, pageProps }) {
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "Green Irony",
-              url: toAbsoluteUrl('/') || undefined,
-              logo: toAbsoluteUrl('/logos/green-irony/Green-Irony-Logo.svg') || undefined,
+              url: toAbsoluteUrl("/") || undefined,
+              logo:
+                toAbsoluteUrl("/logos/green-irony/Green-Irony-Logo.svg") ||
+                undefined,
               sameAs: [],
             }),
           }}
@@ -134,10 +159,12 @@ export default function MyApp({ Component, pageProps }) {
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "Green Irony",
-              url: toAbsoluteUrl('/') || undefined,
+              url: toAbsoluteUrl("/") || undefined,
               potentialAction: {
                 "@type": "SearchAction",
-                target: toAbsoluteUrl('/insights?q={search_term_string}') || undefined,
+                target:
+                  toAbsoluteUrl("/insights?q={search_term_string}") ||
+                  undefined,
                 "query-input": "required name=search_term_string",
               },
             }),
@@ -145,8 +172,21 @@ export default function MyApp({ Component, pageProps }) {
         />
       </Head>
       <FaustProvider pageProps={pageProps}>
-        <div className="min-h-screen flex flex-col" style={isPortal ? undefined : { paddingTop: 'var(--gi-header-offset,64px)' }}>
-          {!isPortal && <style jsx global>{`:root{--gi-header-offset:64px}`}</style>}
+        <div
+          className="min-h-screen flex flex-col"
+          style={
+            isPortal
+              ? undefined
+              : { paddingTop: "var(--gi-header-offset,64px)" }
+          }
+        >
+          {!isPortal && (
+            <style jsx global>{`
+              :root {
+                --gi-header-offset: 64px;
+              }
+            `}</style>
+          )}
           {isPortal ? (
             <PortalAccessProvider>
               <Component {...pageProps} key={router.asPath} />
