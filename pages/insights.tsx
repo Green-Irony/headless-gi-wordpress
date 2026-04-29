@@ -16,7 +16,11 @@ import { HEADER_MENU_QUERY } from "../queries/MenuQueries";
 import React from "react";
 import { loadAllStories } from "../lib/customerStories";
 
-// Simple latest posts query (9 most recent)
+// We pass first: 500 below to fetch all posts in one shot so every blog
+// URL appears in the SSR HTML. Image bytes are still deferred client-side
+// via next/image, so rendering all tiles costs only ~25KB of extra HTML.
+
+// Latest posts query
 export const LATEST_POSTS_QUERY = gql`
   ${POST_LIST_FRAGMENT}
   query LatestPosts(
@@ -117,7 +121,7 @@ const Page: any = function InsightsPage(props: any & { stories: any[] }) {
     refetch,
   } = useQuery(LATEST_POSTS_QUERY, {
     variables: {
-      first: 9,
+      first: 500,
       after: null,
       categoryIn: selectedCategoryIds.length ? selectedCategoryIds : undefined,
       search: debouncedQ || undefined,
@@ -142,7 +146,7 @@ const Page: any = function InsightsPage(props: any & { stories: any[] }) {
   React.useEffect(() => {
     // Keep current posts visible while refetching to avoid UI flicker to stories-only
     refetch({
-      first: 9,
+      first: 500,
       after: null,
       categoryIn: selectedCategoryIds.length ? selectedCategoryIds : undefined,
       search: debouncedQ || undefined,
@@ -166,7 +170,7 @@ const Page: any = function InsightsPage(props: any & { stories: any[] }) {
     try {
       const res = await fetchMore({
         variables: {
-          first: 9,
+          first: 500,
           after: pageInfo?.endCursor,
           categoryIn: selectedCategoryIds.length
             ? selectedCategoryIds
@@ -626,7 +630,7 @@ export async function getStaticProps(_context: any) {
     apolloClient.query({
       query: LATEST_POSTS_QUERY,
       variables: {
-        first: 9,
+        first: 500,
         after: null,
         categoryIn: undefined,
         search: undefined,
